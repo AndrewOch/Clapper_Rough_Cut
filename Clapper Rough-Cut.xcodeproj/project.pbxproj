@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		048455A4298D212400772EB0 /* Clapper_Rough_CutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455A3298D212400772EB0 /* Clapper_Rough_CutApp.swift */; };
+		048455A6298D212400772EB0 /* Clapper_Rough_CutDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455A5298D212400772EB0 /* Clapper_Rough_CutDocument.swift */; };
+		048455A8298D212400772EB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455A7298D212400772EB0 /* ContentView.swift */; };
+		048455AA298D212600772EB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048455A9298D212600772EB0 /* Assets.xcassets */; };
+		048455AD298D212600772EB0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048455AC298D212600772EB0 /* Preview Assets.xcassets */; };
+		048455B9298D212600772EB0 /* Clapper_Rough_CutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */; };
+		048455C3298D212600772EB0 /* Clapper_Rough_CutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */; };
+		048455C5298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		048455B5298D212600772EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04845598298D212400772EB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0484559F298D212400772EB0;
+			remoteInfo = "Clapper Rough-Cut";
+		};
+		048455BF298D212600772EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04845598298D212400772EB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0484559F298D212400772EB0;
+			remoteInfo = "Clapper Rough-Cut";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		048455A0298D212400772EB0 /* Clapper Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455A3298D212400772EB0 /* Clapper_Rough_CutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutApp.swift; sourceTree = "<group>"; };
+		048455A5298D212400772EB0 /* Clapper_Rough_CutDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutDocument.swift; sourceTree = "<group>"; };
+		048455A7298D212400772EB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		048455A9298D212600772EB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		048455AC298D212600772EB0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		048455AE298D212600772EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048455AF298D212600772EB0 /* Clapper_Rough_Cut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clapper_Rough_Cut.entitlements; sourceTree = "<group>"; };
+		048455B4298D212600772EB0 /* Clapper Rough-CutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clapper Rough-CutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutTests.swift; sourceTree = "<group>"; };
+		048455BE298D212600772EB0 /* Clapper Rough-CutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clapper Rough-CutUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutUITests.swift; sourceTree = "<group>"; };
+		048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0484559D298D212400772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B1298D212600772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BB298D212600772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04845597298D212400772EB0 = {
+			isa = PBXGroup;
+			children = (
+				048455A2298D212400772EB0 /* Clapper Rough-Cut */,
+				048455B7298D212600772EB0 /* Clapper Rough-CutTests */,
+				048455C1298D212600772EB0 /* Clapper Rough-CutUITests */,
+				048455A1298D212400772EB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		048455A1298D212400772EB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				048455A0298D212400772EB0 /* Clapper Rough-Cut.app */,
+				048455B4298D212600772EB0 /* Clapper Rough-CutTests.xctest */,
+				048455BE298D212600772EB0 /* Clapper Rough-CutUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		048455A2298D212400772EB0 /* Clapper Rough-Cut */ = {
+			isa = PBXGroup;
+			children = (
+				048455A3298D212400772EB0 /* Clapper_Rough_CutApp.swift */,
+				048455A5298D212400772EB0 /* Clapper_Rough_CutDocument.swift */,
+				048455A7298D212400772EB0 /* ContentView.swift */,
+				048455A9298D212600772EB0 /* Assets.xcassets */,
+				048455AE298D212600772EB0 /* Info.plist */,
+				048455AF298D212600772EB0 /* Clapper_Rough_Cut.entitlements */,
+				048455AB298D212600772EB0 /* Preview Content */,
+			);
+			path = "Clapper Rough-Cut";
+			sourceTree = "<group>";
+		};
+		048455AB298D212600772EB0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				048455AC298D212600772EB0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		048455B7298D212600772EB0 /* Clapper Rough-CutTests */ = {
+			isa = PBXGroup;
+			children = (
+				048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */,
+			);
+			path = "Clapper Rough-CutTests";
+			sourceTree = "<group>";
+		};
+		048455C1298D212600772EB0 /* Clapper Rough-CutUITests */ = {
+			isa = PBXGroup;
+			children = (
+				048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */,
+				048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */,
+			);
+			path = "Clapper Rough-CutUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0484559F298D212400772EB0 /* Clapper Rough-Cut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-Cut" */;
+			buildPhases = (
+				0484559C298D212400772EB0 /* Sources */,
+				0484559D298D212400772EB0 /* Frameworks */,
+				0484559E298D212400772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Clapper Rough-Cut";
+			productName = "Clapper Rough-Cut";
+			productReference = 048455A0298D212400772EB0 /* Clapper Rough-Cut.app */;
+			productType = "com.apple.product-type.application";
+		};
+		048455B3298D212600772EB0 /* Clapper Rough-CutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455CB298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-CutTests" */;
+			buildPhases = (
+				048455B0298D212600772EB0 /* Sources */,
+				048455B1298D212600772EB0 /* Frameworks */,
+				048455B2298D212600772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048455B6298D212600772EB0 /* PBXTargetDependency */,
+			);
+			name = "Clapper Rough-CutTests";
+			productName = "Clapper Rough-CutTests";
+			productReference = 048455B4298D212600772EB0 /* Clapper Rough-CutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		048455BD298D212600772EB0 /* Clapper Rough-CutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455CE298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-CutUITests" */;
+			buildPhases = (
+				048455BA298D212600772EB0 /* Sources */,
+				048455BB298D212600772EB0 /* Frameworks */,
+				048455BC298D212600772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048455C0298D212600772EB0 /* PBXTargetDependency */,
+			);
+			name = "Clapper Rough-CutUITests";
+			productName = "Clapper Rough-CutUITests";
+			productReference = 048455BE298D212600772EB0 /* Clapper Rough-CutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04845598298D212400772EB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					0484559F298D212400772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					048455B3298D212600772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 0484559F298D212400772EB0;
+					};
+					048455BD298D212600772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 0484559F298D212400772EB0;
+					};
+				};
+			};
+			buildConfigurationList = 0484559B298D212400772EB0 /* Build configuration list for PBXProject "Clapper Rough-Cut" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04845597298D212400772EB0;
+			productRefGroup = 048455A1298D212400772EB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0484559F298D212400772EB0 /* Clapper Rough-Cut */,
+				048455B3298D212600772EB0 /* Clapper Rough-CutTests */,
+				048455BD298D212600772EB0 /* Clapper Rough-CutUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0484559E298D212400772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455AD298D212600772EB0 /* Preview Assets.xcassets in Resources */,
+				048455AA298D212600772EB0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B2298D212600772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BC298D212600772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0484559C298D212400772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455A4298D212400772EB0 /* Clapper_Rough_CutApp.swift in Sources */,
+				048455A6298D212400772EB0 /* Clapper_Rough_CutDocument.swift in Sources */,
+				048455A8298D212400772EB0 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B0298D212600772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455B9298D212600772EB0 /* Clapper_Rough_CutTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BA298D212600772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455C3298D212600772EB0 /* Clapper_Rough_CutUITests.swift in Sources */,
+				048455C5298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		048455B6298D212600772EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0484559F298D212400772EB0 /* Clapper Rough-Cut */;
+			targetProxy = 048455B5298D212600772EB0 /* PBXContainerItemProxy */;
+		};
+		048455C0298D212600772EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0484559F298D212400772EB0 /* Clapper Rough-Cut */;
+			targetProxy = 048455BF298D212600772EB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		048455C6298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		048455C7298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		048455C9298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Clapper Rough-Cut/Clapper_Rough_Cut.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Clapper Rough-Cut/Preview Content\"";
+				DEVELOPMENT_TEAM = 7944299YL2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Clapper Rough-Cut/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		048455CA298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Clapper Rough-Cut/Clapper_Rough_Cut.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Clapper Rough-Cut/Preview Content\"";
+				DEVELOPMENT_TEAM = 7944299YL2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Clapper Rough-Cut/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		048455CC298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clapper Rough-Cut.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clapper Rough-Cut";
+			};
+			name = Debug;
+		};
+		048455CD298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clapper Rough-Cut.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clapper Rough-Cut";
+			};
+			name = Release;
+		};
+		048455CF298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Clapper Rough-Cut";
+			};
+			name = Debug;
+		};
+		048455D0298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Clapper Rough-Cut";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0484559B298D212400772EB0 /* Build configuration list for PBXProject "Clapper Rough-Cut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455C6298D212600772EB0 /* Debug */,
+				048455C7298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-Cut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455C9298D212600772EB0 /* Debug */,
+				048455CA298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455CB298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-CutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455CC298D212600772EB0 /* Debug */,
+				048455CD298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455CE298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper Rough-CutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455CF298D212600772EB0 /* Debug */,
+				048455D0298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04845598298D212400772EB0 /* Project object */;
+}
