@@ -1,0 +1,1014 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0400DA4E29EDC860003AD42B /* PythonKit */; };
+		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
+		0426529D29EF3869008855C1 /* MFCC.py in Resources */ = {isa = PBXBuildFile; fileRef = 0426529C29EF3869008855C1 /* MFCC.py */; };
+		0426529F29EFB6FB008855C1 /* MFCC_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */; };
+		043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */; };
+		043EDDBB29E804A000DA5EFF /* Cryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 043EDDBA29E804A000DA5EFF /* Cryptor */; };
+		043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */; };
+		043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */; };
+		043EDDC429E9317A00DA5EFF /* StringsMatcher_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC329E9317A00DA5EFF /* StringsMatcher_Wrapper.mm */; };
+		043EDDC729E953FF00DA5EFF /* TakesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */; };
+		043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */; };
+		043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */; };
+		043EDDD229E9E21000DA5EFF /* RawTakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDD129E9E21000DA5EFF /* RawTakeView.swift */; };
+		0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4A29E59CF40086BD89 /* FileSystemView.swift */; };
+		0448AD4E29E5ADC20086BD89 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4D29E5ADC20086BD89 /* PrimaryButton.swift */; };
+		0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */; };
+		0448AD5329E6B4EC0086BD89 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = 0448AD5229E6B4EC0086BD89 /* Files */; };
+		0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */; };
+		0464D9FC29E423A80007EF24 /* Texts_Matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* Texts_Matcher.py */; };
+		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
+		0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C729E423A70007EF24 /* ScriptRunner.swift */; };
+		0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C929E423A70007EF24 /* ScriptFile.swift */; };
+		0464DA0029E423A80007EF24 /* RawFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9CA29E423A70007EF24 /* RawFile.swift */; };
+		0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9CC29E423A70007EF24 /* Preview Assets.xcassets */; };
+		0464DA0229E423A80007EF24 /* RawFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9CF29E423A70007EF24 /* RawFileView.swift */; };
+		0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D029E423A70007EF24 /* FileSystemOperations.swift */; };
+		0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D429E423A70007EF24 /* ScriptFileOperations.swift */; };
+		0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D529E423A70007EF24 /* ScriptView.swift */; };
+		0464DA0D29E423A80007EF24 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9DC29E423A70007EF24 /* Info.plist */; };
+		0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9DE29E423A70007EF24 /* Clapper_Rough_CutApp.swift */; };
+		0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9DF29E423A70007EF24 /* ClapperRoughCutDocument.swift */; };
+		0464DA1029E423A80007EF24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E029E423A70007EF24 /* ContentView.swift */; };
+		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
+		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
+		048455B9298D212600772EB0 /* Clapper_Rough_CutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */; };
+		048455C3298D212600772EB0 /* Clapper_Rough_CutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */; };
+		048455C5298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */; };
+		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
+		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
+		04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */; };
+		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
+		04FE4B8A29F818DE00634522 /* main in Resources */ = {isa = PBXBuildFile; fileRef = 044307FF29E2A70800705B78 /* main */; };
+		04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04FE4B8B29F819EB00634522 /* ggml-base.bin */; };
+		04FE56CC29F846DD00634522 /* python3.9 in Resources */ = {isa = PBXBuildFile; fileRef = 04FE56CB29F846DD00634522 /* python3.9 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		048455B5298D212600772EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04845598298D212400772EB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0484559F298D212400772EB0;
+			remoteInfo = "Clapper Rough-Cut";
+		};
+		048455BF298D212600772EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04845598298D212400772EB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0484559F298D212400772EB0;
+			remoteInfo = "Clapper Rough-Cut";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
+		0426529C29EF3869008855C1 /* MFCC.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = MFCC.py; sourceTree = "<group>"; };
+		0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCC_Wrapper.swift; sourceTree = "<group>"; };
+		043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseMatcher.swift; sourceTree = "<group>"; };
+		043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesMatchOperations.swift; sourceTree = "<group>"; };
+		043EDDBF29E92ED300DA5EFF /* Clapper-Rough-Cut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clapper-Rough-Cut-Bridging-Header.h"; sourceTree = "<group>"; };
+		043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringsMatcher.cpp; sourceTree = "<group>"; };
+		043EDDC129E92ED400DA5EFF /* StringsMatcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringsMatcher.hpp; sourceTree = "<group>"; };
+		043EDDC329E9317A00DA5EFF /* StringsMatcher_Wrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StringsMatcher_Wrapper.mm; sourceTree = "<group>"; };
+		043EDDC529E9318A00DA5EFF /* StringsMatcher_Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringsMatcher_Wrapper.h; sourceTree = "<group>"; };
+		043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakesMatchOperations.swift; sourceTree = "<group>"; };
+		043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WaveFunction.cpp; sourceTree = "<group>"; };
+		043EDDCB29E95EB100DA5EFF /* WaveFunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WaveFunction.hpp; sourceTree = "<group>"; };
+		043EDDCD29E95F1100DA5EFF /* WaveStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveStructure.h; sourceTree = "<group>"; };
+		043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WaveFunction_Wrapper.mm; sourceTree = "<group>"; };
+		043EDDD029E961AD00DA5EFF /* WaveFunction_Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveFunction_Wrapper.h; sourceTree = "<group>"; };
+		043EDDD129E9E21000DA5EFF /* RawTakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawTakeView.swift; sourceTree = "<group>"; };
+		044307FD29E2A70800705B78 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		044307FE29E2A70800705B78 /* whisper.textClipping */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = whisper.textClipping; sourceTree = "<group>"; };
+		044307FF29E2A70800705B78 /* main */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = main; sourceTree = "<group>"; };
+		0443080029E2A70800705B78 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		0443080129E2A70800705B78 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0443080229E2A70800705B78 /* ggml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ggml.h; sourceTree = "<group>"; };
+		0443080329E2A70800705B78 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		0443080429E2A70900705B78 /* whisper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = whisper.h; sourceTree = "<group>"; };
+		0443080529E2A70900705B78 /* ggml.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ggml.c; sourceTree = "<group>"; };
+		0443080629E2A70900705B78 /* whisper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = whisper.cpp; sourceTree = "<group>"; };
+		0443080729E2A70900705B78 /* bench */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bench; sourceTree = "<group>"; };
+		0443080829E2A70900705B78 /* ggml.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ggml.o; sourceTree = "<group>"; };
+		0443080929E2A70900705B78 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0443080A29E2A70900705B78 /* whisper.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = whisper.o; sourceTree = "<group>"; };
+		0443080B29E2A70900705B78 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0443080D29E2A70A00705B78 /* convert-pt-to-ggml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = "convert-pt-to-ggml.py"; sourceTree = "<group>"; };
+		0443080E29E2A70A00705B78 /* for-tests-ggml-medium.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-medium.en.bin"; sourceTree = "<group>"; };
+		0443080F29E2A70A00705B78 /* download-ggml-model.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "download-ggml-model.sh"; sourceTree = "<group>"; };
+		0443081029E2A70A00705B78 /* for-tests-ggml-small.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-small.en.bin"; sourceTree = "<group>"; };
+		0443081129E2A70A00705B78 /* for-tests-ggml-tiny.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-tiny.bin"; sourceTree = "<group>"; };
+		0443081229E2A70A00705B78 /* download-ggml-model.cmd */ = {isa = PBXFileReference; lastKnownFileType = text; path = "download-ggml-model.cmd"; sourceTree = "<group>"; };
+		0443081329E2A70A00705B78 /* for-tests-ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-base.bin"; sourceTree = "<group>"; };
+		0443081429E2A70A00705B78 /* for-tests-ggml-large.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-large.bin"; sourceTree = "<group>"; };
+		0443081529E2A70A00705B78 /* convert-h5-to-ggml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = "convert-h5-to-ggml.py"; sourceTree = "<group>"; };
+		0443081629E2A70B00705B78 /* for-tests-ggml-medium.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-medium.bin"; sourceTree = "<group>"; };
+		0443081729E2A70B00705B78 /* for-tests-ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-small.bin"; sourceTree = "<group>"; };
+		0443081829E2A70B00705B78 /* for-tests-ggml-base.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-base.en.bin"; sourceTree = "<group>"; };
+		0443081929E2A70B00705B78 /* for-tests-ggml-tiny.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-tiny.en.bin"; sourceTree = "<group>"; };
+		0448AD4A29E59CF40086BD89 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
+		0448AD4D29E5ADC20086BD89 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFileDetailView.swift; sourceTree = "<group>"; };
+		0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextsMatcher_Wrapper.swift; sourceTree = "<group>"; };
+		0464D9C329E423A70007EF24 /* Texts_Matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Texts_Matcher.py; sourceTree = "<group>"; };
+		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0464D9C729E423A70007EF24 /* ScriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
+		0464D9C929E423A70007EF24 /* ScriptFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptFile.swift; sourceTree = "<group>"; };
+		0464D9CA29E423A70007EF24 /* RawFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawFile.swift; sourceTree = "<group>"; };
+		0464D9CC29E423A70007EF24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0464D9CF29E423A70007EF24 /* RawFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawFileView.swift; sourceTree = "<group>"; };
+		0464D9D029E423A70007EF24 /* FileSystemOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemOperations.swift; sourceTree = "<group>"; };
+		0464D9D429E423A70007EF24 /* ScriptFileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptFileOperations.swift; sourceTree = "<group>"; };
+		0464D9D529E423A70007EF24 /* ScriptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptView.swift; sourceTree = "<group>"; };
+		0464D9DB29E423A70007EF24 /* Clapper_Rough_Cut.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Clapper_Rough_Cut.entitlements; sourceTree = "<group>"; };
+		0464D9DC29E423A70007EF24 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0464D9DE29E423A70007EF24 /* Clapper_Rough_CutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutApp.swift; sourceTree = "<group>"; };
+		0464D9DF29E423A70007EF24 /* ClapperRoughCutDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClapperRoughCutDocument.swift; sourceTree = "<group>"; };
+		0464D9E029E423A70007EF24 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0464D9E329E423A70007EF24 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperAudioTranscriber.swift; sourceTree = "<group>"; };
+		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455B4298D212600772EB0 /* Clapper-Rough-CutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clapper-Rough-CutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutTests.swift; sourceTree = "<group>"; };
+		048455BE298D212600772EB0 /* Clapper-Rough-CutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clapper-Rough-CutUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutUITests.swift; sourceTree = "<group>"; };
+		048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clapper_Rough_CutUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
+		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
+		04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFilesFolderView.swift; sourceTree = "<group>"; };
+		04FE4B8B29F819EB00634522 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
+		04FE56CB29F846DD00634522 /* python3.9 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = python3.9; path = ../../opt/anaconda3/bin/python3.9; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0484559D298D212400772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0448AD5329E6B4EC0086BD89 /* Files in Frameworks */,
+				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
+				043EDDBB29E804A000DA5EFF /* Cryptor in Frameworks */,
+				0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B1298D212600772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BB298D212600772EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		043EDDBE29E92EAA00DA5EFF /* StringsMatcher */ = {
+			isa = PBXGroup;
+			children = (
+				043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */,
+				043EDDC129E92ED400DA5EFF /* StringsMatcher.hpp */,
+				043EDDBF29E92ED300DA5EFF /* Clapper-Rough-Cut-Bridging-Header.h */,
+				043EDDC329E9317A00DA5EFF /* StringsMatcher_Wrapper.mm */,
+				043EDDC529E9318A00DA5EFF /* StringsMatcher_Wrapper.h */,
+			);
+			path = StringsMatcher;
+			sourceTree = "<group>";
+		};
+		043EDDC829E95D4900DA5EFF /* MFCC */ = {
+			isa = PBXGroup;
+			children = (
+				043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */,
+				043EDDCB29E95EB100DA5EFF /* WaveFunction.hpp */,
+				043EDDCD29E95F1100DA5EFF /* WaveStructure.h */,
+				043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */,
+				043EDDD029E961AD00DA5EFF /* WaveFunction_Wrapper.h */,
+			);
+			path = MFCC;
+			sourceTree = "<group>";
+		};
+		044307F729E2A6F700705B78 /* Whisper */ = {
+			isa = PBXGroup;
+			children = (
+				0443080729E2A70900705B78 /* bench */,
+				0443080A29E2A70900705B78 /* whisper.o */,
+				0443080429E2A70900705B78 /* whisper.h */,
+				044307FD29E2A70800705B78 /* CMakeLists.txt */,
+				0443080B29E2A70900705B78 /* LICENSE */,
+				0443080329E2A70800705B78 /* Makefile */,
+				0443080529E2A70900705B78 /* ggml.c */,
+				0443080C29E2A70900705B78 /* models */,
+				0443080629E2A70900705B78 /* whisper.cpp */,
+				0443080029E2A70800705B78 /* .gitmodules */,
+				0443080129E2A70800705B78 /* README.md */,
+				0443080929E2A70900705B78 /* .gitignore */,
+				044307FF29E2A70800705B78 /* main */,
+				044307FE29E2A70800705B78 /* whisper.textClipping */,
+				0443080829E2A70900705B78 /* ggml.o */,
+				0443080229E2A70800705B78 /* ggml.h */,
+			);
+			path = Whisper;
+			sourceTree = "<group>";
+		};
+		0443080C29E2A70900705B78 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				04FE4B8B29F819EB00634522 /* ggml-base.bin */,
+				0443081929E2A70B00705B78 /* for-tests-ggml-tiny.en.bin */,
+				0443081629E2A70B00705B78 /* for-tests-ggml-medium.bin */,
+				0443081129E2A70A00705B78 /* for-tests-ggml-tiny.bin */,
+				0443081529E2A70A00705B78 /* convert-h5-to-ggml.py */,
+				0443081829E2A70B00705B78 /* for-tests-ggml-base.en.bin */,
+				0443081229E2A70A00705B78 /* download-ggml-model.cmd */,
+				0443081429E2A70A00705B78 /* for-tests-ggml-large.bin */,
+				0443081729E2A70B00705B78 /* for-tests-ggml-small.bin */,
+				0443080D29E2A70A00705B78 /* convert-pt-to-ggml.py */,
+				0443081329E2A70A00705B78 /* for-tests-ggml-base.bin */,
+				0443080F29E2A70A00705B78 /* download-ggml-model.sh */,
+				0443081029E2A70A00705B78 /* for-tests-ggml-small.en.bin */,
+				0443080E29E2A70A00705B78 /* for-tests-ggml-medium.en.bin */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		0448AD4C29E5ACE80086BD89 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0448AD4D29E5ADC20086BD89 /* PrimaryButton.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		0464D9BF29E423A70007EF24 /* Clapper-Rough-Cut */ = {
+			isa = PBXGroup;
+			children = (
+				043EDDC829E95D4900DA5EFF /* MFCC */,
+				043EDDBE29E92EAA00DA5EFF /* StringsMatcher */,
+				0464D9C029E423A70007EF24 /* Python */,
+				044307F729E2A6F700705B78 /* Whisper */,
+				0448AD4C29E5ACE80086BD89 /* UIComponents */,
+				0464D9CD29E423A70007EF24 /* Views */,
+				0464D9C829E423A70007EF24 /* Models */,
+				0464D9E129E423A70007EF24 /* Services */,
+				04ACBEF529E7DFA30093DD76 /* ProjectDocument */,
+				0464D9DD29E423A70007EF24 /* Base */,
+				0464D9DB29E423A70007EF24 /* Clapper_Rough_Cut.entitlements */,
+				0464D9DC29E423A70007EF24 /* Info.plist */,
+				0464D9C429E423A70007EF24 /* Resources */,
+				0464D9CB29E423A70007EF24 /* Preview Content */,
+			);
+			path = "Clapper-Rough-Cut";
+			sourceTree = "<group>";
+		};
+		0464D9C029E423A70007EF24 /* Python */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */,
+				0464D9C329E423A70007EF24 /* Texts_Matcher.py */,
+				0426529C29EF3869008855C1 /* MFCC.py */,
+				0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */,
+			);
+			path = Python;
+			sourceTree = "<group>";
+		};
+		0464D9C429E423A70007EF24 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9C529E423A70007EF24 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0464D9C829E423A70007EF24 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9C929E423A70007EF24 /* ScriptFile.swift */,
+				0464D9CA29E423A70007EF24 /* RawFile.swift */,
+				04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */,
+				04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0464D9CB29E423A70007EF24 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9CC29E423A70007EF24 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0464D9CD29E423A70007EF24 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9CF29E423A70007EF24 /* RawFileView.swift */,
+				043EDDD129E9E21000DA5EFF /* RawTakeView.swift */,
+				0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */,
+				0448AD4A29E59CF40086BD89 /* FileSystemView.swift */,
+				0464D9D529E423A70007EF24 /* ScriptView.swift */,
+				04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */,
+				0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0464D9DD29E423A70007EF24 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9DE29E423A70007EF24 /* Clapper_Rough_CutApp.swift */,
+				0464D9E029E423A70007EF24 /* ContentView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0464D9E129E423A70007EF24 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9C729E423A70007EF24 /* ScriptRunner.swift */,
+				0464D9E329E423A70007EF24 /* Converter.swift */,
+				0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */,
+				043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		04845597298D212400772EB0 = {
+			isa = PBXGroup;
+			children = (
+				04FE56CB29F846DD00634522 /* python3.9 */,
+				0464D9BF29E423A70007EF24 /* Clapper-Rough-Cut */,
+				048455B7298D212600772EB0 /* Clapper Rough-CutTests */,
+				048455C1298D212600772EB0 /* Clapper Rough-CutUITests */,
+				048455A1298D212400772EB0 /* Products */,
+				04B0E505298F04C9004E8435 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		048455A1298D212400772EB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */,
+				048455B4298D212600772EB0 /* Clapper-Rough-CutTests.xctest */,
+				048455BE298D212600772EB0 /* Clapper-Rough-CutUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		048455B7298D212600772EB0 /* Clapper Rough-CutTests */ = {
+			isa = PBXGroup;
+			children = (
+				048455B8298D212600772EB0 /* Clapper_Rough_CutTests.swift */,
+			);
+			path = "Clapper Rough-CutTests";
+			sourceTree = "<group>";
+		};
+		048455C1298D212600772EB0 /* Clapper Rough-CutUITests */ = {
+			isa = PBXGroup;
+			children = (
+				048455C2298D212600772EB0 /* Clapper_Rough_CutUITests.swift */,
+				048455C4298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift */,
+			);
+			path = "Clapper Rough-CutUITests";
+			sourceTree = "<group>";
+		};
+		04ACBEF529E7DFA30093DD76 /* ProjectDocument */ = {
+			isa = PBXGroup;
+			children = (
+				0464D9DF29E423A70007EF24 /* ClapperRoughCutDocument.swift */,
+				0464D9D029E423A70007EF24 /* FileSystemOperations.swift */,
+				0464D9D429E423A70007EF24 /* ScriptFileOperations.swift */,
+				043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */,
+				043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */,
+			);
+			path = ProjectDocument;
+			sourceTree = "<group>";
+		};
+		04B0E505298F04C9004E8435 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0484559F298D212400772EB0 /* Clapper-Rough-Cut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-Cut" */;
+			buildPhases = (
+				0462234A29E2C09500944093 /* Run Script */,
+				0484559C298D212400772EB0 /* Sources */,
+				0484559D298D212400772EB0 /* Frameworks */,
+				0484559E298D212400772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Clapper-Rough-Cut";
+			packageProductDependencies = (
+				04BA3A0D29E1F26300047A9B /* AudioKit */,
+				0448AD5229E6B4EC0086BD89 /* Files */,
+				043EDDBA29E804A000DA5EFF /* Cryptor */,
+				0400DA4E29EDC860003AD42B /* PythonKit */,
+			);
+			productName = "Clapper Rough-Cut";
+			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
+			productType = "com.apple.product-type.application";
+		};
+		048455B3298D212600772EB0 /* Clapper-Rough-CutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455CB298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutTests" */;
+			buildPhases = (
+				048455B0298D212600772EB0 /* Sources */,
+				048455B1298D212600772EB0 /* Frameworks */,
+				048455B2298D212600772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048455B6298D212600772EB0 /* PBXTargetDependency */,
+			);
+			name = "Clapper-Rough-CutTests";
+			productName = "Clapper Rough-CutTests";
+			productReference = 048455B4298D212600772EB0 /* Clapper-Rough-CutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		048455BD298D212600772EB0 /* Clapper-Rough-CutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048455CE298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutUITests" */;
+			buildPhases = (
+				048455BA298D212600772EB0 /* Sources */,
+				048455BB298D212600772EB0 /* Frameworks */,
+				048455BC298D212600772EB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048455C0298D212600772EB0 /* PBXTargetDependency */,
+			);
+			name = "Clapper-Rough-CutUITests";
+			productName = "Clapper Rough-CutUITests";
+			productReference = 048455BE298D212600772EB0 /* Clapper-Rough-CutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04845598298D212400772EB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					0484559F298D212400772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1430;
+					};
+					048455B3298D212600772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 0484559F298D212400772EB0;
+					};
+					048455BD298D212600772EB0 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 0484559F298D212400772EB0;
+					};
+				};
+			};
+			buildConfigurationList = 0484559B298D212400772EB0 /* Build configuration list for PBXProject "Clapper-Rough-Cut" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04845597298D212400772EB0;
+			packageReferences = (
+				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
+				0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */,
+				04670E8B29E44B0C007645A8 /* XCRemoteSwiftPackageReference "SwiftShell" */,
+				0448AD5129E6B4EC0086BD89 /* XCRemoteSwiftPackageReference "Files" */,
+				043EDDB929E804A000DA5EFF /* XCRemoteSwiftPackageReference "BlueCryptor" */,
+			);
+			productRefGroup = 048455A1298D212400772EB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0484559F298D212400772EB0 /* Clapper-Rough-Cut */,
+				048455B3298D212600772EB0 /* Clapper-Rough-CutTests */,
+				048455BD298D212600772EB0 /* Clapper-Rough-CutUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0484559E298D212400772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
+				04FE4B8A29F818DE00634522 /* main in Resources */,
+				0464DA0D29E423A80007EF24 /* Info.plist in Resources */,
+				04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */,
+				0464D9FC29E423A80007EF24 /* Texts_Matcher.py in Resources */,
+				04FE56CC29F846DD00634522 /* python3.9 in Resources */,
+				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
+				0426529D29EF3869008855C1 /* MFCC.py in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B2298D212600772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BC298D212600772EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0462234A29E2C09500944093 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PYTHON_LIBRARY=\"/Users/mac/opt/anaconda3/lib/python3.9\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0484559C298D212400772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				043EDDC429E9317A00DA5EFF /* StringsMatcher_Wrapper.mm in Sources */,
+				0426529F29EFB6FB008855C1 /* MFCC_Wrapper.swift in Sources */,
+				043EDDC729E953FF00DA5EFF /* TakesMatchOperations.swift in Sources */,
+				0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */,
+				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
+				043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */,
+				0464DA1129E423A80007EF24 /* Converter.swift in Sources */,
+				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
+				0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */,
+				0464DA0029E423A80007EF24 /* RawFile.swift in Sources */,
+				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
+				0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */,
+				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
+				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
+				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
+				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
+				04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */,
+				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
+				043EDDD229E9E21000DA5EFF /* RawTakeView.swift in Sources */,
+				043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */,
+				0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */,
+				04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */,
+				043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */,
+				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
+				0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */,
+				0464DA0229E423A80007EF24 /* RawFileView.swift in Sources */,
+				0448AD4E29E5ADC20086BD89 /* PrimaryButton.swift in Sources */,
+				0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */,
+				043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455B0298D212600772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455B9298D212600772EB0 /* Clapper_Rough_CutTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048455BA298D212600772EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048455C3298D212600772EB0 /* Clapper_Rough_CutUITests.swift in Sources */,
+				048455C5298D212600772EB0 /* Clapper_Rough_CutUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		048455B6298D212600772EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0484559F298D212400772EB0 /* Clapper-Rough-Cut */;
+			targetProxy = 048455B5298D212600772EB0 /* PBXContainerItemProxy */;
+		};
+		048455C0298D212600772EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0484559F298D212400772EB0 /* Clapper-Rough-Cut */;
+			targetProxy = 048455BF298D212600772EB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		048455C6298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		048455C7298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		048455C9298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Clapper-Rough-Cut/Clapper_Rough_Cut.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Clapper-Rough-Cut/Preview Content\"";
+				DEVELOPMENT_TEAM = 7944299YL2;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Clapper-Rough-Cut/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Clapper: Rough-Cut";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROJECT_DIR = "$(PROJECT_DIR)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Clapper-Rough-Cut/StringsMatcher/Clapper-Rough-Cut-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		048455CA298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Clapper-Rough-Cut/Clapper_Rough_Cut.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Clapper-Rough-Cut/Preview Content\"";
+				DEVELOPMENT_TEAM = 7944299YL2;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Clapper-Rough-Cut/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Clapper: Rough-Cut";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROJECT_DIR = "$(PROJECT_DIR)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Clapper-Rough-Cut/StringsMatcher/Clapper-Rough-Cut-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		048455CC298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clapper-Rough-Cut.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clapper-Rough-Cut";
+			};
+			name = Debug;
+		};
+		048455CD298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clapper-Rough-Cut.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clapper-Rough-Cut";
+			};
+			name = Release;
+		};
+		048455CF298D212600772EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Clapper Rough-Cut";
+			};
+			name = Debug;
+		};
+		048455D0298D212600772EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7944299YL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-CutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Clapper Rough-Cut";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0484559B298D212400772EB0 /* Build configuration list for PBXProject "Clapper-Rough-Cut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455C6298D212600772EB0 /* Debug */,
+				048455C7298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-Cut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455C9298D212600772EB0 /* Debug */,
+				048455CA298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455CB298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455CC298D212600772EB0 /* Debug */,
+				048455CD298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048455CE298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048455CF298D212600772EB0 /* Debug */,
+				048455D0298D212600772EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		043EDDB929E804A000DA5EFF /* XCRemoteSwiftPackageReference "BlueCryptor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kitura/BlueCryptor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		0448AD5129E6B4EC0086BD89 /* XCRemoteSwiftPackageReference "Files" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Files";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pvieito/PythonKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		04670E8B29E44B0C007645A8 /* XCRemoteSwiftPackageReference "SwiftShell" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kareman/SwiftShell.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0400DA4E29EDC860003AD42B /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
+		};
+		043EDDBA29E804A000DA5EFF /* Cryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 043EDDB929E804A000DA5EFF /* XCRemoteSwiftPackageReference "BlueCryptor" */;
+			productName = Cryptor;
+		};
+		0448AD5229E6B4EC0086BD89 /* Files */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0448AD5129E6B4EC0086BD89 /* XCRemoteSwiftPackageReference "Files" */;
+			productName = Files;
+		};
+		04BA3A0D29E1F26300047A9B /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 04845598298D212400772EB0 /* Project object */;
+}
