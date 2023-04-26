@@ -12,6 +12,7 @@ struct FileSystemView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 600
+    @State private var isExportViewPresented = false
     
     var body: some View {
         VSplitView {
@@ -22,6 +23,14 @@ struct FileSystemView: View {
                     .onAppear {
                         width = 850
                         fileSystemHeight = 600
+                    }
+                    .sheet(isPresented: $isExportViewPresented) {
+                        ExportView() {
+                            document.export()
+                            isExportViewPresented.toggle()
+                        } closeAction: {
+                            isExportViewPresented.toggle()
+                        }
                     }
             detailView
                 .padding()
@@ -47,7 +56,9 @@ struct FileSystemView: View {
                 PrimaryButton(title: "Определить дубли", imageName: "film.stack", accesibilityIdentifier: "", enabled: $document.project.hasUnmatchedSortedFiles) {
                     document.matchTakes()
                 }
-                PrimaryButton(title: "Экспорт", imageName: "rectangle.portrait.and.arrow.right", accesibilityIdentifier: "", enabled: .constant(false)) {
+                PrimaryButton(title: "Экспорт", imageName: "rectangle.portrait.and.arrow.right", accesibilityIdentifier: "", enabled: .constant(true))
+                {
+                    isExportViewPresented.toggle()
                 }
                 Spacer()
             }

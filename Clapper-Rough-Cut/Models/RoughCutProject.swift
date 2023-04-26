@@ -21,4 +21,6 @@ struct RoughCutProject: Identifiable, Codable {
     var hasUnsortedTranscribedFiles: Bool = false
     var canSortScenes: Bool = false
     var hasUnmatchedSortedFiles: Bool = false
+    
+    var exportSettings: ExportSettings = ExportSettings()
 }

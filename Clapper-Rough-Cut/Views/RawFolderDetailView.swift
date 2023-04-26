@@ -44,18 +44,21 @@ struct RawFolderDetailView: View {
                     Spacer()
                 }
                 .foregroundColor(.black)
+                .padding(.vertical, 5)
                 HStack{
                     FileIcon(type: .audio)
                     Text("\(folder.files.filter({ file in file.type == .audio }).count) аудио")
                     Spacer()
                 }
                 .foregroundColor(.black)
+                .padding(.vertical, 5)
                 HStack{
                     Image(systemName: "film.stack")
                     Text("\(folder.takes.count) дубли")
                     Spacer()
                 }
                 .foregroundColor(.black)
+                .padding(.vertical, 5)
         }
     }
 }

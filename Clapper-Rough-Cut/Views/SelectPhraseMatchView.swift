@@ -16,13 +16,7 @@ struct SelectPhraseMatchView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Выберите фразу...", text: $searchText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                    .focusable(false)
-                    .foregroundColor(.black)
-                    .cornerRadius(15)
-                    .border(.gray)
+                TextFieldComponent(placeholder: "Выберите фразу...", text: $searchText)
                     
                 Spacer()
                 Button(action: closeAction) {
@@ -68,7 +62,7 @@ struct SelectPhraseMatchView: View {
     
     func getPhrases() -> [Phrase] {
         var phrases: [Phrase] = []
-        var blocks = document.project.scriptFile?.blocks.filter({ $0.isDialogue }) ?? []
+        let blocks = document.project.scriptFile?.blocks.filter({ $0.isDialogue }) ?? []
         for block in blocks {
             phrases += block.phrases
         }
