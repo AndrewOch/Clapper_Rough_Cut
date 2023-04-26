@@ -42,7 +42,7 @@ struct PrimaryButtonLabel: View {
                 .font(.custom("Jost Regular", size: 12))
         }
         .foregroundColor(.white)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .background(
             .purple

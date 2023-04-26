@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SelectPhraseMatchView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @State var file: RawFile
     @State var selectAction: (Phrase) -> Void
     @State var closeAction: () -> Void
     @State var searchText: String = ""
@@ -66,7 +65,6 @@ struct SelectPhraseMatchView: View {
         .background(.white)
         .cornerRadius(15)
     }
-    
     
     func getPhrases() -> [Phrase] {
         var phrases: [Phrase] = []

@@ -89,13 +89,28 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         updateStatus()
     }
     
-    public func getPhraseFolderForFile(_ file: RawFile?) -> RawFilesFolder? {
+    public func getPhraseFolder(for file: RawFile?) -> RawFilesFolder? {
         guard let file = file else { return nil }
         var folder: RawFilesFolder? = nil
         project.phraseFolders.forEach { f in
             if f.files.contains(file) { folder = f }
         }
         return folder
+    }
+    
+    public func getPhraseFolder(for take: RawTake?) -> RawFilesFolder? {
+        guard let take = take else { return nil }
+        var folder: RawFilesFolder? = nil
+        project.phraseFolders.forEach { f in
+            if f.takes.contains(take) { folder = f }
+        }
+        return folder
+    }
+    
+    func unselectAll() {
+        project.selectedFile = nil
+        project.selectedFolder = nil
+        project.selectedTake = nil
     }
     
     func selectFile(_ file: RawFile) {

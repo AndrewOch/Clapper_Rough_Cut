@@ -24,7 +24,7 @@ class RawFilesFolder: Identifiable, Equatable, Codable {
     }
     
     // Init for phrase folder
-    init(title: String, files: [RawFile], takes: [RawTake] = [], scriptPhraseId: UUID? = nil) {
+    init(title: String, files: [RawFile] = [], takes: [RawTake] = [], scriptPhraseId: UUID? = nil) {
         self.title = title
         self.files = files
         self.scriptPhraseId = scriptPhraseId

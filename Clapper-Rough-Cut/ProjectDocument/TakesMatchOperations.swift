@@ -11,6 +11,7 @@ import AVFoundation
 
 protocol TakesMatchOperations {
     func matchTakes()
+    func detachFiles(from take: RawTake)
 }
 
 extension ClapperRoughCutDocument: TakesMatchOperations {
@@ -50,6 +51,18 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
         let endTime = Date().timeIntervalSince1970
         let elapsedTime = endTime - startTime
         print("Total matching time: \(elapsedTime) seconds")
+        unselectAll()
+        updateStatus()
+    }
+    
+    func detachFiles(from take: RawTake) {
+        let video = take.video
+        let audio = take.audio
+        if let index = project.phraseFolders.firstIndex(where: { folder in folder.takes.contains { t in t.id == take.id }}) {
+            project.phraseFolders[index].files.append(contentsOf: [video, audio])
+            project.phraseFolders[index].takes.removeAll { t in t.id == take.id }
+        }
+        unselectAll()
         updateStatus()
     }
 }

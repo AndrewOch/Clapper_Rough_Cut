@@ -23,8 +23,11 @@ struct FileSystemView: View {
                         width = 850
                         fileSystemHeight = 600
                     }
-            RawFileDetailView(file: $document.project.selectedFile,
-                              width: width)
+            detailView
+                .padding()
+                    .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
+                    .frame(minHeight: 200, maxHeight: .infinity)
+                    .background(Color.white)
         }
     }
     
@@ -54,15 +57,28 @@ struct FileSystemView: View {
                 Color.black.opacity(0.8)
                 ScrollView {
                     LazyVStack {
-                        RawFilesFolderView(folder: document.project.unsortedFolder, collapsed: document.project.unsortedFolder.collapsed)
+                        RawFilesFolderView(folder: document.project.unsortedFolder, collapsed: document.project.unsortedFolder.collapsed, selected: document.project.selectedFolder == document.project.unsortedFolder)
                         ForEach(document.project.phraseFolders) { folder in
-                            RawFilesFolderView(folder: folder, collapsed: folder.collapsed)
+                            RawFilesFolderView(folder: folder, collapsed: folder.collapsed, selected: document.project.selectedFolder == folder)
                         }
                         Spacer()
                     }
                     .padding()
                 }
             }
+        }
+    }
+    
+    var detailView: some View {
+        VStack {
+            if document.project.selectedFile != nil {
+                RawFileDetailView(file: $document.project.selectedFile)
+            } else if document.project.selectedFolder != nil {
+                RawFolderDetailView(folder: $document.project.selectedFolder)
+            } else if document.project.selectedTake != nil {
+                RawTakeDetailView(take: $document.project.selectedTake)
+            }
+            Spacer()
         }
     }
 }

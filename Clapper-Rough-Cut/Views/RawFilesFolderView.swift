@@ -11,6 +11,7 @@ struct RawFilesFolderView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var folder: RawFilesFolder
     @State var collapsed: Bool
+    var selected: Bool
     
     var body: some View {
         VStack {
@@ -25,9 +26,20 @@ struct RawFilesFolderView: View {
                 }
                 .focusable(false)
                 .buttonStyle(PlainButtonStyle())
-                Image(systemName: "folder")
-                Text(folder.title).lineLimit(1)
-                Spacer()
+                
+                Button(action: {
+                    document.selectFolder(folder)
+                }, label: {
+                    Image(systemName: "folder")
+                    Text(folder.title).lineLimit(1)
+                    Spacer()
+                })
+                .focusable(false)
+                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 5)
+                .padding(.vertical, selected ? 5 : 1)
+                .background(selected ? Color.purple.opacity(0.3) : Color.clear)
+                .cornerRadius(5)
             }
             if !collapsed {
                 ForEach(folder.takes) { take in
