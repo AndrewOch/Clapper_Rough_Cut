@@ -7,15 +7,15 @@ enum WhisperError: Error {
 // Meet Whisper C++ constraint: Don't access from more than one thread at a time.
 actor WhisperContext {
     private var context: OpaquePointer
-    
+
     init(context: OpaquePointer) {
         self.context = context
     }
-    
+
     deinit {
         whisper_free(context)
     }
-    
+
     func fullTranscribe(samples: [Float]) {
         // Leave 2 processors free (i.e. the high-efficiency cores).
         let maxThreads = max(1, min(8, cpuCount() - 2))
@@ -33,7 +33,7 @@ actor WhisperContext {
             params.offset_ms = 0
             params.no_context = true
             params.single_segment = false
-            
+
             whisper_reset_timings(context)
             print("About to run whisper_full")
             samples.withUnsafeBufferPointer { samples in
@@ -45,7 +45,7 @@ actor WhisperContext {
             }
         }
     }
-    
+
     func getTranscription() -> String {
         var transcription = ""
         for i in 0..<whisper_full_n_segments(context) {
@@ -53,7 +53,7 @@ actor WhisperContext {
         }
         return transcription
     }
-    
+
     static func createContext(path: String) throws -> WhisperContext {
         let context = whisper_init_from_file(path)
         if let context {

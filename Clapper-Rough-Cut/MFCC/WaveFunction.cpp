@@ -1,10 +1,3 @@
-//
-//  MFCC.cpp
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #include "WaveFunction.hpp"
 
 WaveFunction::WaveFunction(int frm_len, int mfcc_num){

@@ -1,10 +1,3 @@
-//
-//  RawTakeDetailView.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 25.04.2023.
-//
-
 import SwiftUI
 
 struct RawTakeDetailView: View {

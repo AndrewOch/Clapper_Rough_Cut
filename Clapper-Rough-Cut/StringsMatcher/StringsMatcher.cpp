@@ -1,10 +1,3 @@
-//
-//  Levenshtein.cpp
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #include "StringsMatcher.hpp"
 #include <iostream>
 #include <string>

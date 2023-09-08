@@ -1,10 +1,3 @@
-//
-//  Levenshtein_Wrapper.m
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #import "StringsMatcher_Wrapper.h"
 #import "StringsMatcher.hpp"
 

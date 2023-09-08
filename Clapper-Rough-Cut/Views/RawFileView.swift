@@ -1,10 +1,3 @@
-//
-//  RawFilesView.swift
-//  Clapper Rough-Cut
-//
-//  Created by andrewoch on 04.02.2023.
-//
-
 import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
@@ -37,5 +30,8 @@ struct RawFileView: View {
         .padding(.vertical, selected ? 5 : 1)
         .background(selected ? Color.purple.opacity(0.3) : Color.clear)
         .cornerRadius(5)
+        
+        
+        
     }
 }

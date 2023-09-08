@@ -1,10 +1,3 @@
-//
-//  Converter.swift
-//  Clapper Rough-Cut
-//
-//  Created by andrewoch on 08.04.2023.
-//
-
 import Foundation
 import AVFoundation
 import AudioKit

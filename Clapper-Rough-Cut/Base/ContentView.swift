@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Clapper Rough Cut
-//
-//  Created by andrewoch on 03.02.2023.
-//
-
 import SwiftUI
 import CoreData
 

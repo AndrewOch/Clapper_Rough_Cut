@@ -1,10 +1,3 @@
-//
-//  RoughCutDocument.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 12.04.2023.
-//
-
 import Foundation
 
 struct RoughCutProject: Identifiable, Codable {

@@ -11,6 +11,10 @@
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529D29EF3869008855C1 /* MFCC.py in Resources */ = {isa = PBXBuildFile; fileRef = 0426529C29EF3869008855C1 /* MFCC.py */; };
 		0426529F29EFB6FB008855C1 /* MFCC_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */; };
+		043538B52AAB688000775E0D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538B22AAB688000775E0D /* Fonts.swift */; };
+		043538B62AAB688000775E0D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538B32AAB688000775E0D /* Strings.swift */; };
+		043538B72AAB688000775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538B42AAB688000775E0D /* Assets.swift */; };
+		043538BB2AAB7A6600775E0D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043538BA2AAB7A6600775E0D /* Localizable.strings */; };
 		043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */; };
 		043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */; };
 		043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */; };
@@ -46,6 +50,8 @@
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
 		04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */; };
 		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
+		04E23A2E2AA9CDE700F14C3D /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E23A2D2AA9CDE700F14C3D /* Font.swift */; };
+		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
 		04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */; };
@@ -58,6 +64,9 @@
 		04FE56CC29F846DD00634522 /* python3.9 in Resources */ = {isa = PBXBuildFile; fileRef = 04FE56CB29F846DD00634522 /* python3.9 */; };
 		04FE56D029F8663E00634522 /* RawTakeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FE56CF29F8663E00634522 /* RawTakeDetailView.swift */; };
 		04FE56D429F876F000634522 /* RawFolderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FE56D329F876F000634522 /* RawFolderDetailView.swift */; };
+		5AFF515A9DF08651D89AA8E4 /* Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527938C26D2D41DCEE40AFC2 /* Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework */; };
+		5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */; };
+		C1FA70DFD7299E797A47062C /* Pods_Clapper_Rough_CutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +90,10 @@
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
 		0426529C29EF3869008855C1 /* MFCC.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = MFCC.py; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCC_Wrapper.swift; sourceTree = "<group>"; };
+		043538B22AAB688000775E0D /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		043538B32AAB688000775E0D /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		043538B42AAB688000775E0D /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		043538BA2AAB7A6600775E0D /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseMatcher.swift; sourceTree = "<group>"; };
 		043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesMatchOperations.swift; sourceTree = "<group>"; };
 		043EDDBF29E92ED300DA5EFF /* Clapper-Rough-Cut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clapper-Rough-Cut-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -153,6 +166,8 @@
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
 		04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFilesFolderView.swift; sourceTree = "<group>"; };
+		04E23A2D2AA9CDE700F14C3D /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribedIcon.swift; sourceTree = "<group>"; };
@@ -164,6 +179,15 @@
 		04FE56CB29F846DD00634522 /* python3.9 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = python3.9; path = ../../opt/anaconda3/bin/python3.9; sourceTree = "<group>"; };
 		04FE56CF29F8663E00634522 /* RawTakeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawTakeDetailView.swift; sourceTree = "<group>"; };
 		04FE56D329F876F000634522 /* RawFolderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFolderDetailView.swift; sourceTree = "<group>"; };
+		08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_Cut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_CutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		266EB9366FA0884BBF0EC260 /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig"; sourceTree = "<group>"; };
+		46374DCE497161B58AF362C1 /* Pods-Clapper-Rough-CutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-CutTests.release.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-CutTests/Pods-Clapper-Rough-CutTests.release.xcconfig"; sourceTree = "<group>"; };
+		527938C26D2D41DCEE40AFC2 /* Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE0E5D9067719C7ED8EA23C /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.debug.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B9834B76F821A1A27FC3BCDC /* Pods-Clapper-Rough-CutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-CutTests.debug.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-CutTests/Pods-Clapper-Rough-CutTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CAD388714F18F277B634EED1 /* Pods-Clapper-Rough-Cut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-Cut.debug.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-Cut/Pods-Clapper-Rough-Cut.debug.xcconfig"; sourceTree = "<group>"; };
+		DB61326F2F6E0BB0646CAA4F /* Pods-Clapper-Rough-Cut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-Cut.release.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-Cut/Pods-Clapper-Rough-Cut.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +197,7 @@
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
 				0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */,
+				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1FA70DFD7299E797A47062C /* Pods_Clapper_Rough_CutTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,12 +213,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFF515A9DF08651D89AA8E4 /* Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041FE5D12AAB38910054C861 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				043538B42AAB688000775E0D /* Assets.swift */,
+				043538B22AAB688000775E0D /* Fonts.swift */,
+				043538B32AAB688000775E0D /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		043EDDBE29E92EAA00DA5EFF /* StringsMatcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +319,7 @@
 				0448AD4C29E5ACE80086BD89 /* UIComponents */,
 				0464D9CD29E423A70007EF24 /* Views */,
 				0464D9C829E423A70007EF24 /* Models */,
+				04E23A2C2AA9CDDA00F14C3D /* Extensions */,
 				0464D9E129E423A70007EF24 /* Services */,
 				04ACBEF529E7DFA30093DD76 /* ProjectDocument */,
 				0464D9DD29E423A70007EF24 /* Base */,
@@ -307,7 +345,10 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				041FE5D12AAB38910054C861 /* Generated */,
+				04E23A292AA9CAA600F14C3D /* Fonts */,
 				0464D9C529E423A70007EF24 /* Assets.xcassets */,
+				043538BA2AAB7A6600775E0D /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -379,6 +420,7 @@
 				048455C1298D212600772EB0 /* Clapper Rough-CutUITests */,
 				048455A1298D212400772EB0 /* Products */,
 				04B0E505298F04C9004E8435 /* Frameworks */,
+				A6DE910A220299BDC033D3EF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -425,8 +467,40 @@
 		04B0E505298F04C9004E8435 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */,
+				527938C26D2D41DCEE40AFC2 /* Pods_Clapper_Rough_Cut_Clapper_Rough_CutUITests.framework */,
+				241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04E23A292AA9CAA600F14C3D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04E23A372AA9F16800F14C3D /* Overpass.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		04E23A2C2AA9CDDA00F14C3D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04E23A2D2AA9CDE700F14C3D /* Font.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A6DE910A220299BDC033D3EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAD388714F18F277B634EED1 /* Pods-Clapper-Rough-Cut.debug.xcconfig */,
+				DB61326F2F6E0BB0646CAA4F /* Pods-Clapper-Rough-Cut.release.xcconfig */,
+				5AE0E5D9067719C7ED8EA23C /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.debug.xcconfig */,
+				266EB9366FA0884BBF0EC260 /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig */,
+				B9834B76F821A1A27FC3BCDC /* Pods-Clapper-Rough-CutTests.debug.xcconfig */,
+				46374DCE497161B58AF362C1 /* Pods-Clapper-Rough-CutTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,10 +510,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-Cut" */;
 			buildPhases = (
+				313B3A8D9D992845C47EF96D /* [CP] Check Pods Manifest.lock */,
 				0462234A29E2C09500944093 /* Run Script */,
+				041FE5CE2AAB359F0054C861 /* SwiftGen */,
 				0484559C298D212400772EB0 /* Sources */,
 				0484559D298D212400772EB0 /* Frameworks */,
 				0484559E298D212400772EB0 /* Resources */,
+				04E23A3F2AAB19DE00F14C3D /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -458,6 +535,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 048455CB298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutTests" */;
 			buildPhases = (
+				E5A87510EAE17BDC9E589874 /* [CP] Check Pods Manifest.lock */,
 				048455B0298D212600772EB0 /* Sources */,
 				048455B1298D212600772EB0 /* Frameworks */,
 				048455B2298D212600772EB0 /* Resources */,
@@ -476,6 +554,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 048455CE298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-CutUITests" */;
 			buildPhases = (
+				4901EEE4A4641AC16208877F /* [CP] Check Pods Manifest.lock */,
 				048455BA298D212600772EB0 /* Sources */,
 				048455BB298D212600772EB0 /* Frameworks */,
 				048455BC298D212600772EB0 /* Resources */,
@@ -516,11 +595,12 @@
 			};
 			buildConfigurationList = 0484559B298D212400772EB0 /* Build configuration list for PBXProject "Clapper-Rough-Cut" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 04845597298D212400772EB0;
 			packageReferences = (
@@ -547,6 +627,8 @@
 				04FE4B8A29F818DE00634522 /* main in Resources */,
 				0464DA0D29E423A80007EF24 /* Info.plist in Resources */,
 				04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */,
+				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,
+				043538BB2AAB7A6600775E0D /* Localizable.strings in Resources */,
 				0464D9FC29E423A80007EF24 /* Texts_Matcher.py in Resources */,
 				04FE56CC29F846DD00634522 /* python3.9 in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
@@ -571,6 +653,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		041FE5CE2AAB359F0054C861 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\"$PODS_ROOT\"/SwiftGen/bin/swiftgen config run --config SwiftGen/swiftgen.yml\n";
+		};
 		0462234A29E2C09500944093 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -589,6 +689,90 @@
 			shellPath = /bin/sh;
 			shellScript = "PYTHON_LIBRARY=\"/Users/mac/opt/anaconda3/lib/python3.9\"\n";
 		};
+		04E23A3F2AAB19DE00F14C3D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		313B3A8D9D992845C47EF96D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Clapper-Rough-Cut-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4901EEE4A4641AC16208877F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5A87510EAE17BDC9E589874 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Clapper-Rough-CutTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -604,6 +788,7 @@
 				043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */,
 				0464DA1129E423A80007EF24 /* Converter.swift in Sources */,
 				04FE56D429F876F000634522 /* RawFolderDetailView.swift in Sources */,
+				043538B72AAB688000775E0D /* Assets.swift in Sources */,
 				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
 				04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */,
 				0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */,
@@ -612,10 +797,12 @@
 				0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */,
 				04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
+				043538B52AAB688000775E0D /* Fonts.swift in Sources */,
 				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
 				04F7A9EE29F96D27007E4C64 /* TextFieldComponent.swift in Sources */,
 				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
+				04E23A2E2AA9CDE700F14C3D /* Font.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
 				04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */,
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
@@ -626,6 +813,7 @@
 				04FE56D029F8663E00634522 /* RawTakeDetailView.swift in Sources */,
 				04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */,
 				04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */,
+				043538B62AAB688000775E0D /* Strings.swift in Sources */,
 				043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */,
 				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
 				0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */,
@@ -785,6 +973,7 @@
 		};
 		048455C9298D212600772EB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAD388714F18F277B634EED1 /* Pods-Clapper-Rough-Cut.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -823,6 +1012,7 @@
 		};
 		048455CA298D212600772EB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB61326F2F6E0BB0646CAA4F /* Pods-Clapper-Rough-Cut.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -860,6 +1050,7 @@
 		};
 		048455CC298D212600772EB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9834B76F821A1A27FC3BCDC /* Pods-Clapper-Rough-CutTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -879,6 +1070,7 @@
 		};
 		048455CD298D212600772EB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46374DCE497161B58AF362C1 /* Pods-Clapper-Rough-CutTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -898,6 +1090,7 @@
 		};
 		048455CF298D212600772EB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AE0E5D9067719C7ED8EA23C /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -915,6 +1108,7 @@
 		};
 		048455D0298D212600772EB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 266EB9366FA0884BBF0EC260 /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

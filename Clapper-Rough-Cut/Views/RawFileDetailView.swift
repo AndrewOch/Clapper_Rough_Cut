@@ -1,10 +1,3 @@
-//
-//  RawFileDetailView.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 12.04.2023.
-//
-
 import SwiftUI
 
 struct RawFileDetailView: View {

@@ -1,10 +1,3 @@
-//
-//  WaveFunction_Wrapper.h
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #import <Foundation/Foundation.h>
 
 @interface WaveFunction_Wrapper : NSObject

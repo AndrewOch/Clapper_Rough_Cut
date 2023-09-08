@@ -1,10 +1,3 @@
-//
-//  WaveFunction_Wrapper.m
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #import "WaveFunction_Wrapper.h"
 #import "WaveFunction.hpp"
 

@@ -1,10 +1,3 @@
-//
-//  Levenshtein.hpp
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #include <stdio.h>
 #include <iostream>
 #include <string>

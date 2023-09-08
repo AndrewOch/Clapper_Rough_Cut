@@ -1,10 +1,3 @@
-//
-//  ExportSettings.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 26.04.2023.
-//
-
 import Foundation
 
 class ExportSettings: Identifiable, Codable {

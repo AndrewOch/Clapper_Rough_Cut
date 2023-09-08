@@ -1,10 +1,3 @@
-//
-//  MFCC.hpp
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #ifndef WAVEFUNCTION_H
 #define WAVEFUNCTION_H
 #include "WaveStructure.h"

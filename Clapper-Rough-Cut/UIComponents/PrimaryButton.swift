@@ -1,10 +1,3 @@
-//
-//  PrimaryButton.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 11.04.2023.
-//
-
 import SwiftUI
 
 struct PrimaryButton: View {
@@ -39,7 +32,7 @@ struct PrimaryButtonLabel: View {
                     .frame(width: 16, height: 16)
             }
             Text(title)
-                .font(.custom("Jost Regular", size: 12))
+                .font(.caption)
         }
         .foregroundColor(.white)
         .padding(.horizontal, 16)

@@ -1,33 +1,25 @@
-//
-//  PhraseMatcher.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 13.04.2023.
-//
-
 import Foundation
 import NaturalLanguage
 
-
 protocol PhraseMatcherProtocol {
-    func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> ())
+    func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> Void)
 }
 
 final class PhraseMatcher: PhraseMatcherProtocol {
-    
+
     let textsMatcherWrapper = TextsMatcher_Wrapper()
-    
-    public func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> ()) {
+
+    public func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> Void) {
         let startTime = Date().timeIntervalSince1970
         for file in files {
             if let transcription = file.transcription {
                 let wordsCount = transcription.components(separatedBy: .whitespaces).count
                 if wordsCount == 0 { continue }
-                
+
                 var res: [([Int], Phrase)] = []
                 for phrase in phrases {
                     let cleanedPhrase = removeEnclosedText(phrase.phraseText).trimmingCharacters(in: .whitespaces)
-                    if cleanedPhrase.components(separatedBy: .whitespaces).count > 0 {
+                    if cleanedPhrase.components(separatedBy: .whitespaces).isNotEmpty {
                         let lengths = textsMatcherWrapper.matchingSequenceLengths(text1: transcription.lowercased(), text2: cleanedPhrase.lowercased())
                         if lengths.isNotEmpty {
 //                            print(lengths)
@@ -46,7 +38,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         let elapsed = endTime - startTime
         print("Total sorting time: \(elapsed) seconds")
     }
-    
+
     func getBestMatch(phrasesMap: [([Int], Phrase)]) -> ([Int], Phrase)? {
         var phrasesMap = phrasesMap.map { (key: $0.sorted(by: >), value: $1) } // Sorting map keys in descending order
         while phrasesMap.count > 1 {
@@ -65,8 +57,8 @@ final class PhraseMatcher: PhraseMatcherProtocol {
             phrasesMap = newPhrasesMap
             if phrasesMap.count > 1 && phrasesMap.allSatisfy({ $0.0.count == 1 }) {
                 print()
-                for p in phrasesMap {
-                    print("Conflicting: ", p.key, p.value.fullText)
+                for phrase in phrasesMap {
+                    print("Conflicting: ", phrase.key, phrase.value.fullText)
                 }
                 print()
                 return phrasesMap.first
@@ -80,7 +72,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         let words2 = text2.components(separatedBy: .whitespaces)
         var matchCount = 0
         var lastIndex = 0
-        
+
         DispatchQueue.concurrentPerform(iterations: words1.count) { i in
             let word1 = words1[i]
             if word1.isEmpty { return }

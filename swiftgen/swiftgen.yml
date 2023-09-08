@@ -1,0 +1,17 @@
+output_dir: ../Clapper-Rough-Cut/Resources/Generated/
+xcassets:
+  inputs: ../Clapper-Rough-Cut/Resources/Assets.xcassets
+  outputs:
+    templateName: swift5
+    output: Assets.swift
+strings:
+    inputs:
+        - ../Clapper-Rough-Cut/Resources/Localizable.strings
+    outputs:
+      templateName: structured-swift5
+      output: Strings.swift
+fonts:
+  inputs: ../Clapper-Rough-Cut/Resources/Fonts
+  outputs:
+    templatePath: ../swiftgen/swift5.stencil
+    output: Fonts.swift

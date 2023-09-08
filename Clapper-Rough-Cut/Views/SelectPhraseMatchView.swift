@@ -1,10 +1,3 @@
-//
-//  SelectSceneMatchView.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 18.04.2023.
-//
-
 import SwiftUI
 
 struct SelectPhraseMatchView: View {

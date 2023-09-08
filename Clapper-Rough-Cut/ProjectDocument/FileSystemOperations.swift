@@ -1,10 +1,3 @@
-//
-//  ProjectEditViewModel.swift
-//  Clapper Rough-Cut
-//
-//  Created by andrewoch on 03.02.2023.
-//
-
 import Foundation
 import AppKit
 import SwiftUI
@@ -78,7 +71,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             }
         }
     }
-    
+
     public func transcribeFiles() {
         let filtered = project.unsortedFolder.files.filter { file in file.transcription == nil }
         transcriber.transcribeFiles(filtered) { url, transcription in
@@ -88,43 +81,43 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         }
         updateStatus()
     }
-    
+
     public func getPhraseFolder(for file: RawFile?) -> RawFilesFolder? {
         guard let file = file else { return nil }
         var folder: RawFilesFolder? = nil
-        project.phraseFolders.forEach { f in
-            if f.files.contains(file) { folder = f }
+        project.phraseFolders.forEach { phraseFolder in
+            if phraseFolder.files.contains(file) { folder = phraseFolder }
         }
         return folder
     }
-    
+
     public func getPhraseFolder(for take: RawTake?) -> RawFilesFolder? {
         guard let take = take else { return nil }
         var folder: RawFilesFolder? = nil
-        project.phraseFolders.forEach { f in
-            if f.takes.contains(take) { folder = f }
+        project.phraseFolders.forEach { phraseFolder in
+            if phraseFolder.takes.contains(take) { folder = phraseFolder }
         }
         return folder
     }
-    
+
     func unselectAll() {
         project.selectedFile = nil
         project.selectedFolder = nil
         project.selectedTake = nil
     }
-    
+
     func selectFile(_ file: RawFile) {
         project.selectedFile = file
         project.selectedFolder = nil
         project.selectedTake = nil
     }
-    
+
     func selectFolder(_ folder: RawFilesFolder) {
         project.selectedFile = nil
         project.selectedFolder = folder
         project.selectedTake = nil
     }
-    
+
     func selectTake(_ take: RawTake) {
         project.selectedFile = nil
         project.selectedFolder = nil

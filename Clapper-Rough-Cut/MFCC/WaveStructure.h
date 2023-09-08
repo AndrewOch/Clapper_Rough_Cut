@@ -1,10 +1,3 @@
-//
-//  WaveStructure.h
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 #ifndef WAVESTRUCTURE_H
 #define WAVESTRUCTURE_H
 

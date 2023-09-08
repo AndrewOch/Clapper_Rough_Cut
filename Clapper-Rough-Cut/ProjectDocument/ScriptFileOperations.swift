@@ -1,10 +1,3 @@
-//
-//  ScriptViewModel.swift
-//  Clapper Rough-Cut
-//
-//  Created by andrewoch on 04.02.2023.
-//
-
 import AppKit
 import UniformTypeIdentifiers
 

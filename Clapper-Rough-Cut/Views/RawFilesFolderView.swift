@@ -1,10 +1,3 @@
-//
-//  RawFilesFolderView.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 13.04.2023.
-//
-
 import SwiftUI
 
 struct RawFilesFolderView: View {

@@ -1,10 +1,3 @@
-//
-//  FileSystemView.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 11.04.2023.
-//
-
 import SwiftUI
 
 struct FileSystemView: View {
@@ -13,7 +6,7 @@ struct FileSystemView: View {
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 600
     @State private var isExportViewPresented = false
-    
+      
     var body: some View {
         VSplitView {
             fileSystem
@@ -42,6 +35,10 @@ struct FileSystemView: View {
     
     var fileSystem: some View {
         VStack {
+            Text("Добавить файл Add file").font(.custom("", size: 20))
+                .foregroundColor(.black)
+            Text("Добавить файл Add file").font(.custom("Overpass-Regular", size: 20))
+                .foregroundColor(.black)
             HStack {
                 PrimaryButton(title: "Добавить файлы", imageName: "square.and.arrow.down", accesibilityIdentifier: "", enabled: .constant(true)) {
                     document.addRawFiles()

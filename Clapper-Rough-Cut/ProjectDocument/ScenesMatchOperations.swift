@@ -1,10 +1,3 @@
-//
-//  SceneMatchOperations.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 14.04.2023.
-//
-
 import Foundation
 
 protocol ScenesMatchOperations {
@@ -15,31 +8,31 @@ protocol ScenesMatchOperations {
 
 // MARK: - Scenes Match Operations
 extension ClapperRoughCutDocument: ScenesMatchOperations {
-    
+
     func matchScenes() {
         matchFor(files: project.unsortedFolder.files)
     }
-    
+
     func matchSceneForFile(_ file: RawFile) {
         matchFor(files: [file])
     }
-    
+
     func manualMatch(file: RawFile, phrase: Phrase) {
         match(file: file, phrase: phrase)
         updateStatus()
     }
-    
+
     func manualMatch(take: RawTake, phrase: Phrase) {
         match(take: take, phrase: phrase)
         updateStatus()
     }
-    
+
     func changeScene(for folder: RawFilesFolder, phrase: Phrase) {
         folder.scriptPhraseId = phrase.id
         folder.title = createPhraseFolderTitle(characterName: phrase.characterName, text: phrase.phraseText)
         updateStatus()
     }
-    
+
     private func matchFor(files: [RawFile]) {
         phraseMatcher.matchFilesToPhrases(files: files,
                                           phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
@@ -47,7 +40,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         }
         updateStatus()
     }
-    
+
     private func createPhraseFolderTitle(characterName: String, text: String) -> String {
         let punctuation = CharacterSet.punctuationCharacters.union(CharacterSet.symbols)
         let cleanedString = text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -55,7 +48,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         let words = cleanedString.components(separatedBy: .whitespacesAndNewlines)
         return "\(characterName)-\(words.prefix(10).joined(separator: " "))"
     }
-    
+
     private func match(file: RawFile, phrase: Phrase) {
         if let index = self.project.phraseFolders.firstIndex(where: { $0.files.contains { $0.id == file.id }}) {
             project.phraseFolders[index].files.removeAll(where: { $0.id == file.id })
@@ -71,9 +64,9 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
                                                              files: [file],
                                                              scriptPhraseId: phrase.id))
         }
-        self.project.unsortedFolder.files.removeAll { f in f.id == file.id }
+        self.project.unsortedFolder.files.removeAll { file in file.id == file.id }
     }
-    
+
     private func match(take: RawTake, phrase: Phrase) {
         if let index = self.project.phraseFolders.firstIndex(where: { $0.takes.contains { $0.id == take.id }}) {
             project.phraseFolders[index].takes.removeAll(where: { $0.id == take.id })
@@ -89,6 +82,6 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
                                                              takes: [take],
                                                              scriptPhraseId: phrase.id))
         }
-        self.project.unsortedFolder.takes.removeAll { f in f.id == take.id }
+        self.project.unsortedFolder.takes.removeAll { file in file.id == take.id }
     }
 }

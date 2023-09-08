@@ -1,10 +1,3 @@
-//
-//  MFCC_Wrapper.swift
-//  Clapper-Rough-Cut
-//
-//  Created by andrewoch on 19.04.2023.
-//
-
 import Foundation
 import PythonKit
 
