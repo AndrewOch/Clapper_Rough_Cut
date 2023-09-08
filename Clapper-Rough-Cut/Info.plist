@@ -27,8 +27,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Jost.ttf</string>
-		<string>Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf</string>
+		<string>Overpass.ttf</string>
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>

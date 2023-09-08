@@ -3,7 +3,7 @@ import SwiftUI
 struct TextFieldComponent: View {
     var placeholder: String
     @Binding var text: String
-    
+
     var body: some View {
         TextField(placeholder, text: $text)
             .lineLimit(1)

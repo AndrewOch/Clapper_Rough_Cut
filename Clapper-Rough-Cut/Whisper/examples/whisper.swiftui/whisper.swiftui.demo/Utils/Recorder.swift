@@ -3,15 +3,15 @@ import AVFoundation
 
 actor Recorder {
     private var recorder: AVAudioRecorder?
-    
+
     enum RecorderError: Error {
         case couldNotStartRecording
     }
-    
+
     func startRecording(toOutputFile url: URL, delegate: AVAudioRecorderDelegate?) throws {
         let recordSettings: [String : Any] = [
             AVFormatIDKey: Int(kAudioFormatLinearPCM),
-            AVSampleRateKey: 16000.0,
+            AVSampleRateKey: 16_000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
@@ -27,7 +27,7 @@ actor Recorder {
         }
         self.recorder = recorder
     }
-    
+
     func stopRecording() {
         recorder?.stop()
         recorder = nil

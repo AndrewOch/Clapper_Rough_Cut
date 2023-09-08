@@ -8,7 +8,7 @@ struct RawTakeView: View {
 
     var action: () -> Void
     var selected: Bool
-    
+
     var body: some View {
         Button {
             action()

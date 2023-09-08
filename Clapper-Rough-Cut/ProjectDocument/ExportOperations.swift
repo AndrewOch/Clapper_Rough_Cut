@@ -8,22 +8,22 @@ protocol ExportOperations {
 
 extension ClapperRoughCutDocument: ExportOperations {
     func selectExportFolder() {
-        let dialog = NSOpenPanel();
-        dialog.title                   = "Choose script file";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = true;
-        dialog.allowsMultipleSelection = false;
-        dialog.allowedContentTypes     = [.directory];
+        let dialog = NSOpenPanel()
+        dialog.title                   = "Choose script file"
+        dialog.showsResizeIndicator    = true
+        dialog.showsHiddenFiles        = false
+        dialog.canChooseDirectories    = true
+        dialog.allowsMultipleSelection = false
+        dialog.allowedContentTypes     = [.directory]
 
-        if (dialog.runModal() ==  NSApplication.ModalResponse.OK) {
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             if let result = dialog.url {
                 project.exportSettings.path = result.path
             }
         }
         updateStatus()
     }
-    
+
     func export() {
         let exportSettings = project.exportSettings
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
@@ -34,7 +34,7 @@ extension ClapperRoughCutDocument: ExportOperations {
             exportFolder(root: exportFolderURL, folder: folder)
         }
     }
-    
+
     private func exportFolder(root: URL, folder: RawFilesFolder) {
         let exportFolderURL = root.appendingPathComponent(folder.title)
         createFolder(at: exportFolderURL)
@@ -52,7 +52,7 @@ extension ClapperRoughCutDocument: ExportOperations {
             takeNum += 1
         }
     }
-    
+
     private func exportTake(root: URL, take: RawTake, num: Int) {
         let exportFolderURL = root.appendingPathComponent("Take \(num)")
         createFolder(at: exportFolderURL)
@@ -61,7 +61,7 @@ extension ClapperRoughCutDocument: ExportOperations {
         let audioName = take.audio.url.lastPathComponent
         copyFile(from: take.audio.url, to: exportFolderURL.appendingPathComponent(audioName))
     }
-    
+
     private func createFolder(at url: URL) {
         let fileManager = FileManager.default
         do {
@@ -71,7 +71,7 @@ extension ClapperRoughCutDocument: ExportOperations {
             print("Error creating folder: \(error.localizedDescription)")
         }
     }
-    
+
     private func copyFile(from sourceURL: URL, to destinationURL: URL) {
         let fileManager = FileManager.default
         do {
@@ -81,5 +81,4 @@ extension ClapperRoughCutDocument: ExportOperations {
             print("Error copying file: \(error.localizedDescription)")
         }
     }
-
 }

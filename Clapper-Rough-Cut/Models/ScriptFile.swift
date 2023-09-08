@@ -5,7 +5,7 @@ class ScriptFile: Identifiable, Codable {
     let url: URL
     var fullText: String
     var blocks: [ScriptBlock]
-    
+
     init(url: URL, text: String) {
         self.url = url
         self.blocks = []
@@ -23,7 +23,7 @@ class ScriptFile: Identifiable, Codable {
         }
         self.fullText = text
     }
-    
+
     private static func determineIsDialogue(lines: [String]) -> Bool {
         for line in lines {
             let dialogueRegex = #"^([^\n\s]+[\s]?){1,3}:[^\n]+$"#
@@ -38,7 +38,7 @@ class ScriptBlock: Identifiable, Codable {
     var isDialogue: Bool
     var fullText: String
     var phrases: [Phrase]
-    
+
     init(isDialogue: Bool, text: String, lines: [String]) {
         self.isDialogue = isDialogue
         self.fullText = text
@@ -47,7 +47,7 @@ class ScriptBlock: Identifiable, Codable {
             self.phrases.append(Phrase(text: line))
         }
     }
-    
+
     static func == (lhs: ScriptBlock, rhs: ScriptBlock) -> Bool {
         lhs.id == rhs.id
     }
@@ -58,7 +58,7 @@ class Phrase: Identifiable, Codable {
     var fullText: String
     var characterName: String
     var phraseText: String
-    
+
     init(text: String) {
         self.fullText = text
         let components = text.components(separatedBy: ":")
@@ -71,4 +71,3 @@ class Phrase: Identifiable, Codable {
         self.phraseText = components[1]
     }
 }
-

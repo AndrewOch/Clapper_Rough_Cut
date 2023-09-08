@@ -4,7 +4,7 @@ struct RawTakeDetailView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var take: RawTake?
     @State private var isModalPresented = false
-    
+
     var body: some View {
         if let take = take {
             HStack {
@@ -20,7 +20,7 @@ struct RawTakeDetailView: View {
                     .foregroundColor(.gray)
             }.padding(.bottom)
                 .sheet(isPresented: $isModalPresented) {
-                    SelectPhraseMatchView() { phrase in
+                    SelectPhraseMatchView { phrase in
                         document.manualMatch(take: take, phrase: phrase)
                         isModalPresented.toggle()
                     } closeAction: {
@@ -39,26 +39,24 @@ struct RawTakeDetailView: View {
                 Text(Formatter.formatDate(date: take.audio.createdAt))
                     .foregroundColor(.gray)
             }.padding(.bottom)
-            
+
             if let folder = document.getPhraseFolder(for: take) {
                 VStack {
                     HStack {
-                        Image(systemName: "folder")
+                        SystemImage.folder.imageView
                             .foregroundColor(.gray)
                         Text(folder.title)
                             .foregroundColor(.gray)
                         Spacer()
-                        PrimaryButton(title: "Заменить сцену",
-                                      imageName: "film",
-                                      accesibilityIdentifier: "",
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,
+                                                                       imageName: SystemImage.film.rawValue,
                                       enabled: .constant(true)) {
                             isModalPresented.toggle()
                         }
                     }
                     HStack {
-                        PrimaryButton(title: "Отделить файлы",
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.unwrapFiles.capitalized,
                                       imageName: nil,
-                                      accesibilityIdentifier: "",
                                       enabled: .constant(true)) {
                             document.detachFiles(from: take)
                         }

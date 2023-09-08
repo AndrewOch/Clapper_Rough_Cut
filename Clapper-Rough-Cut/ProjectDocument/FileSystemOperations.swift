@@ -15,17 +15,17 @@ protocol FileSystemOperations {
 
 // MARK: - File System Operations
 extension ClapperRoughCutDocument: FileSystemOperations {
-    
+
     public func addRawFiles() {
-        let dialog = NSOpenPanel();
-        dialog.title                   = "Choose multiple raw files";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = false;
-        dialog.allowsMultipleSelection = true;
-        dialog.allowedContentTypes     = [.audio, .movie];
-        
-        if (dialog.runModal() ==  NSApplication.ModalResponse.OK) {
+        let dialog = NSOpenPanel()
+        dialog.title                   = "Choose multiple raw files"
+        dialog.showsResizeIndicator    = true
+        dialog.showsHiddenFiles        = false
+        dialog.canChooseDirectories    = false
+        dialog.allowsMultipleSelection = true
+        dialog.allowedContentTypes     = [.audio, .movie]
+
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             var existingFiles: [RawFile] = []
             existingFiles += project.unsortedFolder.files
             existingFiles += project.phraseFolders.flatMap({ folder in folder.files })
@@ -54,7 +54,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             return
         }
     }
-    
+
     public func transcribeFile(_ file: RawFile) {
         transcriber.transcribeFile(file) { transcription in
             if let index = self.project.unsortedFolder.files.firstIndex(where: { $0.id == file.id }) {

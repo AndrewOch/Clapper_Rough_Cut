@@ -4,16 +4,16 @@ struct SelectPhraseMatchView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var selectAction: (Phrase) -> Void
     @State var closeAction: () -> Void
-    @State var searchText: String = ""
-    
+    @State var searchText: String = .empty
+
     var body: some View {
         VStack {
             HStack {
-                TextFieldComponent(placeholder: "Выберите фразу...", text: $searchText)
-                    
+                TextFieldComponent(placeholder: L10n.askToSelectScene.capitalized, text: $searchText)
+
                 Spacer()
                 Button(action: closeAction) {
-                    Image(systemName: "xmark")
+                    SystemImage.xmark.imageView
                         .foregroundColor(.black)
                 }.buttonStyle(PlainButtonStyle())
                     .focusable(false)
@@ -52,7 +52,7 @@ struct SelectPhraseMatchView: View {
         .background(.white)
         .cornerRadius(15)
     }
-    
+
     func getPhrases() -> [Phrase] {
         var phrases: [Phrase] = []
         let blocks = document.project.scriptFile?.blocks.filter({ $0.isDialogue }) ?? []
@@ -60,7 +60,7 @@ struct SelectPhraseMatchView: View {
             phrases += block.phrases
         }
         if searchText.isNotEmpty {
-            phrases = phrases.filter { phrase in phrase.fullText.lowercased().contains(searchText.lowercased())}
+            phrases = phrases.filter { phrase in phrase.fullText.lowercased().contains(searchText.lowercased()) }
         }
         return phrases
     }

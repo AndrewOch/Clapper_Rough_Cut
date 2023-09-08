@@ -50,7 +50,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func match(file: RawFile, phrase: Phrase) {
-        if let index = self.project.phraseFolders.firstIndex(where: { $0.files.contains { $0.id == file.id }}) {
+        if let index = self.project.phraseFolders.firstIndex(where: { $0.files.contains { $0.id == file.id } }) {
             project.phraseFolders[index].files.removeAll(where: { $0.id == file.id })
             if project.phraseFolders[index].takes.isEmpty && project.phraseFolders[index].files.isEmpty {
                 project.phraseFolders.remove(at: index)
@@ -68,7 +68,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func match(take: RawTake, phrase: Phrase) {
-        if let index = self.project.phraseFolders.firstIndex(where: { $0.takes.contains { $0.id == take.id }}) {
+        if let index = self.project.phraseFolders.firstIndex(where: { $0.takes.contains { $0.id == take.id } }) {
             project.phraseFolders[index].takes.removeAll(where: { $0.id == take.id })
             if project.phraseFolders[index].takes.isEmpty && project.phraseFolders[index].files.isEmpty {
                 project.phraseFolders.remove(at: index)

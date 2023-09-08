@@ -8,7 +8,7 @@ class Formatter {
         formatter.locale = .current
         return formatter.string(from: date)
     }
-    
+
     static func formatDuration(duration: Double) -> String {
         let minutes = Int(duration / 60)
         let seconds = Int(duration.truncatingRemainder(dividingBy: 60))

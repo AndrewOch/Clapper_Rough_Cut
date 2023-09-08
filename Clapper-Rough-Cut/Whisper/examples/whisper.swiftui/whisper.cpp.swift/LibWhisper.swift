@@ -65,6 +65,6 @@ actor WhisperContext {
     }
 }
 
-fileprivate func cpuCount() -> Int {
+private func cpuCount() -> Int {
     ProcessInfo.processInfo.processorCount
 }

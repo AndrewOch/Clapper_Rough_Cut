@@ -6,7 +6,7 @@ struct RawFileView: View {
     @State var file: RawFile
     var action: () -> Void
     var selected: Bool
-    
+
     var body: some View {
         Button {
             action()
@@ -30,8 +30,5 @@ struct RawFileView: View {
         .padding(.vertical, selected ? 5 : 1)
         .background(selected ? Color.purple.opacity(0.3) : Color.clear)
         .cornerRadius(5)
-        
-        
-        
     }
 }

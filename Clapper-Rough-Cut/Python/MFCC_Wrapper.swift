@@ -2,7 +2,7 @@ import Foundation
 import PythonKit
 
 class MFCC_Wrapper {
-    
+
     var waveFunction: PythonObject
 
     init() {
@@ -17,7 +17,7 @@ class MFCC_Wrapper {
         let file = Python.import("MFCC")
         self.waveFunction = file
     }
-    
+
     func extractMFCCS(file: URL) -> [[Float]]? {
         let response = waveFunction.get_normalized_mfcc(audio_file: file.path)
 
@@ -33,12 +33,9 @@ class MFCC_Wrapper {
         }
         return swiftArray
     }
-    
+
     func distanceDTW(mfccs1: [[Float]], mfccs2: [[Float]]) -> Float {
        let response = waveFunction.get_dtw(mfccs1: mfccs1, mfccs2: mfccs2)
         return Float(response[0])!
     }
 }
-
-
-

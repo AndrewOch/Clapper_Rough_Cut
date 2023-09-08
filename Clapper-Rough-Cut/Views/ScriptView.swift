@@ -3,17 +3,19 @@ import SwiftUI
 
 struct ScriptView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
-    
+
     var body: some View {
         VStack {
             HStack {
                 if let file = document.project.scriptFile {
-                    Image(systemName: "doc")
+                    SystemImage.doc.imageView
                         .foregroundColor(.black)
                     Text(file.url.lastPathComponent)
                         .foregroundColor(.black)
                 } else {
-                    PrimaryButton(title: "Добавить сценарий", imageName: "plus", accesibilityIdentifier: "", enabled: .constant(true)) {
+                    RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.addScript.capitalized,
+                                                                   imageName: SystemImage.plus.rawValue,
+                                                                   enabled: .constant(true)) {
                         document.addScriptFile()
                     }
                 }
@@ -59,5 +61,3 @@ struct ScriptView: View {
         .background(Color.white)
     }
 }
-
-

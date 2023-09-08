@@ -7,7 +7,7 @@ class Converter {
         let outputFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(UUID().uuidString).appendingPathExtension("wav")
         var options = FormatConverter.Options()
         options.format = .wav
-        options.sampleRate = 16000
+        options.sampleRate = 16_000
         let converter = FormatConverter(inputURL: sourceFileURL, outputURL: outputFileURL, options: options)
         converter.start(completionHandler: { error in
             if let error = error {

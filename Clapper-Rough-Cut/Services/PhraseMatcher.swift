@@ -66,7 +66,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         }
         return phrasesMap.first
     }
-    
+
     private func countMatchingWords(text1: String, text2: String) -> Int {
         let words1 = text1.components(separatedBy: .whitespaces)
         let words2 = text2.components(separatedBy: .whitespaces)
@@ -133,7 +133,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         }
         return maxSequenceLength
     }
-    
+
     private func matchingRatio(text1: String, text2: String) -> Double {
         let words1 = text1.components(separatedBy: .whitespaces)
         let words2 = text2.components(separatedBy: .whitespaces)
@@ -177,14 +177,11 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         if matchCount == 0 { return 0 }
         return Double(maxSequenceLength / matchCount)
     }
-    
-    
-    
+
     private func distance(text1: String, text2: String) -> Int {
         return StringsMatcher_Wrapper().distance(text1, text2)
     }
-    
-    
+
     private func removeEnclosedText(_ text: String) -> String {
         var result = text
         result = result.replacingOccurrences(of: #"\[.*?\]"#, with: "", options: .regularExpression)

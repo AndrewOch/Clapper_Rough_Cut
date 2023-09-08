@@ -8,7 +8,7 @@ protocol AudioTranscriber {
 
 class WhisperAudioTranscriber: AudioTranscriber {
     let converter = Converter()
-    
+
     private var whisperScript: String {
         guard let path = Bundle.main.path(forResource: "main", ofType: "") else {
             print("File not found")
@@ -16,7 +16,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
         return path
     }
-    
+
     private var whisperModel: String {
         guard let path = Bundle.main.path(forResource: "ggml-base", ofType: ".bin") else {
             print("File not found")
@@ -24,7 +24,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
         return path
     }
-    
+
     private func transcribe(audioFile: RawFile, completion: @escaping (TranscriptionResult) -> Void) {
         let startTime = Date().timeIntervalSince1970
         converter.convertAudioFile(audioFile.url) { result in
@@ -62,7 +62,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
             }
         }
     }
-    
+
     func transcribeFiles(_ files: [RawFile], completion: @escaping (URL, String?) -> Void) {
         let totalStartTime = Date().timeIntervalSince1970
         var totalDuration: Double = 0
@@ -71,8 +71,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
             transcribe(audioFile: file) { result in
                 if (result.status == .success) {
                     if let transcription = result.transcription,
-                       let transcriptionDuration = result.transcriptionDuration
-                    {
+                       let transcriptionDuration = result.transcriptionDuration {
                         print(file.url.lastPathComponent)
                         print(transcription)
                         print("Audio file duration: \(String(format: "%.2f", file.duration)) seconds")
@@ -91,13 +90,12 @@ class WhisperAudioTranscriber: AudioTranscriber {
             }
         }
     }
-    
+
     func transcribeFile(_ file: RawFile, completion: @escaping (String?) -> Void) {
         transcribe(audioFile: file) { result in
             if (result.status == .success) {
                 if let transcription = result.transcription,
-                   let transcriptionDuration = result.transcriptionDuration
-                {
+                   let transcriptionDuration = result.transcriptionDuration {
                     print(file.url.lastPathComponent)
                     print(transcription)
                     print("Audio file duration: \(String(format: "%.2f", file.duration)) seconds")

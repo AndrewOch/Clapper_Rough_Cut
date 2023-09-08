@@ -2,7 +2,7 @@ import Foundation
 import PythonKit
 
 class TextsMatcher_Wrapper {
-    
+
     var waveFunction: PythonObject
 
     init() {
@@ -17,13 +17,10 @@ class TextsMatcher_Wrapper {
         let file = Python.import("Texts_Matcher")
         self.waveFunction = file
     }
-    
+
     func matchingSequenceLengths(text1: String, text2: String) -> [Int] {
         let response = waveFunction.matching_sequence_lengths(text1: text1, text2: text2)
         let array = response.map { Int($0)! }
         return array
     }
 }
-
-
-

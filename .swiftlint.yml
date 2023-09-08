@@ -3,11 +3,17 @@ excluded:
   - vendor
   - Pods
 disabled_rules:
+  - colon
+  - comma
+  - control_statement
   - nesting
   - comment_spacing
   - multiple_closures_with_trailing_closure
   - vertical_parameter_alignment
   - vertical_parameter_alignment_on_call
+  - redundant_optional_initialization
+  - identifier_name
+  - explicit_init
 custom_rules:
   swiftgen_assets:
     name: "SwiftGen Assets"
@@ -18,11 +24,6 @@ custom_rules:
     name: "SwiftGen Colors"
     regex: '(UIColor(\.init)?|#colorLiteral)\(((red|displayP3Red):.+?,green:.+?,blue:.+?,alpha:.+?)|(white:.+?,alpha:.+?)|(hue:.+?,saturation:.+?,brightness:.+?,alpha:.+?)\)'
     message: "Use ColorName.<color> instead"
-    severity: error
-  swiftgen_files:
-    name: "SwiftGen Files"
-    regex: '(url\(forResource: ?"?.+"?, ?withExtension: ?"?.+"?, ?subdirectory: ?"?.+"?(, ?localization: ?"?.+"?)?\))|(path\(forResource: ?"?.+"?, ?ofType: ?"?.+"?(, ?inDirectory: ?"?.+"?(, ?forLocalization: ?"?.+"?)?)?\))'
-    message: "Use Files.<dir/file> instead"
     severity: error
   swiftgen_fonts:
     name: "SwiftGen Fonts"
@@ -51,9 +52,41 @@ opt_in_rules:
   - fatal_error_message
   - vertical_parameter_alignment_on_call
   - let_var_whitespace
+
+number_separator:
+  minimum_length: 4
+
+force_cast: warning
+force_try:
+  severity: warning
+
+line_length: 180
+
+cyclomatic_complexity: 13
+
+function_body_length: 100
+
+type_body_length:
+  - 300
+  - 400
+
+file_length:
+  warning: 500
+  error: 1200
+
+type_name:
+  min_length: 4
+  max_length:
+    warning: 55
+    error: 65
+  excluded: iPhone
+  allowed_symbols: ["_"]
 identifier_name:
+  min_length:
+    error: 1
   excluded:
     - id
-line_length: 196
-number_separator:
-  minimum_length: 5
+    - URL
+    - GlobalAPIKey
+    - to
+reporter: "xcode"

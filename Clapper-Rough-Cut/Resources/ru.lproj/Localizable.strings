@@ -1,0 +1,22 @@
+
+"addFiles" = "добавить файлы";
+"transcribe" = "расшифровать";
+"determineScenes" = "определить сцены";
+"determineScene" = "определить сцену";
+
+"determineTakes" = "определить дубли";
+"export" = "экспорт";
+"addScript" = "добавить сценарий";
+"unsorted" = "неотсортированное";
+"projectName" = "название проекта";
+"exportPath" = "путь сохранения";
+"select" = "выбрать";
+"video" = "видео";
+"audio" = "аудио";
+"takes" = "дубли";
+"transcribedSpeech" = "распознанная речь";
+"changeScene" = "заменить сцену";
+"chooseScene" = "выбрать сцену";
+"unwrapFiles" = "отделить файлы";
+"askToSelectScene" = "выберите фразу...";
+"choose" = "выбрать";

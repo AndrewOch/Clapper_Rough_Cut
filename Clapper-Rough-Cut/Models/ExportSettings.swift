@@ -5,7 +5,7 @@ class ExportSettings: Identifiable, Codable {
     var path: String
     var directoryName: String
     var method: FileExportMethod
-    
+
     init() {
         if let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first {
             path = downloadsDirectory.path

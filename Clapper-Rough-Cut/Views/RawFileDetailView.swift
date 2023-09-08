@@ -4,7 +4,7 @@ struct RawFileDetailView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var file: RawFile?
     @State private var isModalPresented = false
-    
+
     var body: some View {
         if let file = file {
             HStack {
@@ -20,7 +20,7 @@ struct RawFileDetailView: View {
                     .foregroundColor(.gray)
             }.padding(.bottom)
                 .sheet(isPresented: $isModalPresented) {
-                    SelectPhraseMatchView() { phrase in
+                    SelectPhraseMatchView { phrase in
                         document.manualMatch(file: file, phrase: phrase)
                         isModalPresented.toggle()
                     } closeAction: {
@@ -32,7 +32,7 @@ struct RawFileDetailView: View {
                     HStack {
                         TranscribedIcon()
                             .foregroundColor(.gray)
-                        Text("Распознанная речь")
+                        Text(L10n.transcribedSpeech.capitalized)
                             .foregroundColor(.gray)
                         Spacer()
                     }
@@ -46,7 +46,9 @@ struct RawFileDetailView: View {
                 }
             } else {
                 HStack {
-                    PrimaryButton(title: "Расшифровать", imageName: "rectangle.and.pencil.and.ellipsis", accesibilityIdentifier: "", enabled: .constant(true)) {
+                    RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.transcribe.capitalized,
+                                                                   imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
+                                                                   enabled: .constant(true)) {
                         document.transcribeFile(file)
                     }
                     Spacer()
@@ -55,14 +57,13 @@ struct RawFileDetailView: View {
             if let folder = document.getPhraseFolder(for: file) {
                 VStack {
                     HStack {
-                        Image(systemName: "folder")
+                        SystemImage.folder.imageView
                             .foregroundColor(.gray)
                         Text(folder.title)
                             .foregroundColor(.gray)
                         Spacer()
-                        PrimaryButton(title: "Заменить сцену",
-                                      imageName: "film",
-                                      accesibilityIdentifier: "",
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,
+                                                                       imageName: SystemImage.film.rawValue,
                                       enabled: .constant(true)) {
                             isModalPresented.toggle()
                         }
@@ -71,15 +72,13 @@ struct RawFileDetailView: View {
             } else {
                 VStack {
                     HStack {
-                        PrimaryButton(title: "Определить сцену",
-                                      imageName: "film",
-                                      accesibilityIdentifier: "",
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.determineScene.capitalized,
+                                      imageName: SystemImage.film.rawValue,
                                       enabled: .constant(file.transcription != nil)) {
                             document.matchSceneForFile(file)
                         }
-                        PrimaryButton(title: "Выбрать сцену",
-                                      imageName: "film",
-                                      accesibilityIdentifier: "",
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.chooseScene.capitalized,
+                                      imageName: SystemImage.film.rawValue,
                                       enabled: .constant(true)) {
                             isModalPresented.toggle()
                         }

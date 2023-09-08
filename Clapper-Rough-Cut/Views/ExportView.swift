@@ -4,47 +4,49 @@ struct ExportView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var exportAction: () -> Void
     @State var closeAction: () -> Void
-    @State var searchText: String = ""
-    
+    @State var searchText: String = .empty
+
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Text("Экспорт")
+                Text(L10n.export.capitalized)
                     .foregroundColor(.black)
                     .bold()
                 Spacer()
                 Button(action: closeAction) {
-                    Image(systemName: "xmark")
+                    SystemImage.xmark.imageView
                         .foregroundColor(.black)
                 }.buttonStyle(PlainButtonStyle())
                     .focusable(false)
             }
             .padding(.bottom)
-            VStack{
+            VStack {
                 HStack {
-                    Text("Название проекта")
+                    Text(L10n.projectName.capitalized)
                         .foregroundColor(.black)
                     Spacer()
                 }
-                TextFieldComponent(placeholder: "Название проекта", text: $document.project.exportSettings.directoryName)
+                TextFieldComponent(placeholder: L10n.projectName.capitalized, text: $document.project.exportSettings.directoryName)
             }
             .padding(.bottom)
-            VStack{
+            VStack {
                 HStack {
-                    Text("Путь сохранения")
+                    Text(L10n.exportPath.capitalized)
                         .foregroundColor(.black)
                     Spacer()
                 }
                 HStack {
-                    TextFieldComponent(placeholder: "Путь сохранения", text: $document.project.exportSettings.path)
-                    PrimaryButton(title: "Выбрать", accesibilityIdentifier: "", enabled: .constant(true)) {
+                    TextFieldComponent(placeholder: L10n.exportPath.capitalized, text: $document.project.exportSettings.path)
+                    RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.choose.capitalized,
+                                                                   enabled: .constant(true)) {
                         document.selectExportFolder()
                     }
                 }
             }
             .padding(.bottom)
-            PrimaryButton(title: "Экспорт", accesibilityIdentifier: "", enabled: .constant(true)) {
+            RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.export.capitalized,
+                                                           enabled: .constant(true)) {
                 exportAction()
             }
             Spacer()

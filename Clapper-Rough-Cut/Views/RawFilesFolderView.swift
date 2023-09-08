@@ -5,25 +5,25 @@ struct RawFilesFolderView: View {
     @State var folder: RawFilesFolder
     @State var collapsed: Bool
     var selected: Bool
-    
+
     var body: some View {
         VStack {
             HStack {
                 Button {
                     collapsed.toggle()
                 } label: {
-                    Image(systemName: collapsed ? "chevron.right" : "chevron.down")
+                    Image(systemName: collapsed ? SystemImage.chevronRight.rawValue : SystemImage.chevronDown.rawValue)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 8, height: 8)
                 }
                 .focusable(false)
                 .buttonStyle(PlainButtonStyle())
-                
+
                 Button(action: {
                     document.selectFolder(folder)
                 }, label: {
-                    Image(systemName: "folder")
+                    SystemImage.folder.imageView
                     Text(folder.title).lineLimit(1)
                     Spacer()
                 })

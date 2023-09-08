@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct FileSystemView: View {
-    
+
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 600
     @State private var isExportViewPresented = false
-      
+
     var body: some View {
         VSplitView {
             fileSystem
@@ -18,7 +18,7 @@ struct FileSystemView: View {
                         fileSystemHeight = 600
                     }
                     .sheet(isPresented: $isExportViewPresented) {
-                        ExportView() {
+                        ExportView {
                             document.export()
                             isExportViewPresented.toggle()
                         } closeAction: {
@@ -32,29 +32,33 @@ struct FileSystemView: View {
                     .background(Color.white)
         }
     }
-    
+
     var fileSystem: some View {
         VStack {
-            Text("Добавить файл Add file").font(.custom("", size: 20))
-                .foregroundColor(.black)
-            Text("Добавить файл Add file").font(.custom("Overpass-Regular", size: 20))
-                .foregroundColor(.black)
             HStack {
-                PrimaryButton(title: "Добавить файлы", imageName: "square.and.arrow.down", accesibilityIdentifier: "", enabled: .constant(true)) {
+                RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.addFiles.capitalized,
+                                                               imageName: SystemImage.squareAndArrowDown.rawValue,
+                                                               enabled: .constant(true)) {
                     document.addRawFiles()
                 }
-                PrimaryButton(title: "Расшифровать", imageName: "rectangle.and.pencil.and.ellipsis", accesibilityIdentifier: "", enabled: $document.project.hasUntranscribedFiles)
-                            {
+                RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.transcribe.capitalized,
+                                                               imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
+                              enabled: $document.project.hasUntranscribedFiles) {
                     document.transcribeFiles()
                 }
-                PrimaryButton(title: "Определить сцены", imageName: "film", accesibilityIdentifier: "", enabled: $document.project.canSortScenes) {
+                RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.determineScenes.capitalized,
+                                                               imageName: SystemImage.film.rawValue,
+                                                               enabled: $document.project.canSortScenes) {
                     document.matchScenes()
                 }
-                PrimaryButton(title: "Определить дубли", imageName: "film.stack", accesibilityIdentifier: "", enabled: $document.project.hasUnmatchedSortedFiles) {
+                RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.determineTakes.capitalized,
+                                                               imageName: SystemImage.filmStack.rawValue,
+                                                               enabled: $document.project.hasUnmatchedSortedFiles) {
                     document.matchTakes()
                 }
-                PrimaryButton(title: "Экспорт", imageName: "rectangle.portrait.and.arrow.right", accesibilityIdentifier: "", enabled: .constant(true))
-                {
+                RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.export.capitalized,
+                                                               imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
+                                                               enabled: .constant(true)) {
                     isExportViewPresented.toggle()
                 }
                 Spacer()
@@ -65,7 +69,9 @@ struct FileSystemView: View {
                 Color.black.opacity(0.8)
                 ScrollView {
                     LazyVStack {
-                        RawFilesFolderView(folder: document.project.unsortedFolder, collapsed: document.project.unsortedFolder.collapsed, selected: document.project.selectedFolder == document.project.unsortedFolder)
+                        RawFilesFolderView(folder: document.project.unsortedFolder,
+                                           collapsed: document.project.unsortedFolder.collapsed,
+                                           selected: document.project.selectedFolder == document.project.unsortedFolder)
                         ForEach(document.project.phraseFolders) { folder in
                             RawFilesFolderView(folder: folder, collapsed: folder.collapsed, selected: document.project.selectedFolder == folder)
                         }
@@ -76,7 +82,7 @@ struct FileSystemView: View {
             }
         }
     }
-    
+
     var detailView: some View {
         VStack {
             if document.project.selectedFile != nil {

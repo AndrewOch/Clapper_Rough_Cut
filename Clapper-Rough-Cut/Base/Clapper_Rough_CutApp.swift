@@ -14,7 +14,7 @@ struct Clapper_Rough_CutApp: App {
     }
 
     var body: some Scene {
-        DocumentGroup(newDocument: { ClapperRoughCutDocument() }) { configuration in
+        DocumentGroup(newDocument: { ClapperRoughCutDocument() }) { _ in
             ContentView()
         }
     }
