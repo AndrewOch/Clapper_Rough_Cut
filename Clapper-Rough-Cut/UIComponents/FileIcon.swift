@@ -10,11 +10,11 @@ struct FileIcon: View {
     private func getFileImageName(type: RawFileType?) -> String {
         if let type = type {
             if type == .audio {
-                return "mic"
+                return SystemImage.micFill.rawValue
             } else if type == .video {
-                return "video.square"
+                return SystemImage.videoSquareFill.rawValue
             }
         }
-        return "doc"
+        return SystemImage.doc.rawValue
     }
 }

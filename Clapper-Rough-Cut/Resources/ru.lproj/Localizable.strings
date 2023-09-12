@@ -7,7 +7,7 @@
 "determineTakes" = "определить дубли";
 "export" = "экспорт";
 "addScript" = "добавить сценарий";
-"unsorted" = "неотсортированное";
+"unsorted" = "несортированное";
 "projectName" = "название проекта";
 "exportPath" = "путь сохранения";
 "select" = "выбрать";
@@ -20,3 +20,7 @@
 "unwrapFiles" = "отделить файлы";
 "askToSelectScene" = "выберите фразу...";
 "choose" = "выбрать";
+"project" = "проект";
+"search" = "поиск";
+"sort" = "сортировка";
+"script" = "сценарий";

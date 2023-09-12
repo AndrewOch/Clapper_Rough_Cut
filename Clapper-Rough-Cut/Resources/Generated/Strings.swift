@@ -34,18 +34,26 @@ internal enum L10n {
   internal static let export = L10n.tr("Localizable", "export", fallback: "экспорт")
   /// путь сохранения
   internal static let exportPath = L10n.tr("Localizable", "exportPath", fallback: "путь сохранения")
+  /// проект
+  internal static let project = L10n.tr("Localizable", "project", fallback: "проект")
   /// название проекта
   internal static let projectName = L10n.tr("Localizable", "projectName", fallback: "название проекта")
+  /// сценарий
+  internal static let script = L10n.tr("Localizable", "script", fallback: "сценарий")
+  /// поиск
+  internal static let search = L10n.tr("Localizable", "search", fallback: "поиск")
   /// выбрать
   internal static let select = L10n.tr("Localizable", "select", fallback: "выбрать")
+  /// сортировка
+  internal static let sort = L10n.tr("Localizable", "sort", fallback: "сортировка")
   /// дубли
   internal static let takes = L10n.tr("Localizable", "takes", fallback: "дубли")
   /// расшифровать
   internal static let transcribe = L10n.tr("Localizable", "transcribe", fallback: "расшифровать")
   /// распознанная речь
   internal static let transcribedSpeech = L10n.tr("Localizable", "transcribedSpeech", fallback: "распознанная речь")
-  /// неотсортированное
-  internal static let unsorted = L10n.tr("Localizable", "unsorted", fallback: "неотсортированное")
+  /// несортированное
+  internal static let unsorted = L10n.tr("Localizable", "unsorted", fallback: "несортированное")
   /// отделить файлы
   internal static let unwrapFiles = L10n.tr("Localizable", "unwrapFiles", fallback: "отделить файлы")
   /// видео

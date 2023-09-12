@@ -28,6 +28,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Overpass.ttf</string>
+		<string>Limelight-Regular.ttf</string>
+		<string>NunitoSans.ttf</string>
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>

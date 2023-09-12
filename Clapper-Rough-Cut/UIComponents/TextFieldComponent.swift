@@ -10,14 +10,16 @@ struct TextFieldComponent: View {
             .minimumScaleFactor(0.5)
             .focusable(false)
             .textFieldStyle(.plain)
-            .foregroundColor(.black)
-            .tint(.purple)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 5)
-            .background(.white)
+            .foregroundColor(Asset.dark.swiftUIColor)
+            .tint(Asset.accentPrimary.swiftUIColor)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(Asset.white.swiftUIColor)
+            .cornerRadius(10)
             .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.gray, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Asset.tertiary.swiftUIColor, lineWidth: 1)
+                    .background(.clear)
             )
     }
 }

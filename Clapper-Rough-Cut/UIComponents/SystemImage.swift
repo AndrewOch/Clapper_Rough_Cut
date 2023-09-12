@@ -12,7 +12,12 @@ enum SystemImage: String {
     case plus = "plus"
     case chevronRight = "chevron.right"
     case chevronDown = "chevron.down"
-    
+    case mic = "mic"
+    case micFill = "mic.fill"
+    case videoSquare = "video.square"
+    case videoSquareFill = "video.square.fill"
+    case folderFill = "folder.fill"
+
     var imageView: Image {
         Image(systemName: self.rawValue)
     }
