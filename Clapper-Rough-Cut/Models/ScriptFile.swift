@@ -4,48 +4,128 @@ class ScriptFile: Identifiable, Codable {
     var id = UUID()
     let url: URL
     var fullText: String
+    var characters: [ScriptCharacter]
     var blocks: [ScriptBlock]
 
     init(url: URL, text: String) {
         self.url = url
         self.blocks = []
-        let scriptBlocks = text.components(separatedBy: "\n\n")
-        for scriptBlock in scriptBlocks {
-            let scriptBlock = scriptBlock.trimmingCharacters(in: .whitespacesAndNewlines)
-            if scriptBlock.isNotEmpty {
-                let lines = scriptBlock.components(separatedBy: "\n")
-                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                    .filter { $0.isNotEmpty }
-                let isDialogue = ScriptFile.determineIsDialogue(lines: lines)
-                let block = ScriptBlock(isDialogue: isDialogue, text: scriptBlock, lines: lines)
-                self.blocks.append(block)
-            }
-        }
+        self.characters = []
         self.fullText = text
+        let phrases = determinePhrases()
+        determineScriptBlocks(phrases: phrases)
     }
 
-    private static func determineIsDialogue(lines: [String]) -> Bool {
+    private func determinePhrases() -> [Phrase] {
+        let lines = fullText.components(separatedBy: .newlines)
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.isNotEmpty }
+        var result: [Phrase] = []
         for line in lines {
-            let dialogueRegex = #"^([^\n\s]+[\s]?){1,3}:[^\n]+$"#
-            if line.range(of: dialogueRegex, options: .regularExpression) != nil { return true }
+            if !ScriptFile.isPhrase(line: line) {
+                result.append(Phrase(text: line))
+                continue
+            }
+            var character: ScriptCharacter?
+            let components = line.components(separatedBy: ":")
+            let characterName = components[0]
+            if let char = characters.first(where: { char in char.name == characterName }) {
+                character = char
+            } else {
+                character = ScriptCharacter(name: characterName)
+                if let character = character {
+                    characters.append(character)
+                }
+            }
+            let phraseText = components[1...].joined()
+            if let character = character {
+                result.append(Phrase(character: character, phraseText: phraseText, text: line))
+            }
         }
-        return false
+        return result
+    }
+
+    private func determineScriptBlocks(phrases: [Phrase]) {
+        self.blocks = []
+        var scriptLines: [Phrase] = []
+        var previousIsPhrase = false
+        for phrase in phrases {
+            let isPhrase = phrase.character != nil
+            if isPhrase && !previousIsPhrase {
+                    self.blocks.append(ScriptBlock(isDialogue: false, phrases: scriptLines))
+                    scriptLines = []
+                    previousIsPhrase = true
+            }
+            if !isPhrase && previousIsPhrase {
+                    self.blocks.append(ScriptBlock(isDialogue: true, phrases: scriptLines))
+                    scriptLines = []
+                    previousIsPhrase = false
+            }
+            scriptLines.append(phrase)
+        }
+    }
+
+    private static func isPhrase(line: String) -> Bool {
+        let dialogueRegex = #"^([^\n\s]+[\s]?){1,3}:[^\n]+$"#
+        return line.range(of: dialogueRegex, options: .regularExpression) != nil
+    }
+
+    public func getCharacterPhrases(character: ScriptCharacter) -> [Phrase] {
+        var result: [Phrase] = []
+        for block in blocks {
+            guard block.isDialogue else { continue }
+            for phrase in block.phrases {
+                guard let char = phrase.character else { continue }
+                if char == character {
+                    result.append(phrase)
+                }
+            }
+        }
+        return result
+    }
+
+    public func removeCharacter(by id: UUID) {
+        removeCharacters(by: [id])
+    }
+
+    public func removeCharacters(by ids: [UUID]) {
+        var updatedPhrases: [Phrase] = []
+        let removingCharacters = characters.filter({ char in ids.contains(char.id) })
+        characters.removeAll { char in ids.contains(char.id) }
+        for phrase in blocks.flatMap({ $0.phrases }) {
+            if removingCharacters.contains(where: { char in phrase.character == char }) {
+                phrase.character = nil
+                phrase.phraseText = nil
+            }
+            updatedPhrases.append(phrase)
+        }
+        determineScriptBlocks(phrases: updatedPhrases)
     }
 }
 
 class ScriptBlock: Identifiable, Codable {
     var id = UUID()
     var isDialogue: Bool
-    var fullText: String
+    var fullText: String {
+        var result: String = .empty
+        for phrase in phrases {
+            result.append("\n\(phrase.fullText)")
+        }
+        return result
+    }
     var phrases: [Phrase]
-
-    init(isDialogue: Bool, text: String, lines: [String]) {
-        self.isDialogue = isDialogue
-        self.fullText = text
+    
+    init(text: String, lines: [String]) {
+        self.isDialogue = false
         self.phrases = []
         for line in lines {
             self.phrases.append(Phrase(text: line))
         }
+    }
+
+    init(isDialogue: Bool, phrases: [Phrase]) {
+        self.isDialogue = isDialogue
+        self.phrases = phrases
     }
 
     static func == (lhs: ScriptBlock, rhs: ScriptBlock) -> Bool {
@@ -56,18 +136,16 @@ class ScriptBlock: Identifiable, Codable {
 class Phrase: Identifiable, Codable {
     var id = UUID()
     var fullText: String
-    var characterName: String
-    var phraseText: String
+    var character: ScriptCharacter?
+    var phraseText: String?
 
     init(text: String) {
         self.fullText = text
-        let components = text.components(separatedBy: ":")
-        guard components.count == 2 else {
-            self.characterName = components[0]
-            self.phraseText = components[1...].joined()
-            return
-        }
-        self.characterName = components[0]
-        self.phraseText = components[1]
+    }
+
+    init(character: ScriptCharacter, phraseText: String, text: String) {
+        self.fullText = text
+        self.character = character
+        self.phraseText = phraseText
     }
 }

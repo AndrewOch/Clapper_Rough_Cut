@@ -1,10 +1,20 @@
 import SwiftUI
+import KeyboardShortcuts
 
 struct HeaderMenuConfiguration {
     var document: ClapperRoughCutDocument
 
     public var base: [CustomContextMenuSection] {
-        return project
+        return [
+            CustomContextMenuSection(options: [
+                CustomContextMenuOption(title: L10n.settings.firstWordCapitalized,
+                                        imageName: SystemImage.gearshape.rawValue,
+                                        isEnabled: .constant(true),
+                                        action: {
+
+                                        })
+            ])
+        ]
     }
 
     public var project: [CustomContextMenuSection] {
@@ -15,24 +25,19 @@ struct HeaderMenuConfiguration {
                                         isEnabled: .constant(true),
                                         action: {
                                             document.addRawFiles()
+                                        }),
+                CustomContextMenuOption(title: L10n.addFolder.firstWordCapitalized,
+                                        imageName: SystemImage.squareAndArrowDown.rawValue,
+                                        isEnabled: .constant(true),
+                                        action: {
+
                                         })
             ]),
 
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.export.capitalized,
                                         imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-                                            document.states.isExportViewPresented.toggle()
-                                        }),
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-                                            document.states.isExportViewPresented.toggle()
-                                        }),
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
+                                        shortcut: .export,
                                         isEnabled: .constant(true),
                                         action: {
                                             document.states.isExportViewPresented.toggle()
@@ -43,49 +48,25 @@ struct HeaderMenuConfiguration {
 
     public var search: [CustomContextMenuSection] {
         return [
-            CustomContextMenuSection(options: [
-                CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
-                                        imageName: SystemImage.squareAndArrowDown.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-                                            document.addRawFiles()
-                                        })
-            ]),
-
-            CustomContextMenuSection(options: [
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-                                            document.states.isExportViewPresented.toggle()
-                                        }),
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-                                            document.states.isExportViewPresented.toggle()
-                                        })
-            ])
         ]
     }
 
     public var script: [CustomContextMenuSection] {
         return [
             CustomContextMenuSection(options: [
-                CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
-                                        imageName: SystemImage.squareAndArrowDown.rawValue,
+                CustomContextMenuOption(title: L10n.addScript.firstWordCapitalized,
+                                        imageName: SystemImage.plus.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
-                                            document.addRawFiles()
+                                            document.addScriptFile()
                                         })
             ]),
-
             CustomContextMenuSection(options: [
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
+                CustomContextMenuOption(title: L10n.characters.firstWordCapitalized,
+                                        imageName: SystemImage.person.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
-                                            document.states.isExportViewPresented.toggle()
+                                            document.states.isCharactersViewPresented.toggle()
                                         })
             ])
         ]
@@ -130,6 +111,23 @@ struct HeaderMenuConfiguration {
             ])
         ]
     }
+
+    init(document: ClapperRoughCutDocument) {
+        self.document = document
+        configureShortcuts()
+    }
+
+    private func configureShortcuts() {
+        base.forEach({ section in
+            section.options.forEach({ option in
+                if let shortcut = option.shortcut {
+                    KeyboardShortcuts.onKeyDown(for: shortcut) {
+                        option.action()
+                    }
+                }
+            })
+        })
+    }
 }
 
 struct CustomContextMenuSection: Identifiable {
@@ -141,6 +139,7 @@ struct CustomContextMenuOption: Identifiable {
     var id = UUID()
     var title: String
     var imageName: String?
+    var shortcut: KeyboardShortcuts.Name?
     var isEnabled: Binding<Bool>
     var action: () -> Void
 }

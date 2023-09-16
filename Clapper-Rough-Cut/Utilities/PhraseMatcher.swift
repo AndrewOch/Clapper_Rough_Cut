@@ -18,7 +18,8 @@ final class PhraseMatcher: PhraseMatcherProtocol {
 
                 var res: [([Int], Phrase)] = []
                 for phrase in phrases {
-                    let cleanedPhrase = removeEnclosedText(phrase.phraseText).trimmingCharacters(in: .whitespaces)
+                    guard let phraseText = phrase.phraseText else { continue }
+                    let cleanedPhrase = removeEnclosedText(phraseText).trimmingCharacters(in: .whitespaces)
                     if cleanedPhrase.components(separatedBy: .whitespaces).isNotEmpty {
                         let lengths = textsMatcherWrapper.matchingSequenceLengths(text1: transcription.lowercased(), text2: cleanedPhrase.lowercased())
                         if lengths.isNotEmpty {

@@ -10,17 +10,17 @@ struct RawTakeDetailView: View {
             HStack {
                 FileIcon(type: take.video.type)
                     .foregroundColor(Asset.dark.swiftUIColor)
-                Label<BodyMediumStyle>(text: take.video.url.lastPathComponent)
+                CustomLabel<BodyMediumStyle>(text: take.video.url.lastPathComponent)
                     .lineLimit(1)
                     .foregroundColor(Asset.dark.swiftUIColor)
                 Spacer()
-                Label<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.video.duration))
+                CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.video.duration))
                     .foregroundColor(Asset.dark.swiftUIColor)
-                Label<BodyMediumStyle>(text: Formatter.formatDate(date: take.video.createdAt))
+                CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: take.video.createdAt))
                     .foregroundColor(Asset.semiDark.swiftUIColor)
             }.padding(.bottom)
                 .sheet(isPresented: $isModalPresented) {
-                    ModalSheet(title: "Выберите сцену", resizableVertical: true) {
+                    ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
                         SelectPhraseMatchView { phrase in
                             document.manualMatch(take: take, phrase: phrase)
                             isModalPresented.toggle()
@@ -32,13 +32,13 @@ struct RawTakeDetailView: View {
             HStack {
                 FileIcon(type: take.audio.type)
                     .foregroundColor(Asset.dark.swiftUIColor)
-                Label<BodyMediumStyle>(text: take.audio.url.lastPathComponent)
+                CustomLabel<BodyMediumStyle>(text: take.audio.url.lastPathComponent)
                     .lineLimit(1)
                     .foregroundColor(Asset.dark.swiftUIColor)
                 Spacer()
-                Label<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.audio.duration))
+                CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.audio.duration))
                     .foregroundColor(Asset.dark.swiftUIColor)
-                Label<BodyMediumStyle>(text: Formatter.formatDate(date: take.audio.createdAt))
+                CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: take.audio.createdAt))
                     .foregroundColor(Asset.semiDark.swiftUIColor)
             }.padding(.bottom)
 
@@ -47,7 +47,7 @@ struct RawTakeDetailView: View {
                     HStack {
                         SystemImage.folder.imageView
                             .foregroundColor(Asset.semiDark.swiftUIColor)
-                        Label<BodyMediumStyle>(text: folder.title)
+                        CustomLabel<BodyMediumStyle>(text: folder.title)
                             .foregroundColor(Asset.semiDark.swiftUIColor)
                         Spacer()
                         RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,

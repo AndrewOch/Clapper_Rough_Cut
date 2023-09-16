@@ -11,17 +11,17 @@ struct RawFileDetailView: View {
                 HStack {
                     FileIcon(type: file.type)
                         .foregroundColor(Asset.dark.swiftUIColor)
-                    Label<BodyMediumStyle>(text: file.url.lastPathComponent)
+                    CustomLabel<BodyMediumStyle>(text: file.url.lastPathComponent)
                         .lineLimit(1)
                         .foregroundColor(Asset.dark.swiftUIColor)
                     Spacer()
-                    Label<BodyMediumStyle>(text: Formatter.formatDuration(duration: file.duration))
+                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: file.duration))
                         .foregroundColor(Asset.dark.swiftUIColor)
-                    Label<BodyMediumStyle>(text: Formatter.formatDate(date: file.createdAt))
+                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: file.createdAt))
                         .foregroundColor(Asset.semiDark.swiftUIColor)
                 }.padding(.bottom)
                     .sheet(isPresented: $isModalPresented) {
-                        ModalSheet(title: "Выберите сцену", resizableVertical: true) {
+                        ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
                             SelectPhraseMatchView { phrase in
                                 document.manualMatch(file: file, phrase: phrase)
                                 isModalPresented.toggle()
@@ -35,13 +35,13 @@ struct RawFileDetailView: View {
                         HStack {
                             TranscribedIcon()
                                 .foregroundColor(Asset.semiDark.swiftUIColor)
-                            Label<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
+                            CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
                                 .foregroundColor(Asset.semiDark.swiftUIColor)
                             Spacer()
                         }
                         ScrollView {
                             HStack {
-                                Label<BodyMediumStyle>(text: transcription)
+                                CustomLabel<BodyMediumStyle>(text: transcription)
                                     .foregroundColor(Asset.dark.swiftUIColor)
                                 Spacer()
                             }
@@ -62,7 +62,7 @@ struct RawFileDetailView: View {
                         HStack {
                             SystemImage.folder.imageView
                                 .foregroundColor(Asset.semiDark.swiftUIColor)
-                            Label<BodyMediumStyle>(text: folder.title)
+                            CustomLabel<BodyMediumStyle>(text: folder.title)
                                 .foregroundColor(Asset.semiDark.swiftUIColor)
                             Spacer()
                             RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,

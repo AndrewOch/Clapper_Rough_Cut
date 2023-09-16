@@ -17,6 +17,12 @@ enum SystemImage: String {
     case videoSquare = "video.square"
     case videoSquareFill = "video.square.fill"
     case folderFill = "folder.fill"
+    case command = "command"
+    case shift = "shift"
+    case control = "control"
+    case option = "option"
+    case gearshape = "gearshape"
+    case person = "person"
 
     var imageView: Image {
         Image(systemName: self.rawValue)

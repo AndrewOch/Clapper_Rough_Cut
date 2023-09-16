@@ -14,6 +14,7 @@ private struct CustomContextMenuButtonStyle {
     public static let paddingVertical: CGFloat = 6
     public static let imageSize: CGFloat = 14
     public static let borderColor: SwiftUI.Color = .clear
+    public static let baselineOffset: CGFloat = -2
 }
 
 struct CustomContextMenuView: View {
@@ -62,8 +63,12 @@ struct CustomContextMenuOptionButton: View {
                     }
                     Text(option.title)
                         .font(.custom(CustomContextMenuButtonStyle.fontName, size: CustomContextMenuButtonStyle.fontSize))
+                        .baselineOffset(CustomContextMenuButtonStyle.baselineOffset)
                         .lineLimit(1)
                     Spacer()
+                    if let shortcut = option.shortcut?.shortcut {
+                        ShortcutView(shortcut: shortcut)
+                    }
                 }
                 .foregroundColor((option.isEnabled.wrappedValue && hovered) ? CustomContextMenuButtonStyle.hoveredForegroundColor : CustomContextMenuButtonStyle.foregroundColor)
                 .padding(.horizontal, CustomContextMenuButtonStyle.paddingHorizontal)

@@ -14,7 +14,7 @@ struct RawFileView: View {
             HStack {
                 FileIcon(type: file.type)
                     .foregroundColor(selected ? Asset.light.swiftUIColor : Asset.semiDark.swiftUIColor)
-                Label<BodyMediumStyle>(text: file.url.lastPathComponent)
+                CustomLabel<BodyMediumStyle>(text: file.url.lastPathComponent)
                     .foregroundColor(selected ? Asset.semiWhite.swiftUIColor : Asset.dark.swiftUIColor)
                     .lineLimit(1)
                 Spacer()
@@ -23,20 +23,20 @@ struct RawFileView: View {
                         .foregroundColor(selected ? Asset.light.swiftUIColor : Asset.dark.swiftUIColor)
                 }
                 HStack {
-                    Label<BodyMediumStyle>(text: Formatter.formatDuration(duration: file.duration))
+                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: file.duration))
                         .foregroundColor(selected ? Asset.semiWhite.swiftUIColor : Asset.dark.swiftUIColor)
                     Spacer()
                 }
                 .frame(width: 60)
                 HStack {
-                    Label<BodyMediumStyle>(text: Formatter.formatDate(date: file.createdAt))
+                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: file.createdAt))
                         .foregroundColor(selected ? Asset.light.swiftUIColor : Asset.tertiary.swiftUIColor)
                     Spacer()
                 }
                 .frame(width: 200)
             }
             .padding(.horizontal, 5)
-            .padding(.vertical, 5)
+            .padding(.vertical, 2)
             .background(selected ? Asset.accentPrimary.swiftUIColor : Asset.light.swiftUIColor)
             .cornerRadius(5)
         }

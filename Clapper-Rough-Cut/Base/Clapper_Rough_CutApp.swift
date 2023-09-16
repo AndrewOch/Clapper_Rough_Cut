@@ -17,5 +17,8 @@ struct Clapper_Rough_CutApp: App {
         DocumentGroup(newDocument: { ClapperRoughCutDocument() }) { _ in
             ContentView()
         }
+        Settings {
+            SettingsView()
+        }
     }
 }

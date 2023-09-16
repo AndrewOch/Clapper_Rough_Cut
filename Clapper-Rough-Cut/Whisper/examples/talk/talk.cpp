@@ -1,8 +1,8 @@
 // Talk with AI
 //
 
-#include "common.h"
 #include "common-sdl.h"
+#include "common.h"
 #include "whisper.h"
 #include "gpt-2.h"
 
@@ -36,7 +36,7 @@ struct whisper_params {
     std::string language  = "en";
     std::string model_wsp = "models/ggml-base.en.bin";
     std::string model_gpt = "models/ggml-gpt-2-117M.bin";
-    std::string speak     = "./examples/talk/speak.sh";
+    std::string speak     = "./examples/talk/speak";
     std::string fname_out;
 };
 
@@ -349,7 +349,10 @@ int main(int argc, char ** argv) {
                 gpt2_set_prompt(ctx_gpt, prompt_base.c_str());
 
                 text_to_speak = ::replace(text_to_speak, params.person + ": ", "");
-                system((params.speak + " " + std::to_string(voice_id) + " \"" + text_to_speak + "\"").c_str());
+                int ret = system((params.speak + " " + std::to_string(voice_id) + " \"" + text_to_speak + "\"").c_str());
+                if (ret != 0) {
+                    fprintf(stderr, "%s: system() failed!\n", __func__);
+                }
 
                 audio.clear();
 

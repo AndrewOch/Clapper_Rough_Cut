@@ -29,7 +29,9 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     func changeScene(for folder: RawFilesFolder, phrase: Phrase) {
         folder.scriptPhraseId = phrase.id
-        folder.title = createPhraseFolderTitle(characterName: phrase.characterName, text: phrase.phraseText)
+        if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
+            folder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
+        }
         updateStatus()
     }
 
@@ -59,10 +61,12 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         if let index = self.project.phraseFolders.firstIndex(where: { folder in folder.scriptPhraseId == phrase.id }) {
             self.project.phraseFolders[index].files.append(file)
         } else {
-            self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: phrase.characterName,
-                                                                                            text: phrase.phraseText),
-                                                             files: [file],
-                                                             scriptPhraseId: phrase.id))
+            if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
+                self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: characterName,
+                                                                                                     text: phraseText),
+                                                                 files: [file],
+                                                                 scriptPhraseId: phrase.id))
+            }
         }
         self.project.unsortedFolder.files.removeAll { file in file.id == file.id }
     }
@@ -77,10 +81,12 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         if let index = self.project.phraseFolders.firstIndex(where: { folder in folder.scriptPhraseId == phrase.id }) {
             self.project.phraseFolders[index].takes.append(take)
         } else {
-            self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: phrase.characterName,
-                                                                                                 text: phrase.phraseText),
-                                                             takes: [take],
-                                                             scriptPhraseId: phrase.id))
+            if let character = phrase.character, let phraseText = phrase.phraseText {
+                self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: character.name,
+                                                                                                     text: phraseText),
+                                                                 takes: [take],
+                                                                 scriptPhraseId: phrase.id))
+            }
         }
         self.project.unsortedFolder.takes.removeAll { file in file.id == take.id }
     }

@@ -10,7 +10,7 @@ struct RawFolderDetailView: View {
                 HStack {
                     SystemImage.folder.imageView
                         .foregroundColor(Asset.semiDark.swiftUIColor)
-                    Label<BodyMediumStyle>(text: folder.title)
+                    CustomLabel<BodyMediumStyle>(text: folder.title)
                         .foregroundColor(Asset.semiDark.swiftUIColor)
                     Spacer()
                     if document.project.unsortedFolder != folder {
@@ -22,7 +22,7 @@ struct RawFolderDetailView: View {
                     }
                 }
                 .sheet(isPresented: $isModalPresented) {
-                    ModalSheet(title: "Выберите сцену", resizableVertical: true) {
+                    ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
                         SelectPhraseMatchView { phrase in
                             document.changeScene(for: folder, phrase: phrase)
                             isModalPresented.toggle()
@@ -34,21 +34,21 @@ struct RawFolderDetailView: View {
 
                 HStack {
                     FileIcon(type: .video)
-                    Label<BodyMediumStyle>(text: "\(folder.files.filter({ file in file.type == .video }).count) \(L10n.video)")
+                    CustomLabel<BodyMediumStyle>(text: "\(folder.files.filter({ file in file.type == .video }).count) \(L10n.video)")
                     Spacer()
                 }
                 .foregroundColor(Asset.dark.swiftUIColor)
                 .padding(.vertical, 5)
                 HStack {
                     FileIcon(type: .audio)
-                    Label<BodyMediumStyle>(text: "\(folder.files.filter({ file in file.type == .audio }).count) \(L10n.audio)")
+                    CustomLabel<BodyMediumStyle>(text: "\(folder.files.filter({ file in file.type == .audio }).count) \(L10n.audio)")
                     Spacer()
                 }
                 .foregroundColor(.black)
                 .padding(.vertical, 5)
                 HStack {
                     SystemImage.filmStack.imageView
-                    Label<BodyMediumStyle>(text: "\(folder.takes.count) \(L10n.takes)")
+                    CustomLabel<BodyMediumStyle>(text: "\(folder.takes.count) \(L10n.takes)")
                     Spacer()
                 }
                 .foregroundColor(Asset.dark.swiftUIColor)

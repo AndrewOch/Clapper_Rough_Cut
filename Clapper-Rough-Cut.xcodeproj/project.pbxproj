@@ -17,7 +17,7 @@
 		043538CA2AABBB0D00775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C72AABBB0D00775E0D /* Assets.swift */; };
 		043538CB2AABBB0D00775E0D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C82AABBB0D00775E0D /* Strings.swift */; };
 		043538CD2AABD57100775E0D /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538CC2AABD57100775E0D /* SystemImage.swift */; };
-		043538CF2AAC75CA00775E0D /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538CE2AAC75CA00775E0D /* Label.swift */; };
+		043538CF2AAC75CA00775E0D /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538CE2AAC75CA00775E0D /* CustomLabel.swift */; };
 		043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 043538D02AAC855200775E0D /* Limelight-Regular.ttf */; };
 		043538D32AAC855200775E0D /* NunitoSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 043538D12AAC855200775E0D /* NunitoSans.ttf */; };
 		043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538D42AAC86DD00775E0D /* PhraseLabel.swift */; };
@@ -29,6 +29,10 @@
 		043538EF2AAFB45000775E0D /* HeaderMenuConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538EE2AAFB45000775E0D /* HeaderMenuConfiguration.swift */; };
 		043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538F02AAFB99100775E0D /* DocumentStates.swift */; };
 		043538F32AB073DE00775E0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538F22AB073DE00775E0D /* Environment.swift */; };
+		043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538F42AB2019B00775E0D /* ShortcutView.swift */; };
+		043538F82AB21A6A00775E0D /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 043538F72AB21A6A00775E0D /* KeyboardShortcuts */; };
+		043538FA2AB21A9300775E0D /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538F92AB21A9300775E0D /* KeyboardShortcuts.swift */; };
+		043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538FE2AB21AD900775E0D /* SettingsView.swift */; };
 		043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */; };
 		043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */; };
 		043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */; };
@@ -57,6 +61,10 @@
 		0464DA1029E423A80007EF24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E029E423A70007EF24 /* ContentView.swift */; };
 		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
+		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
+		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
+		049B0CC72AB5CC66007E446D /* ggml-medium-q5_0.bin in Resources */ = {isa = PBXBuildFile; fileRef = 049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */; };
+		04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04A72EB52AB2785300000482 /* ggml-medium.bin */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
 		04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */; };
@@ -68,7 +76,7 @@
 		04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E729F9262D007E4C64 /* ExportView.swift */; };
 		04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E929F926D1007E4C64 /* ExportOperations.swift */; };
 		04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */; };
-		04F7A9EE29F96D27007E4C64 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* TextFieldComponent.swift */; };
+		04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */; };
 		04FE4B8A29F818DE00634522 /* main in Resources */ = {isa = PBXBuildFile; fileRef = 044307FF29E2A70800705B78 /* main */; };
 		04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04FE4B8B29F819EB00634522 /* ggml-base.bin */; };
 		04FE56CC29F846DD00634522 /* python3.9 in Resources */ = {isa = PBXBuildFile; fileRef = 04FE56CB29F846DD00634522 /* python3.9 */; };
@@ -87,7 +95,7 @@
 		043538C72AABBB0D00775E0D /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		043538C82AABBB0D00775E0D /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		043538CC2AABD57100775E0D /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
-		043538CE2AAC75CA00775E0D /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		043538CE2AAC75CA00775E0D /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		043538D02AAC855200775E0D /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
 		043538D12AAC855200775E0D /* NunitoSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NunitoSans.ttf; sourceTree = "<group>"; };
 		043538D42AAC86DD00775E0D /* PhraseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseLabel.swift; sourceTree = "<group>"; };
@@ -99,6 +107,9 @@
 		043538EE2AAFB45000775E0D /* HeaderMenuConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuConfiguration.swift; sourceTree = "<group>"; };
 		043538F02AAFB99100775E0D /* DocumentStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStates.swift; sourceTree = "<group>"; };
 		043538F22AB073DE00775E0D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		043538F42AB2019B00775E0D /* ShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutView.swift; sourceTree = "<group>"; };
+		043538F92AB21A9300775E0D /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
+		043538FE2AB21AD900775E0D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseMatcher.swift; sourceTree = "<group>"; };
 		043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesMatchOperations.swift; sourceTree = "<group>"; };
 		043EDDBF29E92ED300DA5EFF /* Clapper-Rough-Cut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clapper-Rough-Cut-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -163,6 +174,10 @@
 		0464D9E329E423A70007EF24 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperAudioTranscriber.swift; sourceTree = "<group>"; };
 		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		049B0CBE2AB34019007E446D /* ScriptCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCharacter.swift; sourceTree = "<group>"; };
+		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
+		049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-medium-q5_0.bin"; sourceTree = "<group>"; };
+		04A72EB52AB2785300000482 /* ggml-medium.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-medium.bin"; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
 		04ACBEF629E7EA2F0093DD76 /* RawFilesFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFilesFolderView.swift; sourceTree = "<group>"; };
@@ -173,7 +188,7 @@
 		04F7A9E729F9262D007E4C64 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		04F7A9E929F926D1007E4C64 /* ExportOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOperations.swift; sourceTree = "<group>"; };
 		04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
-		04F7A9ED29F96D27007E4C64 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
+		04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		04FE4B8B29F819EB00634522 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
 		04FE56CB29F846DD00634522 /* python3.9 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = python3.9; path = ../../opt/anaconda3/bin/python3.9; sourceTree = "<group>"; };
 		04FE56CF29F8663E00634522 /* RawTakeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawTakeDetailView.swift; sourceTree = "<group>"; };
@@ -195,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
+				043538F82AB21A6A00775E0D /* KeyboardShortcuts in Frameworks */,
 				0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */,
 				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
@@ -226,6 +242,7 @@
 			children = (
 				043538C42AABA51C00775E0D /* String.swift */,
 				043538F22AB073DE00775E0D /* Environment.swift */,
+				043538F92AB21A9300775E0D /* KeyboardShortcuts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -336,6 +353,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		043538FB2AB21ABB00775E0D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				043538FD2AB21AC700775E0D /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		043538FD2AB21AC700775E0D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				043538FE2AB21AD900775E0D /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		043EDDBE29E92EAA00DA5EFF /* StringsMatcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +419,8 @@
 		0443080C29E2A70900705B78 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */,
+				04A72EB52AB2785300000482 /* ggml-medium.bin */,
 				04FE4B8B29F819EB00634522 /* ggml-base.bin */,
 				0443081929E2A70B00705B78 /* for-tests-ggml-tiny.en.bin */,
 				0443081629E2A70B00705B78 /* for-tests-ggml-medium.bin */,
@@ -410,14 +445,15 @@
 				0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */,
 				04F7A9E029F91AF2007E4C64 /* FileIcon.swift */,
 				04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */,
-				04F7A9ED29F96D27007E4C64 /* TextFieldComponent.swift */,
+				04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */,
 				043538CC2AABD57100775E0D /* SystemImage.swift */,
-				043538CE2AAC75CA00775E0D /* Label.swift */,
+				043538CE2AAC75CA00775E0D /* CustomLabel.swift */,
 				043538D42AAC86DD00775E0D /* PhraseLabel.swift */,
 				043538D82AACD33500775E0D /* ImageButton.swift */,
 				043538E62AAD263100775E0D /* ModalSheet.swift */,
 				043538EA2AAEFB9700775E0D /* OverlayMenu.swift */,
 				043538EC2AAFAFE700775E0D /* CustomContextMenuView.swift */,
+				043538F42AB2019B00775E0D /* ShortcutView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -475,6 +511,7 @@
 				04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */,
 				043538EE2AAFB45000775E0D /* HeaderMenuConfiguration.swift */,
 				043538F02AAFB99100775E0D /* DocumentStates.swift */,
+				049B0CBE2AB34019007E446D /* ScriptCharacter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +527,8 @@
 		0464D9CD29E423A70007EF24 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				049B0CC22AB39C0D007E446D /* Characters */,
+				043538FB2AB21ABB00775E0D /* Settings */,
 				043538DF2AAD1D0400775E0D /* HeaderMenu */,
 				043538DE2AAD1CFA00775E0D /* SelectPhrase */,
 				043538DD2AAD1CF100775E0D /* Export */,
@@ -539,6 +578,22 @@
 				048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		049B0CC22AB39C0D007E446D /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+				049B0CC32AB39C14007E446D /* Views */,
+			);
+			path = Characters;
+			sourceTree = "<group>";
+		};
+		049B0CC32AB39C14007E446D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		04B0E505298F04C9004E8435 /* Frameworks */ = {
@@ -597,6 +652,7 @@
 			packageProductDependencies = (
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
 				0400DA4E29EDC860003AD42B /* PythonKit */,
+				043538F72AB21A6A00775E0D /* KeyboardShortcuts */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -631,6 +687,7 @@
 			packageReferences = (
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
 				0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */,
+				043538F62AB21A6A00775E0D /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -646,8 +703,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049B0CC72AB5CC66007E446D /* ggml-medium-q5_0.bin in Resources */,
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				04FE4B8A29F818DE00634522 /* main in Resources */,
+				04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */,
 				0464DA0D29E423A80007EF24 /* Info.plist in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
 				04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */,
@@ -759,6 +818,7 @@
 				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
 				04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */,
 				0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */,
+				043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */,
 				0464DA0029E423A80007EF24 /* RawFile.swift in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
 				0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */,
@@ -769,7 +829,7 @@
 				043538C92AABBB0D00775E0D /* Fonts.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
 				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
-				04F7A9EE29F96D27007E4C64 /* TextFieldComponent.swift in Sources */,
+				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
 				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
@@ -778,9 +838,10 @@
 				043538D92AACD33500775E0D /* ImageButton.swift in Sources */,
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
 				04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */,
-				043538CF2AAC75CA00775E0D /* Label.swift in Sources */,
+				043538CF2AAC75CA00775E0D /* CustomLabel.swift in Sources */,
 				043EDDD229E9E21000DA5EFF /* RawTakeView.swift in Sources */,
 				043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */,
+				049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */,
 				043538CA2AABBB0D00775E0D /* Assets.swift in Sources */,
 				0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */,
 				043538E72AAD263100775E0D /* ModalSheet.swift in Sources */,
@@ -795,11 +856,14 @@
 				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
 				0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */,
 				043538CD2AABD57100775E0D /* SystemImage.swift in Sources */,
+				043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */,
 				04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */,
+				043538FA2AB21A9300775E0D /* KeyboardShortcuts.swift in Sources */,
 				0464DA0229E423A80007EF24 /* RawFileView.swift in Sources */,
 				0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */,
 				0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */,
 				043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */,
+				049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,6 +1095,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		043538F62AB21A6A00775E0D /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pvieito/PythonKit";
@@ -1054,6 +1126,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */;
 			productName = PythonKit;
+		};
+		043538F72AB21A6A00775E0D /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 043538F62AB21A6A00775E0D /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 		04BA3A0D29E1F26300047A9B /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;

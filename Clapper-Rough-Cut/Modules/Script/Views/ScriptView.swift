@@ -9,7 +9,7 @@ struct ScriptView: View {
             HStack {
                 Spacer()
                 if let file = document.project.scriptFile {
-                    Label<Header3Style>(text: file.url.deletingPathExtension().lastPathComponent)
+                    CustomLabel<Header3Style>(text: file.url.deletingPathExtension().lastPathComponent)
                         .foregroundColor(Asset.dark.swiftUIColor)
                 } else {
                     RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.addScript.capitalized,
@@ -31,8 +31,10 @@ struct ScriptView: View {
                                 VStack {
                                     ForEach(block.phrases) { phrase in
                                         HStack(spacing: 0) {
-                                            PhraseLabel(characterName: phrase.characterName,
-                                                        text: phrase.phraseText)
+                                            if let character = phrase.character, let phraseText = phrase.phraseText {
+                                                PhraseLabel(characterName: character.name,
+                                                            text: phraseText)
+                                            }
                                             Spacer()
                                         }
                                         .foregroundColor(Asset.dark.swiftUIColor)
@@ -44,7 +46,7 @@ struct ScriptView: View {
                                     .overlay(RoundedRectangle(cornerRadius: 5)
                                         .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                             } else {
-                                Label<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
+                                CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
                                     .foregroundColor(Asset.dark.swiftUIColor)
                             }
                         }
@@ -58,5 +60,18 @@ struct ScriptView: View {
         .frame(minWidth: 300, maxWidth: .infinity,
                minHeight: 500, maxHeight: .infinity)
         .background(Asset.semiWhite.swiftUIColor)
+        .sheet(isPresented: $document.states.isCharactersViewPresented) {
+            if let scriptFile = document.project.scriptFile {
+                var characterPhrasesMap: [UUID: [Phrase]] = scriptFile.characters.reduce(into: [:]) { result, character in
+                    let phrases = scriptFile.getCharacterPhrases(character: character)
+                    if !phrases.isEmpty {
+                        result[character.id] = phrases
+                    }
+                }
+                CharactersSettingsView(characterPhrases: characterPhrasesMap) {
+                    document.states.isCharactersViewPresented.toggle()
+                }
+            }
+        }
     }
 }

@@ -6,7 +6,9 @@ struct SelectPhraseMatchView: View {
     @State var searchText: String = .empty
 
     var body: some View {
-        TextFieldComponent(placeholder: L10n.askToSelectScene.capitalized, text: $searchText)
+        CustomTextField(title: L10n.searchPhrase.firstWordCapitalized,
+                           placeholder: L10n.searchPhrasePlaceholder.firstWordCapitalized,
+                           text: $searchText)
         ScrollView {
             LazyVStack {
                 ForEach(getPhrases()) { phrase in
@@ -14,8 +16,10 @@ struct SelectPhraseMatchView: View {
                         selectAction(phrase)
                     } label: {
                         HStack {
-                            PhraseLabel(characterName: phrase.characterName,
-                                        text: phrase.phraseText)
+                            if let character = phrase.character, let phraseText = phrase.phraseText {
+                                PhraseLabel(characterName: character.name,
+                                            text: phraseText)
+                            }
                             Spacer()
                         }
                         .padding(.all, 5)
@@ -30,7 +34,7 @@ struct SelectPhraseMatchView: View {
             }
             .padding(.all, 10)
         }
-        .background(Asset.secondary.swiftUIColor)
+        .background(Asset.light.swiftUIColor)
         .cornerRadius(10)
     }
 
