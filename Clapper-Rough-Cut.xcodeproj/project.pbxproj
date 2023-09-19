@@ -63,7 +63,6 @@
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
 		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
-		049B0CC72AB5CC66007E446D /* ggml-medium-q5_0.bin in Resources */ = {isa = PBXBuildFile; fileRef = 049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */; };
 		04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04A72EB52AB2785300000482 /* ggml-medium.bin */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
@@ -176,7 +175,6 @@
 		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		049B0CBE2AB34019007E446D /* ScriptCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCharacter.swift; sourceTree = "<group>"; };
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
-		049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-medium-q5_0.bin"; sourceTree = "<group>"; };
 		04A72EB52AB2785300000482 /* ggml-medium.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-medium.bin"; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 		0443080C29E2A70900705B78 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				049B0CC62AB5CC66007E446D /* ggml-medium-q5_0.bin */,
 				04A72EB52AB2785300000482 /* ggml-medium.bin */,
 				04FE4B8B29F819EB00634522 /* ggml-base.bin */,
 				0443081929E2A70B00705B78 /* for-tests-ggml-tiny.en.bin */,
@@ -703,7 +700,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049B0CC72AB5CC66007E446D /* ggml-medium-q5_0.bin in Resources */,
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				04FE4B8A29F818DE00634522 /* main in Resources */,
 				04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */,
