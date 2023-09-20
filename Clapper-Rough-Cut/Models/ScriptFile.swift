@@ -1,6 +1,6 @@
 import Foundation
 
-class ScriptFile: Identifiable, Codable {
+struct ScriptFile: Identifiable, Codable {
     var id = UUID()
     let url: URL
     var fullText: String
@@ -16,7 +16,7 @@ class ScriptFile: Identifiable, Codable {
         determineScriptBlocks(phrases: phrases)
     }
 
-    private func determinePhrases() -> [Phrase] {
+    private mutating func determinePhrases() -> [Phrase] {
         let lines = fullText.components(separatedBy: .newlines)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { $0.isNotEmpty }
@@ -45,7 +45,7 @@ class ScriptFile: Identifiable, Codable {
         return result
     }
 
-    private func determineScriptBlocks(phrases: [Phrase]) {
+    private mutating func determineScriptBlocks(phrases: [Phrase]) {
         self.blocks = []
         var scriptLines: [Phrase] = []
         var previousIsPhrase = false
@@ -84,18 +84,18 @@ class ScriptFile: Identifiable, Codable {
         return result
     }
 
-    public func removeCharacter(by id: UUID) {
+    public mutating func removeCharacter(by id: UUID) {
         removeCharacters(by: [id])
     }
 
-    public func removeCharacters(by ids: [UUID]) {
+    public mutating func removeCharacters(by ids: [UUID]) {
         var updatedPhrases: [Phrase] = []
         let removingCharacters = characters.filter({ char in ids.contains(char.id) })
         characters.removeAll { char in ids.contains(char.id) }
         for phrase in blocks.flatMap({ $0.phrases }) {
             if removingCharacters.contains(where: { char in phrase.character == char }) {
-                phrase.character = nil
-                phrase.phraseText = nil
+                updatedPhrases.append(Phrase(text: phrase.fullText))
+                continue
             }
             updatedPhrases.append(phrase)
         }
@@ -103,7 +103,7 @@ class ScriptFile: Identifiable, Codable {
     }
 }
 
-class ScriptBlock: Identifiable, Codable {
+struct ScriptBlock: Identifiable, Codable {
     var id = UUID()
     var isDialogue: Bool
     var fullText: String {
@@ -114,7 +114,7 @@ class ScriptBlock: Identifiable, Codable {
         return result
     }
     var phrases: [Phrase]
-    
+
     init(text: String, lines: [String]) {
         self.isDialogue = false
         self.phrases = []
@@ -133,7 +133,7 @@ class ScriptBlock: Identifiable, Codable {
     }
 }
 
-class Phrase: Identifiable, Codable {
+struct Phrase: Identifiable, Codable {
     var id = UUID()
     var fullText: String
     var character: ScriptCharacter?

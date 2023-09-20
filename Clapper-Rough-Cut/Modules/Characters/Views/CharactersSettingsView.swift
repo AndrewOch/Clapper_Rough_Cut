@@ -82,8 +82,7 @@ struct CharactersSettingsView: View {
 
     private var detailed: some View {
         VStack {
-            if let scriptFile = document.project.scriptFile {
-                let characters = scriptFile.characters.filter { char in selectedCharacters.contains(char.id) }
+            if let characters = document.project.scriptFile?.characters.filter({ char in selectedCharacters.contains(char.id) }) {
                 if characters.count == 1 {
                     if let character = characters.first {
                         CustomLabel<Header3Style>(text: character.name)
@@ -93,7 +92,7 @@ struct CharactersSettingsView: View {
                             .foregroundColor(Asset.dark.swiftUIColor)
                         Spacer()
                         RoundedButton<RoundedButtonAlertMediumStyle>(title: L10n.delete.firstWordCapitalized, enabled: .constant(true)) {
-                            scriptFile.removeCharacter(by: character.id)
+                            document.project.scriptFile?.removeCharacter(by: character.id)
                             selectedCharacters = []
                         }
                     }
@@ -103,7 +102,7 @@ struct CharactersSettingsView: View {
                         .lineLimit(1)
                     Spacer()
                     RoundedButton<RoundedButtonAlertMediumStyle>(title: L10n.delete.firstWordCapitalized, enabled: .constant(true)) {
-                        scriptFile.removeCharacters(by: selectedCharacters)
+                        document.project.scriptFile?.removeCharacters(by: selectedCharacters)
                         selectedCharacters = []
                     }
                 }

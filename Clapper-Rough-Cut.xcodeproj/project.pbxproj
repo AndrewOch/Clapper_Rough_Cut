@@ -634,8 +634,8 @@
 			buildConfigurationList = 048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-Cut" */;
 			buildPhases = (
 				313B3A8D9D992845C47EF96D /* [CP] Check Pods Manifest.lock */,
-				0462234A29E2C09500944093 /* PythonLibrary */,
 				041FE5CE2AAB359F0054C861 /* SwiftGen */,
+				0462234A29E2C09500944093 /* PythonLibrary */,
 				0484559C298D212400772EB0 /* Sources */,
 				0484559D298D212400772EB0 /* Frameworks */,
 				0484559E298D212400772EB0 /* Resources */,

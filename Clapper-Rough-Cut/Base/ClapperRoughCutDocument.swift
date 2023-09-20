@@ -49,16 +49,15 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
 // MARK: - Undo/Redo
 extension ClapperRoughCutDocument {
     func registerUndo() {
-        registerUndo(version: self.project)
-    }
-    
-    private func registerUndo(version: RoughCutProject) {
         let previousVersion = project.copy()
-        undoManager?.registerUndo(withTarget: self, handler: { target in
-            let old = target.project.copy()
-            target.project = previousVersion
-            target.registerUndo(version: old)
-        })
+        registerUndo(from: project, to: previousVersion)
+    }
+
+    private func registerUndo(from oldValue: RoughCutProject, to newValue: RoughCutProject) {
+        undoManager?.registerUndo(withTarget: self) { target in
+            target.registerUndo(from: newValue, to: target.project)
+            target.project = oldValue
+        }
     }
 }
 
