@@ -9,6 +9,7 @@ protocol TakesMatchOperations {
 
 extension ClapperRoughCutDocument: TakesMatchOperations {
     func matchTakes() {
+        registerUndo()
         let startTime = Date().timeIntervalSince1970
         let python = MFCC_Wrapper()
 
@@ -49,6 +50,7 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
     }
 
     func detachFiles(from take: RawTake) {
+        registerUndo()
         let video = take.video
         let audio = take.audio
         if let index = project.phraseFolders.firstIndex(where: { folder in folder.takes.contains { t in t.id == take.id } }) {

@@ -56,9 +56,3 @@ struct FileSystemView: View {
         }
     }
 }
-
-struct FileSystemView_Previews: PreviewProvider {
-    static var previews: some View {
-        FileSystemView()
-    }
-}

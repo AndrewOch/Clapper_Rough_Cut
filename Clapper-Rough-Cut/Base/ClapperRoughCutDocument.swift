@@ -17,6 +17,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
+    @Published var undoManager: UndoManager?
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
@@ -42,6 +43,22 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         let data = try JSONEncoder().encode(snapshot)
         let fileWrapper = FileWrapper(regularFileWithContents: data)
         return fileWrapper
+    }
+}
+
+// MARK: - Undo/Redo
+extension ClapperRoughCutDocument {
+    func registerUndo() {
+        registerUndo(version: self.project)
+    }
+    
+    private func registerUndo(version: RoughCutProject) {
+        let previousVersion = project.copy()
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            let old = target.project.copy()
+            target.project = previousVersion
+            target.registerUndo(version: old)
+        })
     }
 }
 
