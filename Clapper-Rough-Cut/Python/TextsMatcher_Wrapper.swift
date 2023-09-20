@@ -6,7 +6,7 @@ class TextsMatcher_Wrapper {
     var waveFunction: PythonObject
 
     init() {
-        guard let path = Bundle.main.path(forResource: "Texts_Matcher", ofType: "py") as NSString? else {
+        guard let path = Bundle.main.path(forResource: "text_matcher", ofType: "py") as NSString? else {
             print("File not found")
             self.waveFunction = []
             return
@@ -14,7 +14,7 @@ class TextsMatcher_Wrapper {
         let folder = path.deletingLastPathComponent
         let sys = Python.import("sys")
         sys.path.append(folder)
-        let file = Python.import("Texts_Matcher")
+        let file = Python.import("text_matcher")
         self.waveFunction = file
     }
 

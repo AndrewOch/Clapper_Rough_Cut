@@ -2,6 +2,7 @@ excluded:
   - Carthage
   - vendor
   - Pods
+  - Whisper
 disabled_rules:
   - colon
   - comma

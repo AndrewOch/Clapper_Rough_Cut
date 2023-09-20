@@ -73,7 +73,6 @@ class WhisperAudioTranscriber: AudioTranscriber {
                                                                  "-p", numProcesses,
                                                                  "-l", "ru",
                                                                  "-m", model,
-                                                                 "-pc",
                                                                  "-nt", tmpFile])
                         let endTime = Date().timeIntervalSince1970
                         let resultTime = endTime - startTime

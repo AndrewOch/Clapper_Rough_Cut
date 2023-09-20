@@ -28,6 +28,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     init() {
         project = RoughCutProject()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        updateStatus()
     }
 
     init(configuration: ReadConfiguration) throws {
@@ -37,12 +38,24 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        updateStatus()
     }
 
     func fileWrapper(snapshot: RoughCutProject, configuration: WriteConfiguration) throws -> FileWrapper {
         let data = try JSONEncoder().encode(snapshot)
         let fileWrapper = FileWrapper(regularFileWithContents: data)
         return fileWrapper
+    }
+    
+    func updateStatus() {
+        project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
+        project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
+        project.canSortScenes = project.hasUnsortedTranscribedFiles && project.scriptFile != nil
+
+        let files = project.phraseFolders.flatMap({ folder in folder.files })
+        let videos = files.filter { file in file.type == .video }
+        let audios = files.filter { file in file.type == .audio }
+        project.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
     }
 }
 
@@ -58,19 +71,5 @@ extension ClapperRoughCutDocument {
             target.registerUndo(from: newValue, to: target.project)
             target.project = oldValue
         }
-    }
-}
-
-// MARK: - Update Status
-extension ClapperRoughCutDocument {
-    func updateStatus() {
-        project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
-        project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
-        project.canSortScenes = project.hasUnsortedTranscribedFiles && project.scriptFile != nil
-
-        let files = project.phraseFolders.flatMap({ folder in folder.files })
-        let videos = files.filter { file in file.type == .video }
-        let audios = files.filter { file in file.type == .audio }
-        project.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
     }
 }
