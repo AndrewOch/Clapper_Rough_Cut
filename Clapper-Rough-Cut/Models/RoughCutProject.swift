@@ -16,10 +16,4 @@ struct RoughCutProject: Identifiable, Codable {
     var hasUnmatchedSortedFiles: Bool = false
 
     var exportSettings: ExportSettings = ExportSettings()
-
-    func copy() -> RoughCutProject {
-        var copy = self
-        
-        return copy
-    }
 }

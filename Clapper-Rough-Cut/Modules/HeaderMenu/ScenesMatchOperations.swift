@@ -32,11 +32,14 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     func changeScene(for folder: RawFilesFolder, phrase: Phrase) {
+        guard let index = project.phraseFolders.firstIndex(of: folder) else { return }
         registerUndo()
-        folder.scriptPhraseId = phrase.id
+        var newFolder = folder
+        newFolder.scriptPhraseId = phrase.id
         if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
-            folder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
+            newFolder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
         }
+        project.phraseFolders[index] = newFolder
         updateStatus()
     }
 

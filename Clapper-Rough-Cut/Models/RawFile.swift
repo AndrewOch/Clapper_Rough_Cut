@@ -1,6 +1,6 @@
 import Foundation
 
-class RawFilesFolder: Identifiable, Equatable, Codable {
+struct RawFilesFolder: Identifiable, Equatable, Codable {
     var id = UUID()
     var title: String
     var files: [RawFile]
@@ -29,7 +29,7 @@ class RawFilesFolder: Identifiable, Equatable, Codable {
     }
 }
 
-class RawTake: Identifiable, Equatable, Codable {
+struct RawTake: Identifiable, Equatable, Codable {
     var id = UUID()
     var video: RawFile
     var audio: RawFile
@@ -44,7 +44,7 @@ class RawTake: Identifiable, Equatable, Codable {
     }
 }
 
-class RawFile: Identifiable, Equatable, Codable {
+struct RawFile: Identifiable, Equatable, Codable {
     var id = UUID()
     let url: URL
     let duration: Double

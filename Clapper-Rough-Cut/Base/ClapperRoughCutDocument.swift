@@ -46,7 +46,26 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         let fileWrapper = FileWrapper(regularFileWithContents: data)
         return fileWrapper
     }
+}
 
+// MARK: - Undo/Redo
+extension ClapperRoughCutDocument {
+    func registerUndo() {
+        let previousVersion = project
+        registerUndo(oldValue: previousVersion)
+    }
+
+    private func registerUndo(oldValue: RoughCutProject) {
+        undoManager?.registerUndo(withTarget: self) { target in
+            let previousVersion = target.project
+            target.registerUndo(oldValue: previousVersion)
+            target.project = oldValue
+        }
+    }
+}
+
+// MARK: - Update status
+extension ClapperRoughCutDocument {
     func updateStatus() {
         project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
         project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
@@ -56,21 +75,5 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         let videos = files.filter { file in file.type == .video }
         let audios = files.filter { file in file.type == .audio }
         project.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
-    }
-}
-
-// MARK: - Undo/Redo
-extension ClapperRoughCutDocument {
-    func registerUndo() {
-        let previousVersion = project.copy()
-        registerUndo(oldValue: previousVersion)
-    }
-
-    private func registerUndo(oldValue: RoughCutProject) {
-        undoManager?.registerUndo(withTarget: self) { target in
-            let previousVersion = target.project.copy()
-            target.registerUndo(oldValue: previousVersion)
-            target.project = oldValue
-        }
     }
 }

@@ -2,17 +2,16 @@ import SwiftUI
 
 struct RawFilesFolderView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @State var folder: RawFilesFolder
-    @State var collapsed: Bool
+    @Binding var folder: RawFilesFolder
     var selected: Bool
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Button {
-                    collapsed.toggle()
+                    folder.collapsed.toggle()
                 } label: {
-                    Image(systemName: collapsed ? SystemImage.chevronRight.rawValue : SystemImage.chevronDown.rawValue)
+                    Image(systemName: folder.collapsed ? SystemImage.chevronRight.rawValue : SystemImage.chevronDown.rawValue)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 8, height: 8)
@@ -43,7 +42,7 @@ struct RawFilesFolderView: View {
                 .focusable(false)
                 .buttonStyle(PlainButtonStyle())
             }
-            if !collapsed {
+            if !folder.collapsed {
                 ForEach(folder.takes) { take in
                     RawTakeView(video: take.video,
                                 audio: take.audio,

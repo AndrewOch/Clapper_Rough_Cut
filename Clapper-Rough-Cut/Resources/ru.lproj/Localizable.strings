@@ -1,9 +1,7 @@
-
 "addFiles" = "добавить файлы";
 "transcribe" = "расшифровать";
 "determineScenes" = "определить сцены";
 "determineScene" = "определить сцену";
-
 "determineTakes" = "определить дубли";
 "export" = "экспорт";
 "addScript" = "добавить сценарий";

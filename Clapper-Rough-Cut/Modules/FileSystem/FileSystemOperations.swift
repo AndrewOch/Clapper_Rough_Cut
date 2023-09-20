@@ -52,6 +52,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             }
             updateStatus()
         } else {
+            updateStatus()
             return
         }
     }
@@ -64,13 +65,16 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                 self.updateStatus()
                 return
             }
+            var newFolders: [RawFilesFolder] = []
             for folder in self.project.phraseFolders {
+                var newFolder = folder
                 if let index = folder.files.firstIndex(where: { $0.id == file.id }) {
-                    folder.files[index].transcription = transcription
-                    self.updateStatus()
-                    return
+                    newFolder.files[index].transcription = transcription
                 }
+                newFolders.append(newFolder)
             }
+            self.project.phraseFolders = newFolders
+            self.updateStatus()
         }
     }
 

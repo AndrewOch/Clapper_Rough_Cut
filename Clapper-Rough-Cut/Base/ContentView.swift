@@ -16,32 +16,8 @@ struct ContentView: View {
                 ScriptView()
             }
         }
-//        .onAppear {
-//            NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) -> NSEvent? in
-//                if event.modifierFlags.contains(.command) && event.keyCode == 6 {
-//                    if event.modifierFlags.contains(.shift) {
-//                        document.undoManager?.redo()
-//                        return nil
-//                    }
-//                    document.undoManager?.undo()
-//                    return nil
-//                }
-//                return event
-//            }
-//        }
         .onChange(of: self.undoManager) { undoManager in
             document.undoManager = undoManager
-//            NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) -> NSEvent? in
-//                if event.modifierFlags.contains(.command) && event.keyCode == 6 {
-//                    if event.modifierFlags.contains(.shift) {
-//                        undoManager?.redo()
-//                        return nil
-//                    }
-//                    undoManager?.undo()
-//                    return nil
-//                }
-//                return event
-//            }
         }
         .onTapGesture {
             document.states.selectedHeaderOption = .none
