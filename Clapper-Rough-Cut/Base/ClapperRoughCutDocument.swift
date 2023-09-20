@@ -46,7 +46,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         let fileWrapper = FileWrapper(regularFileWithContents: data)
         return fileWrapper
     }
-    
+
     func updateStatus() {
         project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
         project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
@@ -63,12 +63,13 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
 extension ClapperRoughCutDocument {
     func registerUndo() {
         let previousVersion = project.copy()
-        registerUndo(from: project, to: previousVersion)
+        registerUndo(oldValue: previousVersion)
     }
 
-    private func registerUndo(from oldValue: RoughCutProject, to newValue: RoughCutProject) {
+    private func registerUndo(oldValue: RoughCutProject) {
         undoManager?.registerUndo(withTarget: self) { target in
-            target.registerUndo(from: newValue, to: target.project)
+            let previousVersion = target.project.copy()
+            target.registerUndo(oldValue: previousVersion)
             target.project = oldValue
         }
     }
