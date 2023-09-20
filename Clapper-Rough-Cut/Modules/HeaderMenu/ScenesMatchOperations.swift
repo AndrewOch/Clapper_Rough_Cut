@@ -10,28 +10,36 @@ protocol ScenesMatchOperations {
 extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     func matchScenes() {
+        registerUndo()
         matchFor(files: project.unsortedFolder.files)
     }
 
     func matchSceneForFile(_ file: RawFile) {
+        registerUndo()
         matchFor(files: [file])
     }
 
     func manualMatch(file: RawFile, phrase: Phrase) {
+        registerUndo()
         match(file: file, phrase: phrase)
         updateStatus()
     }
 
     func manualMatch(take: RawTake, phrase: Phrase) {
+        registerUndo()
         match(take: take, phrase: phrase)
         updateStatus()
     }
 
     func changeScene(for folder: RawFilesFolder, phrase: Phrase) {
-        folder.scriptPhraseId = phrase.id
+        guard let index = project.phraseFolders.firstIndex(of: folder) else { return }
+        registerUndo()
+        var newFolder = folder
+        newFolder.scriptPhraseId = phrase.id
         if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
-            folder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
+            newFolder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
         }
+        project.phraseFolders[index] = newFolder
         updateStatus()
     }
 

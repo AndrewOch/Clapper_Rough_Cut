@@ -3,7 +3,7 @@ import AVFoundation
 
 struct ContentView: View {
     @StateObject var whisperState = WhisperState()
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -15,7 +15,6 @@ struct ContentView: View {
                     })
                     .buttonStyle(.bordered)
                     .disabled(!whisperState.canTranscribe)
-                    
                     Button(whisperState.isRecording ? "Stop recording" : "Start recording", action: {
                         Task {
                             await whisperState.toggleRecord()
@@ -24,7 +23,7 @@ struct ContentView: View {
                     .buttonStyle(.bordered)
                     .disabled(!whisperState.canTranscribe)
                 }
-                
+
                 ScrollView {
                     Text(verbatim: whisperState.messageLog)
                         .frame(maxWidth: .infinity, alignment: .leading)

@@ -17,6 +17,7 @@ protocol FileSystemOperations {
 extension ClapperRoughCutDocument: FileSystemOperations {
 
     public func addRawFiles() {
+        registerUndo()
         let dialog = NSOpenPanel()
         dialog.title                   = "Choose multiple raw files"
         dialog.showsResizeIndicator    = true
@@ -51,28 +52,34 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             }
             updateStatus()
         } else {
+            updateStatus()
             return
         }
     }
 
     public func transcribeFile(_ file: RawFile) {
+        registerUndo()
         transcriber.transcribeFile(file, level: .quality) { transcription in
             if let index = self.project.unsortedFolder.files.firstIndex(where: { $0.id == file.id }) {
                 self.project.unsortedFolder.files[index].transcription = transcription
                 self.updateStatus()
                 return
             }
+            var newFolders: [RawFilesFolder] = []
             for folder in self.project.phraseFolders {
+                var newFolder = folder
                 if let index = folder.files.firstIndex(where: { $0.id == file.id }) {
-                    folder.files[index].transcription = transcription
-                    self.updateStatus()
-                    return
+                    newFolder.files[index].transcription = transcription
                 }
+                newFolders.append(newFolder)
             }
+            self.project.phraseFolders = newFolders
+            self.updateStatus()
         }
     }
 
     public func transcribeFiles() {
+        registerUndo()
         let filtered = project.unsortedFolder.files.filter { file in file.transcription == nil }
         transcriber.transcribeFiles(filtered, level: .quality) { url, transcription in
             if let index = self.project.unsortedFolder.files.firstIndex(where: { $0.url == url }) {

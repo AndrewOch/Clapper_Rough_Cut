@@ -2,9 +2,11 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @Environment(\.undoManager) var undoManager
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var isExportViewPresented = false
     @State private var popupPositions: [HeaderMenuOption: CGPoint] = [:]
+    @State var value: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -13,6 +15,9 @@ struct ContentView: View {
                 FileSystemView()
                 ScriptView()
             }
+        }
+        .onChange(of: self.undoManager) { undoManager in
+            document.undoManager = undoManager
         }
         .onTapGesture {
             document.states.selectedHeaderOption = .none

@@ -17,6 +17,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
+    @Published var undoManager: UndoManager?
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
@@ -27,6 +28,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     init() {
         project = RoughCutProject()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        updateStatus()
     }
 
     init(configuration: ReadConfiguration) throws {
@@ -36,6 +38,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        updateStatus()
     }
 
     func fileWrapper(snapshot: RoughCutProject, configuration: WriteConfiguration) throws -> FileWrapper {
@@ -45,7 +48,23 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     }
 }
 
-// MARK: - Update Status
+// MARK: - Undo/Redo
+extension ClapperRoughCutDocument {
+    func registerUndo() {
+        let previousVersion = project
+        registerUndo(oldValue: previousVersion)
+    }
+
+    private func registerUndo(oldValue: RoughCutProject) {
+        undoManager?.registerUndo(withTarget: self) { target in
+            let previousVersion = target.project
+            target.registerUndo(oldValue: previousVersion)
+            target.project = oldValue
+        }
+    }
+}
+
+// MARK: - Update status
 extension ClapperRoughCutDocument {
     func updateStatus() {
         project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty

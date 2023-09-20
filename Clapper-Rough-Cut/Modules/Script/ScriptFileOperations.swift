@@ -8,6 +8,7 @@ protocol ScriptFileOperations {
 // MARK: - Script File Operations
 extension ClapperRoughCutDocument: ScriptFileOperations {
     public func addScriptFile() {
+        registerUndo()
         let dialog = NSOpenPanel()
         dialog.title                   = "Choose script file"
         dialog.showsResizeIndicator    = true

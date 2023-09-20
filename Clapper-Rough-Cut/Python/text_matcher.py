@@ -1,7 +1,7 @@
 import os
 from fonetika.soundex import RussianSoundex
 import string
-
+    
 soundex = RussianSoundex(delete_first_letter=True)
 soundex_dictionary = {}
 
@@ -50,3 +50,4 @@ def remove_punctuation(txt):
     punct_set = set(string.punctuation)
     no_punct = "".join(char for char in txt if char not in punct_set)
     return no_punct
+

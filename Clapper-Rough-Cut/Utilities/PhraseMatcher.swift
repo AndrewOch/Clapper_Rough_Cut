@@ -7,10 +7,9 @@ protocol PhraseMatcherProtocol {
 
 final class PhraseMatcher: PhraseMatcherProtocol {
 
-    let textsMatcherWrapper = TextsMatcher_Wrapper()
-
     public func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> Void) {
         let startTime = Date().timeIntervalSince1970
+        let textsMatcherWrapper = TextsMatcher_Wrapper()
         for file in files {
             if let transcription = file.transcription {
                 let wordsCount = transcription.components(separatedBy: .whitespaces).count

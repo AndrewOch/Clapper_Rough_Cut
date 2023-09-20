@@ -45,7 +45,7 @@
 		0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */; };
 		0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */; };
 		0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */; };
-		0464D9FC29E423A80007EF24 /* Texts_Matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* Texts_Matcher.py */; };
+		0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* text_matcher.py */; };
 		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
 		0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C729E423A70007EF24 /* ScriptRunner.swift */; };
 		0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C929E423A70007EF24 /* ScriptFile.swift */; };
@@ -55,7 +55,6 @@
 		0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D029E423A70007EF24 /* FileSystemOperations.swift */; };
 		0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D429E423A70007EF24 /* ScriptFileOperations.swift */; };
 		0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D529E423A70007EF24 /* ScriptView.swift */; };
-		0464DA0D29E423A80007EF24 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9DC29E423A70007EF24 /* Info.plist */; };
 		0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9DE29E423A70007EF24 /* Clapper_Rough_CutApp.swift */; };
 		0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9DF29E423A70007EF24 /* ClapperRoughCutDocument.swift */; };
 		0464DA1029E423A80007EF24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E029E423A70007EF24 /* ContentView.swift */; };
@@ -155,7 +154,7 @@
 		0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFileDetailView.swift; sourceTree = "<group>"; };
 		0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextsMatcher_Wrapper.swift; sourceTree = "<group>"; };
-		0464D9C329E423A70007EF24 /* Texts_Matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Texts_Matcher.py; sourceTree = "<group>"; };
+		0464D9C329E423A70007EF24 /* text_matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = text_matcher.py; sourceTree = "<group>"; };
 		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0464D9C729E423A70007EF24 /* ScriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
 		0464D9C929E423A70007EF24 /* ScriptFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptFile.swift; sourceTree = "<group>"; };
@@ -480,7 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */,
-				0464D9C329E423A70007EF24 /* Texts_Matcher.py */,
+				0464D9C329E423A70007EF24 /* text_matcher.py */,
 				0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */,
 				0426529C29EF3869008855C1 /* MFCC.py */,
 			);
@@ -634,8 +633,8 @@
 			buildConfigurationList = 048455C8298D212600772EB0 /* Build configuration list for PBXNativeTarget "Clapper-Rough-Cut" */;
 			buildPhases = (
 				313B3A8D9D992845C47EF96D /* [CP] Check Pods Manifest.lock */,
-				0462234A29E2C09500944093 /* PythonLibrary */,
 				041FE5CE2AAB359F0054C861 /* SwiftGen */,
+				0462234A29E2C09500944093 /* PythonLibrary */,
 				0484559C298D212400772EB0 /* Sources */,
 				0484559D298D212400772EB0 /* Frameworks */,
 				0484559E298D212400772EB0 /* Resources */,
@@ -663,7 +662,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0484559F298D212400772EB0 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -703,12 +702,11 @@
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				04FE4B8A29F818DE00634522 /* main in Resources */,
 				04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */,
-				0464DA0D29E423A80007EF24 /* Info.plist in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
 				04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */,
 				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,
 				043538C22AAB8B5400775E0D /* Localizable.strings in Resources */,
-				0464D9FC29E423A80007EF24 /* Texts_Matcher.py in Resources */,
+				0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */,
 				04FE56CC29F846DD00634522 /* python3.9 in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
 				0426529D29EF3869008855C1 /* MFCC.py in Resources */,
@@ -753,7 +751,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PYTHON_LIBRARY=\"~/opt/anaconda3/lib/python3.9\"\n";
+			shellScript = "PYTHON_LIBRARY=\"usr/bin/python3.9\"\n";
 		};
 		04E23A3F2AAB19DE00F14C3D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

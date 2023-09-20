@@ -1,6 +1,6 @@
 import Foundation
 
-class ExportSettings: Identifiable, Codable {
+struct ExportSettings: Identifiable, Codable {
     var id = UUID()
     var path: String
     var directoryName: String

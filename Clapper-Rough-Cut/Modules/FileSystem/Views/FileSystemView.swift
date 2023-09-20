@@ -29,11 +29,18 @@ struct FileSystemView: View {
                 Asset.light.swiftUIColor
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        RawFilesFolderView(folder: document.project.unsortedFolder,
-                                           collapsed: document.project.unsortedFolder.collapsed,
+                        RawFilesFolderView(folder: $document.project.unsortedFolder,
                                            selected: document.project.selectedFolder == document.project.unsortedFolder)
                         ForEach(document.project.phraseFolders) { folder in
-                            RawFilesFolderView(folder: folder, collapsed: folder.collapsed, selected: document.project.selectedFolder == folder)
+                            RawFilesFolderView(folder: Binding(get: {
+                                document.project.phraseFolders.first(where: { $0.id == folder.id }) ?? folder
+                            },
+                                                               set: { newValue in
+                                if let index = document.project.phraseFolders.firstIndex(where: { $0.id == folder.id }) {
+                                    document.project.phraseFolders[index] = newValue
+                                }
+                            }),
+                                               selected: document.project.selectedFolder == folder)
                         }
                         Spacer()
                     }
@@ -54,11 +61,5 @@ struct FileSystemView: View {
             }
             Spacer()
         }
-    }
-}
-
-struct FileSystemView_Previews: PreviewProvider {
-    static var previews: some View {
-        FileSystemView()
     }
 }
