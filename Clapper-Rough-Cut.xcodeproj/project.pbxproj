@@ -49,7 +49,7 @@
 		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
 		0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C729E423A70007EF24 /* ScriptRunner.swift */; };
 		0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C929E423A70007EF24 /* ScriptFile.swift */; };
-		0464DA0029E423A80007EF24 /* RawFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9CA29E423A70007EF24 /* RawFile.swift */; };
+		0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9CA29E423A70007EF24 /* FileSystemElement.swift */; };
 		0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9CC29E423A70007EF24 /* Preview Assets.xcassets */; };
 		0464DA0229E423A80007EF24 /* RawFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9CF29E423A70007EF24 /* RawFileView.swift */; };
 		0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9D029E423A70007EF24 /* FileSystemOperations.swift */; };
@@ -158,7 +158,7 @@
 		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0464D9C729E423A70007EF24 /* ScriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
 		0464D9C929E423A70007EF24 /* ScriptFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptFile.swift; sourceTree = "<group>"; };
-		0464D9CA29E423A70007EF24 /* RawFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawFile.swift; sourceTree = "<group>"; };
+		0464D9CA29E423A70007EF24 /* FileSystemElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemElement.swift; sourceTree = "<group>"; };
 		0464D9CC29E423A70007EF24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0464D9CF29E423A70007EF24 /* RawFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawFileView.swift; sourceTree = "<group>"; };
 		0464D9D029E423A70007EF24 /* FileSystemOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemOperations.swift; sourceTree = "<group>"; };
@@ -501,7 +501,7 @@
 			isa = PBXGroup;
 			children = (
 				0464D9C929E423A70007EF24 /* ScriptFile.swift */,
-				0464D9CA29E423A70007EF24 /* RawFile.swift */,
+				0464D9CA29E423A70007EF24 /* FileSystemElement.swift */,
 				04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */,
 				04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */,
 				04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */,
@@ -813,7 +813,7 @@
 				04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */,
 				0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */,
 				043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */,
-				0464DA0029E423A80007EF24 /* RawFile.swift in Sources */,
+				0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
 				0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */,
 				043538ED2AAFAFE700775E0D /* CustomContextMenuView.swift in Sources */,
@@ -1015,6 +1015,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1054,6 +1055,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vigvamcev-media.Clapper-Rough-Cut";
 				PRODUCT_NAME = "$(TARGET_NAME)";

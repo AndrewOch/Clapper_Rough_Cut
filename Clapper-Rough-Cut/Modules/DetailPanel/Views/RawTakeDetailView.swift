@@ -2,47 +2,38 @@ import SwiftUI
 
 struct RawTakeDetailView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @Binding var take: RawTake?
+    @Binding var take: FileSystemElement?
     @State private var isModalPresented = false
 
     var body: some View {
         if let take = take {
-            HStack {
-                FileIcon(type: take.video.type)
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                CustomLabel<BodyMediumStyle>(text: take.video.url.lastPathComponent)
-                    .lineLimit(1)
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                Spacer()
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.video.duration))
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: take.video.createdAt))
-                    .foregroundColor(Asset.semiDark.swiftUIColor)
-            }.padding(.bottom)
-                .sheet(isPresented: $isModalPresented) {
-                    ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
-                        SelectPhraseMatchView { phrase in
-                            document.manualMatch(take: take, phrase: phrase)
+            ForEach(Array(take.elements.values)) { element in
+                HStack {
+                    if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
+                        FileIcon(type: element.type)
+                            .foregroundColor(Asset.dark.swiftUIColor)
+                        CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
+                            .lineLimit(1)
+                            .foregroundColor(Asset.dark.swiftUIColor)
+                        Spacer()
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
+                            .foregroundColor(Asset.dark.swiftUIColor)
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
+                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                    }
+                }.padding(.bottom)
+                    .sheet(isPresented: $isModalPresented) {
+                        ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
+                            SelectPhraseMatchView { phrase in
+                                document.manualMatch(element: take, phrase: phrase)
+                                isModalPresented.toggle()
+                            }
+                        } closeAction: {
                             isModalPresented.toggle()
                         }
-                    } closeAction: {
-                        isModalPresented.toggle()
                     }
-                }
-            HStack {
-                FileIcon(type: take.audio.type)
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                CustomLabel<BodyMediumStyle>(text: take.audio.url.lastPathComponent)
-                    .lineLimit(1)
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                Spacer()
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: take.audio.duration))
-                    .foregroundColor(Asset.dark.swiftUIColor)
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: take.audio.createdAt))
-                    .foregroundColor(Asset.semiDark.swiftUIColor)
-            }.padding(.bottom)
-
-            if let folder = document.getPhraseFolder(for: take) {
+            }
+            if let folder = document.project.getContainer(forElementWithID: take.id) {
                 VStack {
                     HStack {
                         SystemImage.folder.imageView

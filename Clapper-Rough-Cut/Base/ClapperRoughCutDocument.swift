@@ -67,13 +67,13 @@ extension ClapperRoughCutDocument {
 // MARK: - Update status
 extension ClapperRoughCutDocument {
     func updateStatus() {
-        project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
-        project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
-        project.canSortScenes = project.hasUnsortedTranscribedFiles && project.scriptFile != nil
-
-        let files = project.phraseFolders.flatMap({ folder in folder.files })
-        let videos = files.filter { file in file.type == .video }
-        let audios = files.filter { file in file.type == .audio }
-        project.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
+////        project.states.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
+//        project.states.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
+//        project.states.canSortScenes = project.states.hasUnsortedTranscribedFiles && project.scriptFile != nil
+//
+//        let files = project.phraseFolders.flatMap({ folder in folder.files })
+//        let videos = files.filter { file in file.type == .video }
+//        let audios = files.filter { file in file.type == .audio }
+//        project.states.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
     }
 }

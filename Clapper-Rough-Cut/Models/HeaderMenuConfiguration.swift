@@ -79,9 +79,7 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
                                         isEnabled: Binding(get: {
                                             document.project.hasUntranscribedFiles
-                                        }, set: { value in
-                                            document.project.hasUntranscribedFiles = value
-                                        }),
+                                        }, set: { _ in }),
                                         action: {
                                             document.transcribeFiles()
                                         })
@@ -92,9 +90,7 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.film.rawValue,
                                         isEnabled: Binding(get: {
                                             document.project.canSortScenes
-                                        }, set: { value in
-                                            document.project.canSortScenes = value
-                                        }),
+                                        }, set: { _ in }),
                                         action: {
                                             document.matchScenes()
                                         }),
@@ -102,9 +98,7 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.filmStack.rawValue,
                                         isEnabled: Binding(get: {
                                             document.project.hasUnmatchedSortedFiles
-                                        }, set: { value in
-                                            document.project.hasUnmatchedSortedFiles = value
-                                        }),
+                                        }, set: { _ in }),
                                         action: {
                                             document.matchTakes()
                                         })

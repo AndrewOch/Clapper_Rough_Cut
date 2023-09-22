@@ -3,8 +3,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct RawTakeView: View {
-    @State var video: RawFile
-    @State var audio: RawFile
+    @State var video: FileSystemElement
+    @State var audio: FileSystemElement
 
     var action: () -> Void
     var selected: Bool
@@ -15,29 +15,34 @@ struct RawTakeView: View {
         } label: {
             VStack {
                 HStack {
-                    FileIcon(type: video.type)
-                    CustomLabel<BodyMediumStyle>(text: video.url.lastPathComponent)
-                        .lineLimit(1)
-                    Spacer()
-                    if video.transcription != nil {
-                        TranscribedIcon()
+                    if let url = video.url, let duration = video.duration, let createdAt = video.createdAt {
+                        FileIcon(type: video.type)
+                        CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
+                            .lineLimit(1)
+                        Spacer()
+                        if video.transcription != nil {
+                            TranscribedIcon()
+                        }
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
+                            .foregroundColor(Asset.secondary.swiftUIColor)
                     }
-                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: video.duration))
-                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: video.createdAt))
-                        .foregroundColor(Asset.secondary.swiftUIColor)
                 }
                 .padding(.bottom, 2)
                 HStack {
-                    FileIcon(type: audio.type)
-                    CustomLabel<BodyMediumStyle>(text: audio.url.lastPathComponent)
-                        .lineLimit(1)
-                    Spacer()
-                    if audio.transcription != nil {
-                        TranscribedIcon()
+                    if let url = audio.url, let duration = audio.duration, let createdAt = audio.createdAt {
+                        
+                        FileIcon(type: audio.type)
+                        CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
+                            .lineLimit(1)
+                        Spacer()
+                        if audio.transcription != nil {
+                            TranscribedIcon()
+                        }
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
+                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
+                            .foregroundColor(Asset.secondary.swiftUIColor)
                     }
-                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: audio.duration))
-                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: audio.createdAt))
-                        .foregroundColor(Asset.secondary.swiftUIColor)
                 }
             }
             .padding(.horizontal, 5)

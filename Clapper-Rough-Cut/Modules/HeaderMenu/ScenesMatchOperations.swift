@@ -2,8 +2,8 @@ import Foundation
 
 protocol ScenesMatchOperations {
     func matchScenes()
-    func matchSceneForFile(_ file: RawFile)
-    func manualMatch(file: RawFile, phrase: Phrase)
+    func matchSceneForFile(_ file: FileSystemElement)
+    func manualMatch(element: FileSystemElement, phrase: Phrase)
 }
 
 // MARK: - Scenes Match Operations
@@ -11,42 +11,35 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     func matchScenes() {
         registerUndo()
-        matchFor(files: project.unsortedFolder.files)
+        let files = project.findAllFileSystemElements(where: { $0.isFile }, excludeScenes: true, excludeTakes: true)
+        matchFor(files: files)
     }
 
-    func matchSceneForFile(_ file: RawFile) {
+    func matchSceneForFile(_ file: FileSystemElement) {
         registerUndo()
         matchFor(files: [file])
     }
 
-    func manualMatch(file: RawFile, phrase: Phrase) {
+    func manualMatch(element: FileSystemElement, phrase: Phrase) {
         registerUndo()
-        match(file: file, phrase: phrase)
+        match(element: element, phrase: phrase)
         updateStatus()
     }
 
-    func manualMatch(take: RawTake, phrase: Phrase) {
+    func changePhrase(for scene: FileSystemElement, phrase: Phrase) {
         registerUndo()
-        match(take: take, phrase: phrase)
-        updateStatus()
-    }
-
-    func changeScene(for folder: RawFilesFolder, phrase: Phrase) {
-        guard let index = project.phraseFolders.firstIndex(of: folder) else { return }
-        registerUndo()
-        var newFolder = folder
-        newFolder.scriptPhraseId = phrase.id
+        var newScene = scene
+        newScene.scriptPhraseId = phrase.id
         if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
-            newFolder.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
+            newScene.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
         }
-        project.phraseFolders[index] = newFolder
-        updateStatus()
+        project.updateFileSystemElement(withID: scene.id, newValue: newScene)
     }
 
-    private func matchFor(files: [RawFile]) {
+    private func matchFor(files: [FileSystemElement]) {
         phraseMatcher.matchFilesToPhrases(files: files,
                                           phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
-            self.manualMatch(file: file, phrase: phrase)
+            self.manualMatch(element: file, phrase: phrase)
         }
         updateStatus()
     }
@@ -59,43 +52,20 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         return "\(characterName)-\(words.prefix(10).joined(separator: " "))"
     }
 
-    private func match(file: RawFile, phrase: Phrase) {
-        if let index = self.project.phraseFolders.firstIndex(where: { $0.files.contains { $0.id == file.id } }) {
-            project.phraseFolders[index].files.removeAll(where: { $0.id == file.id })
-            if project.phraseFolders[index].takes.isEmpty && project.phraseFolders[index].files.isEmpty {
-                project.phraseFolders.remove(at: index)
-            }
-        }
-        if let index = self.project.phraseFolders.firstIndex(where: { folder in folder.scriptPhraseId == phrase.id }) {
-            self.project.phraseFolders[index].files.append(file)
-        } else {
+    private func match(element: FileSystemElement, phrase: Phrase) {
+        guard var scene = project.firstFileSystemElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id },
+                                                         excludeScenes: true,
+                                                         excludeTakes: true) else {
             if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
-                self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: characterName,
-                                                                                                     text: phraseText),
-                                                                 files: [file],
-                                                                 scriptPhraseId: phrase.id))
+                guard let folder = project.getContainer(forElementWithID: element.id) else { return }
+                var scene = FileSystemElement(title: self.createPhraseFolderTitle(characterName: characterName,
+                                                                                  text: phraseText),
+                                              type: .scene)
+                project.addElement(scene, toFolderWithID: folder.id)
+                project.moveFileSystemElement(withID: element.id, toFolderWithID: scene.id)
             }
+            return
         }
-        self.project.unsortedFolder.files.removeAll { file in file.id == file.id }
-    }
-
-    private func match(take: RawTake, phrase: Phrase) {
-        if let index = self.project.phraseFolders.firstIndex(where: { $0.takes.contains { $0.id == take.id } }) {
-            project.phraseFolders[index].takes.removeAll(where: { $0.id == take.id })
-            if project.phraseFolders[index].takes.isEmpty && project.phraseFolders[index].files.isEmpty {
-                project.phraseFolders.remove(at: index)
-            }
-        }
-        if let index = self.project.phraseFolders.firstIndex(where: { folder in folder.scriptPhraseId == phrase.id }) {
-            self.project.phraseFolders[index].takes.append(take)
-        } else {
-            if let character = phrase.character, let phraseText = phrase.phraseText {
-                self.project.phraseFolders.append(RawFilesFolder(title: self.createPhraseFolderTitle(characterName: character.name,
-                                                                                                     text: phraseText),
-                                                                 takes: [take],
-                                                                 scriptPhraseId: phrase.id))
-            }
-        }
-        self.project.unsortedFolder.takes.removeAll { file in file.id == take.id }
+        project.moveFileSystemElement(withID: element.id, toFolderWithID: scene.id)
     }
 }

@@ -24,41 +24,37 @@ struct FileSystemView: View {
     }
 
     var fileSystem: some View {
-        VStack {
-            ZStack {
-                Asset.light.swiftUIColor
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        RawFilesFolderView(folder: $document.project.unsortedFolder,
-                                           selected: document.project.selectedFolder == document.project.unsortedFolder)
-                        ForEach(document.project.phraseFolders) { folder in
-                            RawFilesFolderView(folder: Binding(get: {
-                                document.project.phraseFolders.first(where: { $0.id == folder.id }) ?? folder
-                            },
-                                                               set: { newValue in
-                                if let index = document.project.phraseFolders.firstIndex(where: { $0.id == folder.id }) {
-                                    document.project.phraseFolders[index] = newValue
-                                }
-                            }),
-                                               selected: document.project.selectedFolder == folder)
-                        }
-                        Spacer()
+        ZStack {
+            Asset.light.swiftUIColor
+            let elementsArray = Array(document.project.fileSystem.elements.values)
+            Table(elementsArray) {
+                TableColumn("Название", value: \.title)
+                    .width(min: 100, ideal: 200, max: 600)
+                TableColumn("Длительность", value: \.title)
+                    .width(min: 40, ideal: 100, max: 200)
+                TableColumn("Дата создания") { element in
+                    if let date = element.createdAt {
+                        Text(Formatter.formatDate(date: date))
                     }
-                    .padding()
                 }
+                .width(min: 40, ideal: 100, max: 200)
             }
+            .scrollContentBackground(.hidden)
+            .tableStyle(.bordered(alternatesRowBackgrounds: false))
+            .background(Asset.light.swiftUIColor)
         }
     }
 
     var detailView: some View {
         VStack {
-            if document.project.selectedFile != nil {
-                RawFileDetailView(file: $document.project.selectedFile)
-            } else if document.project.selectedFolder != nil {
-                RawFolderDetailView(folder: $document.project.selectedFolder)
-            } else if document.project.selectedTake != nil {
-                RawTakeDetailView(take: $document.project.selectedTake)
-            }
+            //TODO: - Detailed view
+//            if document.project.selectedFile != nil {
+//                RawFileDetailView(file: $document.project.selectedFile)
+//            } else if document.project.selectedFolder != nil {
+//                RawFolderDetailView(folder: $document.project.selectedFolder)
+//            } else if document.project.selectedTake != nil {
+//                RawTakeDetailView(take: $document.project.selectedTake)
+//            }
             Spacer()
         }
     }

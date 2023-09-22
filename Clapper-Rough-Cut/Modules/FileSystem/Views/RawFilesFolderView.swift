@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RawFilesFolderView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @Binding var folder: RawFilesFolder
+    @Binding var folder: FileSystemElement
     var selected: Bool
 
     var body: some View {
@@ -21,7 +21,7 @@ struct RawFilesFolderView: View {
                 .buttonStyle(PlainButtonStyle())
 
                 Button(action: {
-                    document.selectFolder(folder)
+//                    document.selectFolder(folder)
                 }, label: {
                     HStack {
                         SystemImage.folderFill.imageView
@@ -43,19 +43,19 @@ struct RawFilesFolderView: View {
                 .buttonStyle(PlainButtonStyle())
             }
             if !folder.collapsed {
-                ForEach(folder.takes) { take in
-                    RawTakeView(video: take.video,
-                                audio: take.audio,
-                                action: {
-                        document.selectTake(take)
-                    }, selected: document.project.selectedTake?.id == take.id)
-                    .padding(.leading, 20)
+                ForEach(Array(folder.elements.values.filter({ $0.isTake }))) { take in
+//                    RawTakeView(video: take.video,
+//                                audio: take.audio,
+//                                action: {
+//                        document.selectTake(take)
+//                    }, selected: document.project.selectedTake?.id == take.id)
+//                    .padding(.leading, 20)
                 }
-                ForEach(folder.files) { file in
-                    RawFileView(file: file, action: {
-                        document.selectFile(file)
-                    }, selected: document.project.selectedFile?.id == file.id)
-                    .padding(.leading, 20)
+                ForEach(Array(folder.elements.values.filter({ $0.isFile }))) { file in
+//                    RawFileView(file: file, action: {
+//                        document.selectFile(file)
+//                    }, selected: document.project.selectedFile?.id == file.id)
+//                    .padding(.leading, 20)
                 }
             }
         }

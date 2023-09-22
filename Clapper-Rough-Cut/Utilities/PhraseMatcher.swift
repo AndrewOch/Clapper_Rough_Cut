@@ -2,12 +2,12 @@ import Foundation
 import NaturalLanguage
 
 protocol PhraseMatcherProtocol {
-    func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> Void)
+    func matchFilesToPhrases(files: [FileSystemElement], phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void)
 }
 
 final class PhraseMatcher: PhraseMatcherProtocol {
 
-    public func matchFilesToPhrases(files: [RawFile], phrases: [Phrase], completion: @escaping (RawFile, Phrase) -> Void) {
+    public func matchFilesToPhrases(files: [FileSystemElement], phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void) {
         let startTime = Date().timeIntervalSince1970
         let textsMatcherWrapper = TextsMatcher_Wrapper()
         for file in files {
