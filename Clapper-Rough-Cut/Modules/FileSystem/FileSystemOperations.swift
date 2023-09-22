@@ -22,33 +22,33 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         dialog.canChooseDirectories    = false
         dialog.allowsMultipleSelection = true
         dialog.allowedContentTypes     = [.audio, .movie]
-
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            var existingFiles: [FileSystemElement] = project.findAllFileSystemElements(where: { $0.isFile })
-            let results = dialog.urls
-            let filtered = results.filter { res in
-                !existingFiles.contains(where: { $0.url == res })
-            }
-            for url in filtered {
-                var type: RawFileType? = nil
-                if let fileType = UTType(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil) {
-                    if fileType.isSubtype(of: .audio) {
-                        type = .audio
-                    } else if fileType.isSubtype(of: .movie) {
-                        type = .video
-                    }
+        guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return }
+        
+        let existingFiles: [FileSystemElement] = project.findAllFileSystemElements(where: { $0.isFile })
+        let results = dialog.urls
+        let filtered = results.filter { res in
+            !existingFiles.contains(where: { $0.url == res })
+        }
+        for url in filtered {
+            var type: FileSystemElementType? = nil
+            if let fileType = UTType(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil) {
+                if fileType.isSubtype(of: .audio) {
+                    type = .audio
+                } else if fileType.isSubtype(of: .movie) {
+                    type = .video
                 }
-                guard let type = type else { continue }
-                let audioAsset = AVURLAsset(url: url)
-                let audioDuration = audioAsset.duration.seconds
-                let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
-                let createdAt = attributes?[.creationDate] as? Date ?? Date()
-//                project.unsortedFolder.files.append(FileSystemElement(url: url, duration: audioDuration, type: type, createdAt: createdAt))
             }
-            updateStatus()
-        } else {
-            updateStatus()
-            return
+            guard let type = type else { continue }
+            let audioAsset = AVURLAsset(url: url)
+            let audioDuration = audioAsset.duration.seconds
+            let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
+            let createdAt = attributes?[.creationDate] as? Date ?? Date()
+            let newFile = FileSystemElement(title: url.lastPathComponent,
+                                            type: type,
+                                            createdAt: createdAt,
+                                            duration: audioDuration,
+                                            url: url)
+            project.fileSystem.elements[newFile.id] = newFile
         }
     }
 
@@ -70,6 +70,5 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             guard let self = self else { return }
             self.project.updateFileSystemElement(withID: newFile.id, newValue: newFile)
         }
-        updateStatus()
     }
 }

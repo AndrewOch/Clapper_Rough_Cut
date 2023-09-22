@@ -33,3 +33,7 @@
 "charactersInScript" = "персонажей в сценарии";
 "delete" = "удалить";
 "charactersSelected" = "выбрано персонажей";
+"fileTitle" = "название";
+"duration" = "длительность";
+"createdAt" = "дата создания";
+"statuses" = "статусы";

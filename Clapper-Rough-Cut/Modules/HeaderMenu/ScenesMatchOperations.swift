@@ -23,7 +23,6 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     func manualMatch(element: FileSystemElement, phrase: Phrase) {
         registerUndo()
         match(element: element, phrase: phrase)
-        updateStatus()
     }
 
     func changePhrase(for scene: FileSystemElement, phrase: Phrase) {
@@ -41,7 +40,6 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
                                           phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
             self.manualMatch(element: file, phrase: phrase)
         }
-        updateStatus()
     }
 
     private func createPhraseFolderTitle(characterName: String, text: String) -> String {

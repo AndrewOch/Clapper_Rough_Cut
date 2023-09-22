@@ -17,7 +17,6 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
         let endTime = Date().timeIntervalSince1970
         let elapsedTime = endTime - startTime
         print("Total matching time: \(elapsedTime) seconds")
-        updateStatus()
     }
 
     func detachFiles(from take: FileSystemElement) {
@@ -27,7 +26,6 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
             project.moveFileSystemElement(withID: key, toFolderWithID: scene.id)
         }
         _ = project.deleteFileSystemElement(by: take.id)
-        updateStatus()
     }
 
     private func findMFCCS(in scenes: [FileSystemElement]) {
@@ -47,7 +45,6 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
         var videos: [FileSystemElement] = []
         var audios: [FileSystemElement] = []
         var newFolders: [FileSystemElement] = []
-                
         scenes.forEach { scene in
             var updatedScene = scene
             videos = scene.elements.values.filter({ $0.type == .video && $0.mfccs != nil })

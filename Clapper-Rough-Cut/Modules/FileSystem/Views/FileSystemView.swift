@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct FileSystemView: View {
-
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 600
+    @State private var selection: Set<FileSystemElement.ID> = []
 
     var body: some View {
         VSplitView {
@@ -27,22 +27,44 @@ struct FileSystemView: View {
         ZStack {
             Asset.light.swiftUIColor
             let elementsArray = Array(document.project.fileSystem.elements.values)
-            Table(elementsArray) {
-                TableColumn("Название", value: \.title)
-                    .width(min: 100, ideal: 200, max: 600)
-                TableColumn("Длительность", value: \.title)
-                    .width(min: 40, ideal: 100, max: 200)
-                TableColumn("Дата создания") { element in
+            Table(of: FileSystemElement.self, selection: $selection) {
+                TableColumn(L10n.fileTitle.firstWordCapitalized) { element in
+                    HStack {
+                        FileIcon(type: element.type)
+                        Text(element.title)
+                    }
+                }.width(min: 100, ideal: 200, max: 600)
+                TableColumn(L10n.statuses.firstWordCapitalized) { element in
+                    HStack {
+                        if element.statuses.contains(.transcription) {
+                            TranscribedIcon()
+                        }
+                    }
+                }.width(min: 30, ideal: 60, max: 80)
+                TableColumn(L10n.duration.firstWordCapitalized) { element in
+                    if let duration = element.duration {
+                        Text(Formatter.formatDuration(duration: duration))
+                    }
+                }.width(min: 50, ideal: 100, max: 120)
+                TableColumn(L10n.createdAt.firstWordCapitalized) { element in
                     if let date = element.createdAt {
                         Text(Formatter.formatDate(date: date))
                     }
+                }.width(min: 40, ideal: 100, max: 200)
+            } rows: {
+                ForEach(elementsArray) { element in
+                    TableRow(element)
                 }
-                .width(min: 40, ideal: 100, max: 200)
             }
             .scrollContentBackground(.hidden)
-            .tableStyle(.bordered(alternatesRowBackgrounds: false))
+            .preferredColorScheme(.light)
+            .tableStyle(.inset(alternatesRowBackgrounds: false))
             .background(Asset.light.swiftUIColor)
         }
+    }
+
+    func fileSystemElementTableRow(folder: FileSystemElement) -> some TableRowContent {
+        TableRow(folder)
     }
 
     var detailView: some View {

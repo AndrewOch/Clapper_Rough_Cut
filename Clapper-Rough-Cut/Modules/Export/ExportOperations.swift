@@ -21,7 +21,6 @@ extension ClapperRoughCutDocument: ExportOperations {
                 project.exportSettings.path = result.path
             }
         }
-        updateStatus()
     }
 
     func export() {

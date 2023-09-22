@@ -20,8 +20,8 @@ extension RoughCutProject {
     }
     var hasUnmatchedSortedFiles: Bool {
         findAllFileSystemElements(where: { $0.isScene &&
-            $0.elements.values.contains(where: { $0.type == .audio}) &&
-            $0.elements.values.contains(where: { $0.type == .video}) }).isNotEmpty
+            $0.elements.values.contains(where: { $0.type == .audio }) &&
+            $0.elements.values.contains(where: { $0.type == .video }) }).isNotEmpty
     }
 }
 
@@ -31,19 +31,14 @@ extension RoughCutProject {
                                 excludeScenes: Bool = false,
                                 excludeTakes: Bool = false,
                                 recursiveSearch: Bool = true) -> FileSystemElement? {
-        for (_, folder) in fileSystem.elements {
-            if let result = firstFileSystemElement(from: folder,
-                                                   where: predicate,
-                                                   excludeScenes: excludeScenes,
-                                                   excludeTakes: excludeTakes,
-                                                   recursiveSearch: recursiveSearch) {
-                return result
-            }
-            
-        }
-        return nil
+        return firstFileSystemElement(from: fileSystem,
+                                      where: predicate,
+                                      excludeScenes: excludeScenes,
+                                      excludeTakes: excludeTakes,
+                                      recursiveSearch: recursiveSearch)
+        
     }
-    
+
     private func firstFileSystemElement(from folder: FileSystemElement,
                                         where predicate: (FileSystemElement) -> Bool,
                                         excludeScenes: Bool = false,
@@ -71,15 +66,11 @@ extension RoughCutProject {
                                    excludeScenes: Bool = false,
                                    excludeTakes: Bool = false,
                                    recursiveSearch: Bool = true) -> [FileSystemElement] {
-        var files: [FileSystemElement] = []
-        
-        for (_, folder) in fileSystem.elements {
-            files.append(contentsOf: findAllFileSystemElements(from: folder,
+        var files: [FileSystemElement] = findAllFileSystemElements(from: fileSystem,
                                                                where: predicate,
                                                                excludeScenes: excludeScenes,
                                                                excludeTakes: excludeTakes,
-                                                               recursiveSearch: recursiveSearch))
-        }
+                                                               recursiveSearch: recursiveSearch)
         return files
     }
 
@@ -101,7 +92,7 @@ extension RoughCutProject {
         }
         return files
     }
-    
+
     mutating func addElement(_ newElement: FileSystemElement, toFolderWithID folderID: UUID) {
         guard var targetFolder = firstFileSystemElement(where: {$0.id == folderID }) else {
             return
@@ -118,7 +109,7 @@ extension RoughCutProject {
     private func updateFileSystemElement(withID elementID: UUID,
                                          newValue: FileSystemElement,
                                          in elements: inout [UUID: FileSystemElement]) {
-        if let element = elements[elementID] {
+        if elements[elementID] != nil {
             elements[elementID] = newValue
             return
         }

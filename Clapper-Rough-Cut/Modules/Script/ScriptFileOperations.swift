@@ -16,17 +16,14 @@ extension ClapperRoughCutDocument: ScriptFileOperations {
         dialog.canChooseDirectories    = false
         dialog.allowsMultipleSelection = false
         dialog.allowedContentTypes     = [UTType("org.openxmlformats.wordprocessingml.document")!, UTType(filenameExtension: "pages")!, .text]
-
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            if let result = dialog.url {
-                do {
-                    let fileContent = try String(contentsOf: result, encoding: .utf8)
-                    project.scriptFile = ScriptFile(url: result, text: fileContent)
-                } catch let error as NSError {
-                    print("Script error: \(error.localizedDescription)")
-                }
-            }
+        
+        guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return }
+        guard let result = dialog.url else { return }
+        do {
+            let fileContent = try String(contentsOf: result, encoding: .utf8)
+            project.scriptFile = ScriptFile(url: result, text: fileContent)
+        } catch let error as NSError {
+            print("Script error: \(error.localizedDescription)")
         }
-        updateStatus()
     }
 }

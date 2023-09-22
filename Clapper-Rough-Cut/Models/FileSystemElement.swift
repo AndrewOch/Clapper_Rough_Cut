@@ -3,7 +3,7 @@ import Foundation
 struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var id: UUID = UUID()
     var title: String
-    let type: RawFileType
+    let type: FileSystemElementType
     var createdAt: Date?
     var statuses: [FileStatus]
     var duration: Double?
@@ -15,7 +15,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var collapsed: Bool = false
 
     init(title: String,
-         type: RawFileType,
+         type: FileSystemElementType,
          createdAt: Date? = nil,
          statuses: [FileStatus] = [],
          duration: Double? = nil,
@@ -61,7 +61,7 @@ extension FileSystemElement {
     }
 }
 
-enum RawFileType: Codable, Hashable {
+enum FileSystemElementType: Codable, Hashable {
     case audio
     case video
     case folder
