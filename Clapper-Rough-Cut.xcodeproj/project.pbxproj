@@ -44,6 +44,8 @@
 		0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4A29E59CF40086BD89 /* FileSystemView.swift */; };
 		0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */; };
 		0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */; };
+		0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */; };
+		0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */; };
 		0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */; };
 		0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* text_matcher.py */; };
 		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
@@ -153,6 +155,8 @@
 		0448AD4A29E59CF40086BD89 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
 		0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFileDetailView.swift; sourceTree = "<group>"; };
+		0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralSelectionDetailView.swift; sourceTree = "<group>"; };
+		0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemSelectionDetailView.swift; sourceTree = "<group>"; };
 		0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextsMatcher_Wrapper.swift; sourceTree = "<group>"; };
 		0464D9C329E423A70007EF24 /* text_matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = text_matcher.py; sourceTree = "<group>"; };
 		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 				0448AD4F29E684FD0086BD89 /* RawFileDetailView.swift */,
 				04FE56D329F876F000634522 /* RawFolderDetailView.swift */,
 				04FE56CF29F8663E00634522 /* RawTakeDetailView.swift */,
+				0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */,
+				0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -815,6 +821,7 @@
 				043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */,
 				0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
+				0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */,
 				0448AD5029E684FD0086BD89 /* RawFileDetailView.swift in Sources */,
 				043538ED2AAFAFE700775E0D /* CustomContextMenuView.swift in Sources */,
 				04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */,
@@ -829,6 +836,7 @@
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
 				04ACBEF729E7EA2F0093DD76 /* RawFilesFolderView.swift in Sources */,
 				043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */,
+				0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */,
 				043538D92AACD33500775E0D /* ImageButton.swift in Sources */,
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
 				04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */,

@@ -36,7 +36,6 @@ extension RoughCutProject {
                                       excludeScenes: excludeScenes,
                                       excludeTakes: excludeTakes,
                                       recursiveSearch: recursiveSearch)
-        
     }
 
     private func firstFileSystemElement(from folder: FileSystemElement,
@@ -103,7 +102,9 @@ extension RoughCutProject {
 
     mutating func updateFileSystemElement(withID elementID: UUID,
                                           newValue: FileSystemElement) {
-        updateFileSystemElement(withID: elementID, newValue: newValue, in: &fileSystem.elements)
+        var updated = fileSystem.elements
+        updateFileSystemElement(withID: elementID, newValue: newValue, in: &updated)
+        fileSystem.elements = updated
     }
 
     private func updateFileSystemElement(withID elementID: UUID,
@@ -113,10 +114,8 @@ extension RoughCutProject {
             elements[elementID] = newValue
             return
         }
-        for (key, element) in elements {
-            if element.elements.isNotEmpty {
-                updateFileSystemElement(withID: elementID, newValue: newValue, in: &elements[key]!.elements)
-            }
+        for (key, element) in elements where element.elements.isNotEmpty {
+            updateFileSystemElement(withID: elementID, newValue: newValue, in: &elements[key]!.elements)
         }
     }
 

@@ -14,10 +14,10 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
 
     @Published var project: RoughCutProject
     @Published var states: DocumentStates = DocumentStates()
+    @Published var undoManager: UndoManager?
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
-    @Published var undoManager: UndoManager?
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 

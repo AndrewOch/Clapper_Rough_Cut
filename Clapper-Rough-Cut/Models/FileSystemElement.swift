@@ -59,6 +59,10 @@ extension FileSystemElement {
     var isTake: Bool {
         return type == .take
     }
+
+    var isContainer: Bool {
+        return isFolder || isScene || isTake
+    }
 }
 
 enum FileSystemElementType: Codable, Hashable {
