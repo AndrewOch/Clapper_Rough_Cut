@@ -7,7 +7,7 @@ struct RoughCutProject: Identifiable, Codable {
     var exportSettings: ExportSettings = ExportSettings()
 }
 
-//MARK: - Project states
+// MARK: - Project states
 extension RoughCutProject {
     var hasUntranscribedFiles: Bool {
         return findAllFileSystemElements(where: { $0.isFile && $0.transcription == nil }).isNotEmpty
@@ -25,7 +25,7 @@ extension RoughCutProject {
     }
 }
 
-//MARK: - FileSystem Utilities
+// MARK: - FileSystem Utilities
 extension RoughCutProject {
     func firstFileSystemElement(where predicate: (FileSystemElement) -> Bool,
                                 excludeScenes: Bool = false,
@@ -65,7 +65,7 @@ extension RoughCutProject {
                                    excludeScenes: Bool = false,
                                    excludeTakes: Bool = false,
                                    recursiveSearch: Bool = true) -> [FileSystemElement] {
-        var files: [FileSystemElement] = findAllFileSystemElements(from: fileSystem,
+        let files: [FileSystemElement] = findAllFileSystemElements(from: fileSystem,
                                                                where: predicate,
                                                                excludeScenes: excludeScenes,
                                                                excludeTakes: excludeTakes,
@@ -147,10 +147,8 @@ extension RoughCutProject {
             elements.removeValue(forKey: elementID)
             return true
         }
-        for (key, _) in elements {
-            if deleteFileSystemElement(by: elementID, in: &elements[key]!.elements) {
-                return true
-            }
+        for (key, _) in elements where deleteFileSystemElement(by: elementID, in: &elements[key]!.elements) {
+            return true
         }
         return false
     }

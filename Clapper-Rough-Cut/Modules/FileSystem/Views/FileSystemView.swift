@@ -90,12 +90,6 @@ struct FileSystemView: View {
             .background(Asset.light.swiftUIColor)
             .id(UUID())
         }
-        .onAppear {
-            let f = FileSystemElement(title: "File", type: .audio)
-            var fo = FileSystemElement(title: "Folder", type: .folder)
-            fo.elements[f.id] = f
-            document.project.fileSystem.elements[fo.id] = fo
-        }
     }
 
     private var fileSystemElements: [FileSystemTableRowElement] {
@@ -120,18 +114,12 @@ struct FileSystemView: View {
         VStack {
             if selection.count > 1 {
                 SeveralSelectionDetailView(selection: $selection)
-            } else if let id = selection.first, let element = document.project.firstFileSystemElement(where: { $0.id == id }) {
-                
+            } else {
+                if let id = selection.first, let element = document.project.firstFileSystemElement(where: { $0.id == id }) {
+                    FileSystemSelectionDetailView(element: Binding(get: { return element },
+                                                                   set: { document.project.updateFileSystemElement(withID: element.id, newValue: $0) }))
+                }
             }
-
-            //TODO: - Detailed view
-//            if document.project.selectedFile != nil {
-//                RawFileDetailView(file: $document.project.selectedFile)
-//            } else if document.project.selectedFolder != nil {
-//                RawFolderDetailView(folder: $document.project.selectedFolder)
-//            } else if document.project.selectedTake != nil {
-//                RawTakeDetailView(take: $document.project.selectedTake)
-//            }
             Spacer()
         }
     }
