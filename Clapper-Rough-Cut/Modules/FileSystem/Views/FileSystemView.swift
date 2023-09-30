@@ -58,8 +58,8 @@ struct FileSystemView: View {
                     }.frame(width: 200)
                 }
                 .padding(.horizontal)
-                .foregroundColor(selection.contains(element.id) ? Asset.white.swiftUIColor : Asset.dark.swiftUIColor)
             }
+            .preferredColorScheme(.light)
             .font(.custom(FontFamily.Overpass.regular.name, size: 12))
             .scrollContentBackground(.hidden)
             .background(Asset.light.swiftUIColor)
