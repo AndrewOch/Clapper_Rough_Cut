@@ -7,7 +7,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var createdAt: Date?
     var statuses: [FileStatus]
     var duration: Double?
-    var elements: [UUID:FileSystemElement]
+    var elements: [FileSystemElement]?
     var scriptPhraseId: UUID?
     let url: URL?
     var transcription: String?
@@ -19,7 +19,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          createdAt: Date? = nil,
          statuses: [FileStatus] = [],
          duration: Double? = nil,
-         elements: [UUID:FileSystemElement] = [:],
+         elements: [FileSystemElement]? = nil,
          scriptPhraseId: UUID? = nil,
          url: URL? = nil,
          transcription: String? = nil,

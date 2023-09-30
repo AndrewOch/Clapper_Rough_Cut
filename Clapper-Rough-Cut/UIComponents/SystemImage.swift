@@ -15,6 +15,7 @@ enum SystemImage: String {
     case mic = "mic"
     case micFill = "mic.fill"
     case videoSquare = "video.square"
+    case videoFill = "video.fill"
     case videoSquareFill = "video.square.fill"
     case folderFill = "folder.fill"
     case command = "command"

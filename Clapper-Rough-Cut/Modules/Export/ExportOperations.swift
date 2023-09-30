@@ -28,21 +28,21 @@ extension ClapperRoughCutDocument: ExportOperations {
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
         let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
         createFolder(at: exportFolderURL)
-        project.fileSystem.elements.forEach { exportFolder(root: exportFolderURL, folder: $1) }
+        project.fileSystem.elements?.forEach { exportFolder(root: exportFolderURL, folder: $0)}
     }
 
     private func exportFolder(root: URL, folder: FileSystemElement) {
         let exportFolderURL = root.appendingPathComponent(folder.title)
         createFolder(at: exportFolderURL)
-        folder.elements.filter({ $1.isFile }).forEach { key, file in
+        folder.elements?.filter({ $0.isFile }).forEach { file in
             guard let url = file.url else { return }
             let fileName = url.lastPathComponent
             copyFile(from: url, to: exportFolderURL.appendingPathComponent(fileName))
         }
-        var takes: [FileSystemElement] = folder.elements.values.filter({ $0.isTake })
+        var takes: [FileSystemElement] = folder.elements?.filter({ $0.isTake }) ?? []
         takes.sort { take1, take2 in
-            let minCreatedAt1 = take1.elements.values.min(by: compareByMinCreatedAt)?.createdAt
-            let minCreatedAt2 = take2.elements.values.min(by: compareByMinCreatedAt)?.createdAt
+            let minCreatedAt1 = take1.elements?.min(by: compareByMinCreatedAt)?.createdAt
+            let minCreatedAt2 = take2.elements?.min(by: compareByMinCreatedAt)?.createdAt
             if let min1 = minCreatedAt1, let min2 = minCreatedAt2 {
                 return min1 < min2
             }
@@ -65,7 +65,7 @@ extension ClapperRoughCutDocument: ExportOperations {
     private func exportTake(root: URL, take: FileSystemElement, num: Int) {
         let exportFolderURL = root.appendingPathComponent("Take \(num)")
         createFolder(at: exportFolderURL)
-        take.elements.values.filter({ $0.isFile }).forEach { file in
+        take.elements?.filter({ $0.isFile }).forEach { file in
             guard let url = file.url else { return }
             let name = url.lastPathComponent
             copyFile(from: url, to: exportFolderURL.appendingPathComponent(name))

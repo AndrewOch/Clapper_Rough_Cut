@@ -11,7 +11,7 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
     func matchTakes() {
         registerUndo()
         let startTime = Date().timeIntervalSince1970
-        var scenes = project.findAllFileSystemElements(where: { $0.isScene }, excludeScenes: true, excludeTakes: true)
+        let scenes = project.findAllFileSystemElements(where: { $0.isScene }, excludeScenes: true, excludeTakes: true)
         findMFCCS(in: scenes)
         matchByDistance(in: scenes)
         let endTime = Date().timeIntervalSince1970
@@ -21,9 +21,10 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
 
     func detachFiles(from take: FileSystemElement) {
         guard let scene = project.getContainer(forElementWithID: take.id) else { return }
+        guard let elements = take.elements else { return }
         registerUndo()
-        for (key, _) in take.elements {
-            project.moveFileSystemElement(withID: key, toFolderWithID: scene.id)
+        for element in elements {
+            project.moveFileSystemElement(withID: element.id, toFolderWithID: scene.id)
         }
         _ = project.deleteFileSystemElement(by: take.id)
     }
@@ -31,7 +32,7 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
     private func findMFCCS(in scenes: [FileSystemElement]) {
         let python = MFCC_Wrapper()
         scenes.forEach { scene in
-            scene.elements.values.forEach { element in
+            scene.elements?.forEach { element in
                 guard element.isFile, element.mfccs == nil, let url = element.url else { return }
                 var newFile = element
                 newFile.mfccs = python.extractMFCCS(file: url)
@@ -44,11 +45,10 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
         let python = MFCC_Wrapper()
         var videos: [FileSystemElement] = []
         var audios: [FileSystemElement] = []
-        var newFolders: [FileSystemElement] = []
         scenes.forEach { scene in
             var updatedScene = scene
-            videos = scene.elements.values.filter({ $0.type == .video && $0.mfccs != nil })
-            audios = scene.elements.values.filter({ $0.type == .audio && $0.mfccs != nil })
+            videos = scene.elements?.filter({ $0.type == .video && $0.mfccs != nil }) ?? []
+            audios = scene.elements?.filter({ $0.type == .audio && $0.mfccs != nil }) ?? []
             for video in videos {
                 guard let videoMFCCS = video.mfccs else { continue }
                 var bestMatch: UUID? = nil
@@ -61,7 +61,7 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
                         bestRatio = distance
                     }
                 }
-                if let match = bestMatch, let audio = scene.elements[match] {
+                if let match = bestMatch, let audio = scene.elements?.first(where: { $0.id == match }) {
                     var take = FileSystemElement(title: .empty, type: .take)
                     project.addElement(take, toFolderWithID: scene.id)
                     project.moveFileSystemElement(withID: video.id, toFolderWithID: take.id)

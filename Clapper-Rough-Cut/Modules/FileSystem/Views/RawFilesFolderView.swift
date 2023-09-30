@@ -43,7 +43,7 @@ struct RawFilesFolderView: View {
                 .buttonStyle(PlainButtonStyle())
             }
             if !folder.collapsed {
-                ForEach(Array(folder.elements.values.filter({ $0.isTake }))) { take in
+                ForEach(Array(folder.elements?.filter({ $0.isTake }) ?? [])) { take in
 //                    RawTakeView(video: take.video,
 //                                audio: take.audio,
 //                                action: {
@@ -51,7 +51,7 @@ struct RawFilesFolderView: View {
 //                    }, selected: document.project.selectedTake?.id == take.id)
 //                    .padding(.leading, 20)
                 }
-                ForEach(Array(folder.elements.values.filter({ $0.isFile }))) { file in
+                ForEach(Array(folder.elements?.filter({ $0.isFile }) ?? [])) { file in
 //                    RawFileView(file: file, action: {
 //                        document.selectFile(file)
 //                    }, selected: document.project.selectedFile?.id == file.id)

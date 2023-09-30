@@ -12,7 +12,7 @@ struct FileIcon: View {
         case .audio:
             return SystemImage.micFill.rawValue
         case .video:
-            return SystemImage.videoSquareFill.rawValue
+            return SystemImage.videoFill.rawValue
         case .folder:
             return SystemImage.folder.rawValue
         case .scene:

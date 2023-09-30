@@ -23,7 +23,6 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         dialog.allowsMultipleSelection = true
         dialog.allowedContentTypes     = [.audio, .movie]
         guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return }
-        
         let existingFiles: [FileSystemElement] = project.findAllFileSystemElements(where: { $0.isFile })
         let results = dialog.urls
         let filtered = results.filter { res in
@@ -48,7 +47,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                                             createdAt: createdAt,
                                             duration: audioDuration,
                                             url: url)
-            project.fileSystem.elements[newFile.id] = newFile
+            project.addElement(newFile)
         }
     }
 
