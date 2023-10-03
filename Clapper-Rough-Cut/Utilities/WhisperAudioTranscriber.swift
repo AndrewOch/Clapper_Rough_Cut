@@ -1,15 +1,16 @@
 import Foundation
+import SwiftWhisper
 import AVFoundation
 import Dispatch
 
 protocol AudioTranscriber {
-    func transcribeFiles(_ files: [RawFile], level: TranscriptionLevel, completion: @escaping (URL, String?) -> Void)
-    func transcribeFile(_ file: RawFile, level: TranscriptionLevel, completion: @escaping (String?) -> Void)
+    func transcribeFiles(_ files: [RawFile], level: TranscriptionQuality, completion: @escaping (URL, String?) -> Void)
+    func transcribeFile(_ file: RawFile, level: TranscriptionQuality, completion: @escaping (String?) -> Void)
 }
 
-public enum TranscriptionLevel {
-    case fast
-    case quality
+public enum TranscriptionQuality {
+    case low
+    case medium
 }
 
 class WhisperAudioTranscriber: AudioTranscriber {
@@ -31,55 +32,41 @@ class WhisperAudioTranscriber: AudioTranscriber {
         return path
     }
 
-    private var whisperQualityModel: String {
+    private var whisperQualityModel: Whisper? {
         guard let path = Bundle.main.path(forResource: "ggml-medium", ofType: ".bin") else {
-            print("File for quality model not found")
-            return ""
+            print("File for fast model not found")
+            return nil
         }
-        return path
+        var params = WhisperParams.default
+        params.detect_language = true
+        let whisper = Whisper(fromFileURL: URL(fileURLWithPath: path), withParams: params)
+        return whisper
     }
 
-    private func transcribe(audioFile: RawFile, level: TranscriptionLevel = .fast, completion: @escaping (TranscriptionResult) -> Void) {
-        var model: String?
-        switch level {
-        case .fast:
-            model = self.whisperFastModel
-        case .quality:
-            model = self.whisperQualityModel
-        }
-        guard let model = model else {
+    private func transcribe(audioFile: RawFile,
+                            level: TranscriptionQuality = .low,
+                            completion: @escaping (TranscriptionResult) -> Void) {
+        guard let model = self.whisperQualityModel else {
             completion(TranscriptionResult(status: .failure,
                                            transcription: nil,
                                            transcriptionDuration: nil))
             return
         }
         let startTime = Date().timeIntervalSince1970
-        converter.convertAudioFile(audioFile.url) { result in
+        converter.convertAudioFileToPCMArray(fileURL: audioFile.url) { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .success(let outputURL):
-                let tmpFile = outputURL.path
-                print("Conversion successful! Output file saved to: \(outputURL.path)")
-                if FileManager.default.fileExists(atPath: tmpFile) {
-                    var numThreads = "4"
-                    var numProcesses = "2"
-                    if audioFile.duration > 100 {
-                        numThreads = "1"
-                        numProcesses = "8"
-                    }
-                    print("TMP file " + tmpFile)
-                    do {
-                        let result = try ScriptRunner.safeShell([self.whisperScript,
-                                                                 "-t", numThreads,
-                                                                 "-p", numProcesses,
-                                                                 "-l", "ru",
-                                                                 "-m", model,
-                                                                 "-nt", tmpFile])
+            case .success(let frames):
+                model.transcribe(audioFrames: frames) { result in
+                    switch(result) {
+                    case .success(let segments):
+                        print("Transcribed audio:", segments.map(\.text).joined())
                         let endTime = Date().timeIntervalSince1970
                         let resultTime = endTime - startTime
                         completion(TranscriptionResult(status: .success,
-                                                       transcription: result,
+                                                       transcription: segments.map(\.text).joined(),
                                                        transcriptionDuration: resultTime))
-                    } catch {
+                    case .failure(let error):
                         print("Transcription failed with error: \(error.localizedDescription)")
                         completion(TranscriptionResult(status: .failure,
                                                        transcription: nil,
@@ -95,7 +82,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
     }
 
-    func transcribeFiles(_ files: [RawFile], level: TranscriptionLevel = .fast, completion: @escaping (URL, String?) -> Void) {
+    func transcribeFiles(_ files: [RawFile], level: TranscriptionQuality = .low, completion: @escaping (URL, String?) -> Void) {
         let totalStartTime = Date().timeIntervalSince1970
         var totalDuration: Double = 0
         var processedCount = 0
@@ -126,7 +113,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
     }
 
-    func transcribeFile(_ file: RawFile, level: TranscriptionLevel = .fast, completion: @escaping (String?) -> Void) {
+    func transcribeFile(_ file: RawFile, level: TranscriptionQuality = .low, completion: @escaping (String?) -> Void) {
         let backgroundQueue = DispatchQueue.global(qos: .background)
         backgroundQueue.async {
             self.transcribe(audioFile: file, level: level) { result in

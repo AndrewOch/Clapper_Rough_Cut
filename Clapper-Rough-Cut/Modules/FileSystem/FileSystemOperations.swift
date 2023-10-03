@@ -59,7 +59,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
 
     public func transcribeFile(_ file: RawFile) {
         registerUndo()
-        transcriber.transcribeFile(file, level: .quality) { transcription in
+        transcriber.transcribeFile(file, level: .medium) { transcription in
             if let index = self.project.unsortedFolder.files.firstIndex(where: { $0.id == file.id }) {
                 self.project.unsortedFolder.files[index].transcription = transcription
                 self.updateStatus()
@@ -81,7 +81,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
     public func transcribeFiles() {
         registerUndo()
         let filtered = project.unsortedFolder.files.filter { file in file.transcription == nil }
-        transcriber.transcribeFiles(filtered, level: .quality) { url, transcription in
+        transcriber.transcribeFiles(filtered, level: .medium) { url, transcription in
             if let index = self.project.unsortedFolder.files.firstIndex(where: { $0.url == url }) {
                 self.project.unsortedFolder.files[index].transcription = transcription
             }
