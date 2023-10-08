@@ -37,7 +37,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
             print("File for fast model not found")
             return nil
         }
-        var params = WhisperParams.default
+        let params = WhisperParams.default
         params.detect_language = true
         let whisper = Whisper(fromFileURL: URL(fileURLWithPath: path), withParams: params)
         return whisper
