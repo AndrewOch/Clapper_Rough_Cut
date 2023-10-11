@@ -7,7 +7,6 @@ struct FileSystemView: View {
     @State private var selection: Set<FileSystemElement.ID> = []
 
     @State private var draggable: [UUID] = []
-    @State private var isDragging: Bool = false
     @State private var isTargeted = false
 
     var body: some View {
@@ -33,7 +32,6 @@ struct FileSystemView: View {
             List(document.project.fileSystem.elements ?? [], children: \.elements, selection: $selection) { element in
                 FileSystemElementView(element: element)
                     .onDrag({
-                        isDragging.toggle()
                         draggable.removeAll()
                         if selection.contains(element.id) {
                             draggable.append(contentsOf: selection)
@@ -43,11 +41,17 @@ struct FileSystemView: View {
                         let uuidStrings = draggable.map { $0.uuidString }
                         return NSItemProvider(object: uuidStrings.joined(separator: ",") as NSItemProviderWriting)
                     }, preview: {
-                        HStack(spacing: 2) {
-                            FileIcon(type: element.type)
-                            CustomLabel<BodyMediumStyle>(text: String(draggable.count))
-                        }
-                        .foregroundColor(Asset.dark.swiftUIColor)
+                            HStack(spacing: 2) {
+                                FileIcon(type: element.type)
+                                CustomLabel<BodyMediumStyle>(text: String(draggable.count))
+                            }
+                            .foregroundColor(Asset.dark.swiftUIColor)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(Asset.white.swiftUIColor)
+                            .cornerRadius(5)
+                            .overlay(RoundedRectangle(cornerRadius: 5)
+                                .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                     })
                     .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
                         guard element.isContainer else { return false }
