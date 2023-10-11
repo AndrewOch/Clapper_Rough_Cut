@@ -32,6 +32,12 @@ internal enum L10n {
   internal static let chooseScene = L10n.tr("Localizable", "chooseScene", fallback: "выбрать сцену")
   /// дата создания
   internal static let createdAt = L10n.tr("Localizable", "createdAt", fallback: "дата создания")
+  /// создать папку
+  internal static let createFolder = L10n.tr("Localizable", "createFolder", fallback: "создать папку")
+  /// создать сцену
+  internal static let createScene = L10n.tr("Localizable", "createScene", fallback: "создать сцену")
+  /// создать дубль
+  internal static let createTake = L10n.tr("Localizable", "createTake", fallback: "создать дубль")
   /// удалить
   internal static let delete = L10n.tr("Localizable", "delete", fallback: "удалить")
   /// определить сцену
@@ -42,14 +48,22 @@ internal enum L10n {
   internal static let determineTakes = L10n.tr("Localizable", "determineTakes", fallback: "определить дубли")
   /// длительность
   internal static let duration = L10n.tr("Localizable", "duration", fallback: "длительность")
+  /// правка
+  internal static let editSection = L10n.tr("Localizable", "editSection", fallback: "правка")
   /// экспорт
   internal static let export = L10n.tr("Localizable", "export", fallback: "экспорт")
   /// путь сохранения
   internal static let exportPath = L10n.tr("Localizable", "exportPath", fallback: "путь сохранения")
   /// введите путь сохранения
   internal static let exportPathPlaceholder = L10n.tr("Localizable", "exportPathPlaceholder", fallback: "введите путь сохранения")
+  /// файл
+  internal static let file = L10n.tr("Localizable", "file", fallback: "файл")
   /// название
   internal static let fileTitle = L10n.tr("Localizable", "fileTitle", fallback: "название")
+  /// папка
+  internal static let folder = L10n.tr("Localizable", "folder", fallback: "папка")
+  /// папки
+  internal static let folders = L10n.tr("Localizable", "folders", fallback: "папки")
   /// фразы
   internal static let phrasesCount = L10n.tr("Localizable", "phrasesCount", fallback: "фразы")
   /// проект
@@ -58,6 +72,10 @@ internal enum L10n {
   internal static let projectName = L10n.tr("Localizable", "projectName", fallback: "название проекта")
   /// введите название проекта
   internal static let projectNamePlaceholder = L10n.tr("Localizable", "projectNamePlaceholder", fallback: "введите название проекта")
+  /// сцена
+  internal static let scene = L10n.tr("Localizable", "scene", fallback: "сцена")
+  /// сцены
+  internal static let scenes = L10n.tr("Localizable", "scenes", fallback: "сцены")
   /// выбор сцены
   internal static let sceneSelection = L10n.tr("Localizable", "sceneSelection", fallback: "выбор сцены")
   /// сценарий
@@ -70,12 +88,16 @@ internal enum L10n {
   internal static let searchPhrasePlaceholder = L10n.tr("Localizable", "searchPhrasePlaceholder", fallback: "введите текст фразы")
   /// выбрать
   internal static let select = L10n.tr("Localizable", "select", fallback: "выбрать")
+  /// выбрано
+  internal static let selected = L10n.tr("Localizable", "selected", fallback: "выбрано")
   /// настройки
   internal static let settings = L10n.tr("Localizable", "settings", fallback: "настройки")
   /// сортировка
   internal static let sort = L10n.tr("Localizable", "sort", fallback: "сортировка")
   /// статусы
   internal static let statuses = L10n.tr("Localizable", "statuses", fallback: "статусы")
+  /// дубль
+  internal static let take = L10n.tr("Localizable", "take", fallback: "дубль")
   /// дубли
   internal static let takes = L10n.tr("Localizable", "takes", fallback: "дубли")
   /// расшифровать

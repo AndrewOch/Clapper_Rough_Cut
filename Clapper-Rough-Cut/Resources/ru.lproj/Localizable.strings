@@ -37,3 +37,14 @@
 "duration" = "длительность";
 "createdAt" = "дата создания";
 "statuses" = "статусы";
+"selected" = "выбрано";
+"folders" = "папки";
+"scenes" = "сцены";
+"editSection" = "правка";
+"file" = "файл";
+"createFolder" = "создать папку";
+"createScene" = "создать сцену";
+"createTake" = "создать дубль";
+"folder" = "папка";
+"scene" = "сцена";
+"take" = "дубль";

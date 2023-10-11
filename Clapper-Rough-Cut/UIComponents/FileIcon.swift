@@ -14,7 +14,7 @@ struct FileIcon: View {
         case .video:
             return SystemImage.videoFill.rawValue
         case .folder:
-            return SystemImage.folder.rawValue
+            return SystemImage.folderFill.rawValue
         case .scene:
             return SystemImage.film.rawValue
         case .take:

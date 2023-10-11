@@ -29,9 +29,12 @@ struct ContentView: View {
                 case .base:
                     CustomContextMenuView(position: popupPositions[.base] ?? .zero,
                                           sections: document.headerMenuConfiguration?.base ?? [])
-                case .project:
-                    CustomContextMenuView(position: popupPositions[.project] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.project ?? [])
+                case .file:
+                    CustomContextMenuView(position: popupPositions[.file] ?? .zero,
+                                          sections: document.headerMenuConfiguration?.file ?? [])
+                case .edit:
+                    CustomContextMenuView(position: popupPositions[.edit] ?? .zero,
+                                          sections: document.headerMenuConfiguration?.edit ?? [])
                 case .search:
                     CustomContextMenuView(position: popupPositions[.search] ?? .zero,
                                           sections: document.headerMenuConfiguration?.search ?? [])

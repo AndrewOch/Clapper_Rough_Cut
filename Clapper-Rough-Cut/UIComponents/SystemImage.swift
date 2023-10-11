@@ -24,6 +24,7 @@ enum SystemImage: String {
     case option = "option"
     case gearshape = "gearshape"
     case person = "person"
+    case rectangleStack = "rectangle.stack"
 
     var imageView: Image {
         Image(systemName: self.rawValue)

@@ -6,6 +6,10 @@ struct FileSystemView: View {
     @State private var fileSystemHeight: CGFloat = 600
     @State private var selection: Set<FileSystemElement.ID> = []
 
+    @State private var draggable: [UUID] = []
+    @State private var isDragging: Bool = false
+    @State private var isTargeted = false
+
     var body: some View {
         VSplitView {
             fileSystem
@@ -27,42 +31,66 @@ struct FileSystemView: View {
         ZStack {
             Asset.light.swiftUIColor
             List(document.project.fileSystem.elements ?? [], children: \.elements, selection: $selection) { element in
-                HStack(alignment: .center) {
-                    HStack(spacing: 5) {
-                        FileIcon(type: element.type)
-                            .frame(width: 10, height: 10)
-                            .scaledToFit()
-                        CustomLabel<BodyMediumStyle>(text: element.title)
-                    }
-                    Spacer()
-                    HStack {
-                        if element.statuses.contains(.transcription) {
-                            TranscribedIcon()
+                FileSystemElementView(element: element)
+                    .onDrag({
+                        isDragging.toggle()
+                        draggable.removeAll()
+                        if selection.contains(element.id) {
+                            draggable.append(contentsOf: selection)
+                        } else {
+                            draggable.append(element.id)
                         }
-                    }
-                    .frame(width: 60)
-                    HStack {
-                        if let duration = element.duration {
-                            CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
-                                .lineLimit(1)
+                        let uuidStrings = draggable.map { $0.uuidString }
+                        return NSItemProvider(object: uuidStrings.joined(separator: ",") as NSItemProviderWriting)
+                    }, preview: {
+                        HStack(spacing: 2) {
+                            FileIcon(type: element.type)
+                            CustomLabel<BodyMediumStyle>(text: String(draggable.count))
                         }
-                        Spacer()
-                    }
-                    .frame(width: 60)
-                    HStack {
-                        if let date = element.createdAt {
-                            CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: date))
-                                .lineLimit(1)
+                        .foregroundColor(Asset.dark.swiftUIColor)
+                    })
+                    .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
+                        guard element.isContainer else { return false }
+                        if let itemProvider = providers.first {
+                            itemProvider.loadObject(ofClass: NSString.self) { items, _ in
+                                if let uuidString = items as? String {
+                                    let uuids = uuidString.components(separatedBy: ",")
+                                    document.registerUndo()
+                                    for uuid in uuids {
+                                        if let id = UUID(uuidString: uuid) {
+                                            document.project.moveFileSystemElement(withID: id, toFolderWithID: element.id)
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        Spacer()
-                    }.frame(width: 200)
-                }
-                .padding(.horizontal)
+                        return true
+                    }
+                    .onHover { hover in
+                        isTargeted = hover && element.isContainer
+                    }
             }
-            .preferredColorScheme(.light)
-            .font(.custom(FontFamily.Overpass.regular.name, size: 12))
-            .scrollContentBackground(.hidden)
-            .background(Asset.light.swiftUIColor)
+        }
+        .preferredColorScheme(.light)
+        .font(.custom(FontFamily.Overpass.regular.name, size: 12))
+        .scrollContentBackground(.hidden)
+        .background(Asset.light.swiftUIColor)
+        .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
+            if let itemProvider = providers.first {
+                itemProvider.loadObject(ofClass: NSString.self) { items, _ in
+                    if let uuidString = items as? String {
+                        let uuids = uuidString.components(separatedBy: ",")
+                        document.registerUndo()
+                        for uuid in uuids {
+                            if let id = UUID(uuidString: uuid) {
+                                document.project.moveFileSystemElement(withID: id,
+                                                                       toFolderWithID: document.project.fileSystem.id)
+                            }
+                        }
+                    }
+                }
+            }
+            return true
         }
     }
 
@@ -78,17 +106,5 @@ struct FileSystemView: View {
             }
             Spacer()
         }
-    }
-}
-
-struct FileSystemTableRowElement: Identifiable, Hashable {
-    let id: UUID
-    let value: FileSystemElement
-    let nestingLevel: CGFloat
-
-    init(value: FileSystemElement, nestingLevel: CGFloat) {
-        self.id = value.id
-        self.value = value
-        self.nestingLevel = nestingLevel
     }
 }

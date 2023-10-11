@@ -39,7 +39,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         return path
     }
 
-    private func transcribe(audioFile: FileSystemElement, 
+    private func transcribe(audioFile: FileSystemElement,
                             quality: TranscriptionQuality = .low,
                             completion: @escaping (TranscriptionResult) -> Void) {
         var model: String?
@@ -75,6 +75,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
                                                                  "-p", numProcesses,
                                                                  "-l", "ru",
                                                                  "-m", model,
+                                                                 "-d",
                                                                  "-nt", tmpFile])
                         let endTime = Date().timeIntervalSince1970
                         let resultTime = endTime - startTime

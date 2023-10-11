@@ -17,7 +17,21 @@ struct HeaderMenuConfiguration {
         ]
     }
 
-    public var project: [CustomContextMenuSection] {
+    public var file: [CustomContextMenuSection] {
+        return [
+            CustomContextMenuSection(options: [
+                CustomContextMenuOption(title: L10n.export.capitalized,
+                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
+                                        shortcut: .export,
+                                        isEnabled: .constant(true),
+                                        action: {
+                                            document.states.isExportViewPresented.toggle()
+                                        })
+            ])
+        ]
+    }
+
+    public var edit: [CustomContextMenuSection] {
         return [
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
@@ -33,14 +47,20 @@ struct HeaderMenuConfiguration {
 
                                         })
             ]),
-
             CustomContextMenuSection(options: [
-                CustomContextMenuOption(title: L10n.export.capitalized,
-                                        imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        shortcut: .export,
+                CustomContextMenuOption(title: L10n.createFolder.firstWordCapitalized,
+                                        imageName: SystemImage.folder.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
-                                            document.states.isExportViewPresented.toggle()
+                                            let folder = FileSystemElement(title: L10n.folder.firstWordCapitalized, type: .folder)
+                                            document.project.addElement(folder)
+                                        }),
+                CustomContextMenuOption(title: L10n.createScene.firstWordCapitalized,
+                                        imageName: SystemImage.film.rawValue,
+                                        isEnabled: .constant(true),
+                                        action: {
+                                            let folder = FileSystemElement(title: L10n.scene.firstWordCapitalized, type: .scene)
+                                            document.project.addElement(folder)
                                         })
             ])
         ]
@@ -64,6 +84,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.characters.firstWordCapitalized,
                                         imageName: SystemImage.person.rawValue,
+                                        shortcut: .characters,
                                         isEnabled: .constant(true),
                                         action: {
                                             document.states.isCharactersViewPresented.toggle()
@@ -77,6 +98,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.transcribe.capitalized,
                                         imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
+                                        shortcut: .transcribe,
                                         isEnabled: Binding(get: {
                                             document.project.hasUntranscribedFiles
                                         }, set: { _ in }),
@@ -112,7 +134,16 @@ struct HeaderMenuConfiguration {
     }
 
     private func configureShortcuts() {
-        base.forEach({ section in
+        configureShortcuts(for: base)
+        configureShortcuts(for: file)
+        configureShortcuts(for: edit)
+        configureShortcuts(for: search)
+        configureShortcuts(for: script)
+        configureShortcuts(for: sort)
+    }
+
+    private func configureShortcuts(for menu: [CustomContextMenuSection]) {
+        menu.forEach({ section in
             section.options.forEach({ option in
                 if let shortcut = option.shortcut {
                     KeyboardShortcuts.onKeyDown(for: shortcut) {

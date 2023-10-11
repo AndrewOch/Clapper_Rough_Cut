@@ -121,7 +121,7 @@ extension RoughCutProject {
             elements[index] = newValue
             return true
         }
-        for (index, element) in elements.enumerated() where element.isContainer {
+        for (index, element) in elements.enumerated() where element.elements != nil {
             if updateFileSystemElement(withID: elementID, newValue: newValue, in: &elements[index].elements!) {
                 return true
             }
@@ -131,6 +131,9 @@ extension RoughCutProject {
 
     func getContainer(forElementWithID elementID: UUID) -> FileSystemElement? {
         guard let elements = fileSystem.elements else { return nil }
+        if elements.contains(where: { $0.id == elementID }) {
+            return fileSystem
+        }
         return getContainer(forElementID: elementID, in: elements)
     }
 

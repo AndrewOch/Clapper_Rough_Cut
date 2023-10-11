@@ -135,6 +135,32 @@ struct FileSystemSelectionDetailView: View {
             }
             .foregroundColor(Asset.dark.swiftUIColor)
             .padding(.vertical, 5)
+            if let phrase = element.scriptPhraseId {
+                VStack {
+                    HStack {
+                        SystemImage.film.imageView
+                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                        CustomLabel<BodyMediumStyle>(text: element.title)
+                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                        Spacer()
+                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
+                                                                       imageName: SystemImage.film.rawValue,
+                                                                       enabled: .constant(true)) {
+                            isModalPresented.toggle()
+                        }
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $isModalPresented) {
+            ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
+                SelectPhraseMatchView { phrase in
+                    document.changePhrase(for: element, phrase: phrase)
+                    isModalPresented.toggle()
+                }
+            } closeAction: {
+                isModalPresented.toggle()
+            }
         }
     }
 

@@ -52,8 +52,8 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     private func match(element: FileSystemElement, phrase: Phrase) {
         guard var scene = project.firstFileSystemElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id },
-                                                         excludeScenes: true,
-                                                         excludeTakes: true) else {
+                                                         excludeScenes: false,
+                                                         excludeTakes: false) else {
             if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
                 guard let folder = project.getContainer(forElementWithID: element.id) else { return }
                 var scene = FileSystemElement(title: self.createPhraseFolderTitle(characterName: characterName,
