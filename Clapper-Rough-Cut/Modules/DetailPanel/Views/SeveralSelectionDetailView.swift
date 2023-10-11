@@ -8,7 +8,7 @@ struct SeveralSelectionDetailView: View {
     var body: some View {
         VStack {
             HStack {
-                SystemImage.rectangleStack.imageView
+                SystemImage.rectangleStackFill.imageView
                     .foregroundColor(Asset.dark.swiftUIColor)
                 CustomLabel<BodyMediumStyle>(text: "\(L10n.selected.firstWordCapitalized): \(selection.count)")
                     .lineLimit(1)

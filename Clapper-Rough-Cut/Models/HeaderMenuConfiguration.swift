@@ -52,7 +52,8 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.folder.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
-                                            let folder = FileSystemElement(title: L10n.folder.firstWordCapitalized, type: .folder)
+                                            let title = document.project.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized)
+                                            let folder = FileSystemElement(title: title, type: .folder)
                                             document.project.addElement(folder)
                                         }),
                 CustomContextMenuOption(title: L10n.createScene.firstWordCapitalized,

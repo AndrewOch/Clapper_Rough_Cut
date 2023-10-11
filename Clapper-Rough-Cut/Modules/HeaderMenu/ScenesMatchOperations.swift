@@ -11,7 +11,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     func matchScenes() {
         registerUndo()
-        let files = project.findAllFileSystemElements(where: { $0.isFile }, excludeScenes: true, excludeTakes: true)
+        let files = project.findAllFileSystemElements(where: { $0.isFile })
         matchFor(files: files)
     }
 
@@ -51,9 +51,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func match(element: FileSystemElement, phrase: Phrase) {
-        guard var scene = project.firstFileSystemElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id },
-                                                         excludeScenes: false,
-                                                         excludeTakes: false) else {
+        guard var scene = project.firstFileSystemElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id }) else {
             if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
                 guard let folder = project.getContainer(forElementWithID: element.id) else { return }
                 var scene = FileSystemElement(title: self.createPhraseFolderTitle(characterName: characterName,

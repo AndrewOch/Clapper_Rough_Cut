@@ -61,10 +61,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
 
     public func transcribeFiles() {
         registerUndo()
-        let filtered = project.findAllFileSystemElements(where: {$0.isFile},
-                                                         excludeScenes: true,
-                                                         excludeTakes: true,
-                                                         recursiveSearch: true).filter({ $0.transcription == nil })
+        let filtered = project.findAllFileSystemElements(where: { $0.isFile }).filter({ $0.transcription == nil })
         transcriber.transcribeFiles(filtered, quality: .high) { [weak self] newFile in
             guard let self = self else { return }
             self.project.updateFileSystemElement(withID: newFile.id, newValue: newFile)

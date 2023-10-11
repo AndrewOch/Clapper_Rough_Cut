@@ -3,7 +3,8 @@ import Foundation
 struct RoughCutProject: Identifiable, Codable {
     var id = UUID()
     var scriptFile: ScriptFile?
-    var fileSystem: FileSystemElement = FileSystemElement(title: .empty, type: .folder, elements: [])
+    var fileSystem: FileSystemElement = FileSystemElement(title: .empty, type: .folder)
+    var elements: [UUID: FileSystemElement] = [:]
     var exportSettings: ExportSettings = ExportSettings()
 }
 
@@ -19,165 +20,98 @@ extension RoughCutProject {
         return hasUntranscribedFiles && scriptFile != nil
     }
     var hasUnmatchedSortedFiles: Bool {
-        firstFileSystemElement(where: { $0.isScene &&
-            (($0.elements?.contains(where: { $0.type == .audio })) != nil) &&
-            (($0.elements?.contains(where: { $0.type == .video })) != nil) }) != nil
+        firstFileSystemElement { scene in
+            scene.isScene &&
+            firstFileSystemElement(where: { $0.containerId == scene.id && $0.type == .audio }) != nil &&
+            firstFileSystemElement(where: { $0.containerId == scene.id && $0.type == .video }) != nil
+        } != nil
     }
 }
 
 // MARK: - FileSystem Utilities
 extension RoughCutProject {
-    func firstFileSystemElement(where predicate: (FileSystemElement) -> Bool,
-                                excludeScenes: Bool = false,
-                                excludeTakes: Bool = false,
-                                recursiveSearch: Bool = true) -> FileSystemElement? {
-        if predicate(fileSystem) { return fileSystem }
-        return firstFileSystemElement(from: fileSystem,
-                                      where: predicate,
-                                      excludeScenes: excludeScenes,
-                                      excludeTakes: excludeTakes,
-                                      recursiveSearch: recursiveSearch)
+    func firstFileSystemElement(where predicate: (FileSystemElement) -> Bool) -> FileSystemElement? {
+        return elements.values.first(where: predicate)
     }
 
-    private func firstFileSystemElement(from folder: FileSystemElement,
-                                        where predicate: (FileSystemElement) -> Bool,
-                                        excludeScenes: Bool = false,
-                                        excludeTakes: Bool = false,
-                                        recursiveSearch: Bool = true) -> FileSystemElement? {
-
-        if let element = folder.elements?.first(where: predicate) {
-            return element
-        }
-        var result: FileSystemElement? = nil
-        guard let elements = folder.elements else { return result }
-        for element in elements {
-            guard recursiveSearch || (!excludeScenes && element.isScene) || (!excludeTakes && element.isTake) else {
-                continue
-            }
-            result = firstFileSystemElement(from: element,
-                                                      where: predicate,
-                                                      excludeScenes: excludeScenes,
-                                                      excludeTakes: excludeTakes,
-                                                      recursiveSearch: recursiveSearch)
-            if result != nil { break }
-        }
-        return result
-    }
-
-    func findAllFileSystemElements(where predicate: (FileSystemElement) -> Bool,
-                                   excludeScenes: Bool = false,
-                                   excludeTakes: Bool = false,
-                                   recursiveSearch: Bool = true) -> [FileSystemElement] {
-        let files: [FileSystemElement] = findAllFileSystemElements(from: fileSystem,
-                                                               where: predicate,
-                                                               excludeScenes: excludeScenes,
-                                                               excludeTakes: excludeTakes,
-                                                               recursiveSearch: recursiveSearch)
-        return files
-    }
-
-    private func findAllFileSystemElements(from folder: FileSystemElement,
-                             where predicate: (FileSystemElement) -> Bool,
-                             excludeScenes: Bool = false,
-                             excludeTakes: Bool = false,
-                             recursiveSearch: Bool = true) -> [FileSystemElement] {
-        guard var files = folder.elements?.filter(predicate) else { return [] }
-        files.forEach { element in
-            guard recursiveSearch || (!excludeScenes && element.isScene) || (!excludeTakes && element.isTake) else {
-                return
-            }
-            files.append(contentsOf: findAllFileSystemElements(from: element,
-                                                 where: predicate,
-                                                 excludeScenes: excludeScenes,
-                                                 excludeTakes: excludeTakes,
-                                                 recursiveSearch: recursiveSearch))
-        }
-        return files
+    func findAllFileSystemElements(where predicate: (FileSystemElement) -> Bool) -> [FileSystemElement] {
+        return elements.values.filter(predicate)
     }
 
     mutating func addElement(_ newElement: FileSystemElement) {
-        fileSystem.elements?.append(newElement)
+        var newElement = newElement
+        newElement.containerId = fileSystem.id
+        elements[newElement.id] = newElement
     }
 
     mutating func addElement(_ newElement: FileSystemElement, toFolderWithID folderID: UUID) {
-        guard var targetFolder = firstFileSystemElement(where: { $0.id == folderID }) else {
+        if fileSystem.id == folderID {
+            addElement(newElement)
             return
         }
-        targetFolder.elements?.append(newElement)
-        updateFileSystemElement(withID: targetFolder.id, newValue: targetFolder)
+        guard var targetFolder = firstFileSystemElement(where: { $0.id == folderID }) else { return }
+        var newElement = newElement
+        newElement.containerId = targetFolder.id
+        elements[newElement.id] = newElement
     }
 
     mutating func updateFileSystemElement(withID elementID: UUID,
                                           newValue: FileSystemElement) {
-        guard var updated = fileSystem.elements else { return }
-        _ = updateFileSystemElement(withID: elementID, newValue: newValue, in: &updated)
-        fileSystem.elements = updated
-    }
-
-    private func updateFileSystemElement(withID elementID: UUID,
-                                         newValue: FileSystemElement,
-                                         in elements: inout [FileSystemElement]) -> Bool {
-        if let index = elements.firstIndex(where: { $0.id == elementID }) {
-            elements[index] = newValue
-            return true
-        }
-        for (index, element) in elements.enumerated() where element.elements != nil {
-            if updateFileSystemElement(withID: elementID, newValue: newValue, in: &elements[index].elements!) {
-                return true
-            }
-        }
-        return false
+        elements[elementID] = newValue
     }
 
     func getContainer(forElementWithID elementID: UUID) -> FileSystemElement? {
-        guard let elements = fileSystem.elements else { return nil }
-        if elements.contains(where: { $0.id == elementID }) {
-            return fileSystem
-        }
-        return getContainer(forElementID: elementID, in: elements)
-    }
-
-    private func getContainer(forElementID elementID: UUID,
-                              in elements: [FileSystemElement]) -> FileSystemElement? {
-        for element in elements {
-            if let index = element.elements?.firstIndex(where: { $0.id == elementID }) {
-                return element
-            }
-            guard let elements = element.elements else { continue }
-            if let containerElement = getContainer(forElementID: elementID, in: elements) {
-                return containerElement
-            }
+        guard let element = firstFileSystemElement(where: { $0.id == elementID }) else { return nil }
+        if fileSystem.id == element.containerId { return fileSystem }
+        for elem in elements {
+            if elem.key == element.containerId { return elem.value }
         }
         return nil
     }
 
     mutating func deleteFileSystemElement(by elementID: UUID) -> Bool {
-        guard var updated = fileSystem.elements else { return false }
-        let result = deleteFileSystemElement(by: elementID, in: &updated)
-        fileSystem.elements = updated
-        return result
-    }
-
-    private mutating func deleteFileSystemElement(by elementID: UUID,
-                                                  in elements: inout [FileSystemElement]) -> Bool {
-        if let index = elements.firstIndex(where: { $0.id == elementID }) {
-            elements.remove(at: index)
-            return true
-        }
-        for element in elements {
-            guard let index = elements.firstIndex(where: { $0.id == element.id }) else { continue }
-            if deleteFileSystemElement(by: elementID, in: &elements[index].elements!) {
-                return true
-            }
-        }
-        return false
+        guard let elem = elements.removeValue(forKey: elementID) else { return false }
+        return true
     }
 
     mutating func moveFileSystemElement(withID elementID: UUID, toFolderWithID folderID: UUID) {
-        guard let elementToMove = firstFileSystemElement(where: { $0.id == elementID }) else {
-            return
-        }
+        guard let elementToMove = firstFileSystemElement(where: { $0.id == elementID }) else { return }
         _ = deleteFileSystemElement(by: elementToMove.id)
         addElement(elementToMove, toFolderWithID: folderID)
+    }
+}
+
+// MARK: - Convert FileSystem to ListItems
+extension RoughCutProject {
+    var fileSystemListItems: [FileSystemListItem] {
+        var items: [FileSystemListItem] = []
+        findAllFileSystemElements(where: { $0.containerId == fileSystem.id }).forEach { elem in
+            items.append(fileSystemListItem(element: elem))
+        }
+        return items
+    }
+
+    private func fileSystemListItem(element: FileSystemElement) -> FileSystemListItem {
+        var elems: [FileSystemListItem] = []
+        findAllFileSystemElements(where: { $0.containerId == element.id }).forEach { elem in
+            elems.append(fileSystemListItem(element: elem))
+        }
+        if elems.isNotEmpty {
+            return FileSystemListItem(value: element, elements: elems)
+        }
+        return FileSystemListItem(value: element, elements: nil)
+    }
+}
+
+extension RoughCutProject {
+    func generateUniqueName(baseName: String) -> String {
+        var uniqueName = baseName
+        var folderNumber = 1
+        while elements.values.contains(where: { $0.title == uniqueName }) {
+            folderNumber += 1
+            uniqueName = "\(baseName) \(folderNumber)"
+        }
+
+        return uniqueName
     }
 }

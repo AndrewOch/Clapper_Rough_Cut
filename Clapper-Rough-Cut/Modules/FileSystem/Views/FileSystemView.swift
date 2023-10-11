@@ -29,7 +29,8 @@ struct FileSystemView: View {
     var fileSystem: some View {
         ZStack {
             Asset.light.swiftUIColor
-            List(document.project.fileSystem.elements ?? [], children: \.elements, selection: $selection) { element in
+            List(document.project.fileSystemListItems, children: \.elements, selection: $selection) { item in
+                let element = item.value
                 FileSystemElementView(element: element)
                     .onDrag({
                         draggable.removeAll()
@@ -58,12 +59,20 @@ struct FileSystemView: View {
                         if let itemProvider = providers.first {
                             itemProvider.loadObject(ofClass: NSString.self) { items, _ in
                                 if let uuidString = items as? String {
-                                    let uuids = uuidString.components(separatedBy: ",")
+                                    var uuids: [UUID] = []
+                                    uuidString.components(separatedBy: ",").forEach { str in
+                                        if let uuid = UUID(uuidString: str) {
+                                            uuids.append(uuid)
+                                        }
+                                    }
+                                    uuids = uuids.filter({ id in
+                                        guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
+                                        return !uuids.contains(where: { $0 == containerId })
+                                    })
+                                    guard !uuids.contains(element.id) else { return }
                                     document.registerUndo()
                                     for uuid in uuids {
-                                        if let id = UUID(uuidString: uuid) {
-                                            document.project.moveFileSystemElement(withID: id, toFolderWithID: element.id)
-                                        }
+                                        document.project.moveFileSystemElement(withID: uuid, toFolderWithID: element.id)
                                     }
                                 }
                             }
@@ -83,13 +92,20 @@ struct FileSystemView: View {
             if let itemProvider = providers.first {
                 itemProvider.loadObject(ofClass: NSString.self) { items, _ in
                     if let uuidString = items as? String {
-                        let uuids = uuidString.components(separatedBy: ",")
+                        var uuids: [UUID] = []
+                        uuidString.components(separatedBy: ",").forEach { str in
+                            if let uuid = UUID(uuidString: str) {
+                                uuids.append(uuid)
+                            }
+                        }
+                        uuids = uuids.filter({ id in
+                            guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
+                            return !uuids.contains(where: { $0 == containerId })
+                        })
+                        guard !uuids.contains(document.project.fileSystem.id) else { return }
                         document.registerUndo()
                         for uuid in uuids {
-                            if let id = UUID(uuidString: uuid) {
-                                document.project.moveFileSystemElement(withID: id,
-                                                                       toFolderWithID: document.project.fileSystem.id)
-                            }
+                            document.project.moveFileSystemElement(withID: uuid, toFolderWithID: document.project.fileSystem.id)
                         }
                     }
                 }

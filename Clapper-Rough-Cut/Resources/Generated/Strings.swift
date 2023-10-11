@@ -64,6 +64,8 @@ internal enum L10n {
   internal static let folder = L10n.tr("Localizable", "folder", fallback: "папка")
   /// папки
   internal static let folders = L10n.tr("Localizable", "folders", fallback: "папки")
+  /// новая папка
+  internal static let newFolder = L10n.tr("Localizable", "newFolder", fallback: "новая папка")
   /// фразы
   internal static let phrasesCount = L10n.tr("Localizable", "phrasesCount", fallback: "фразы")
   /// проект

@@ -116,21 +116,21 @@ struct FileSystemSelectionDetailView: View {
         VStack {
             HStack {
                 FileIcon(type: .video)
-                CustomLabel<BodyMediumStyle>(text: "\(element.elements?.filter({ file in file.type == .video }).count ?? 0) \(L10n.video)")
+                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.type == .video }).count) \(L10n.video)")
                 Spacer()
             }
             .foregroundColor(Asset.dark.swiftUIColor)
             .padding(.vertical, 5)
             HStack {
                 FileIcon(type: .audio)
-                CustomLabel<BodyMediumStyle>(text: "\(element.elements?.filter({ file in file.type == .audio }).count ?? 0) \(L10n.audio)")
+                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.type == .audio }).count) \(L10n.audio)")
                 Spacer()
             }
             .foregroundColor(.black)
             .padding(.vertical, 5)
             HStack {
                 SystemImage.filmStack.imageView
-                CustomLabel<BodyMediumStyle>(text: "\(element.elements?.filter({ $0.isTake }).count ?? 0) \(L10n.takes)")
+                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.isTake }).count) \(L10n.takes)")
                 Spacer()
             }
             .foregroundColor(Asset.dark.swiftUIColor)
@@ -166,7 +166,7 @@ struct FileSystemSelectionDetailView: View {
 
     var takeDetailInfo: some View {
         VStack {
-            ForEach(element.elements ?? []) { element in
+            ForEach(document.project.findAllFileSystemElements(where: { $0.containerId == element.id })) { element in
                 HStack {
                     if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
                         FileIcon(type: element.type)
