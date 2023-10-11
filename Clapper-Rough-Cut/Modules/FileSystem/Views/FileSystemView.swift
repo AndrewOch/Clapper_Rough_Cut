@@ -55,29 +55,7 @@ struct FileSystemView: View {
                                 .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                     })
                     .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
-                        guard element.isContainer else { return false }
-                        if let itemProvider = providers.first {
-                            itemProvider.loadObject(ofClass: NSString.self) { items, _ in
-                                if let uuidString = items as? String {
-                                    var uuids: [UUID] = []
-                                    uuidString.components(separatedBy: ",").forEach { str in
-                                        if let uuid = UUID(uuidString: str) {
-                                            uuids.append(uuid)
-                                        }
-                                    }
-                                    uuids = uuids.filter({ id in
-                                        guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
-                                        return !uuids.contains(where: { $0 == containerId })
-                                    })
-                                    guard !uuids.contains(element.id) else { return }
-                                    document.registerUndo()
-                                    for uuid in uuids {
-                                        document.project.moveFileSystemElement(withID: uuid, toFolderWithID: element.id)
-                                    }
-                                }
-                            }
-                        }
-                        return true
+                        drop(at: element, providers: providers)
                     }
                     .onHover { hover in
                         isTargeted = hover && element.isContainer
@@ -89,28 +67,7 @@ struct FileSystemView: View {
         .scrollContentBackground(.hidden)
         .background(Asset.light.swiftUIColor)
         .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
-            if let itemProvider = providers.first {
-                itemProvider.loadObject(ofClass: NSString.self) { items, _ in
-                    if let uuidString = items as? String {
-                        var uuids: [UUID] = []
-                        uuidString.components(separatedBy: ",").forEach { str in
-                            if let uuid = UUID(uuidString: str) {
-                                uuids.append(uuid)
-                            }
-                        }
-                        uuids = uuids.filter({ id in
-                            guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
-                            return !uuids.contains(where: { $0 == containerId })
-                        })
-                        guard !uuids.contains(document.project.fileSystem.id) else { return }
-                        document.registerUndo()
-                        for uuid in uuids {
-                            document.project.moveFileSystemElement(withID: uuid, toFolderWithID: document.project.fileSystem.id)
-                        }
-                    }
-                }
-            }
-            return true
+            drop(at: document.project.fileSystem, providers: providers)
         }
     }
 
@@ -126,5 +83,37 @@ struct FileSystemView: View {
             }
             Spacer()
         }
+    }
+    
+    func drop(at element: FileSystemElement, providers: [NSItemProvider]) -> Bool {
+        var target: FileSystemElement? = nil
+        if element.isContainer {
+            target = element
+        } else {
+            target = document.project.firstFileSystemElement(where: { $0.id == element.containerId })
+        }
+        guard let target = target else { return false }
+        if let itemProvider = providers.first {
+            itemProvider.loadObject(ofClass: NSString.self) { items, _ in
+                if let uuidString = items as? String {
+                    var uuids: [UUID] = []
+                    uuidString.components(separatedBy: ",").forEach { str in
+                        if let uuid = UUID(uuidString: str) {
+                            uuids.append(uuid)
+                        }
+                    }
+                    uuids = uuids.filter({ id in
+                        guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
+                        return !uuids.contains(where: { $0 == containerId })
+                    })
+                    guard !uuids.contains(target.id) else { return }
+                    document.registerUndo()
+                    for uuid in uuids {
+                        document.project.moveFileSystemElement(withID: uuid, toFolderWithID: target.id)
+                    }
+                }
+            }
+        }
+        return true
     }
 }
