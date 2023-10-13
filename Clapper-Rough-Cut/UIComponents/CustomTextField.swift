@@ -12,7 +12,7 @@ struct CustomTextField: View {
                     .foregroundColor(Asset.semiDark.swiftUIColor)
                 Spacer()
             }.padding(.horizontal, 10)
-            TextField(title, text: $text)
+            TextField(placeholder, text: $text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .focusable(false)
@@ -21,17 +21,6 @@ struct CustomTextField: View {
                 .tint(Asset.accentPrimary.swiftUIColor)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 10)
-                .background {
-                    if text.isEmpty {
-                        HStack(alignment: .bottom) {
-                            CustomLabel<BodyMediumStyle>(text: placeholder)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .foregroundColor(Asset.secondary.swiftUIColor)
-                            Spacer()
-                        }.disabled(true)
-                    }
-                }
                 .background(Asset.white.swiftUIColor)
                 .cornerRadius(10)
                 .font(.custom(BodyMediumStyle.fontName, size: BodyMediumStyle.fontSize))

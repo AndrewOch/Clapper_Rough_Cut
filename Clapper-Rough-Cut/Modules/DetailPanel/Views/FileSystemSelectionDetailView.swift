@@ -69,7 +69,7 @@ struct FileSystemSelectionDetailView: View {
                     Spacer()
                 }
             }
-            if let folder = document.project.getContainer(forElementWithID: element.id) {
+            if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id) {
                 VStack {
                     HStack {
                         SystemImage.folder.imageView
@@ -114,28 +114,32 @@ struct FileSystemSelectionDetailView: View {
 
     var sceneDetailInfo: some View {
         VStack {
+            let fileSystem = document.project.fileSystem
+            let videoCount = fileSystem.allElements(where: { $0.containerId == element.id && $0.type == .video }).count
+            let audioCount = fileSystem.allElements(where: { $0.containerId == element.id && $0.type == .audio }).count
+            let takesCount = fileSystem.allElements(where: { $0.containerId == element.id && $0.isTake }).count
             HStack {
                 FileIcon(type: .video)
-                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.type == .video }).count) \(L10n.video)")
+                CustomLabel<BodyMediumStyle>(text: "\(videoCount) \(L10n.video)")
                 Spacer()
             }
             .foregroundColor(Asset.dark.swiftUIColor)
             .padding(.vertical, 5)
             HStack {
                 FileIcon(type: .audio)
-                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.type == .audio }).count) \(L10n.audio)")
+                CustomLabel<BodyMediumStyle>(text: "\(audioCount) \(L10n.audio)")
                 Spacer()
             }
             .foregroundColor(.black)
             .padding(.vertical, 5)
             HStack {
                 SystemImage.filmStack.imageView
-                CustomLabel<BodyMediumStyle>(text: "\(document.project.findAllFileSystemElements(where: { $0.containerId == element.id && $0.isTake }).count) \(L10n.takes)")
+                CustomLabel<BodyMediumStyle>(text: "\(takesCount) \(L10n.takes)")
                 Spacer()
             }
             .foregroundColor(Asset.dark.swiftUIColor)
             .padding(.vertical, 5)
-            if let phrase = element.scriptPhraseId {
+            if (element.scriptPhraseId != nil) {
                 VStack {
                     HStack {
                         SystemImage.film.imageView
@@ -166,7 +170,7 @@ struct FileSystemSelectionDetailView: View {
 
     var takeDetailInfo: some View {
         VStack {
-            ForEach(document.project.findAllFileSystemElements(where: { $0.containerId == element.id })) { element in
+            ForEach(document.project.fileSystem.allElements(where: { $0.containerId == element.id })) { element in
                 HStack {
                     if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
                         FileIcon(type: element.type)

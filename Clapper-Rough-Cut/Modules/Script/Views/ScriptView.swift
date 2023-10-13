@@ -62,7 +62,7 @@ struct ScriptView: View {
         .background(Asset.semiWhite.swiftUIColor)
         .sheet(isPresented: $document.states.isCharactersViewPresented) {
             if let scriptFile = document.project.scriptFile {
-                var characterPhrasesMap: [UUID: [Phrase]] = scriptFile.characters.reduce(into: [:]) { result, character in
+                let characterPhrasesMap: [UUID: [Phrase]] = scriptFile.characters.reduce(into: [:]) { result, character in
                     let phrases = scriptFile.getCharacterPhrases(character: character)
                     if !phrases.isEmpty {
                         result[character.id] = phrases

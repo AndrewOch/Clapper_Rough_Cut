@@ -65,12 +65,12 @@ extension FileSystemElement {
     }
 }
 
-enum FileSystemElementType: Codable, Hashable {
-    case audio
-    case video
-    case folder
-    case take
-    case scene
+enum FileSystemElementType: Int, Codable, Hashable {
+    case audio = 0
+    case video = 1
+    case take = 2
+    case scene = 3
+    case folder = 4
 }
 
 enum FileStatus: Codable, Hashable {

@@ -29,7 +29,7 @@ struct FileSystemView: View {
     var fileSystem: some View {
         ZStack {
             Asset.light.swiftUIColor
-            List(document.project.fileSystemListItems, children: \.elements, selection: $selection) { item in
+            List(document.project.fileSystem.listItems, children: \.elements, selection: $selection) { item in
                 let element = item.value
                 FileSystemElementView(element: element)
                     .onDrag({
@@ -67,7 +67,7 @@ struct FileSystemView: View {
         .scrollContentBackground(.hidden)
         .background(Asset.light.swiftUIColor)
         .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
-            drop(at: document.project.fileSystem, providers: providers)
+            drop(at: document.project.fileSystem.root, providers: providers)
         }
     }
 
@@ -76,21 +76,22 @@ struct FileSystemView: View {
             if selection.count > 1 {
                 SeveralSelectionDetailView(selection: $selection)
             } else {
-                if let id = selection.first, let element = document.project.firstFileSystemElement(where: { $0.id == id }) {
+                if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
                     FileSystemSelectionDetailView(element: Binding(get: { return element },
-                                                                   set: { document.project.updateFileSystemElement(withID: element.id, newValue: $0) }))
+                                                                   set: { document.project.fileSystem.updateElement(withID: element.id,
+                                                                                                                    newValue: $0) }))
                 }
             }
             Spacer()
         }
     }
-    
+
     func drop(at element: FileSystemElement, providers: [NSItemProvider]) -> Bool {
         var target: FileSystemElement? = nil
         if element.isContainer {
             target = element
         } else {
-            target = document.project.firstFileSystemElement(where: { $0.id == element.containerId })
+            target = document.project.fileSystem.getContainer(forElementWithID: element.id)
         }
         guard let target = target else { return false }
         if let itemProvider = providers.first {
@@ -103,13 +104,14 @@ struct FileSystemView: View {
                         }
                     }
                     uuids = uuids.filter({ id in
-                        guard let elem = document.project.firstFileSystemElement(where: { $0.id == id }), let containerId = elem.containerId else { return true }
-                        return !uuids.contains(where: { $0 == containerId })
+                        guard let elem = document.project.fileSystem.elementById(id), let containerId = elem.containerId else { return true }
+                        return !uuids.contains(where: { $0 == containerId }) && !document.project.fileSystem.contains(target.id,
+                                                                                                                      in: id)
                     })
                     guard !uuids.contains(target.id) else { return }
                     document.registerUndo()
                     for uuid in uuids {
-                        document.project.moveFileSystemElement(withID: uuid, toFolderWithID: target.id)
+                        document.project.fileSystem.moveElement(withID: uuid, toFolderWithID: target.id)
                     }
                 }
             }

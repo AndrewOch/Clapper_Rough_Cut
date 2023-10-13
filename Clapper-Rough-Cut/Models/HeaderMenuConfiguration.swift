@@ -52,16 +52,16 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.folder.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
-                                            let title = document.project.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized)
+                                            let title = document.project.fileSystem.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized)
                                             let folder = FileSystemElement(title: title, type: .folder)
-                                            document.project.addElement(folder)
+                                            document.project.fileSystem.addElement(folder)
                                         }),
                 CustomContextMenuOption(title: L10n.createScene.firstWordCapitalized,
                                         imageName: SystemImage.film.rawValue,
                                         isEnabled: .constant(true),
                                         action: {
                                             let folder = FileSystemElement(title: L10n.scene.firstWordCapitalized, type: .scene)
-                                            document.project.addElement(folder)
+                                            document.project.fileSystem.addElement(folder)
                                         })
             ])
         ]

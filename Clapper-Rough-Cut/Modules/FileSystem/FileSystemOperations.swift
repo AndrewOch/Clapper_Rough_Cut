@@ -23,7 +23,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         dialog.allowsMultipleSelection = true
         dialog.allowedContentTypes     = [.audio, .movie]
         guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return }
-        let existingFiles: [FileSystemElement] = project.findAllFileSystemElements(where: { $0.isFile })
+        let existingFiles: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isFile })
         let results = dialog.urls
         let filtered = results.filter { res in
             !existingFiles.contains(where: { $0.url == res })
@@ -47,7 +47,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                                             createdAt: createdAt,
                                             duration: audioDuration,
                                             url: url)
-            project.addElement(newFile)
+            project.fileSystem.addElement(newFile)
         }
     }
 
@@ -55,16 +55,16 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         registerUndo()
         transcriber.transcribeFile(file, quality: .high) { [weak self] newFile in
             guard let self = self else { return }
-            self.project.updateFileSystemElement(withID: file.id, newValue: newFile)
+            self.project.fileSystem.updateElement(withID: file.id, newValue: newFile)
         }
     }
 
     public func transcribeFiles() {
         registerUndo()
-        let filtered = project.findAllFileSystemElements(where: { $0.isFile }).filter({ $0.transcription == nil })
+        let filtered = project.fileSystem.allElements(where: { $0.isFile }).filter({ $0.transcription == nil })
         transcriber.transcribeFiles(filtered, quality: .high) { [weak self] newFile in
             guard let self = self else { return }
-            self.project.updateFileSystemElement(withID: newFile.id, newValue: newFile)
+            self.project.fileSystem.updateElement(withID: newFile.id, newValue: newFile)
         }
     }
 }
