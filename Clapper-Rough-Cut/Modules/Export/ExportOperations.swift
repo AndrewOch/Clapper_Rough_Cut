@@ -28,7 +28,8 @@ extension ClapperRoughCutDocument: ExportOperations {
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
         let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
         createFolder(at: exportFolderURL)
-        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == project.fileSystem.id }).forEach{ exportFolder(root: exportFolderURL, folder: $0)}
+        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == project.fileSystem.id }).forEach {
+            exportFolder(root: exportFolderURL, folder: $0)}
     }
 
     private func exportFolder(root: URL, folder: FileSystemElement) {

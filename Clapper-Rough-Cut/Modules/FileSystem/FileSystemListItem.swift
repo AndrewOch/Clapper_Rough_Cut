@@ -15,7 +15,6 @@ struct FileSystemListItem: Identifiable, Hashable {
         } else if lhs.value.type.rawValue > rhs.value.type.rawValue {
             return false
         }
-        
         return lhs.value.title < rhs.value.title
     }
 }

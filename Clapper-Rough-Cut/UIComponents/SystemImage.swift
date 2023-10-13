@@ -26,6 +26,12 @@ enum SystemImage: String {
     case person = "person"
     case rectangleStack = "rectangle.stack"
     case rectangleStackFill = "rectangle.stack.fill"
+    case backwardFill = "backward.fill"
+    case forwardFill = "forward.fill"
+    case goForward5 = "goforward.5"
+    case goBackward5 = "gobackward.5"
+    case pauseFill = "pause.fill"
+    case playFill = "play.fill"
 
     var imageView: Image {
         Image(systemName: self.rawValue)

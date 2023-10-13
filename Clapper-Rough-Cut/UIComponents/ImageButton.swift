@@ -24,6 +24,18 @@ public enum ImageButtonLogoStyle: ImageButtonStyle {
     public static var borderColor: SwiftUI.Color = .clear
 }
 
+public enum ImageButtonSystemStyle: ImageButtonStyle {
+    public static var cornerRadius: CGFloat = 0
+    public static var foregroundColor: SwiftUI.Color = Asset.dark.swiftUIColor
+    public static var backgroundColor: SwiftUI.Color = .clear
+    public static var borderWidth: CGFloat = 0
+    public static var paddingHorizontal: CGFloat = 0
+    public static var paddingTop: CGFloat = 0
+    public static var paddingBottom: CGFloat = 0
+    public static var imageSize: CGFloat = 16
+    public static var borderColor: SwiftUI.Color = .clear
+}
+
 struct ImageButton<Style: ImageButtonStyle>: View {
     var image: Image
     @Binding var enabled: Bool

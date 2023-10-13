@@ -47,6 +47,9 @@
 		0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */; };
 		0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */; };
 		0453BC6A2AD895B0000909D6 /* RoughCutFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC692AD895B0000909D6 /* RoughCutFileSystem.swift */; };
+		0453BC6E2AD93535000909D6 /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */; };
+		0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC6F2AD93F53000909D6 /* DateFormatter.swift */; };
+		0453BC732AD99507000909D6 /* SVEVideoUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0453BC722AD99507000909D6 /* SVEVideoUI */; };
 		0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */; };
 		0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* text_matcher.py */; };
 		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
@@ -144,6 +147,8 @@
 		0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralSelectionDetailView.swift; sourceTree = "<group>"; };
 		0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemSelectionDetailView.swift; sourceTree = "<group>"; };
 		0453BC692AD895B0000909D6 /* RoughCutFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutFileSystem.swift; sourceTree = "<group>"; };
+		0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
+		0453BC6F2AD93F53000909D6 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		0464D9C229E423A70007EF24 /* TextsMatcher_Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextsMatcher_Wrapper.swift; sourceTree = "<group>"; };
 		0464D9C329E423A70007EF24 /* text_matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = text_matcher.py; sourceTree = "<group>"; };
 		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0453BC732AD99507000909D6 /* SVEVideoUI in Frameworks */,
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
 				043538F82AB21A6A00775E0D /* KeyboardShortcuts in Frameworks */,
 				0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */,
@@ -228,6 +234,7 @@
 				043538C42AABA51C00775E0D /* String.swift */,
 				043538F22AB073DE00775E0D /* Environment.swift */,
 				043538F92AB21A9300775E0D /* KeyboardShortcuts.swift */,
+				0453BC6F2AD93F53000909D6 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -323,6 +330,7 @@
 			children = (
 				0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */,
 				0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */,
+				0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -626,6 +634,7 @@
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
 				0400DA4E29EDC860003AD42B /* PythonKit */,
 				043538F72AB21A6A00775E0D /* KeyboardShortcuts */,
+				0453BC722AD99507000909D6 /* SVEVideoUI */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -661,6 +670,7 @@
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
 				0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */,
 				043538F62AB21A6A00775E0D /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				0453BC712AD99507000909D6 /* XCRemoteSwiftPackageReference "SVEVideoUI" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -784,7 +794,9 @@
 				0453BC6A2AD895B0000909D6 /* RoughCutFileSystem.swift in Sources */,
 				044C4C822AD6ABF4006E6BBD /* FileSystemElementView.swift in Sources */,
 				0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */,
+				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
 				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
+				0453BC6E2AD93535000909D6 /* MediaPlayerView.swift in Sources */,
 				043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */,
 				0464DA1129E423A80007EF24 /* Converter.swift in Sources */,
 				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
@@ -1075,6 +1087,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		0453BC712AD99507000909D6 /* XCRemoteSwiftPackageReference "SVEVideoUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SergioEstevao/SVEVideoUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
 		0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pvieito/PythonKit";
@@ -1103,6 +1123,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 043538F62AB21A6A00775E0D /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
+		};
+		0453BC722AD99507000909D6 /* SVEVideoUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0453BC712AD99507000909D6 /* XCRemoteSwiftPackageReference "SVEVideoUI" */;
+			productName = SVEVideoUI;
 		};
 		04BA3A0D29E1F26300047A9B /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;

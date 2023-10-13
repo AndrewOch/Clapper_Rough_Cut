@@ -18,11 +18,22 @@ struct FileSystemView: View {
                         width = 850
                         fileSystemHeight = 600
                     }
-            detailView
-                .padding()
-                    .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
-                    .frame(minHeight: 200, maxHeight: .infinity)
-                    .background(Asset.semiWhite.swiftUIColor)
+            HSplitView {
+                if selection.count == 1,
+                   let elementId = selection.first,
+                   let element = document.project.fileSystem.elementById(elementId) {
+                    if element.isFile {
+                        MediaPlayerView(element: Binding(get: { return element }, set: { _ in }))
+                            .frame(minWidth: 200, idealWidth: 600, maxWidth: 600)
+                            .frame(minHeight: 200, maxHeight: .infinity)
+                    }
+                }
+                detailView
+                    .padding()
+                        .frame(minWidth: 350, idealWidth: 400, maxWidth: .infinity)
+                        .frame(minHeight: 200, maxHeight: .infinity)
+                        .background(Asset.semiWhite.swiftUIColor)
+            }
         }
     }
 
