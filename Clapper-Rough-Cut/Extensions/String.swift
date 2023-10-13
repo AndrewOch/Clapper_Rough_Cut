@@ -1,5 +1,6 @@
 extension String {
     public static let empty = ""
+    public static let nilParameter = "--"
 }
 
 extension String {

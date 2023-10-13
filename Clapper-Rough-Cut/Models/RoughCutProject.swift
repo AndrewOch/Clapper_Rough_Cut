@@ -3,17 +3,26 @@ import Foundation
 struct RoughCutProject: Identifiable, Codable {
     var id = UUID()
     var scriptFile: ScriptFile?
-    var unsortedFolder = RawFilesFolder()
-    var phraseFolders: [RawFilesFolder] = []
-
-    var selectedFile: RawFile?
-    var selectedFolder: RawFilesFolder?
-    var selectedTake: RawTake?
-
-    var hasUntranscribedFiles: Bool = false
-    var hasUnsortedTranscribedFiles: Bool = false
-    var canSortScenes: Bool = false
-    var hasUnmatchedSortedFiles: Bool = false
-
+    var fileSystem: RoughCutFileSystem = RoughCutFileSystem()
     var exportSettings: ExportSettings = ExportSettings()
+}
+
+// MARK: - Project states
+extension RoughCutProject {
+    var hasUntranscribedFiles: Bool {
+        return fileSystem.allElements(where: { $0.isFile && $0.transcription == nil }).isNotEmpty
+    }
+    var hasUnsortedTranscribedFiles: Bool {
+        return fileSystem.allElements(where: { $0.isFile && $0.transcription != nil }).isNotEmpty
+    }
+    var canSortScenes: Bool {
+        return hasUntranscribedFiles && scriptFile != nil
+    }
+    var hasUnmatchedSortedFiles: Bool {
+        fileSystem.firstElement { scene in
+            scene.isScene &&
+            fileSystem.firstElement(where: { $0.containerId == scene.id && $0.type == .audio }) != nil &&
+            fileSystem.firstElement(where: { $0.containerId == scene.id && $0.type == .video }) != nil
+        } != nil
+    }
 }

@@ -3,7 +3,8 @@ import SwiftUI
 enum HeaderMenuOption {
     case none
     case base
-    case project
+    case file
+    case edit
     case search
     case script
     case sort
@@ -29,17 +30,52 @@ struct HeaderView: View {
                                                                                           y: (buttonFrame.maxY / 2) + (ImageButtonLogoStyle.imageSize / 6))
                                                       }
                                               })
+                                              .onHover(perform: { hovering in
+                                                  if hovering &&
+                                                        document.states.selectedHeaderOption != .base &&
+                                                        document.states.selectedHeaderOption != .none {
+                                                      document.states.selectedHeaderOption = .base
+
+                                                  }
+                                              })
             HStack {
-                RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.project.firstWordCapitalized,
+                RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.file.firstWordCapitalized,
                                                             enabled: .constant(true)) {
-                    document.states.selectedHeaderOption = .project
+                    document.states.selectedHeaderOption = .file
                 }
                                                             .background(GeometryReader { buttonGeometry in
                                                                 Color.clear
                                                                     .onAppear {
                                                                         let buttonFrame = buttonGeometry.frame(in: .global)
-                                                                        popupPositions[.project] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
+                                                                        popupPositions[.file] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
                                                                     }
+                                                            })
+                                                            .onHover(perform: { hovering in
+                                                                if hovering &&
+                                                                      document.states.selectedHeaderOption != .file &&
+                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption = .file
+
+                                                                }
+                                                            })
+                RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.editSection.firstWordCapitalized,
+                                                            enabled: .constant(true)) {
+                    document.states.selectedHeaderOption = .edit
+                }
+                                                            .background(GeometryReader { buttonGeometry in
+                                                                Color.clear
+                                                                    .onAppear {
+                                                                        let buttonFrame = buttonGeometry.frame(in: .global)
+                                                                        popupPositions[.edit] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
+                                                                    }
+                                                            })
+                                                            .onHover(perform: { hovering in
+                                                                if hovering &&
+                                                                      document.states.selectedHeaderOption != .edit &&
+                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption = .edit
+
+                                                                }
                                                             })
                 RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.search.firstWordCapitalized,
                                                             enabled: .constant(true)) {
@@ -52,6 +88,14 @@ struct HeaderView: View {
                                                                         popupPositions[.search] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
                                                                     }
                                                             })
+                                                            .onHover(perform: { hovering in
+                                                                if hovering &&
+                                                                      document.states.selectedHeaderOption != .search &&
+                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption = .search
+
+                                                                }
+                                                            })
                 RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.script.firstWordCapitalized,
                                                             enabled: .constant(true)) {
                     document.states.selectedHeaderOption = .script
@@ -63,6 +107,14 @@ struct HeaderView: View {
                                                                         popupPositions[.script] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
                                                                     }
                                                             })
+                                                            .onHover(perform: { hovering in
+                                                                if hovering &&
+                                                                      document.states.selectedHeaderOption != .script &&
+                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption = .script
+
+                                                                }
+                                                            })
                 RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.sort.firstWordCapitalized,
                                                             enabled: .constant(true)) {
                     document.states.selectedHeaderOption = .sort
@@ -73,6 +125,14 @@ struct HeaderView: View {
                                                                         let buttonFrame = buttonGeometry.frame(in: .global)
                                                                         popupPositions[.sort] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
                                                                     }
+                                                            })
+                                                            .onHover(perform: { hovering in
+                                                                if hovering &&
+                                                                      document.states.selectedHeaderOption != .sort &&
+                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption = .sort
+
+                                                                }
                                                             })
             }
             Spacer()

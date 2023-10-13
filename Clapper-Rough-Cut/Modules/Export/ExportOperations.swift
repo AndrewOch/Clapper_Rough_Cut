@@ -21,7 +21,6 @@ extension ClapperRoughCutDocument: ExportOperations {
                 project.exportSettings.path = result.path
             }
         }
-        updateStatus()
     }
 
     func export() {
@@ -29,22 +28,27 @@ extension ClapperRoughCutDocument: ExportOperations {
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
         let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
         createFolder(at: exportFolderURL)
-        exportFolder(root: exportFolderURL, folder: project.unsortedFolder)
-        project.phraseFolders.forEach { folder in
-            exportFolder(root: exportFolderURL, folder: folder)
-        }
+        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == project.fileSystem.id }).forEach{ exportFolder(root: exportFolderURL, folder: $0)}
     }
 
-    private func exportFolder(root: URL, folder: RawFilesFolder) {
+    private func exportFolder(root: URL, folder: FileSystemElement) {
         let exportFolderURL = root.appendingPathComponent(folder.title)
         createFolder(at: exportFolderURL)
-        folder.files.forEach { file in
-            let fileName = file.url.lastPathComponent
-            copyFile(from: file.url, to: exportFolderURL.appendingPathComponent(fileName))
+        project.fileSystem.allElements(where: { $0.isFile && $0.containerId == folder.id }).forEach { file in
+            guard let url = file.url else { return }
+            let fileName = url.lastPathComponent
+            copyFile(from: url, to: exportFolderURL.appendingPathComponent(fileName))
         }
-        var takes = folder.takes
+        var takes: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isTake && $0.containerId == folder.id })
         takes.sort { take1, take2 in
-            min(take1.video.createdAt, take1.audio.createdAt) < min(take2.video.createdAt, take2.audio.createdAt)
+            let minCreatedAt1 = project.fileSystem.allElements(where: { $0.containerId == take1.id })
+                .min(by: compareByMinCreatedAt)?.createdAt
+            let minCreatedAt2 = project.fileSystem.allElements(where: { $0.containerId == take2.id })
+                .min(by: compareByMinCreatedAt)?.createdAt
+            if let min1 = minCreatedAt1, let min2 = minCreatedAt2 {
+                return min1 < min2
+            }
+            return false
         }
         var takeNum = 1
         takes.forEach { take in
@@ -53,13 +57,21 @@ extension ClapperRoughCutDocument: ExportOperations {
         }
     }
 
-    private func exportTake(root: URL, take: RawTake, num: Int) {
+    private func compareByMinCreatedAt(_ element1: FileSystemElement, _ element2: FileSystemElement) -> Bool {
+        if let createdAt1 = element1.createdAt, let createdAt2 = element2.createdAt {
+            return createdAt1 < createdAt2
+        }
+        return false
+    }
+
+    private func exportTake(root: URL, take: FileSystemElement, num: Int) {
         let exportFolderURL = root.appendingPathComponent("Take \(num)")
         createFolder(at: exportFolderURL)
-        let videoName = take.video.url.lastPathComponent
-        copyFile(from: take.video.url, to: exportFolderURL.appendingPathComponent(videoName))
-        let audioName = take.audio.url.lastPathComponent
-        copyFile(from: take.audio.url, to: exportFolderURL.appendingPathComponent(audioName))
+        project.fileSystem.allElements(where: { $0.isFile && $0.containerId == take.id }).forEach { file in
+            guard let url = file.url else { return }
+            let name = url.lastPathComponent
+            copyFile(from: url, to: exportFolderURL.appendingPathComponent(name))
+        }
     }
 
     private func createFolder(at url: URL) {

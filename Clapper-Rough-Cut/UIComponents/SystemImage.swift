@@ -15,6 +15,7 @@ enum SystemImage: String {
     case mic = "mic"
     case micFill = "mic.fill"
     case videoSquare = "video.square"
+    case videoFill = "video.fill"
     case videoSquareFill = "video.square.fill"
     case folderFill = "folder.fill"
     case command = "command"
@@ -23,6 +24,8 @@ enum SystemImage: String {
     case option = "option"
     case gearshape = "gearshape"
     case person = "person"
+    case rectangleStack = "rectangle.stack"
+    case rectangleStackFill = "rectangle.stack.fill"
 
     var imageView: Image {
         Image(systemName: self.rawValue)

@@ -14,10 +14,10 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
 
     @Published var project: RoughCutProject
     @Published var states: DocumentStates = DocumentStates()
+    @Published var undoManager: UndoManager?
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
-    @Published var undoManager: UndoManager?
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
@@ -28,7 +28,6 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     init() {
         project = RoughCutProject()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
-        updateStatus()
     }
 
     init(configuration: ReadConfiguration) throws {
@@ -38,7 +37,6 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
-        updateStatus()
     }
 
     func fileWrapper(snapshot: RoughCutProject, configuration: WriteConfiguration) throws -> FileWrapper {
@@ -61,19 +59,5 @@ extension ClapperRoughCutDocument {
             target.registerUndo(oldValue: previousVersion)
             target.project = oldValue
         }
-    }
-}
-
-// MARK: - Update status
-extension ClapperRoughCutDocument {
-    func updateStatus() {
-        project.hasUntranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription == nil }).isNotEmpty
-        project.hasUnsortedTranscribedFiles = project.unsortedFolder.files.filter({ file in file.transcription != nil }).isNotEmpty
-        project.canSortScenes = project.hasUnsortedTranscribedFiles && project.scriptFile != nil
-
-        let files = project.phraseFolders.flatMap({ folder in folder.files })
-        let videos = files.filter { file in file.type == .video }
-        let audios = files.filter { file in file.type == .audio }
-        project.hasUnmatchedSortedFiles = videos.isNotEmpty && audios.isNotEmpty
     }
 }
