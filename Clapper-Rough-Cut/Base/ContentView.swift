@@ -16,7 +16,10 @@ struct ContentView: View {
                 ScriptView()
             }
         }
-        .onChange(of: self.undoManager) { undoManager in
+        .onAppear {
+            document.undoManager = undoManager
+        }
+    .onChange(of: self.undoManager) { undoManager in
             document.undoManager = undoManager
         }
         .onTapGesture {

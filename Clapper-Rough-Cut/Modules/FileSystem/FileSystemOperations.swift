@@ -6,8 +6,10 @@ import AVFoundation
 
 protocol FileSystemOperations {
     func addRawFiles()
+    func transcribeSelectedFiles(_ selection: Set<FileSystemElement.ID>)
     func transcribeFile(_ file: FileSystemElement)
-    func transcribeFiles()
+    func transcribeFiles(_ files: [FileSystemElement]?)
+    func deleteSelectedFiles(_ selection: Set<FileSystemElement.ID>)
 }
 
 // MARK: - File System Operations
@@ -68,9 +70,15 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             .store(in: &cancellables)
     }
 
-    public func transcribeFiles() {
+    public func transcribeFiles(_ files: [FileSystemElement]? = nil) {
+        var filtered: [FileSystemElement] = []
+        if let files = files {
+            filtered = files.filter({ $0.isFile && $0.transcription == nil })
+        } else {
+            filtered = project.fileSystem.allElements(where: { $0.isFile && $0.transcription == nil })
+        }
+        guard !filtered.isEmpty else { return }
         registerUndo()
-        let filtered = project.fileSystem.allElements(where: { $0.isFile }).filter({ $0.transcription == nil })
         filtered.forEach({
             var transcribingFile = $0
             transcribingFile.statuses.append(.transcribing)
@@ -86,5 +94,19 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                 self.project.fileSystem.updateElement(withID: file.id, newValue: file)
             }
             .store(in: &cancellables)
+    }
+
+    func transcribeSelectedFiles(_ selection: Set<FileSystemElement.ID>) {
+        var files: [FileSystemElement] = []
+        selection.forEach { uuid in
+            guard let elem = project.fileSystem.elementById(uuid) else { return }
+            files.append(elem)
+        }
+        transcribeFiles(files)
+    }
+
+    func deleteSelectedFiles(_ selection: Set<FileSystemElement.ID>) {
+        registerUndo()
+        selection.forEach { _ = project.fileSystem.deleteElement(by: $0) }
     }
 }

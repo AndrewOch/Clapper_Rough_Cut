@@ -13,6 +13,41 @@ public enum TranscriptionQuality {
     case high
 }
 
+public struct TranscriptionProgress {
+    public let progress: Double
+}
+
+class WhisperProgressCapture {
+    private var progress: Double = 0
+    private var captureProcess: Process?
+
+    func startCapture() {
+        let capturePipe = Pipe()
+        let captureProcess = Process()
+        captureProcess.launchPath = "/bin/sh"
+        captureProcess.arguments = ["-c", "whisper_full_with_state"]
+        captureProcess.standardOutput = capturePipe
+        capturePipe.fileHandleForReading.readabilityHandler = { handle in
+            let data = handle.availableData
+            if let output = String(data: data, encoding: .utf8) {
+                if let range = output.range(of: "progress = ") {
+                    let progressString = output[range.upperBound...].trimmingCharacters(in: .whitespaces)
+                    if let progress = Double(progressString) {
+                        self.progress = progress
+                    }
+                }
+            }
+        }
+        captureProcess.launch()
+        self.captureProcess = captureProcess
+    }
+
+    func stopCapture() {
+        captureProcess?.terminate()
+        captureProcess?.waitUntilExit()
+    }
+}
+
 class TranscriptionPublisher: Publisher {
     typealias Output = FileSystemElement
     typealias Failure = Never
@@ -121,7 +156,7 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
                                                                      "-p", numProcesses,
                                                                      "-l", "ru",
                                                                      "-m", model,
-                                                                     "-nt", tmpFile])
+                                                                     "-pp", tmpFile])
                             result = result.trimmingCharacters(in: .whitespacesAndNewlines)
                             let endTime = Date().timeIntervalSince1970
                             let resultTime = endTime - startTime
