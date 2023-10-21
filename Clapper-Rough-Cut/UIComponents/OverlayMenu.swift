@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct OverlayMenu<Content: View>: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State var position: CGPoint
     private let content: Content
 
@@ -14,7 +15,7 @@ struct OverlayMenu<Content: View>: View {
 
     var body: some View {
         content
-            .background(Asset.white.swiftUIColor)
+            .background(Color.surfaceSecondary(colorScheme))
             .background(GeometryReader { buttonGeometry in
                 Color.clear
                     .onAppear {

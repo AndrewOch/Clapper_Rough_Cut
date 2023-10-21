@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ModalSheet<Content: View, ActionBarContent: View>: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State var closeAction: () -> Void
     @State var title: String
     @State var minWidth: CGFloat
@@ -49,17 +50,17 @@ struct ModalSheet<Content: View, ActionBarContent: View>: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: cornerImageSize, height: cornerImageSize)
-                    .foregroundColor(Asset.light.swiftUIColor)
+                    .foregroundColor(.surfaceTertiary(colorScheme))
                 Spacer()
                 CustomLabel<Header2Style>(text: title)
-                    .foregroundColor(Asset.dark.swiftUIColor)
+                    .foregroundColor(.contentPrimary(colorScheme))
                 Spacer()
                 Button(action: closeAction) {
                     SystemImage.xmark.imageView
                         .resizable()
                         .scaledToFit()
                         .frame(width: closeButtonSize, height: closeButtonSize)
-                        .foregroundColor(Asset.dark.swiftUIColor)
+                        .foregroundColor(.contentPrimary(colorScheme))
                 }.buttonStyle(PlainButtonStyle())
                     .focusable(false)
             }
@@ -70,7 +71,7 @@ struct ModalSheet<Content: View, ActionBarContent: View>: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: cornerImageSize, height: cornerImageSize)
-                    .foregroundColor(Asset.light.swiftUIColor)
+                    .foregroundColor(.surfaceTertiary(colorScheme))
                 Spacer()
                 actionBarContent
                 Spacer()
@@ -78,7 +79,7 @@ struct ModalSheet<Content: View, ActionBarContent: View>: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: cornerImageSize, height: cornerImageSize)
-                    .foregroundColor(Asset.light.swiftUIColor)
+                    .foregroundColor(.surfaceTertiary(colorScheme))
             }
         }
         .padding()
@@ -86,7 +87,7 @@ struct ModalSheet<Content: View, ActionBarContent: View>: View {
         .frame(minHeight: resizableVertical ? minHeight : nil,
                idealHeight: resizableVertical ? idealHeight : nil,
                maxHeight: resizableVertical ? maxHeight : nil)
-        .background(Asset.semiWhite.swiftUIColor)
+        .background(Color.surfaceSecondary(colorScheme))
         .cornerRadius(10)
     }
 }
