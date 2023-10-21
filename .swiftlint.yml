@@ -2,7 +2,7 @@ excluded:
   - Carthage
   - vendor
   - Pods
-  - Whisper
+  - Clapper-Rough-Cut/Whisper
 disabled_rules:
   - colon
   - comma

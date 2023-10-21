@@ -5,5 +5,6 @@ extension KeyboardShortcuts.Name {
 
     static let characters = Self("characters", default: Shortcut(.y, modifiers: [.command]))
 
-    static let transcribe = Self("transcribe", default: Shortcut(.t, modifiers: [.command, .shift]))
+    static let transcribeAll = Self("transcribeAll", default: Shortcut(.t, modifiers: [.command, .shift]))
+    static let transcribe = Self("transcribe", default: Shortcut(.t, modifiers: [.command]))
 }

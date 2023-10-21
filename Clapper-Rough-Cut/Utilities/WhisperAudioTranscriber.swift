@@ -1,10 +1,11 @@
 import Foundation
 import AVFoundation
 import Dispatch
+import Combine
 
 protocol AudioTranscriber {
-    func transcribeFiles(_ files: [FileSystemElement], quality: TranscriptionQuality, completion: @escaping (FileSystemElement) -> Void)
-    func transcribeFile(_ file: FileSystemElement, quality: TranscriptionQuality, completion: @escaping (FileSystemElement) -> Void)
+    func transcribeFiles(_ files: [FileSystemElement], quality: TranscriptionQuality) -> AnyPublisher<FileSystemElement, Never>
+    func transcribeFile(_ file: FileSystemElement, quality: TranscriptionQuality) -> AnyPublisher<FileSystemElement, Never>
 }
 
 public enum TranscriptionQuality {
@@ -12,8 +13,53 @@ public enum TranscriptionQuality {
     case high
 }
 
-class WhisperAudioTranscriber: AudioTranscriber {
-    let converter = Converter()
+class TranscriptionPublisher: Publisher {
+    typealias Output = FileSystemElement
+    typealias Failure = Never
+
+    private let audioFile: FileSystemElement
+    private let quality: TranscriptionQuality
+
+    init(audioFile: FileSystemElement, quality: TranscriptionQuality) {
+        self.audioFile = audioFile
+        self.quality = quality
+    }
+
+    func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
+        let subscription = TranscriptionSubscription(subscriber: subscriber, audioFile: audioFile, quality: quality)
+        subscriber.receive(subscription: subscription)
+    }
+}
+
+class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == FileSystemElement {
+    private let converter = Converter()
+    private var subscriber: S?
+    private let audioFile: FileSystemElement
+    private let quality: TranscriptionQuality
+
+    init(subscriber: S, audioFile: FileSystemElement, quality: TranscriptionQuality) {
+            self.subscriber = subscriber
+            self.audioFile = audioFile
+            self.quality = quality
+        }
+
+    func request(_ demand: Subscribers.Demand) {
+            transcribe(audioFile: audioFile, quality: quality) { result in
+                if result.status == .success {
+                    if let transcription = result.transcription {
+                        var newFile = self.audioFile
+                        newFile.transcription = transcription
+                        self.subscriber?.receive(newFile)
+                    }
+                }
+                self.subscriber?.receive(completion: .finished)
+                self.subscriber = nil
+            }
+        }
+
+    func cancel() {
+        subscriber = nil
+    }
 
     private var whisperScript: String {
         guard let path = Bundle.main.path(forResource: "main", ofType: "") else {
@@ -56,100 +102,78 @@ class WhisperAudioTranscriber: AudioTranscriber {
             return
         }
         let startTime = Date().timeIntervalSince1970
-        converter.convertAudioFile(url) { result in
-            switch result {
-            case .success(let outputURL):
-                let tmpFile = outputURL.path
-                if FileManager.default.fileExists(atPath: tmpFile) {
-                    var numThreads = "4"
-                    var numProcesses = "2"
-                    if duration > 100 {
-                        numThreads = "1"
-                        numProcesses = "8"
+        DispatchQueue.global().async {
+            self.converter.convertAudioFile(url) { result in
+                switch result {
+                case .success(let outputURL):
+                    let tmpFile = outputURL.path
+                    if FileManager.default.fileExists(atPath: tmpFile) {
+                        var numThreads = "4"
+                        var numProcesses = "2"
+                        if duration > 100 {
+                            numThreads = "1"
+                            numProcesses = "8"
+                        }
+                        print("TMP file " + tmpFile)
+                        do {
+                            var result = try ScriptRunner.safeShell([self.whisperScript,
+                                                                     "-t", numThreads,
+                                                                     "-p", numProcesses,
+                                                                     "-l", "ru",
+                                                                     "-m", model,
+                                                                     "-nt", tmpFile])
+                            result = result.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let endTime = Date().timeIntervalSince1970
+                            let resultTime = endTime - startTime
+                            do {
+                                try FileManager.default.removeItem(at: outputURL)
+                            } catch {
+                                print("Failed to delete temporary file: \(error)")
+                            }
+                            DispatchQueue.main.async {
+                                completion(TranscriptionResult(status: .success,
+                                                               transcription: result,
+                                                               transcriptionDuration: resultTime))
+                            }
+                        } catch {
+                            do {
+                                try FileManager.default.removeItem(at: outputURL)
+                            } catch {
+                                print("Failed to delete temporary file: \(error)")
+                            }
+                            print("Transcription failed with error: \(error.localizedDescription)")
+                            DispatchQueue.main.async {
+                                completion(TranscriptionResult(status: .failure,
+                                                               transcription: nil,
+                                                               transcriptionDuration: nil))
+                            }
+                        }
                     }
-                    print("TMP file " + tmpFile)
-                    do {
-                        var result = try ScriptRunner.safeShell([self.whisperScript,
-                                                                 "-t", numThreads,
-                                                                 "-p", numProcesses,
-                                                                 "-l", "ru",
-                                                                 "-m", model,
-                                                                 "-nt", tmpFile])
-                        result = result.trimmingCharacters(in: .whitespacesAndNewlines)
-                        let endTime = Date().timeIntervalSince1970
-                        let resultTime = endTime - startTime
-                        completion(TranscriptionResult(status: .success,
-                                                       transcription: result,
-                                                       transcriptionDuration: resultTime))
-                    } catch {
-                        print("Transcription failed with error: \(error.localizedDescription)")
+                case .failure(let error):
+                    print("Conversion failed with error: \(error.localizedDescription)")
+                    DispatchQueue.main.async {
                         completion(TranscriptionResult(status: .failure,
                                                        transcription: nil,
                                                        transcriptionDuration: nil))
                     }
                 }
-            case .failure(let error):
-                print("Conversion failed with error: \(error.localizedDescription)")
-                completion(TranscriptionResult(status: .failure,
-                                               transcription: nil,
-                                               transcriptionDuration: nil))
             }
         }
     }
+}
 
-    func transcribeFiles(_ files: [FileSystemElement],
-                         quality: TranscriptionQuality = .low,
-                         completion: @escaping (FileSystemElement) -> Void) {
-        let totalStartTime = Date().timeIntervalSince1970
-        var totalDuration: Double = 0
-        var processedCount = 0
-        let backgroundQueue = DispatchQueue.global(qos: .background)
-        for file in files {
-            guard let url = file.url, let duration = file.duration else { return }
-            backgroundQueue.async {
-                self.transcribe(audioFile: file, quality: quality) { result in
-                    guard result.status == .success,
-                          let transcription = result.transcription,
-                          let transcriptionDuration = result.transcriptionDuration else { return }
-                    print(url.lastPathComponent)
-                    print(transcription)
-                    print("Audio file duration: \(String(format: "%.2f", duration)) seconds")
-                    print("Transcription time: \(String(format: "%.2f", transcriptionDuration)) seconds")
-                    totalDuration += duration
-                    var newFile = file
-                    newFile.transcription = transcription
-                    completion(newFile)
-                    processedCount += 1
-                    if processedCount < files.count { return }
-                    print("Total audio duration: \(String(format: "%.2f", totalDuration)) seconds")
-                    let totalEndTime = Date().timeIntervalSince1970
-                    let elapsedTime = totalEndTime - totalStartTime
-                    print("Total transcription time: \(String(format: "%.2f", elapsedTime)) seconds")
-                }
-            }
+class WhisperAudioTranscriber: AudioTranscriber {
+    func transcribeFiles(_ files: [FileSystemElement], quality: TranscriptionQuality = .low) -> AnyPublisher<FileSystemElement, Never> {
+        let publishers = files.map { file in
+            TranscriptionPublisher(audioFile: file, quality: quality)
+                .eraseToAnyPublisher()
         }
+        return Publishers.MergeMany(publishers)
+            .eraseToAnyPublisher()
     }
 
-    func transcribeFile(_ file: FileSystemElement,
-                        quality: TranscriptionQuality = .low,
-                        completion: @escaping (FileSystemElement) -> Void) {
-        guard let url = file.url, let duration = file.duration else { return }
-        let backgroundQueue = DispatchQueue.global(qos: .background)
-        backgroundQueue.async {
-            self.transcribe(audioFile: file, quality: quality) { result in
-                if (result.status == .success) {
-                    if let transcription = result.transcription,
-                       let transcriptionDuration = result.transcriptionDuration {
-                        print(url.lastPathComponent)
-                        print(transcription)
-                        print("Audio file duration: \(String(format: "%.2f", duration)) seconds")
-                        print("Transcription time: \(String(format: "%.2f", transcriptionDuration)) seconds")
-                        var newFile = file
-                        newFile.transcription = transcription
-                        completion(newFile)
-                    }
-                }
-            }
-        }
+    func transcribeFile(_ file: FileSystemElement, quality: TranscriptionQuality = .low) -> AnyPublisher<FileSystemElement, Never> {
+        return TranscriptionPublisher(audioFile: file, quality: quality)
+            .eraseToAnyPublisher()
     }
 }

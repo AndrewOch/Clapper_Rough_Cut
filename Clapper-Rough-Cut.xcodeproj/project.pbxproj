@@ -71,7 +71,7 @@
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
 		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
-		04C0A0402AE3EF66001F6B10 /* ShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A03F2AE3EF66001F6B10 /* ShapeStyle.swift */; };
+		04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A03F2AE3EF66001F6B10 /* Color.swift */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -172,7 +172,7 @@
 		04A74A022AD2C32000226865 /* main */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = main; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
-		04C0A03F2AE3EF66001F6B10 /* ShapeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeStyle.swift; sourceTree = "<group>"; };
+		04C0A03F2AE3EF66001F6B10 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 				043538F22AB073DE00775E0D /* Environment.swift */,
 				043538F92AB21A9300775E0D /* KeyboardShortcuts.swift */,
 				0453BC6F2AD93F53000909D6 /* DateFormatter.swift */,
-				04C0A03F2AE3EF66001F6B10 /* ShapeStyle.swift */,
+				04C0A03F2AE3EF66001F6B10 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -835,7 +835,7 @@
 				0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */,
 				043538CD2AABD57100775E0D /* SystemImage.swift in Sources */,
 				043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */,
-				04C0A0402AE3EF66001F6B10 /* ShapeStyle.swift in Sources */,
+				04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */,
 				04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */,
 				043538FA2AB21A9300775E0D /* KeyboardShortcuts.swift in Sources */,
 				0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */,

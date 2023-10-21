@@ -53,18 +53,38 @@ extension ClapperRoughCutDocument: FileSystemOperations {
 
     public func transcribeFile(_ file: FileSystemElement) {
         registerUndo()
-        transcriber.transcribeFile(file, quality: .high) { [weak self] newFile in
-            guard let self = self else { return }
-            self.project.fileSystem.updateElement(withID: file.id, newValue: newFile)
-        }
+        var transcribingFile = file
+        transcribingFile.statuses.append(.transcribing)
+        project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
+        transcriber.transcribeFile(file, quality: .high)
+            .sink { [weak self] completedFile in
+                guard let self = self else { return }
+                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
+                file.statuses.removeAll(where: { $0 == .transcribing })
+                file.statuses.append(.transcription)
+                file.transcription = completedFile.transcription
+                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+            }
+            .store(in: &cancellables)
     }
 
     public func transcribeFiles() {
         registerUndo()
         let filtered = project.fileSystem.allElements(where: { $0.isFile }).filter({ $0.transcription == nil })
-        transcriber.transcribeFiles(filtered, quality: .high) { [weak self] newFile in
-            guard let self = self else { return }
-            self.project.fileSystem.updateElement(withID: newFile.id, newValue: newFile)
-        }
+        filtered.forEach({
+            var transcribingFile = $0
+            transcribingFile.statuses.append(.transcribing)
+            project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
+        })
+        transcriber.transcribeFiles(filtered, quality: .high)
+            .sink { [weak self] completedFile in
+                guard let self = self else { return }
+                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
+                file.statuses.removeAll(where: { $0 == .transcribing })
+                file.statuses.append(.transcription)
+                file.transcription = completedFile.transcription
+                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+            }
+            .store(in: &cancellables)
     }
 }

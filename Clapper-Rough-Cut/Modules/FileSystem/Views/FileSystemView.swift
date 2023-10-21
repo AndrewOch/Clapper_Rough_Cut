@@ -43,7 +43,7 @@ struct FileSystemView: View {
             Color.surfaceTertiary(colorScheme)
             List(document.project.fileSystem.listItems, children: \.elements, selection: $selection) { item in
                 let element = item.value
-                FileSystemElementView(element: element)
+                FileSystemElementView(element: Binding(get: { return element }, set: { _ in }))
                     .onDrag({
                         draggable.removeAll()
                         if selection.contains(element.id) {

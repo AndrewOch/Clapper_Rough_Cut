@@ -99,7 +99,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.transcribe.capitalized,
                                         imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
-                                        shortcut: .transcribe,
+                                        shortcut: .transcribeAll,
                                         isEnabled: Binding(get: {
                                             document.project.hasUntranscribedFiles
                                         }, set: { _ in }),

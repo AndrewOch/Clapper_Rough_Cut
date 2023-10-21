@@ -30,7 +30,6 @@ internal enum Asset {
   internal static let accentPrimary = ColorAsset(name: "accentPrimary")
   internal static let dark = ColorAsset(name: "dark")
   internal static let light = ColorAsset(name: "light")
-  internal static let secondary = ColorAsset(name: "secondary")
   internal static let semiDark = ColorAsset(name: "semiDark")
   internal static let semiWhite = ColorAsset(name: "semiWhite")
   internal static let systemRed = ColorAsset(name: "systemRed")

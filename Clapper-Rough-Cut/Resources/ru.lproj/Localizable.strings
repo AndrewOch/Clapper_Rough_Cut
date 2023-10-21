@@ -49,3 +49,9 @@
 "scene" = "сцена";
 "take" = "дубль";
 "newFolder" = "новая папка";
+
+
+// Settings - Shortcuts
+"shortcut_openCharactersMenu" = "Открыть меню персонажей:";
+"shortcut_export" = "Экспорт:";
+"shortcut_transcribeAll" = "Расшифровать все:";

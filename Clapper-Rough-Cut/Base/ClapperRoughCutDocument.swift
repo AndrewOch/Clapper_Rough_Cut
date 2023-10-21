@@ -1,6 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 import Foundation
+import Combine
 
 extension UTType {
     static var clapperPost: UTType {
@@ -18,6 +19,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
+    var cancellables = Set<AnyCancellable>()
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
