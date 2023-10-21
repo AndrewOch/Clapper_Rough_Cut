@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct FileSystemView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 400
@@ -30,7 +31,7 @@ struct FileSystemView: View {
                 detailView
                     .padding()
                         .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
-                        .background(Asset.semiWhite.swiftUIColor)
+                        .background(Color.surfaceSecondary(colorScheme))
             }
             .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
             .frame(minHeight: 200, idealHeight: 400, maxHeight: .infinity)
@@ -39,7 +40,7 @@ struct FileSystemView: View {
 
     var fileSystem: some View {
         ZStack {
-            Asset.light.swiftUIColor
+            Color.surfaceTertiary(colorScheme)
             List(document.project.fileSystem.listItems, children: \.elements, selection: $selection) { item in
                 let element = item.value
                 FileSystemElementView(element: element)
@@ -57,10 +58,10 @@ struct FileSystemView: View {
                                 FileIcon(type: element.type)
                                 CustomLabel<BodyMediumStyle>(text: String(draggable.count))
                             }
-                            .foregroundColor(Asset.dark.swiftUIColor)
+                            .foregroundColor(.contentPrimary(colorScheme))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
-                            .background(Asset.white.swiftUIColor)
+                            .background(Color.surfacePrimary(colorScheme))
                             .cornerRadius(5)
                             .overlay(RoundedRectangle(cornerRadius: 5)
                                 .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
@@ -73,10 +74,9 @@ struct FileSystemView: View {
                     }
             }
         }
-        .preferredColorScheme(.light)
         .font(.custom(FontFamily.Overpass.regular.name, size: 12))
         .scrollContentBackground(.hidden)
-        .background(Asset.light.swiftUIColor)
+        .background(Color.surfaceTertiary(colorScheme))
         .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
             drop(at: document.project.fileSystem.root, providers: providers)
         }

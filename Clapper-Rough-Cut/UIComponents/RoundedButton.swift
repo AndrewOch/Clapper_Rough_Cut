@@ -42,7 +42,7 @@ public enum RoundedButtonSecondaryMediumStyle: RoundedButtonStyle {
     public static var cornerRadius: CGFloat = 10
     public static var foregroundColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor
     public static var selectedColor: SwiftUI.Color = Asset.accentDark.swiftUIColor
-    public static var backgroundColor: SwiftUI.Color = Asset.white.swiftUIColor
+    public static var backgroundColor: SwiftUI.Color = .clear
     public static var elementsSpacing: CGFloat = 8
     public static var borderWidth: CGFloat = 1
     public static var paddingHorizontal: CGFloat = 16
@@ -78,7 +78,7 @@ public enum RoundedButtonAlertMediumStyle: RoundedButtonStyle {
     public static var cornerRadius: CGFloat = 10
     public static var foregroundColor: SwiftUI.Color = Asset.systemRed.swiftUIColor
     public static var selectedColor: SwiftUI.Color = Asset.systemRed.swiftUIColor
-    public static var backgroundColor: SwiftUI.Color = Asset.white.swiftUIColor
+    public static var backgroundColor: SwiftUI.Color = .clear
     public static var elementsSpacing: CGFloat = 8
     public static var borderWidth: CGFloat = 1
     public static var paddingHorizontal: CGFloat = 16

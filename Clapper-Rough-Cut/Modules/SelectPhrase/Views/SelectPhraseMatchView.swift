@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SelectPhraseMatchView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var selectAction: (Phrase) -> Void
     @State var searchText: String = .empty
@@ -23,7 +24,7 @@ struct SelectPhraseMatchView: View {
                             Spacer()
                         }
                         .padding(.all, 5)
-                        .background(Asset.white.swiftUIColor)
+                        .background(Color.surfacePrimary(colorScheme))
                         .cornerRadius(5)
                         .overlay(RoundedRectangle(cornerRadius: 5)
                             .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
@@ -34,7 +35,7 @@ struct SelectPhraseMatchView: View {
             }
             .padding(.all, 10)
         }
-        .background(Asset.light.swiftUIColor)
+        .background(Color.surfaceTertiary(colorScheme))
         .cornerRadius(10)
     }
 

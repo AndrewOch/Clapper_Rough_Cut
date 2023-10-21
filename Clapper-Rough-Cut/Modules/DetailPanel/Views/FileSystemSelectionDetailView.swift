@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct FileSystemSelectionDetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var isModalPresented = false
     @Binding var element: FileSystemElement
@@ -23,22 +24,23 @@ struct FileSystemSelectionDetailView: View {
     var baseDetailInfo: some View {
         HStack {
             FileIcon(type: element.type)
-                .foregroundColor(Asset.dark.swiftUIColor)
+                .foregroundColor(.contentPrimary(colorScheme))
             CustomLabel<BodyMediumStyle>(text: element.title)
                 .lineLimit(1)
-                .foregroundColor(Asset.dark.swiftUIColor)
+                .foregroundColor(.contentPrimary(colorScheme))
             Spacer()
             if let duration = element.duration {
                 CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
-                    .foregroundColor(Asset.dark.swiftUIColor)
+                    .foregroundColor(.contentPrimary(colorScheme))
             }
             if let createdAt = element.createdAt {
                 CustomLabel<BodyMediumStyle>(text: Formatter.formatDateShort(date: createdAt))
-                    .foregroundColor(Asset.semiDark.swiftUIColor)
+                    .foregroundColor(.contentSecondary(colorScheme))
                     .lineLimit(1)
             }
-        }.padding(.bottom)
-            .foregroundStyle(Asset.dark.swiftUIColor)
+        }
+        .padding(.bottom)
+        .foregroundStyle(Color.contentPrimary(colorScheme))
     }
 
     var fileDetailInfo: some View {
@@ -47,15 +49,15 @@ struct FileSystemSelectionDetailView: View {
                 VStack {
                     HStack {
                         TranscribedIcon()
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
                     }
                     ScrollView {
                         HStack {
                             CustomLabel<BodyMediumStyle>(text: transcription)
-                                .foregroundColor(Asset.dark.swiftUIColor)
+                                .foregroundColor(.contentPrimary(colorScheme))
                             Spacer()
                         }
                     }
@@ -74,9 +76,9 @@ struct FileSystemSelectionDetailView: View {
                 VStack {
                     HStack {
                         SystemImage.folder.imageView
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         CustomLabel<BodyMediumStyle>(text: folder.title)
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
                         RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,
                                                                        imageName: SystemImage.film.rawValue,
@@ -124,7 +126,7 @@ struct FileSystemSelectionDetailView: View {
                 CustomLabel<BodyMediumStyle>(text: "\(videoCount) \(L10n.video)")
                 Spacer()
             }
-            .foregroundColor(Asset.dark.swiftUIColor)
+            .foregroundColor(.contentPrimary(colorScheme))
             .padding(.vertical, 5)
             HStack {
                 FileIcon(type: .audio)
@@ -138,15 +140,15 @@ struct FileSystemSelectionDetailView: View {
                 CustomLabel<BodyMediumStyle>(text: "\(takesCount) \(L10n.takes)")
                 Spacer()
             }
-            .foregroundColor(Asset.dark.swiftUIColor)
+            .foregroundColor(.contentPrimary(colorScheme))
             .padding(.vertical, 5)
             if (element.scriptPhraseId != nil) {
                 VStack {
                     HStack {
                         SystemImage.film.imageView
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         CustomLabel<BodyMediumStyle>(text: element.title)
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
                         RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
                                                                        imageName: SystemImage.film.rawValue,
@@ -175,15 +177,15 @@ struct FileSystemSelectionDetailView: View {
                 HStack {
                     if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
                         FileIcon(type: element.type)
-                            .foregroundColor(Asset.dark.swiftUIColor)
+                            .foregroundColor(.contentPrimary(colorScheme))
                         CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
                             .lineLimit(1)
-                            .foregroundColor(Asset.dark.swiftUIColor)
+                            .foregroundColor(.contentPrimary(colorScheme))
                         Spacer()
                         CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
-                            .foregroundColor(Asset.dark.swiftUIColor)
+                            .foregroundColor(.contentPrimary(colorScheme))
                         CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
-                            .foregroundColor(Asset.semiDark.swiftUIColor)
+                            .foregroundColor(.contentSecondary(colorScheme))
                     }
                 }.padding(.bottom)
                     .sheet(isPresented: $isModalPresented) {

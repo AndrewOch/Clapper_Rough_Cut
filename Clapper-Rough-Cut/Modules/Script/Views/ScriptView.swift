@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 struct ScriptView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
 
     var body: some View {
@@ -10,7 +11,7 @@ struct ScriptView: View {
                 Spacer()
                 if let file = document.project.scriptFile {
                     CustomLabel<Header3Style>(text: file.url.deletingPathExtension().lastPathComponent)
-                        .foregroundColor(Asset.dark.swiftUIColor)
+                        .foregroundColor(.contentPrimary(colorScheme))
                 } else {
                     RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.addScript.capitalized,
                                                                    imageName: SystemImage.plus.rawValue,
@@ -37,17 +38,17 @@ struct ScriptView: View {
                                             }
                                             Spacer()
                                         }
-                                        .foregroundColor(Asset.dark.swiftUIColor)
+                                        .foregroundColor(.contentPrimary(colorScheme))
                                     }
                                 }
                                 .padding(.all, 5)
-                                .background(Asset.white.swiftUIColor)
+                                .background(Color.surfacePrimary(colorScheme))
                                     .cornerRadius(5)
                                     .overlay(RoundedRectangle(cornerRadius: 5)
                                         .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                             } else {
                                 CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
-                                    .foregroundColor(Asset.dark.swiftUIColor)
+                                    .foregroundColor(.contentPrimary(colorScheme))
                             }
                         }
                     }
@@ -57,9 +58,9 @@ struct ScriptView: View {
                 .frame(maxHeight: .infinity)
             }
         }
-        .frame(minWidth: 300, maxWidth: .infinity,
+        .frame(minWidth: 300, idealWidth: 400, maxWidth: 600,
                minHeight: 500, maxHeight: .infinity)
-        .background(Asset.semiWhite.swiftUIColor)
+        .background(Color.surfaceSecondary(colorScheme))
         .sheet(isPresented: $document.states.isCharactersViewPresented) {
             if let scriptFile = document.project.scriptFile {
                 let characterPhrasesMap: [UUID: [Phrase]] = scriptFile.characters.reduce(into: [:]) { result, character in

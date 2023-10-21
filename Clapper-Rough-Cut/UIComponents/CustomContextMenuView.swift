@@ -6,7 +6,7 @@ private struct CustomContextMenuButtonStyle {
     public static let cornerRadius: CGFloat = 5
     public static let foregroundColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor
     public static let hoveredForegroundColor: SwiftUI.Color = Asset.white.swiftUIColor
-    public static let backgroundColor: SwiftUI.Color = Asset.white.swiftUIColor
+    public static let backgroundColor: SwiftUI.Color = .clear
     public static let hoveredBackgroundColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor
     public static let elementsSpacing: CGFloat = 0
     public static let borderWidth: CGFloat = 0

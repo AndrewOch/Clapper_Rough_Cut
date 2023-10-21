@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CustomTextField: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State var title: String
     @State var placeholder: String
     @Binding var text: String
@@ -9,7 +10,7 @@ struct CustomTextField: View {
         VStack(spacing: 5) {
             HStack {
                 CustomLabel<BodyMediumStyle>(text: title)
-                    .foregroundColor(Asset.semiDark.swiftUIColor)
+                    .foregroundColor(Color.contentSecondary(colorScheme))
                 Spacer()
             }.padding(.horizontal, 10)
             TextField(placeholder, text: $text)
@@ -17,17 +18,17 @@ struct CustomTextField: View {
                 .minimumScaleFactor(0.5)
                 .focusable(false)
                 .textFieldStyle(.plain)
-                .foregroundColor(Asset.dark.swiftUIColor)
+                .foregroundColor(Color.contentPrimary(colorScheme))
                 .tint(Asset.accentPrimary.swiftUIColor)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 10)
-                .background(Asset.white.swiftUIColor)
+                .background(Color.surfacePrimary(colorScheme))
                 .cornerRadius(10)
                 .font(.custom(BodyMediumStyle.fontName, size: BodyMediumStyle.fontSize))
                 .overlay(
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Asset.tertiary.swiftUIColor, lineWidth: 1)
+                            .stroke(Color.contentTertiary(colorScheme), lineWidth: 1)
                             .background(.clear)
                     }
                 )
