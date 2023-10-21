@@ -60,7 +60,6 @@ class WhisperAudioTranscriber: AudioTranscriber {
             switch result {
             case .success(let outputURL):
                 let tmpFile = outputURL.path
-                print("Conversion successful! Output file saved to: \(outputURL.path)")
                 if FileManager.default.fileExists(atPath: tmpFile) {
                     var numThreads = "4"
                     var numProcesses = "2"
@@ -70,13 +69,13 @@ class WhisperAudioTranscriber: AudioTranscriber {
                     }
                     print("TMP file " + tmpFile)
                     do {
-                        let result = try ScriptRunner.safeShell([self.whisperScript,
+                        var result = try ScriptRunner.safeShell([self.whisperScript,
                                                                  "-t", numThreads,
                                                                  "-p", numProcesses,
                                                                  "-l", "ru",
                                                                  "-m", model,
-                                                                 "-d",
                                                                  "-nt", tmpFile])
+                        result = result.trimmingCharacters(in: .whitespacesAndNewlines)
                         let endTime = Date().timeIntervalSince1970
                         let resultTime = endTime - startTime
                         completion(TranscriptionResult(status: .success,
@@ -98,7 +97,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
     }
 
-    func transcribeFiles(_ files: [FileSystemElement], 
+    func transcribeFiles(_ files: [FileSystemElement],
                          quality: TranscriptionQuality = .low,
                          completion: @escaping (FileSystemElement) -> Void) {
         let totalStartTime = Date().timeIntervalSince1970
@@ -131,7 +130,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
         }
     }
 
-    func transcribeFile(_ file: FileSystemElement, 
+    func transcribeFile(_ file: FileSystemElement,
                         quality: TranscriptionQuality = .low,
                         completion: @escaping (FileSystemElement) -> Void) {
         guard let url = file.url, let duration = file.duration else { return }

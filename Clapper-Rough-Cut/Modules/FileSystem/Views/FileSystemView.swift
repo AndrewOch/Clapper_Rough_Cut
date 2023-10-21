@@ -32,6 +32,7 @@ struct FileSystemView: View {
                         .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
                         .background(Asset.semiWhite.swiftUIColor)
             }
+            .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
             .frame(minHeight: 200, idealHeight: 400, maxHeight: .infinity)
         }
     }

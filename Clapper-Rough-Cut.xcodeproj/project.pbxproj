@@ -79,7 +79,6 @@
 		04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E929F926D1007E4C64 /* ExportOperations.swift */; };
 		04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */; };
 		04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */; };
-		04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04FE4B8B29F819EB00634522 /* ggml-base.bin */; };
 		04FE56CC29F846DD00634522 /* python3.9 in Resources */ = {isa = PBXBuildFile; fileRef = 04FE56CB29F846DD00634522 /* python3.9 */; };
 		5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */; };
 /* End PBXBuildFile section */
@@ -180,7 +179,6 @@
 		04F7A9E929F926D1007E4C64 /* ExportOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOperations.swift; sourceTree = "<group>"; };
 		04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
 		04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		04FE4B8B29F819EB00634522 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
 		04FE56CB29F846DD00634522 /* python3.9 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = python3.9; path = ../../opt/anaconda3/bin/python3.9; sourceTree = "<group>"; };
 		08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_Cut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_CutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				04A72EB52AB2785300000482 /* ggml-medium.bin */,
-				04FE4B8B29F819EB00634522 /* ggml-base.bin */,
 				0443081529E2A70A00705B78 /* convert-h5-to-ggml.py */,
 				0443081229E2A70A00705B78 /* download-ggml-model.cmd */,
 				0443080D29E2A70A00705B78 /* convert-pt-to-ggml.py */,
@@ -686,7 +683,6 @@
 				04A74A032AD2C32000226865 /* main in Resources */,
 				04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
-				04FE4B8C29F819EB00634522 /* ggml-base.bin in Resources */,
 				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,
 				043538C22AAB8B5400775E0D /* Localizable.strings in Resources */,
 				0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */,

@@ -81,10 +81,6 @@ func (context *context) SetSpeedup(v bool) {
 	context.params.SetSpeedup(v)
 }
 
-func (context *context) SetSplitOnWord(v bool) {
-        context.params.SetSplitOnWord(v)
-}
-
 // Set number of threads to use
 func (context *context) SetThreads(v uint) {
 	context.params.SetThreads(int(v))
@@ -97,7 +93,7 @@ func (context *context) SetOffset(v time.Duration) {
 
 // Set duration of audio to process
 func (context *context) SetDuration(v time.Duration) {
-	context.params.SetDuration(int(v.Milliseconds()))
+	context.params.SetOffset(int(v.Milliseconds()))
 }
 
 // Set timestamp token probability threshold (~0.01)
@@ -156,16 +152,12 @@ func (context *context) WhisperLangAutoDetect(offset_ms int, n_threads int) ([]f
 }
 
 // Process new sample data and return any errors
-func (context *context) Process(
-	data []float32,
-	callNewSegment SegmentCallback,
-	callProgress ProgressCallback,
-) error {
+func (context *context) Process(data []float32, cb SegmentCallback) error {
 	if context.model.ctx == nil {
 		return ErrInternalAppError
 	}
 	// If the callback is defined then we force on single_segment mode
-	if callNewSegment != nil {
+	if cb != nil {
 		context.params.SetSingleSegment(true)
 	}
 
@@ -173,27 +165,23 @@ func (context *context) Process(
 	processors := 0
 	if processors > 1 {
 		if err := context.model.ctx.Whisper_full_parallel(context.params, data, processors, nil, func(new int) {
-			if callNewSegment != nil {
+			if cb != nil {
 				num_segments := context.model.ctx.Whisper_full_n_segments()
 				s0 := num_segments - new
 				for i := s0; i < num_segments; i++ {
-					callNewSegment(toSegment(context.model.ctx, i))
+					cb(toSegment(context.model.ctx, i))
 				}
 			}
 		}); err != nil {
 			return err
 		}
 	} else if err := context.model.ctx.Whisper_full(context.params, data, nil, func(new int) {
-		if callNewSegment != nil {
+		if cb != nil {
 			num_segments := context.model.ctx.Whisper_full_n_segments()
 			s0 := num_segments - new
 			for i := s0; i < num_segments; i++ {
-				callNewSegment(toSegment(context.model.ctx, i))
+				cb(toSegment(context.model.ctx, i))
 			}
-		}
-	}, func(progress int) {
-		if callProgress != nil {
-			callProgress(progress)
 		}
 	}); err != nil {
 		return err
