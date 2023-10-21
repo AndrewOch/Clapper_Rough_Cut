@@ -33,8 +33,9 @@ struct FileSystemSelectionDetailView: View {
                     .foregroundColor(Asset.dark.swiftUIColor)
             }
             if let createdAt = element.createdAt {
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
+                CustomLabel<BodyMediumStyle>(text: Formatter.formatDateShort(date: createdAt))
                     .foregroundColor(Asset.semiDark.swiftUIColor)
+                    .lineLimit(1)
             }
         }.padding(.bottom)
             .foregroundStyle(Asset.dark.swiftUIColor)

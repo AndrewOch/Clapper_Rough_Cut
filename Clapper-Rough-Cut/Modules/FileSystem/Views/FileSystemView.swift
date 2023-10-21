@@ -3,7 +3,7 @@ import SwiftUI
 struct FileSystemView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
-    @State private var fileSystemHeight: CGFloat = 600
+    @State private var fileSystemHeight: CGFloat = 400
     @State private var selection: Set<FileSystemElement.ID> = []
 
     @State private var draggable: [UUID] = []
@@ -16,13 +16,23 @@ struct FileSystemView: View {
                 .frame(minHeight: 400, idealHeight: fileSystemHeight, maxHeight: .infinity)
                     .onAppear {
                         width = 850
-                        fileSystemHeight = 600
+                        fileSystemHeight = 400
                     }
-            detailView
-                .padding()
-                    .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
-                    .frame(minHeight: 200, maxHeight: .infinity)
-                    .background(Asset.semiWhite.swiftUIColor)
+            HSplitView {
+                if selection.count == 1,
+                   let elementId = selection.first,
+                   let element = document.project.fileSystem.elementById(elementId) {
+                    if element.isFile {
+                        MediaPlayerView(element: Binding(get: { return element }, set: { _ in }))
+                            .frame(minWidth: 300, idealWidth: 600, maxWidth: 600)
+                    }
+                }
+                detailView
+                    .padding()
+                        .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
+                        .background(Asset.semiWhite.swiftUIColor)
+            }
+            .frame(minHeight: 200, idealHeight: 400, maxHeight: .infinity)
         }
     }
 

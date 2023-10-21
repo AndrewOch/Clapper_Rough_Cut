@@ -95,7 +95,7 @@ extension RoughCutFileSystem {
         allElements(where: { $0.containerId == _root.id }).forEach { elem in
             items.append(listItem(element: elem))
         }
-        return items
+        return items.sorted(by: <)
     }
 
     private func listItem(element: FileSystemElement) -> FileSystemListItem {
@@ -104,7 +104,7 @@ extension RoughCutFileSystem {
             elems.append(listItem(element: elem))
         }
         if elems.isNotEmpty {
-            return FileSystemListItem(value: element, elements: elems)
+            return FileSystemListItem(value: element, elements: elems.sorted(by: <))
         }
         return FileSystemListItem(value: element, elements: nil)
     }
