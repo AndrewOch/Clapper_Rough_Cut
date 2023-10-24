@@ -10,10 +10,10 @@ struct RoughCutProject: Identifiable, Codable {
 // MARK: - Project states
 extension RoughCutProject {
     var hasUntranscribedFiles: Bool {
-        return fileSystem.allElements(where: { $0.isFile && $0.transcription == nil }).isNotEmpty
+        return fileSystem.allElements(where: { $0.isFile && $0.subtitles == nil }).isNotEmpty
     }
     var hasUnsortedTranscribedFiles: Bool {
-        return fileSystem.allElements(where: { $0.isFile && $0.transcription != nil }).isNotEmpty
+        return fileSystem.allElements(where: { $0.isFile && $0.subtitles != nil }).isNotEmpty
     }
     var canSortScenes: Bool {
         return hasUntranscribedFiles && scriptFile != nil

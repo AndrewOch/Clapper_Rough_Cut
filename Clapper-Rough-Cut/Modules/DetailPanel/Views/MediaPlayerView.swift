@@ -5,7 +5,7 @@ struct MediaPlayerView: View {
     @Binding var element: FileSystemElement
     @State private var player: AVPlayer?
     @State private var isPlaying = false
-    @State private var currentTime: Double = 0.0
+    @Binding var currentTime: Double
     @State private var isDragging = false
 
     var body: some View {

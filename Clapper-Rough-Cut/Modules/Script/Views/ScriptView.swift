@@ -58,7 +58,7 @@ struct ScriptView: View {
                 .frame(maxHeight: .infinity)
             }
         }
-        .frame(minWidth: 300, idealWidth: 400, maxWidth: 600,
+        .frame(minWidth: 300, idealWidth: 400, maxWidth: 580,
                minHeight: 500, maxHeight: .infinity)
         .background(Color.surfaceSecondary(colorScheme))
         .sheet(isPresented: $document.states.isCharactersViewPresented) {

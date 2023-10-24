@@ -3,8 +3,10 @@ import SwiftUI
 struct FileSystemSelectionDetailView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @State private var isModalPresented = false
     @Binding var element: FileSystemElement
+    @Binding var currentTime: Double
+    @State private var isModalPresented = false
+    @State private var subtitlesMode: Int = SubtitlesMode.full.rawValue
 
     var body: some View {
         VStack {
@@ -45,24 +47,7 @@ struct FileSystemSelectionDetailView: View {
 
     var fileDetailInfo: some View {
         VStack {
-            if let transcription = element.transcription {
-                VStack {
-                    HStack {
-                        TranscribedIcon()
-                            .foregroundColor(.contentSecondary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
-                            .foregroundColor(.contentSecondary(colorScheme))
-                        Spacer()
-                    }
-                    ScrollView {
-                        HStack {
-                            CustomLabel<BodyMediumStyle>(text: transcription)
-                                .foregroundColor(.contentPrimary(colorScheme))
-                            Spacer()
-                        }
-                    }
-                }
-            } else {
+            if !element.statuses.contains(where: { $0 == .transcription || $0 == .transcribing }) {
                 HStack {
                     RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.transcribe.capitalized,
                                                                    imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
@@ -71,6 +56,41 @@ struct FileSystemSelectionDetailView: View {
                     }
                     Spacer()
                 }
+            } else {
+                VStack {
+                    HStack {
+                        TranscribedIcon()
+                        CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
+                        Spacer()
+                        CustomPicker(selectedOption: $subtitlesMode, options: SubtitlesMode.images)
+                            .frame(width: 100)
+                    }
+                    .foregroundColor(.contentSecondary(colorScheme))
+                    ScrollView {
+                        HStack {
+                            if element.statuses.contains(.transcribing) {
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .scaleEffect(0.5)
+                            }
+                            if subtitlesMode == 0, let subtitles = element.fullSubtitles {
+                                CustomLabel<BodyMediumStyle>(text: subtitles)
+                            }
+                            if subtitlesMode == 1, let subtitle = element.currentSubtitle(time: currentTime) {
+                                CustomLabel<BodyMediumStyle>(text: subtitle.text)
+                            }
+                            Spacer()
+                        }
+                        .foregroundColor(.contentPrimary(colorScheme))
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Color.surfacePrimary(colorScheme))
+                .cornerRadius(5)
+                .overlay(RoundedRectangle(cornerRadius: 5)
+                    .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                .padding(.bottom, 10)
             }
             if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id) {
                 VStack {
@@ -91,7 +111,7 @@ struct FileSystemSelectionDetailView: View {
                 HStack {
                     RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.determineScene.capitalized,
                                                                    imageName: SystemImage.film.rawValue,
-                                                                   enabled: .constant(element.transcription != nil)) {
+                                                                   enabled: .constant(element.subtitles != nil)) {
                         document.matchSceneForFile(element)
                     }
                     RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.chooseScene.capitalized,

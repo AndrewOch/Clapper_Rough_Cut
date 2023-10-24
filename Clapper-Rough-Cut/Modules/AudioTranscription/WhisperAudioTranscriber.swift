@@ -8,46 +8,6 @@ protocol AudioTranscriber {
     func transcribeFile(_ file: FileSystemElement, quality: TranscriptionQuality) -> AnyPublisher<FileSystemElement, Never>
 }
 
-public enum TranscriptionQuality {
-    case low
-    case high
-}
-
-public struct TranscriptionProgress {
-    public let progress: Double
-}
-
-class WhisperProgressCapture {
-    private var progress: Double = 0
-    private var captureProcess: Process?
-
-    func startCapture() {
-        let capturePipe = Pipe()
-        let captureProcess = Process()
-        captureProcess.launchPath = "/bin/sh"
-        captureProcess.arguments = ["-c", "whisper_full_with_state"]
-        captureProcess.standardOutput = capturePipe
-        capturePipe.fileHandleForReading.readabilityHandler = { handle in
-            let data = handle.availableData
-            if let output = String(data: data, encoding: .utf8) {
-                if let range = output.range(of: "progress = ") {
-                    let progressString = output[range.upperBound...].trimmingCharacters(in: .whitespaces)
-                    if let progress = Double(progressString) {
-                        self.progress = progress
-                    }
-                }
-            }
-        }
-        captureProcess.launch()
-        self.captureProcess = captureProcess
-    }
-
-    func stopCapture() {
-        captureProcess?.terminate()
-        captureProcess?.waitUntilExit()
-    }
-}
-
 class TranscriptionPublisher: Publisher {
     typealias Output = FileSystemElement
     typealias Failure = Never
@@ -79,18 +39,20 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
         }
 
     func request(_ demand: Subscribers.Demand) {
-            transcribe(audioFile: audioFile, quality: quality) { result in
-                if result.status == .success {
-                    if let transcription = result.transcription {
-                        var newFile = self.audioFile
-                        newFile.transcription = transcription
-                        self.subscriber?.receive(newFile)
-                    }
+        transcribe(audioFile: audioFile, quality: quality) { progress in
+            self.subscriber?.receive(self.audioFile)
+        } completion: { result in
+            if result.status == .success {
+                if let transcription = result.transcription {
+                    var newFile = self.audioFile
+                    newFile.subtitles = transcription
+                    self.subscriber?.receive(newFile)
                 }
-                self.subscriber?.receive(completion: .finished)
-                self.subscriber = nil
             }
+            self.subscriber?.receive(completion: .finished)
+            self.subscriber = nil
         }
+    }
 
     func cancel() {
         subscriber = nil
@@ -122,6 +84,7 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
 
     private func transcribe(audioFile: FileSystemElement,
                             quality: TranscriptionQuality = .low,
+                            progress: @escaping (Double) -> Void,
                             completion: @escaping (TranscriptionResult) -> Void) {
         var model: String?
         switch quality {
@@ -130,7 +93,7 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
         case .high:
             model = self.whisperQualityModel
         }
-        guard let model = model, let url = audioFile.url, let duration = audioFile.duration else {
+        guard let model = model, let url = audioFile.url else {
             completion(TranscriptionResult(status: .failure,
                                            transcription: nil,
                                            transcriptionDuration: nil))
@@ -143,17 +106,10 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
                 case .success(let outputURL):
                     let tmpFile = outputURL.path
                     if FileManager.default.fileExists(atPath: tmpFile) {
-                        var numThreads = "4"
-                        var numProcesses = "2"
-                        if duration > 100 {
-                            numThreads = "1"
-                            numProcesses = "8"
-                        }
-                        print("TMP file " + tmpFile)
+                        let maxThreads = max(1, min(8, ProcessInfo.processInfo.processorCount - 2))
                         do {
                             var result = try ScriptRunner.safeShell([self.whisperScript,
-                                                                     "-t", numThreads,
-                                                                     "-p", numProcesses,
+                                                                     "-t", String(maxThreads),
                                                                      "-l", "ru",
                                                                      "-m", model,
                                                                      "-pp", tmpFile])
@@ -167,7 +123,7 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
                             }
                             DispatchQueue.main.async {
                                 completion(TranscriptionResult(status: .success,
-                                                               transcription: result,
+                                                               transcription: self.parseSubtitles(from: result, duration: audioFile.duration ?? 0),
                                                                transcriptionDuration: resultTime))
                             }
                         } catch {
@@ -193,6 +149,39 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
                     }
                 }
             }
+        }
+    }
+
+    private func parseSubtitles(from text: String, duration: Double) -> [Subtitle] {
+        let pattern = "\\[(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{3}) --> (\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{3})\\] (.+)"
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let matches = regex.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+            var subtitles: [Subtitle] = []
+            for match in matches {
+                let startHours = (text as NSString).substring(with: match.range(at: 1))
+                let startMinutes = (text as NSString).substring(with: match.range(at: 2))
+                let startSeconds = (text as NSString).substring(with: match.range(at: 3))
+                let startMilliseconds = (text as NSString).substring(with: match.range(at: 4))
+
+                let endHours = (text as NSString).substring(with: match.range(at: 5))
+                let endMinutes = (text as NSString).substring(with: match.range(at: 6))
+                let endSeconds = (text as NSString).substring(with: match.range(at: 7))
+                let endMilliseconds = (text as NSString).substring(with: match.range(at: 8))
+
+                let startTime = min(Double(startHours)! * 3_600 + Double(startMinutes)! * 60 + Double(startSeconds)! + Double(startMilliseconds)! / 1_000.0 + 2, duration)
+                let endTime = min(Double(endHours)! * 3_600 + Double(endMinutes)! * 60 + Double(endSeconds)! + Double(endMilliseconds)! / 1_000.0 + 2, duration)
+
+                let subtitleText = (text as NSString).substring(with: match.range(at: 9))
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+
+                let subtitle = Subtitle(text: subtitleText, startTime: startTime, endTime: endTime)
+                subtitles.append(subtitle)
+            }
+            return subtitles
+        } catch {
+            print("Error parsing subtitles: \(error)")
+            return []
         }
     }
 }

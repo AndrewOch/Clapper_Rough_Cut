@@ -11,7 +11,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         let startTime = Date().timeIntervalSince1970
         let textsMatcherWrapper = TextsMatcher_Wrapper()
         for file in files {
-            if let transcription = file.transcription {
+            if let transcription = file.fullSubtitles {
                 let wordsCount = transcription.components(separatedBy: .whitespaces).count
                 if wordsCount == 0 { continue }
 

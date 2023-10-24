@@ -50,7 +50,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
                                         imageName: SystemImage.squareAndArrowDown.rawValue,
-                                        isEnabled: .constant(true),
+                                        shortcut: .importFiles, isEnabled: .constant(true),
                                         action: {
                                             document.addRawFiles()
                                         }),

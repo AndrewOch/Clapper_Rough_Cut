@@ -64,7 +64,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                 guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
                 file.statuses.removeAll(where: { $0 == .transcribing })
                 file.statuses.append(.transcription)
-                file.transcription = completedFile.transcription
+                file.subtitles = completedFile.subtitles
                 self.project.fileSystem.updateElement(withID: file.id, newValue: file)
             }
             .store(in: &cancellables)
@@ -73,9 +73,9 @@ extension ClapperRoughCutDocument: FileSystemOperations {
     public func transcribeFiles(_ files: [FileSystemElement]? = nil) {
         var filtered: [FileSystemElement] = []
         if let files = files {
-            filtered = files.filter({ $0.isFile && $0.transcription == nil })
+            filtered = files.filter({ $0.isFile && $0.subtitles == nil })
         } else {
-            filtered = project.fileSystem.allElements(where: { $0.isFile && $0.transcription == nil })
+            filtered = project.fileSystem.allElements(where: { $0.isFile && $0.subtitles == nil })
         }
         guard !filtered.isEmpty else { return }
         registerUndo()
@@ -90,7 +90,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                 guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
                 file.statuses.removeAll(where: { $0 == .transcribing })
                 file.statuses.append(.transcription)
-                file.transcription = completedFile.transcription
+                file.subtitles = completedFile.subtitles
                 self.project.fileSystem.updateElement(withID: file.id, newValue: file)
             }
             .store(in: &cancellables)

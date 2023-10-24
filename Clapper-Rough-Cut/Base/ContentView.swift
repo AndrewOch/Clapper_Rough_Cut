@@ -19,7 +19,7 @@ struct ContentView: View {
         .onAppear {
             document.undoManager = undoManager
         }
-    .onChange(of: self.undoManager) { undoManager in
+        .onChange(of: self.undoManager) { undoManager in
             document.undoManager = undoManager
         }
         .onTapGesture {

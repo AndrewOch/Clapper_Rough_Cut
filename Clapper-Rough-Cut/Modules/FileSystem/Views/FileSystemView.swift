@@ -9,6 +9,7 @@ struct FileSystemView: View {
     @State private var selection: Set<FileSystemElement.ID> = []
     @State private var draggable: [UUID] = []
     @State private var isTargeted = false
+    @State private var currentPlayerTime: Double = 0
 
     var body: some View {
         VSplitView {
@@ -24,7 +25,7 @@ struct FileSystemView: View {
                    let elementId = selection.first,
                    let element = document.project.fileSystem.elementById(elementId) {
                     if element.isFile {
-                        MediaPlayerView(element: .getOnly(element))
+                        MediaPlayerView(element: .getOnly(element), currentTime: $currentPlayerTime)
                             .frame(minWidth: 300, idealWidth: 600, maxWidth: 600)
                     }
                 }
@@ -40,6 +41,7 @@ struct FileSystemView: View {
             NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
                 if event.keyCode == 51 {
                     document.deleteSelectedFiles(selection)
+                    selection = []
                     return nil
                 }
                 if event.modifierFlags.contains(.command) && event.charactersIgnoringModifiers == "t" {
@@ -106,7 +108,7 @@ struct FileSystemView: View {
                 if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
                     FileSystemSelectionDetailView(element: Binding(get: { return element },
                                                                    set: { document.project.fileSystem.updateElement(withID: element.id,
-                                                                                                                    newValue: $0) }))
+                                                                                                                    newValue: $0) }), currentTime: $currentPlayerTime)
                 }
             }
             Spacer()
