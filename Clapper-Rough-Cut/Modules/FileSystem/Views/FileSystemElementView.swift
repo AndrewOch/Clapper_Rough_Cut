@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FileSystemElementView: View {
-    @State var element: FileSystemElement
+    @Binding var element: FileSystemElement
 
     var body: some View {
         HStack(alignment: .center) {
@@ -13,6 +13,12 @@ struct FileSystemElementView: View {
             }
             Spacer()
             HStack {
+                if element.statuses.contains(.transcribing) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.5)
+                        .frame(width: 10, height: 10)
+                }
                 if element.statuses.contains(.transcription) {
                     TranscribedIcon()
                 }
@@ -38,7 +44,8 @@ struct FileSystemElementView: View {
                         .lineLimit(1)
                 }
                 Spacer()
-            }.frame(width: 200)
+            }
+            .frame(width: 200)
         }
         .padding(.horizontal)
     }

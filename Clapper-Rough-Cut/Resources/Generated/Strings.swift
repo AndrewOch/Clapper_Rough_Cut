@@ -94,6 +94,12 @@ internal enum L10n {
   internal static let selected = L10n.tr("Localizable", "selected", fallback: "выбрано")
   /// настройки
   internal static let settings = L10n.tr("Localizable", "settings", fallback: "настройки")
+  /// Экспорт:
+  internal static let shortcutExport = L10n.tr("Localizable", "shortcut_export", fallback: "Экспорт:")
+  /// Открыть меню персонажей:
+  internal static let shortcutOpenCharactersMenu = L10n.tr("Localizable", "shortcut_openCharactersMenu", fallback: "Открыть меню персонажей:")
+  /// Расшифровать все:
+  internal static let shortcutTranscribeAll = L10n.tr("Localizable", "shortcut_transcribeAll", fallback: "Расшифровать все:")
   /// сортировка
   internal static let sort = L10n.tr("Localizable", "sort", fallback: "сортировка")
   /// статусы

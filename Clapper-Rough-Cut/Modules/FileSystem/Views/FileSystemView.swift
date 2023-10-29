@@ -1,4 +1,5 @@
 import SwiftUI
+import KeyboardShortcuts
 
 struct FileSystemView: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -6,34 +7,49 @@ struct FileSystemView: View {
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 400
     @State private var selection: Set<FileSystemElement.ID> = []
-
     @State private var draggable: [UUID] = []
     @State private var isTargeted = false
+    @State private var currentPlayerTime: Double = 0
 
     var body: some View {
         VSplitView {
             fileSystem
                 .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
                 .frame(minHeight: 400, idealHeight: fileSystemHeight, maxHeight: .infinity)
-                    .onAppear {
-                        width = 850
-                        fileSystemHeight = 400
-                    }
+                .onAppear {
+                    width = 850
+                    fileSystemHeight = 400
+                }
             HSplitView {
                 if selection.count == 1,
                    let elementId = selection.first,
                    let element = document.project.fileSystem.elementById(elementId) {
                     if element.isFile {
-                        MediaPlayerView(element: Binding(get: { return element }, set: { _ in }))
+                        MediaPlayerView(element: .getOnly(element), currentTime: $currentPlayerTime)
                             .frame(minWidth: 300, idealWidth: 600, maxWidth: 600)
                     }
                 }
                 detailView
                     .padding()
-                        .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
-                        .background(Color.surfaceSecondary(colorScheme))
+                    .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
+                    .background(Color.surfaceSecondary(colorScheme))
             }
+            .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
             .frame(minHeight: 200, idealHeight: 400, maxHeight: .infinity)
+        }
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                if event.keyCode == 51 {
+                    document.deleteSelectedFiles(selection)
+                    selection = []
+                    return nil
+                }
+                if event.modifierFlags.contains(.command) && event.charactersIgnoringModifiers == "t" {
+                    document.transcribeSelectedFiles(selection)
+                    return nil
+                }
+                return event
+            }
         }
     }
 
@@ -42,7 +58,7 @@ struct FileSystemView: View {
             Color.surfaceTertiary(colorScheme)
             List(document.project.fileSystem.listItems, children: \.elements, selection: $selection) { item in
                 let element = item.value
-                FileSystemElementView(element: element)
+                FileSystemElementView(element: .getOnly(element))
                     .onDrag({
                         draggable.removeAll()
                         if selection.contains(element.id) {
@@ -79,6 +95,9 @@ struct FileSystemView: View {
         .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
             drop(at: document.project.fileSystem.root, providers: providers)
         }
+        .onTapGesture {
+            document.states.selectedHeaderOption = .none
+        }
     }
 
     var detailView: some View {
@@ -89,7 +108,7 @@ struct FileSystemView: View {
                 if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
                     FileSystemSelectionDetailView(element: Binding(get: { return element },
                                                                    set: { document.project.fileSystem.updateElement(withID: element.id,
-                                                                                                                    newValue: $0) }))
+                                                                                                                    newValue: $0) }), currentTime: $currentPlayerTime)
                 }
             }
             Spacer()

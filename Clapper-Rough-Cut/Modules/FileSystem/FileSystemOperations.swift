@@ -6,8 +6,10 @@ import AVFoundation
 
 protocol FileSystemOperations {
     func addRawFiles()
+    func transcribeSelectedFiles(_ selection: Set<FileSystemElement.ID>)
     func transcribeFile(_ file: FileSystemElement)
-    func transcribeFiles()
+    func transcribeFiles(_ files: [FileSystemElement]?)
+    func deleteSelectedFiles(_ selection: Set<FileSystemElement.ID>)
 }
 
 // MARK: - File System Operations
@@ -53,18 +55,58 @@ extension ClapperRoughCutDocument: FileSystemOperations {
 
     public func transcribeFile(_ file: FileSystemElement) {
         registerUndo()
-        transcriber.transcribeFile(file, quality: .high) { [weak self] newFile in
-            guard let self = self else { return }
-            self.project.fileSystem.updateElement(withID: file.id, newValue: newFile)
-        }
+        var transcribingFile = file
+        transcribingFile.statuses.append(.transcribing)
+        project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
+        transcriber.transcribeFile(file, quality: .high)
+            .sink { [weak self] completedFile in
+                guard let self = self else { return }
+                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
+                file.statuses.removeAll(where: { $0 == .transcribing })
+                file.statuses.append(.transcription)
+                file.subtitles = completedFile.subtitles
+                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+            }
+            .store(in: &cancellables)
     }
 
-    public func transcribeFiles() {
-        registerUndo()
-        let filtered = project.fileSystem.allElements(where: { $0.isFile }).filter({ $0.transcription == nil })
-        transcriber.transcribeFiles(filtered, quality: .high) { [weak self] newFile in
-            guard let self = self else { return }
-            self.project.fileSystem.updateElement(withID: newFile.id, newValue: newFile)
+    public func transcribeFiles(_ files: [FileSystemElement]? = nil) {
+        var filtered: [FileSystemElement] = []
+        if let files = files {
+            filtered = files.filter({ $0.isFile && $0.subtitles == nil })
+        } else {
+            filtered = project.fileSystem.allElements(where: { $0.isFile && $0.subtitles == nil })
         }
+        guard !filtered.isEmpty else { return }
+        registerUndo()
+        filtered.forEach({
+            var transcribingFile = $0
+            transcribingFile.statuses.append(.transcribing)
+            project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
+        })
+        transcriber.transcribeFiles(filtered, quality: .high)
+            .sink { [weak self] completedFile in
+                guard let self = self else { return }
+                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
+                file.statuses.removeAll(where: { $0 == .transcribing })
+                file.statuses.append(.transcription)
+                file.subtitles = completedFile.subtitles
+                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+            }
+            .store(in: &cancellables)
+    }
+
+    func transcribeSelectedFiles(_ selection: Set<FileSystemElement.ID>) {
+        var files: [FileSystemElement] = []
+        selection.forEach { uuid in
+            guard let elem = project.fileSystem.elementById(uuid) else { return }
+            files.append(elem)
+        }
+        transcribeFiles(files)
+    }
+
+    func deleteSelectedFiles(_ selection: Set<FileSystemElement.ID>) {
+        registerUndo()
+        selection.forEach { _ = project.fileSystem.deleteElement(by: $0) }
     }
 }

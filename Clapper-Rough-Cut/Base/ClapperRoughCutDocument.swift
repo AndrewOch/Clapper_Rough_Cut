@@ -1,6 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 import Foundation
+import Combine
 
 extension UTType {
     static var clapperPost: UTType {
@@ -18,6 +19,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
+    var cancellables = Set<AnyCancellable>()
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
@@ -28,6 +30,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     init() {
         project = RoughCutProject()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        cleanFileSystemStatuses()
     }
 
     init(configuration: ReadConfiguration) throws {
@@ -37,6 +40,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        cleanFileSystemStatuses()
     }
 
     func fileWrapper(snapshot: RoughCutProject, configuration: WriteConfiguration) throws -> FileWrapper {
@@ -58,6 +62,19 @@ extension ClapperRoughCutDocument {
             let previousVersion = target.project
             target.registerUndo(oldValue: previousVersion)
             target.project = oldValue
+        }
+    }
+}
+
+// MARK: - Clean on init
+extension ClapperRoughCutDocument {
+    private func cleanFileSystemStatuses() {
+        project.fileSystem.elements.forEach { element in
+            var element = element
+            if element.statuses.contains(.transcribing) {
+                element.statuses.removeAll(where: { $0 == .transcribing })
+                project.fileSystem.updateElement(withID: element.id, newValue: element)
+            }
         }
     }
 }

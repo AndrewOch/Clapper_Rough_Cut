@@ -16,7 +16,7 @@ extension ClapperRoughCutDocument: ScriptFileOperations {
         dialog.canChooseDirectories    = false
         dialog.allowsMultipleSelection = false
         dialog.allowedContentTypes     = [UTType("org.openxmlformats.wordprocessingml.document")!, UTType(filenameExtension: "pages")!, .text]
-        
+
         guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return }
         guard let result = dialog.url else { return }
         do {

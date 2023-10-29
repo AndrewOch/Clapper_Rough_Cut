@@ -1,45 +1,53 @@
-#pragma once
-
+#include <cublas_v2.h>
+#include <cuda_runtime.h>
 #include "ggml.h"
-
-#ifdef GGML_USE_HIPBLAS
-#define GGML_CUDA_NAME "ROCm"
-#define GGML_CUBLAS_NAME "hipBLAS"
-#else
-#define GGML_CUDA_NAME "CUDA"
-#define GGML_CUBLAS_NAME "cuBLAS"
-#endif
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
-#define GGML_CUDA_MAX_DEVICES       16
+#define CUDA_CHECK(err)                                                                 \
+    do {                                                                                \
+        cudaError_t err_ = (err);                                                       \
+        if (err_ != cudaSuccess) {                                                      \
+            fprintf(stderr, "CUDA error %d at %s:%d: %s\n", err_, __FILE__, __LINE__,   \
+                cudaGetErrorString(err_));                                              \
+            exit(1);                                                                    \
+        }                                                                               \
+    } while (0)
 
-GGML_API void   ggml_init_cublas(void);
-GGML_API void * ggml_cuda_host_malloc(size_t size);
-GGML_API void   ggml_cuda_host_free(void * ptr);
+#define CUBLAS_CHECK(err)                                                               \
+    do {                                                                                \
+        cublasStatus_t err_ = (err);                                                    \
+        if (err_ != CUBLAS_STATUS_SUCCESS) {                                            \
+            fprintf(stderr, "cuBLAS error %d at %s:%d\n", err_, __FILE__, __LINE__);    \
+            exit(1);                                                                    \
+        }                                                                               \
+    } while (0)
 
-GGML_API bool   ggml_cuda_can_mul_mat(const struct ggml_tensor * src0, const struct ggml_tensor * src1, struct ggml_tensor * dst);
-GGML_API void   ggml_cuda_set_tensor_split(const float * tensor_split);
-GGML_API void   ggml_cuda_transform_tensor(void * data, struct ggml_tensor * tensor);
-GGML_API void   ggml_cuda_free_data(struct ggml_tensor * tensor);
+extern cublasHandle_t g_cublasH;
+extern cudaStream_t g_cudaStream;
+extern cudaStream_t g_cudaStream2;
+extern cudaEvent_t g_cudaEvent;
 
-GGML_API void   ggml_cuda_assign_buffers(struct ggml_tensor * tensor);
-GGML_API void   ggml_cuda_assign_buffers_no_scratch(struct ggml_tensor * tensor);
-GGML_API void   ggml_cuda_assign_buffers_force_inplace(struct ggml_tensor * tensor);
+void   ggml_init_cublas(void);
+void * ggml_cuda_host_malloc(size_t size);
+void   ggml_cuda_host_free(void * ptr);
 
-GGML_API void   ggml_cuda_assign_buffers_no_alloc(struct ggml_tensor * tensor);
-GGML_API void   ggml_cuda_assign_scratch_offset(struct ggml_tensor * tensor, size_t offset);
+void * ggml_cuda_pool_malloc(size_t size, size_t * actual_size);
+void   ggml_cuda_pool_free(void * ptr, size_t size);
 
-GGML_API void   ggml_cuda_set_main_device(int main_device);
-GGML_API void   ggml_cuda_set_mul_mat_q(bool mul_mat_q);
-GGML_API void   ggml_cuda_set_scratch_size(size_t scratch_size);
-GGML_API void   ggml_cuda_free_scratch(void);
-GGML_API bool   ggml_cuda_compute_forward(struct ggml_compute_params * params, struct ggml_tensor * tensor);
+void dequantize_row_q4_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+void dequantize_row_q4_1_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+void dequantize_row_q4_2_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+void dequantize_row_q5_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+void dequantize_row_q5_1_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+void dequantize_row_q8_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
 
-GGML_API int    ggml_cuda_get_device_count(void);
-GGML_API void   ggml_cuda_get_device_description(int device, char * description, size_t description_size);
+cudaError_t ggml_cuda_h2d_tensor_2d(void * dst, const struct ggml_tensor * src, uint64_t i3, uint64_t i2, cudaStream_t stream);
+
+typedef void (*dequantize_row_q_cuda_t)(const void * x, float * y, int k, cudaStream_t stream);
+dequantize_row_q_cuda_t ggml_get_dequantize_row_q_cuda(enum ggml_type type);
 
 #ifdef  __cplusplus
 }

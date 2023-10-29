@@ -1,6 +1,6 @@
 struct TranscriptionResult {
     let status: TranscriptionResultStatus
-    let transcription: String?
+    let transcription: [Subtitle]?
     let transcriptionDuration: Double?
 }
 

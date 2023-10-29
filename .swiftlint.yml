@@ -2,7 +2,8 @@ excluded:
   - Carthage
   - vendor
   - Pods
-  - Whisper
+  - Clapper-Rough-Cut/Whisper
+  - Clapper-Rough-Cut/MFCC
 disabled_rules:
   - colon
   - comma
@@ -61,7 +62,7 @@ force_cast: warning
 force_try:
   severity: warning
 
-line_length: 180
+line_length: 200
 
 cyclomatic_complexity: 13
 

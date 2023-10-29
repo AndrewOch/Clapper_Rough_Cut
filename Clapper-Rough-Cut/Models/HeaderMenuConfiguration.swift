@@ -1,6 +1,20 @@
 import SwiftUI
 import KeyboardShortcuts
 
+struct CustomContextMenuSection: Identifiable {
+    var id = UUID()
+    var options: [CustomContextMenuOption]
+}
+
+struct CustomContextMenuOption: Identifiable {
+    var id = UUID()
+    var title: String
+    var imageName: String?
+    var shortcut: KeyboardShortcuts.Name?
+    var isEnabled: Binding<Bool>
+    var action: () -> Void
+}
+
 struct HeaderMenuConfiguration {
     var document: ClapperRoughCutDocument
 
@@ -36,7 +50,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
                                         imageName: SystemImage.squareAndArrowDown.rawValue,
-                                        isEnabled: .constant(true),
+                                        shortcut: .importFiles, isEnabled: .constant(true),
                                         action: {
                                             document.addRawFiles()
                                         }),
@@ -86,7 +100,7 @@ struct HeaderMenuConfiguration {
                 CustomContextMenuOption(title: L10n.characters.firstWordCapitalized,
                                         imageName: SystemImage.person.rawValue,
                                         shortcut: .characters,
-                                        isEnabled: .constant(true),
+                                        isEnabled: .getOnly(document.project.scriptFile != nil),
                                         action: {
                                             document.states.isCharactersViewPresented.toggle()
                                         })
@@ -99,10 +113,8 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.transcribe.capitalized,
                                         imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
-                                        shortcut: .transcribe,
-                                        isEnabled: Binding(get: {
-                                            document.project.hasUntranscribedFiles
-                                        }, set: { _ in }),
+                                        shortcut: .transcribeAll,
+                                        isEnabled: .getOnly(document.project.hasUntranscribedFiles),
                                         action: {
                                             document.transcribeFiles()
                                         })
@@ -111,17 +123,13 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.determineScenes.firstWordCapitalized,
                                         imageName: SystemImage.film.rawValue,
-                                        isEnabled: Binding(get: {
-                                            document.project.canSortScenes
-                                        }, set: { _ in }),
+                                        isEnabled: .getOnly(document.project.canSortScenes),
                                         action: {
                                             document.matchScenes()
                                         }),
                 CustomContextMenuOption(title: L10n.determineTakes.firstWordCapitalized,
                                         imageName: SystemImage.filmStack.rawValue,
-                                        isEnabled: Binding(get: {
-                                            document.project.hasUnmatchedSortedFiles
-                                        }, set: { _ in }),
+                                        isEnabled: .getOnly(document.project.hasUnmatchedSortedFiles),
                                         action: {
                                             document.matchTakes()
                                         })
@@ -154,18 +162,4 @@ struct HeaderMenuConfiguration {
             })
         })
     }
-}
-
-struct CustomContextMenuSection: Identifiable {
-    var id = UUID()
-    var options: [CustomContextMenuOption]
-}
-
-struct CustomContextMenuOption: Identifiable {
-    var id = UUID()
-    var title: String
-    var imageName: String?
-    var shortcut: KeyboardShortcuts.Name?
-    var isEnabled: Binding<Bool>
-    var action: () -> Void
 }

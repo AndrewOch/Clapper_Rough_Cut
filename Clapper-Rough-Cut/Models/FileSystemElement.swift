@@ -10,7 +10,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var containerId: UUID?
     var scriptPhraseId: UUID?
     let url: URL?
-    var transcription: String?
+    var subtitles: [Subtitle]?
     var mfccs: [[Float]]?
     var collapsed: Bool = false
 
@@ -22,7 +22,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          containerId: UUID? = nil,
          scriptPhraseId: UUID? = nil,
          url: URL? = nil,
-         transcription: String? = nil,
+         transcription: [Subtitle]? = nil,
          mfccs: [[Float]]? = nil,
          collapsed: Bool = false) {
         self.title = title
@@ -33,7 +33,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.containerId = containerId
         self.scriptPhraseId = scriptPhraseId
         self.url = url
-        self.transcription = transcription
+        self.subtitles = transcription
         self.mfccs = mfccs
         self.collapsed = collapsed
     }
@@ -62,6 +62,20 @@ extension FileSystemElement {
 
     var isContainer: Bool {
         return isFolder || isScene || isTake
+    }
+}
+
+extension FileSystemElement {
+    var fullSubtitles: String? {
+        guard let subtitles = subtitles else { return nil }
+        return subtitles.map { $0.text }.joined(separator: " ")
+    }
+
+    func currentSubtitle(time: Double) -> Subtitle? {
+        guard let subtitles = subtitles else { return nil }
+        return subtitles.first { subtitle in
+            subtitle.startTime >= time && time <= subtitle.endTime
+        }
     }
 }
 

@@ -32,7 +32,9 @@ enum SystemImage: String {
     case goBackward5 = "gobackward.5"
     case pauseFill = "pause.fill"
     case playFill = "play.fill"
-
+    case textJustify = "text.justify"
+    case timelineSelection = "timeline.selection"
+    
     var imageView: Image {
         Image(systemName: self.rawValue)
     }

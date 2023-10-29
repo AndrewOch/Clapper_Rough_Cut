@@ -7,28 +7,36 @@ struct RoughCutFileSystem: Identifiable, Codable {
         return _root
     }
 
+    var keys: [UUID] {
+        Array(_elements.keys)
+    }
+
+    var elements: [FileSystemElement] {
+        Array(_elements.values)
+    }
+
     private var _root: FileSystemElement = FileSystemElement(title: .empty, type: .folder)
-    private var elements: [UUID: FileSystemElement] = [:]
+    private var _elements: [UUID: FileSystemElement] = [:]
 }
 
 // MARK: - FileSystem Utilities
 extension RoughCutFileSystem {
     func elementById(_ id: UUID) -> FileSystemElement? {
-        return elements[id]
+        return _elements[id]
     }
 
     func firstElement(where predicate: (FileSystemElement) -> Bool) -> FileSystemElement? {
-        return elements.values.first(where: predicate)
+        return _elements.values.first(where: predicate)
     }
 
     func allElements(where predicate: (FileSystemElement) -> Bool) -> [FileSystemElement] {
-        return elements.values.filter(predicate)
+        return _elements.values.filter(predicate)
     }
 
     mutating func addElement(_ newElement: FileSystemElement) {
         var newElement = newElement
         newElement.containerId = _root.id
-        elements[newElement.id] = newElement
+        _elements[newElement.id] = newElement
     }
 
     mutating func addElement(_ newElement: FileSystemElement, toFolderWithID folderID: UUID) {
@@ -39,39 +47,42 @@ extension RoughCutFileSystem {
         guard let targetFolder = firstElement(where: { $0.id == folderID }) else { return }
         var newElement = newElement
         newElement.containerId = targetFolder.id
-        elements[newElement.id] = newElement
+        _elements[newElement.id] = newElement
     }
 
     mutating func updateElement(withID elementID: UUID,
                                           newValue: FileSystemElement) {
-        elements[elementID] = newValue
+        _elements[elementID] = newValue
     }
 
     func getContainer(forElementWithID elementID: UUID) -> FileSystemElement? {
         guard let element = firstElement(where: { $0.id == elementID }) else { return nil }
         if _root.id == element.containerId { return _root }
-        return elements.first(where: { $0.key == element.containerId })?.value
+        return _elements.first(where: { $0.key == element.containerId })?.value
     }
 
     func contains(_ elementId: UUID, in folderID: UUID) -> Bool {
-        guard var currentElement = elements[elementId] else { return false }
+        guard var currentElement = _elements[elementId] else { return false }
         if folderID == _root.id { return true }
         while currentElement.id != _root.id {
             guard let containerId = currentElement.containerId else { return false }
             if containerId == folderID { return true }
-            guard let container = elements[containerId] else { return false }
+            guard let container = _elements[containerId] else { return false }
             currentElement = container
         }
         return false
     }
 
     mutating func deleteElement(by elementID: UUID) -> Bool {
-        guard elements.removeValue(forKey: elementID) != nil else { return false }
+        guard let element = _elements.removeValue(forKey: elementID) else { return false }
+        allElements(where: { $0.containerId == element.id }).forEach { elem in
+            _ = deleteElement(by: elem.id)
+        }
         return true
     }
 
     mutating func moveElement(withID elementID: UUID, toFolderWithID folderID: UUID) {
-        elements[elementID]?.containerId = folderID
+        _elements[elementID]?.containerId = folderID
     }
 }
 
@@ -79,7 +90,7 @@ extension RoughCutFileSystem {
     func generateUniqueName(baseName: String) -> String {
         var uniqueName = baseName
         var folderNumber = 1
-        while elements.values.contains(where: { $0.title == uniqueName }) {
+        while _elements.values.contains(where: { $0.title == uniqueName }) {
             folderNumber += 1
             uniqueName = "\(baseName) \(folderNumber)"
         }
