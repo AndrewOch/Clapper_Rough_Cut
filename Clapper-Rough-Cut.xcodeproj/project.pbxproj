@@ -77,6 +77,7 @@
 		04C0A0422AE46001001F6B10 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0412AE46001001F6B10 /* Binding.swift */; };
 		04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */; };
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
+		04C18C192AEF092E002C6875 /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04C18C182AEF092E002C6875 /* ggml-small.bin */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -183,6 +184,7 @@
 		04C0A0412AE46001001F6B10 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
+		04C18C182AEF092E002C6875 /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-small.bin"; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 		0443080C29E2A70900705B78 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				04C18C182AEF092E002C6875 /* ggml-small.bin */,
 				04A72EB52AB2785300000482 /* ggml-medium.bin */,
 				0443081529E2A70A00705B78 /* convert-h5-to-ggml.py */,
 				0443081229E2A70A00705B78 /* download-ggml-model.cmd */,
@@ -707,6 +710,7 @@
 			files = (
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				04A74A032AD2C32000226865 /* main in Resources */,
+				04C18C192AEF092E002C6875 /* ggml-small.bin in Resources */,
 				04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
 				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,

@@ -70,7 +70,7 @@ extension FileSystemElement {
         guard let subtitles = subtitles else { return nil }
         return subtitles.map { $0.text }.joined(separator: " ")
     }
-    
+
     func currentSubtitle(time: Double) -> Subtitle? {
         guard let subtitles = subtitles else { return nil }
         return subtitles.first { subtitle in

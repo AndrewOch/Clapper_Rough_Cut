@@ -75,7 +75,7 @@ class TranscriptionSubscription<S: Subscriber>: Subscription where S.Input == Fi
     }
 
     private var whisperQualityModel: String {
-        guard let path = Bundle.main.path(forResource: "ggml-medium", ofType: ".bin") else {
+        guard let path = Bundle.main.path(forResource: "ggml-small", ofType: ".bin") else {
             print("File for quality model not found")
             return ""
         }

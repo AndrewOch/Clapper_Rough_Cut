@@ -6,11 +6,11 @@ struct RoughCutFileSystem: Identifiable, Codable {
     var root: FileSystemElement {
         return _root
     }
-    
+
     var keys: [UUID] {
         Array(_elements.keys)
     }
-    
+
     var elements: [FileSystemElement] {
         Array(_elements.values)
     }
@@ -74,7 +74,10 @@ extension RoughCutFileSystem {
     }
 
     mutating func deleteElement(by elementID: UUID) -> Bool {
-        guard _elements.removeValue(forKey: elementID) != nil else { return false }
+        guard let element = _elements.removeValue(forKey: elementID) else { return false }
+        allElements(where: { $0.containerId == element.id }).forEach { elem in
+            _ = deleteElement(by: elem.id)
+        }
         return true
     }
 
