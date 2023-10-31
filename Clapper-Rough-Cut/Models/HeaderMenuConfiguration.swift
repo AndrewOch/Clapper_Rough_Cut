@@ -81,11 +81,6 @@ struct HeaderMenuConfiguration {
         ]
     }
 
-    public var search: [CustomContextMenuSection] {
-        return [
-        ]
-    }
-
     public var script: [CustomContextMenuSection] {
         return [
             CustomContextMenuSection(options: [
@@ -146,7 +141,6 @@ struct HeaderMenuConfiguration {
         configureShortcuts(for: base)
         configureShortcuts(for: file)
         configureShortcuts(for: edit)
-        configureShortcuts(for: search)
         configureShortcuts(for: script)
         configureShortcuts(for: sort)
     }

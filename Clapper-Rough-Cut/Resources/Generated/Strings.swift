@@ -58,6 +58,8 @@ internal enum L10n {
   internal static let exportPathPlaceholder = L10n.tr("Localizable", "exportPathPlaceholder", fallback: "введите путь сохранения")
   /// файл
   internal static let file = L10n.tr("Localizable", "file", fallback: "файл")
+  /// Найдите нужные файлы
+  internal static let fileSystemSearchPlaceholder = L10n.tr("Localizable", "fileSystemSearchPlaceholder", fallback: "Найдите нужные файлы")
   /// название
   internal static let fileTitle = L10n.tr("Localizable", "fileTitle", fallback: "название")
   /// папка

@@ -34,7 +34,8 @@ enum SystemImage: String {
     case playFill = "play.fill"
     case textJustify = "text.justify"
     case timelineSelection = "timeline.selection"
-    
+    case magnifyingglass = "magnifyingglass"
+
     var imageView: Image {
         Image(systemName: self.rawValue)
     }

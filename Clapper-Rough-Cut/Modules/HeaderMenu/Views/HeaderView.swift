@@ -5,7 +5,6 @@ enum HeaderMenuOption {
     case base
     case file
     case edit
-    case search
     case script
     case sort
 }
@@ -74,25 +73,6 @@ struct HeaderView: View {
                                                                       document.states.selectedHeaderOption != .edit &&
                                                                       document.states.selectedHeaderOption != .none {
                                                                     document.states.selectedHeaderOption = .edit
-
-                                                                }
-                                                            })
-                RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.search.firstWordCapitalized,
-                                                            enabled: .constant(true)) {
-                    document.states.selectedHeaderOption = .search
-                }
-                                                            .background(GeometryReader { buttonGeometry in
-                                                                Color.clear
-                                                                    .onAppear {
-                                                                        let buttonFrame = buttonGeometry.frame(in: .global)
-                                                                        popupPositions[.search] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
-                                                                    }
-                                                            })
-                                                            .onHover(perform: { hovering in
-                                                                if hovering &&
-                                                                      document.states.selectedHeaderOption != .search &&
-                                                                      document.states.selectedHeaderOption != .none {
-                                                                    document.states.selectedHeaderOption = .search
 
                                                                 }
                                                             })
