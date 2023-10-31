@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0400DA4E29EDC860003AD42B /* PythonKit */; };
+		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529D29EF3869008855C1 /* MFCC.py in Resources */ = {isa = PBXBuildFile; fileRef = 0426529C29EF3869008855C1 /* MFCC.py */; };
 		0426529F29EFB6FB008855C1 /* MFCC_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */; };
@@ -42,7 +43,7 @@
 		043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */; };
 		0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4A29E59CF40086BD89 /* FileSystemView.swift */; };
 		0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */; };
-		044C4C822AD6ABF4006E6BBD /* FileSystemElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C4C812AD6ABF4006E6BBD /* FileSystemElementView.swift */; };
+		044C4C822AD6ABF4006E6BBD /* FileSystemListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C4C812AD6ABF4006E6BBD /* FileSystemListItemView.swift */; };
 		044C4C842AD6CA75006E6BBD /* FileSystemListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C4C832AD6CA75006E6BBD /* FileSystemListItem.swift */; };
 		0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */; };
 		0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */; };
@@ -85,12 +86,13 @@
 		04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E729F9262D007E4C64 /* ExportView.swift */; };
 		04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E929F926D1007E4C64 /* ExportOperations.swift */; };
 		04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */; };
-		04F7A9EE29F96D27007E4C64 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* CustomSearchTextField.swift */; };
+		04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */; };
 		04FE56CC29F846DD00634522 /* python3.9 in Resources */ = {isa = PBXBuildFile; fileRef = 04FE56CB29F846DD00634522 /* python3.9 */; };
 		5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
 		0426529C29EF3869008855C1 /* MFCC.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = MFCC.py; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCC_Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCC_Wrapper.swift; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 		0443081529E2A70A00705B78 /* convert-h5-to-ggml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = "convert-h5-to-ggml.py"; sourceTree = "<group>"; };
 		0448AD4A29E59CF40086BD89 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
 		0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		044C4C812AD6ABF4006E6BBD /* FileSystemElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemElementView.swift; sourceTree = "<group>"; };
+		044C4C812AD6ABF4006E6BBD /* FileSystemListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemListItemView.swift; sourceTree = "<group>"; };
 		044C4C832AD6CA75006E6BBD /* FileSystemListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemListItem.swift; sourceTree = "<group>"; };
 		0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralSelectionDetailView.swift; sourceTree = "<group>"; };
 		0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemSelectionDetailView.swift; sourceTree = "<group>"; };
@@ -192,7 +194,7 @@
 		04F7A9E729F9262D007E4C64 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		04F7A9E929F926D1007E4C64 /* ExportOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOperations.swift; sourceTree = "<group>"; };
 		04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
-		04F7A9ED29F96D27007E4C64 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
+		04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		04FE56CB29F846DD00634522 /* python3.9 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = python3.9; path = ../../opt/anaconda3/bin/python3.9; sourceTree = "<group>"; };
 		08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_Cut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_CutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				0448AD4A29E59CF40086BD89 /* FileSystemView.swift */,
-				044C4C812AD6ABF4006E6BBD /* FileSystemElementView.swift */,
+				044C4C812AD6ABF4006E6BBD /* FileSystemListItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,7 +440,7 @@
 				0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */,
 				04F7A9E029F91AF2007E4C64 /* FileIcon.swift */,
 				04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */,
-				04F7A9ED29F96D27007E4C64 /* CustomSearchTextField.swift */,
+				04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */,
 				043538CC2AABD57100775E0D /* SystemImage.swift */,
 				043538CE2AAC75CA00775E0D /* CustomLabel.swift */,
 				043538D42AAC86DD00775E0D /* PhraseLabel.swift */,
@@ -448,6 +450,7 @@
 				043538EC2AAFAFE700775E0D /* CustomContextMenuView.swift */,
 				043538F42AB2019B00775E0D /* ShortcutView.swift */,
 				045D60DE2AE6B1D400833AB6 /* CustomPicker.swift */,
+				040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -814,7 +817,7 @@
 				043538C52AABA51C00775E0D /* String.swift in Sources */,
 				043EDDC729E953FF00DA5EFF /* TakesMatchOperations.swift in Sources */,
 				0453BC6A2AD895B0000909D6 /* RoughCutFileSystem.swift in Sources */,
-				044C4C822AD6ABF4006E6BBD /* FileSystemElementView.swift in Sources */,
+				044C4C822AD6ABF4006E6BBD /* FileSystemListItemView.swift in Sources */,
 				045D60DF2AE6B1D400833AB6 /* CustomPicker.swift in Sources */,
 				0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */,
 				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
@@ -827,6 +830,7 @@
 				0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */,
 				043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */,
 				0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */,
+				040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
 				04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */,
 				0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */,
@@ -838,7 +842,7 @@
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
 				045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */,
 				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
-				04F7A9EE29F96D27007E4C64 /* CustomSearchTextField.swift in Sources */,
+				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
 				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,

@@ -67,9 +67,11 @@ struct FileSystemView: View {
                     .focused($searchBarIsFocused)
                 }
                 .padding(.horizontal, 10)
-                List(filteredItems, children: \.elements, selection: $selection) { item in
+                List(document.project.fileSystem.filteredItems(searchText: searchText),
+                     children: \.elements,
+                     selection: $selection) { item in
                     let element = item.value
-                    FileSystemElementView(element: .getOnly(element))
+                    FileSystemListItemView(item: .getOnly(item))
                         .onDrag({
                             onDrag(element)
                         }, preview: {
@@ -102,7 +104,7 @@ struct FileSystemView: View {
                 SeveralSelectionDetailView(selection: $selection)
             } else {
                 if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
-                    FileSystemSelectionDetailView(element: Binding(get: { return element },
+                    FileSystemSelectionDetailView(element: Binding(get: { element },
                                                                    set: { document.project.fileSystem.updateElement(withID: element.id,
                                                                                                                     newValue: $0) }), currentTime: $currentPlayerTime)
                 }
@@ -123,17 +125,6 @@ struct FileSystemView: View {
         .cornerRadius(5)
         .overlay(RoundedRectangle(cornerRadius: 5)
             .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-    }
-
-    var filteredItems: [FileSystemListItem] {
-        if searchText.isEmpty {
-            return document.project.fileSystem.listItems
-        } else {
-            let items = document.project.fileSystem.listItems
-            return items.filter { item in
-                return item.value.title.localizedCaseInsensitiveContains(searchText) || ((item.value.fullSubtitles?.localizedStandardContains(searchText)) != nil)
-            }
-        }
     }
 
     func onDrag(_ element: FileSystemElement) -> NSItemProvider {

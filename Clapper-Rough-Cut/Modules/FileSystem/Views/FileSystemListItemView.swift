@@ -1,15 +1,20 @@
 import SwiftUI
 
-struct FileSystemElementView: View {
-    @Binding var element: FileSystemElement
+struct FileSystemListItemView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Binding var item: FileSystemListItem
 
     var body: some View {
+        let element = item.value
+        let highlights = item.highlights
         HStack(alignment: .center) {
             HStack(spacing: 5) {
                 FileIcon(type: element.type)
                     .frame(width: 10, height: 10)
                     .scaledToFit()
+                    .foregroundStyle(highlights.contains(.type) ? Color.yellow : Color.contentSecondary(colorScheme))
                 CustomLabel<BodyMediumStyle>(text: element.title)
+                    .foregroundStyle(highlights.contains(.title) ? Color.yellow : Color.contentSecondary(colorScheme))
             }
             Spacer()
             HStack {
@@ -21,6 +26,7 @@ struct FileSystemElementView: View {
                 }
                 if element.statuses.contains(.transcription) {
                     TranscribedIcon()
+                        .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Color.contentSecondary(colorScheme))
                 }
             }
             .frame(width: 60)

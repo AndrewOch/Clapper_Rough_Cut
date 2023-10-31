@@ -35,6 +35,7 @@ enum SystemImage: String {
     case textJustify = "text.justify"
     case timelineSelection = "timeline.selection"
     case magnifyingglass = "magnifyingglass"
+    case xmarkCircleFill = "xmark.circle.fill"
 
     var imageView: Image {
         Image(systemName: self.rawValue)
