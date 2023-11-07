@@ -87,6 +87,23 @@ enum FileSystemElementType: Int, Codable, Hashable {
     case folder = 4
 }
 
+extension FileSystemElementType {
+    var stringValue: String {
+        switch self {
+        case .audio:
+            return L10n.audio
+        case .video:
+            return L10n.video
+        case .take:
+            return L10n.take
+        case .scene:
+            return L10n.scene
+        case .folder:
+            return L10n.folder
+        }
+    }
+}
+
 enum FileStatus: Codable, Hashable {
     case transcribing
     case transcription

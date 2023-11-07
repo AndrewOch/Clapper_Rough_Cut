@@ -2,6 +2,7 @@ struct FileSystemListItem: Identifiable, Hashable {
     let id: UUID
     let value: FileSystemElement
     let elements: [FileSystemListItem]?
+    var highlights: [FileSystemListItemHighlight] = []
 
     init(value: FileSystemElement, elements: [FileSystemListItem]?) {
         self.id = value.id
@@ -17,4 +18,11 @@ struct FileSystemListItem: Identifiable, Hashable {
         }
         return lhs.value.title < rhs.value.title
     }
+}
+
+enum FileSystemListItemHighlight {
+    case type
+    case title
+    case subtitles
+    case date
 }

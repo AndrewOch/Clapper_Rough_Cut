@@ -119,4 +119,35 @@ extension RoughCutFileSystem {
         }
         return FileSystemListItem(value: element, elements: nil)
     }
+
+    func filteredItems(searchText: String) -> [FileSystemListItem] {
+        if searchText.isEmpty {
+            return listItems
+        } else {
+            let items = _elements.map { _, value in
+                return FileSystemListItem(value: value, elements: nil)
+            }
+            var filtered: [FileSystemListItem] = []
+            items.forEach { item in
+                var item = item
+                var chosen = false
+                if item.value.type.stringValue.localizedCaseInsensitiveContains(searchText) {
+                    chosen = true
+                    item.highlights.append(.type)
+                }
+                if item.value.title.localizedCaseInsensitiveContains(searchText) {
+                    chosen = true
+                    item.highlights.append(.title)
+                }
+                if let subtitles = item.value.fullSubtitles, subtitles.localizedCaseInsensitiveContains(searchText) {
+                    chosen = true
+                    item.highlights.append(.subtitles)
+                }
+                if chosen {
+                    filtered.append(item)
+                }
+            }
+            return filtered
+        }
+    }
 }
