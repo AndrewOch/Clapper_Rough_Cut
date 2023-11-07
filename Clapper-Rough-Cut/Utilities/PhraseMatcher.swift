@@ -2,35 +2,20 @@ import Foundation
 import NaturalLanguage
 
 protocol PhraseMatcherProtocol {
-    func matchFilesToPhrases(files: [FileSystemElement], phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void)
+    func match(files: [FileSystemElement], phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void)
+    func match(file: FileSystemElement, phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void)
 }
 
 final class PhraseMatcher: PhraseMatcherProtocol {
 
-    public func matchFilesToPhrases(files: [FileSystemElement], phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void) {
+    public func match(files: [FileSystemElement],
+                      phrases: [Phrase],
+                      completion: @escaping (FileSystemElement, Phrase) -> Void) {
         let startTime = Date().timeIntervalSince1970
         let textsMatcherWrapper = TextsMatcher_Wrapper()
         for file in files {
-            if let transcription = file.fullSubtitles {
-                let wordsCount = transcription.components(separatedBy: .whitespaces).count
-                if wordsCount == 0 { continue }
-
-                var res: [([Int], Phrase)] = []
-                for phrase in phrases {
-                    guard let phraseText = phrase.phraseText else { continue }
-                    let cleanedPhrase = removeEnclosedText(phraseText).trimmingCharacters(in: .whitespaces)
-                    if cleanedPhrase.components(separatedBy: .whitespaces).isNotEmpty {
-                        let lengths = textsMatcherWrapper.matchingSequenceLengths(text1: transcription.lowercased(), text2: cleanedPhrase.lowercased())
-                        if lengths.isNotEmpty {
-                            res.append((lengths, phrase)) }
-                    }
-                }
-                if let bestMatch = getBestMatch(phrasesMap: res) {
-                    print(bestMatch.0, bestMatch.1.fullText)
-                    completion(file, bestMatch.1)
-                } else {
-                    print("Best match does not found")
-                }
+            matchFile(file: file, phrases: phrases, matcher: textsMatcherWrapper) { element, phrase in
+                completion(element, phrase)
             }
         }
         let endTime = Date().timeIntervalSince1970
@@ -38,15 +23,50 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         print("Total sorting time: \(elapsed) seconds")
     }
 
-    func getBestMatch(phrasesMap: [([Int], Phrase)]) -> ([Int], Phrase)? {
-        var phrasesMap = phrasesMap.map { (key: $0.sorted(by: >), value: $1) } // Sorting map keys in descending order
+    public func match(file: FileSystemElement,
+                      phrases: [Phrase],
+                      completion: @escaping (FileSystemElement, Phrase) -> Void) {
+        let startTime = Date().timeIntervalSince1970
+        let textsMatcherWrapper = TextsMatcher_Wrapper()
+        matchFile(file: file, phrases: phrases, matcher: textsMatcherWrapper) { element, phrase in
+            completion(element, phrase)
+        }
+        let endTime = Date().timeIntervalSince1970
+        let elapsed = endTime - startTime
+        print("Sorting time: \(elapsed) seconds")
+    }
+
+    private func matchFile(file: FileSystemElement,
+                           phrases: [Phrase],
+                           matcher: TextsMatcher_Wrapper,
+                           completion: @escaping (FileSystemElement, Phrase) -> Void) {
+        guard let transcription = file.fullSubtitles else { return }
+        if transcription.components(separatedBy: .whitespaces).isEmpty { return }
+        var res: [([Int], Phrase)] = []
+        for phrase in phrases {
+            guard let phraseText = phrase.phraseText else { continue }
+            let cleanedPhrase = removeEnclosedText(phraseText).trimmingCharacters(in: .whitespaces)
+            if cleanedPhrase.components(separatedBy: .whitespaces).isEmpty { continue }
+            let lengths = matcher.matchingSequenceLengths(text1: transcription.lowercased(), text2: cleanedPhrase.lowercased())
+            if lengths.isEmpty { continue }
+            res.append((lengths, phrase))
+        }
+        guard let bestMatch = getBestMatch(phrasesMap: res) else {
+            print("Best match does not found")
+            return
+        }
+        print(bestMatch.0, bestMatch.1.fullText)
+        completion(file, bestMatch.1)
+    }
+
+    private func getBestMatch(phrasesMap: [([Int], Phrase)]) -> ([Int], Phrase)? {
+        var phrasesMap = phrasesMap.map { (key: $0.sorted(by: >), value: $1) }
         while phrasesMap.count > 1 {
             let maxInt = phrasesMap.flatMap { $0.0 }.max() ?? 0
-            phrasesMap = phrasesMap.filter { $0.key.first == maxInt } // Filtering out dictionary based on max integer key
+            phrasesMap = phrasesMap.filter { $0.key.first == maxInt }
             var newPhrasesMap = [(key: [Int], value: Phrase)]()
             for (key, value) in phrasesMap {
                 if key.count >= 2 {
-                    // If key has more than one integer, remove the first integer
                     let newKey = Array(key.dropFirst())
                     newPhrasesMap.append((key: newKey, value: value))
                 } else {
