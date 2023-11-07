@@ -49,11 +49,21 @@ public enum BodySmallStyle: LabelStyle {
 }
 
 struct CustomLabel<Style: LabelStyle>: View {
-    var text: String
+    @State var text: String
 
     var body: some View {
-            Text(text)
-                .font(.custom(Style.fontName, size: Style.fontSize))
-                .baselineOffset(Style.baselineOffset)
+        Text(text)
+            .font(.custom(Style.fontName, size: Style.fontSize))
+            .baselineOffset(Style.baselineOffset)
+    }
+}
+
+struct CustomBindedLabel<Style: LabelStyle>: View {
+    @Binding var text: String
+
+    var body: some View {
+        Text(text)
+            .font(.custom(Style.fontName, size: Style.fontSize))
+            .baselineOffset(Style.baselineOffset)
     }
 }

@@ -10,6 +10,8 @@ struct FileSystemView: View {
     @State private var draggable: [UUID] = []
     @State private var isTargeted = false
     @State private var currentPlayerTime: Double = 0
+    @State private var searchText: String = .empty
+    @FocusState private var searchBarIsFocused: Bool
 
     var body: some View {
         VSplitView {
@@ -39,10 +41,10 @@ struct FileSystemView: View {
         }
         .onAppear {
             NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-                if event.keyCode == 51 {
+                if event.keyCode == 51 && !searchBarIsFocused {
                     document.deleteSelectedFiles(selection)
                     selection = []
-                    return nil
+                    return event
                 }
                 if event.modifierFlags.contains(.command) && event.charactersIgnoringModifiers == "t" {
                     document.transcribeSelectedFiles(selection)
@@ -56,43 +58,39 @@ struct FileSystemView: View {
     var fileSystem: some View {
         ZStack {
             Color.surfaceTertiary(colorScheme)
-            List(document.project.fileSystem.listItems, children: \.elements, selection: $selection) { item in
-                let element = item.value
-                FileSystemElementView(element: .getOnly(element))
-                    .onDrag({
-                        draggable.removeAll()
-                        if selection.contains(element.id) {
-                            draggable.append(contentsOf: selection)
-                        } else {
-                            draggable.append(element.id)
+            VStack {
+                HStack {
+                    Spacer()
+                    CustomSearchTextField(placeholder: L10n.search.firstWordCapitalized,
+                                    text: $searchText)
+                    .frame(width: 300)
+                    .focused($searchBarIsFocused)
+                }
+                .padding(.horizontal, 10)
+                List(document.project.fileSystem.filteredItems(searchText: searchText),
+                     children: \.elements,
+                     selection: $selection) { item in
+                    let element = item.value
+                    FileSystemListItemView(item: .getOnly(item))
+                        .onDrag({
+                            onDrag(element)
+                        }, preview: {
+                            dragPreview
+                        })
+                        .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
+                            drop(at: element, providers: providers)
                         }
-                        let uuidStrings = draggable.map { $0.uuidString }
-                        return NSItemProvider(object: uuidStrings.joined(separator: ",") as NSItemProviderWriting)
-                    }, preview: {
-                            HStack(spacing: 2) {
-                                FileIcon(type: element.type)
-                                CustomLabel<BodyMediumStyle>(text: String(draggable.count))
-                            }
-                            .foregroundColor(.contentPrimary(colorScheme))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(Color.surfacePrimary(colorScheme))
-                            .cornerRadius(5)
-                            .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-                    })
-                    .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
-                        drop(at: element, providers: providers)
-                    }
-                    .onHover { hover in
-                        isTargeted = hover && element.isContainer
-                    }
+                        .onHover { hover in
+                            isTargeted = hover && element.isContainer
+                        }
+                }
             }
+            .padding(.vertical, 10)
         }
         .font(.custom(FontFamily.Overpass.regular.name, size: 12))
         .scrollContentBackground(.hidden)
         .background(Color.surfaceTertiary(colorScheme))
-        .onDrop(of: ["public.text", "public.uuid"], isTargeted: $isTargeted) { providers, _ in
+        .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
             drop(at: document.project.fileSystem.root, providers: providers)
         }
         .onTapGesture {
@@ -106,13 +104,38 @@ struct FileSystemView: View {
                 SeveralSelectionDetailView(selection: $selection)
             } else {
                 if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
-                    FileSystemSelectionDetailView(element: Binding(get: { return element },
+                    FileSystemSelectionDetailView(element: Binding(get: { element },
                                                                    set: { document.project.fileSystem.updateElement(withID: element.id,
                                                                                                                     newValue: $0) }), currentTime: $currentPlayerTime)
                 }
             }
             Spacer()
         }
+    }
+
+    var dragPreview: some View {
+        HStack(spacing: 2) {
+            FileIcon(type: .folder)
+            CustomLabel<BodyMediumStyle>(text: String(draggable.count))
+        }
+        .foregroundColor(.contentPrimary(colorScheme))
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(Color.surfacePrimary(colorScheme))
+        .cornerRadius(5)
+        .overlay(RoundedRectangle(cornerRadius: 5)
+            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+    }
+
+    func onDrag(_ element: FileSystemElement) -> NSItemProvider {
+        draggable.removeAll()
+        if selection.contains(element.id) {
+            draggable.append(contentsOf: selection)
+        } else {
+            draggable.append(element.id)
+        }
+        let uuidStrings = draggable.map { $0.uuidString }
+        return NSItemProvider(object: uuidStrings.joined(separator: ",") as NSItemProviderWriting)
     }
 
     func drop(at element: FileSystemElement, providers: [NSItemProvider]) -> Bool {

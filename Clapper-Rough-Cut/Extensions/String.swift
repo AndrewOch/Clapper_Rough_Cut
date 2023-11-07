@@ -1,6 +1,8 @@
 extension String {
     public static let empty = ""
     public static let nilParameter = "--"
+    public static let typeText = "public.text"
+    public static let typeUUID = "public.uuid"
 }
 
 extension String {

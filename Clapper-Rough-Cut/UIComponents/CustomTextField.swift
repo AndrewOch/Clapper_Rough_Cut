@@ -2,17 +2,19 @@ import SwiftUI
 
 struct CustomTextField: View {
     @Environment(\.colorScheme) private var colorScheme
-    @State var title: String
+    @State var title: String?
     @State var placeholder: String
     @Binding var text: String
 
     var body: some View {
         VStack(spacing: 5) {
-            HStack {
-                CustomLabel<BodyMediumStyle>(text: title)
-                    .foregroundColor(Color.contentSecondary(colorScheme))
-                Spacer()
-            }.padding(.horizontal, 10)
+            if let title = title {
+                HStack {
+                    CustomLabel<BodyMediumStyle>(text: title)
+                        .foregroundColor(Color.contentSecondary(colorScheme))
+                    Spacer()
+                }.padding(.horizontal, 10)
+            }
             TextField(placeholder, text: $text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
