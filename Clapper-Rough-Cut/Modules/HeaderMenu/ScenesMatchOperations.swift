@@ -36,7 +36,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func matchFor(files: [FileSystemElement]) {
-        phraseMatcher.matchFilesToPhrases(files: files,
+        phraseMatcher.match(files: files,
                                           phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
             self.manualMatch(element: file, phrase: phrase)
         }

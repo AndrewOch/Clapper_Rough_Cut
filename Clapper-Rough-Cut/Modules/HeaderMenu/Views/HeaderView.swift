@@ -7,11 +7,22 @@ enum HeaderMenuOption {
     case edit
     case script
     case sort
+    
+    static var ids: [HeaderMenuOption: UUID] {
+        var ids: [HeaderMenuOption: UUID] = [:]
+        ids[.base] = UUID()
+        ids[.file] = UUID()
+        ids[.edit] = UUID()
+        ids[.script] = UUID()
+        ids[.sort] = UUID()
+        return ids
+    }
 }
 
 struct HeaderView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var popupPositions: [HeaderMenuOption: CGPoint]
+    @State var menuIds: [HeaderMenuOption: UUID] = HeaderMenuOption.ids
 
     var body: some View {
         HStack {
@@ -42,19 +53,16 @@ struct HeaderView: View {
                                                             enabled: .constant(true)) {
                     document.states.selectedHeaderOption = .file
                 }
-                                                            .background(GeometryReader { buttonGeometry in
-                                                                Color.clear
-                                                                    .onAppear {
-                                                                        let buttonFrame = buttonGeometry.frame(in: .global)
-                                                                        popupPositions[.file] = CGPoint(x: buttonFrame.minX, y: buttonFrame.maxY / 2)
-                                                                    }
+                                                            .popup(id: menuIds[.file] ?? UUID(),
+                                                                   condition: .constant(true),
+                                                                   content: {
+                                                                Color.black
                                                             })
                                                             .onHover(perform: { hovering in
                                                                 if hovering &&
-                                                                      document.states.selectedHeaderOption != .file &&
-                                                                      document.states.selectedHeaderOption != .none {
+                                                                    document.states.selectedHeaderOption != .file &&
+                                                                    document.states.selectedHeaderOption != .none {
                                                                     document.states.selectedHeaderOption = .file
-
                                                                 }
                                                             })
                 RoundedButton<RoundedButtonHeaderMenuStyle>(title: L10n.editSection.firstWordCapitalized,

@@ -26,24 +26,18 @@ struct ContentView: View {
             document.states.selectedHeaderOption = .none
         }
         .overlay {
-            ZStack {
-                switch document.states.selectedHeaderOption {
-                case .none: EmptyView()
-                case .base:
-                    CustomContextMenuView(position: popupPositions[.base] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.base ?? [])
-                case .file:
-                    CustomContextMenuView(position: popupPositions[.file] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.file ?? [])
-                case .edit:
-                    CustomContextMenuView(position: popupPositions[.edit] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.edit ?? [])
-                case .script:
-                    CustomContextMenuView(position: popupPositions[.script] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.script ?? [])
-                case .sort:
-                    CustomContextMenuView(position: popupPositions[.sort] ?? .zero,
-                                          sections: document.headerMenuConfiguration?.sort ?? [])
+            popups
+        }
+    }
+
+    var popups: some View {
+        ZStack {
+            ForEach(Array(document.states.popupPositions.keys), id: \.self) { key in
+                if let (isPresented, content) = document.states.popupPositions[key] {
+                    if isPresented.wrappedValue {
+                        content
+//                        Color.black
+                    }
                 }
             }
         }

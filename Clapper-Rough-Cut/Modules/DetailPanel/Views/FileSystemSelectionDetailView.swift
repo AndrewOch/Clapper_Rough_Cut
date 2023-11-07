@@ -27,16 +27,16 @@ struct FileSystemSelectionDetailView: View {
         HStack {
             FileIcon(type: element.type)
                 .foregroundColor(.contentPrimary(colorScheme))
-            CustomLabel<BodyMediumStyle>(text: element.title)
+            CustomBindedLabel<BodyMediumStyle>(text: $element.title)
                 .lineLimit(1)
                 .foregroundColor(.contentPrimary(colorScheme))
             Spacer()
             if let duration = element.duration {
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
+                CustomBindedLabel<BodyMediumStyle>(text: .getOnly(Formatter.formatDuration(duration: duration)))
                     .foregroundColor(.contentPrimary(colorScheme))
             }
             if let createdAt = element.createdAt {
-                CustomLabel<BodyMediumStyle>(text: Formatter.formatDateShort(date: createdAt))
+                CustomBindedLabel<BodyMediumStyle>(text: .getOnly(Formatter.formatDateShort(date: createdAt)))
                     .foregroundColor(.contentSecondary(colorScheme))
                     .lineLimit(1)
             }
@@ -74,10 +74,10 @@ struct FileSystemSelectionDetailView: View {
                                     .scaleEffect(0.5)
                             }
                             if subtitlesMode == 0, let subtitles = element.fullSubtitles {
-                                CustomLabel<BodyMediumStyle>(text: subtitles)
+                                CustomBindedLabel<BodyMediumStyle>(text: .getOnly(subtitles))
                             }
                             if subtitlesMode == 1, let subtitle = element.currentSubtitle(time: currentTime) {
-                                CustomLabel<BodyMediumStyle>(text: subtitle.text)
+                                CustomBindedLabel<BodyMediumStyle>(text: .getOnly(subtitle.text))
                             }
                             Spacer()
                         }
@@ -97,7 +97,7 @@ struct FileSystemSelectionDetailView: View {
                     HStack {
                         SystemImage.folder.imageView
                             .foregroundColor(.contentSecondary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: folder.title)
+                        CustomBindedLabel<BodyMediumStyle>(text: .getOnly(folder.title))
                             .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
                         RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,
@@ -143,21 +143,21 @@ struct FileSystemSelectionDetailView: View {
             let takesCount = fileSystem.allElements(where: { $0.containerId == element.id && $0.isTake }).count
             HStack {
                 FileIcon(type: .video)
-                CustomLabel<BodyMediumStyle>(text: "\(videoCount) \(L10n.video)")
+                CustomBindedLabel<BodyMediumStyle>(text: .getOnly("\(videoCount) \(L10n.video)"))
                 Spacer()
             }
             .foregroundColor(.contentPrimary(colorScheme))
             .padding(.vertical, 5)
             HStack {
                 FileIcon(type: .audio)
-                CustomLabel<BodyMediumStyle>(text: "\(audioCount) \(L10n.audio)")
+                CustomBindedLabel<BodyMediumStyle>(text: .getOnly("\(audioCount) \(L10n.audio)"))
                 Spacer()
             }
             .foregroundColor(.black)
             .padding(.vertical, 5)
             HStack {
                 SystemImage.filmStack.imageView
-                CustomLabel<BodyMediumStyle>(text: "\(takesCount) \(L10n.takes)")
+                CustomBindedLabel<BodyMediumStyle>(text: .getOnly("\(takesCount) \(L10n.takes)"))
                 Spacer()
             }
             .foregroundColor(.contentPrimary(colorScheme))
@@ -167,7 +167,7 @@ struct FileSystemSelectionDetailView: View {
                     HStack {
                         SystemImage.film.imageView
                             .foregroundColor(.contentSecondary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: element.title)
+                        CustomBindedLabel<BodyMediumStyle>(text: $element.title)
                             .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
                         RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
@@ -198,13 +198,13 @@ struct FileSystemSelectionDetailView: View {
                     if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
                         FileIcon(type: element.type)
                             .foregroundColor(.contentPrimary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
+                        CustomBindedLabel<BodyMediumStyle>(text: .getOnly(url.lastPathComponent))
                             .lineLimit(1)
                             .foregroundColor(.contentPrimary(colorScheme))
                         Spacer()
-                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
+                        CustomBindedLabel<BodyMediumStyle>(text: .getOnly(Formatter.formatDuration(duration: duration)))
                             .foregroundColor(.contentPrimary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
+                        CustomBindedLabel<BodyMediumStyle>(text: .getOnly(Formatter.formatDate(date: createdAt)))
                             .foregroundColor(.contentSecondary(colorScheme))
                     }
                 }.padding(.bottom)

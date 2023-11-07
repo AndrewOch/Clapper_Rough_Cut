@@ -17,10 +17,10 @@ struct MediaPlayerView: View {
                             Spacer()
                             if let duration = player.currentItem?.duration.seconds, duration.isFinite, duration > 0.0 {
                                 HStack {
-                                    CustomLabel<BodySmallStyle>(text: Formatter.formatDuration(duration: currentTime))
+                                    CustomBindedLabel<BodySmallStyle>(text: .getOnly(Formatter.formatDuration(duration: currentTime)))
                                         .foregroundColor(Asset.white.swiftUIColor)
                                     Spacer()
-                                    CustomLabel<BodySmallStyle>(text: "-\(Formatter.formatDuration(duration: (duration - currentTime)))")
+                                    CustomBindedLabel<BodySmallStyle>(text: .getOnly("-\(Formatter.formatDuration(duration: (duration - currentTime)))"))
                                         .foregroundColor(Asset.white.swiftUIColor)
                                 }
                                 .padding(.horizontal)

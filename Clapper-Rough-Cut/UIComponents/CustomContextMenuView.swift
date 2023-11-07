@@ -18,28 +18,26 @@ private struct CustomContextMenuButtonStyle {
 }
 
 struct CustomContextMenuView: View {
-    @State var position: CGPoint
+    @Environment(\.colorScheme) private var colorScheme
     let sections: [CustomContextMenuSection]
 
     var body: some View {
-        OverlayMenu(position: position) {
-            VStack(spacing: 5) {
-                ForEach(sections) { section in
-                    VStack(spacing: 0) {
-                        ForEach(section.options) { option in
-                            CustomContextMenuOptionButton(option: option)
-                        }
-                    }
-                    if sections.last?.id != section.id {
-                        Rectangle()
-                            .frame(height: 1)
-                            .background(Asset.accentDark.swiftUIColor)
+        VStack(spacing: 5) {
+            ForEach(sections) { section in
+                VStack(spacing: 0) {
+                    ForEach(section.options) { option in
+                        CustomContextMenuOptionButton(option: option)
                     }
                 }
+                if sections.last?.id != section.id {
+                    Rectangle()
+                        .frame(height: 1)
+                        .background(Color.surfaceTertiary(colorScheme))
+                }
             }
-            .frame(idealWidth: 150, maxWidth: 200)
-            .padding(.all, 5)
         }
+        .frame(idealWidth: 150, maxWidth: 200)
+        .padding(.all, 5)
     }
 }
 
