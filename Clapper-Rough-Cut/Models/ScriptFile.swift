@@ -133,7 +133,7 @@ struct ScriptBlock: Identifiable, Codable {
     }
 }
 
-struct Phrase: Identifiable, Codable {
+struct Phrase: Identifiable, Codable, Hashable {    
     var id = UUID()
     var fullText: String
     var character: ScriptCharacter?

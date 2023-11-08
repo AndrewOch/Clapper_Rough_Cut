@@ -6,8 +6,17 @@ protocol PhraseMatcherProtocol {
     func match(file: FileSystemElement, phrases: [Phrase], completion: @escaping (FileSystemElement, Phrase) -> Void)
 }
 
-final class PhraseMatcher: PhraseMatcherProtocol {
+struct MatchingResult: Codable, Equatable, Hashable {
+    let phrase: Phrase
+    let matchingCount: Int
 
+    var matchAccuracy: Double {
+        guard let count = phrase.phraseText?.components(separatedBy: .whitespaces).count else { return 0 }
+        return Double(matchingCount) / Double(count)
+    }
+}
+
+final class PhraseMatcher: PhraseMatcherProtocol {
     public func match(files: [FileSystemElement],
                       phrases: [Phrase],
                       completion: @escaping (FileSystemElement, Phrase) -> Void) {
@@ -40,22 +49,37 @@ final class PhraseMatcher: PhraseMatcherProtocol {
                            phrases: [Phrase],
                            matcher: TextsMatcher_Wrapper,
                            completion: @escaping (FileSystemElement, Phrase) -> Void) {
-        guard let transcription = file.fullSubtitles else { return }
-        if transcription.components(separatedBy: .whitespaces).isEmpty { return }
-        var res: [([Int], Phrase)] = []
+        guard let subtitles = file.subtitles else { return }
+
+        var res: [Subtitle: [MatchingResult]] = [:]
+        var cleanedPhrases: [Phrase: String] = [:]
         for phrase in phrases {
             guard let phraseText = phrase.phraseText else { continue }
             let cleanedPhrase = removeEnclosedText(phraseText).trimmingCharacters(in: .whitespaces)
             if cleanedPhrase.components(separatedBy: .whitespaces).isEmpty { continue }
-            let lengths = matcher.matchingSequenceLengths(text1: transcription.lowercased(), text2: cleanedPhrase.lowercased())
-            if lengths.isEmpty { continue }
-            res.append((lengths, phrase))
+            cleanedPhrases[phrase] = cleanedPhrase
         }
-        guard let bestMatch = getBestMatch(phrasesMap: res) else {
+        for subtitle in subtitles {
+            var results = [MatchingResult]()
+            for phrase in cleanedPhrases {
+                let length = matcher.matchingSequenceLength(text1: subtitle.text.lowercased(),
+                                                            text2: phrase.value.lowercased())
+                if length == 0 { continue }
+                results.append(MatchingResult(phrase: phrase.key, matchingCount: length))
+            }
+            res[subtitle] = results
+        }
+        let combinations = Subtitle.generateMatchedCombinations(of: res)
+        guard let bestMatch = getBestCombination(combinations: combinations,
+                                                 phrases: phrases,
+                                                 matcher: matcher) else {
             print("Best match does not found")
             return
         }
-        print(bestMatch.0, bestMatch.1.fullText)
+        var file = file
+        file.subtitles = bestMatch.0
+//        print(file.subtitles)
+        print(file.subtitles?.compactMap({ $0.matchAccuracy }).max())
         completion(file, bestMatch.1)
     }
 
@@ -84,6 +108,47 @@ final class PhraseMatcher: PhraseMatcherProtocol {
             }
         }
         return phrasesMap.first
+    }
+
+    private func getBestCombination(combinations: [[Subtitle]],
+                                    phrases: [Phrase],
+                                    matcher: TextsMatcher_Wrapper) -> ([Subtitle], Phrase)? {
+        var bestAccuracy: Double = 0
+        var bestCombination: [Subtitle] = []
+        var bestPhrase: Phrase?
+
+        // Поиск лучшей комбинации и соответствующей фразы
+        for combination in combinations {
+            let accuracies = combination.compactMap { $0.bestMatches?.first?.matchAccuracy }
+            if let maxAccuracy = accuracies.max(), maxAccuracy > bestAccuracy {
+                bestAccuracy = maxAccuracy
+                bestCombination = combination
+                // Находим фразу с максимальной точностью
+                if let index = accuracies.firstIndex(of: maxAccuracy),
+                   let phraseId = combination[index].bestMatches?.first?.phrase.id {
+                    bestPhrase = phrases.first { $0.id == phraseId }
+                }
+            }
+        }
+
+        // Проверяем, есть ли лучшая фраза
+        guard let phrase = bestPhrase, let phraseText = phrase.phraseText else { return nil }
+
+        // Очищаем фразу и проверяем, что она не пуста
+        let cleanedPhrase = removeEnclosedText(phraseText).trimmingCharacters(in: .whitespaces)
+        if cleanedPhrase.components(separatedBy: .whitespaces).isEmpty { return nil }
+
+        // Обновляем соответствия для лучшей комбинации
+        for i in bestCombination.indices {
+            let length = matcher.matchingSequenceLength(text1: bestCombination[i].text.lowercased(),
+                                                        text2: cleanedPhrase.lowercased())
+            let matchingResult = MatchingResult(phrase: phrase, matchingCount: length)
+            bestCombination[i].bestMatches?.append(matchingResult)
+            bestCombination[i].phraseId = phrase.id
+            bestCombination[i].matchAccuracy = matchingResult.matchAccuracy
+        }
+
+        return (bestCombination, phrase)
     }
 
     private func countMatchingWords(text1: String, text2: String) -> Int {

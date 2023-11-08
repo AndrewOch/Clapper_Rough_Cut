@@ -37,6 +37,28 @@ def matching_sequence_lengths(text1, text2):
     return sequences
 
 
+def longest_matching_sequence_length(text1, text2):
+    words1 = remove_punctuation(text1).split()
+    words2 = remove_punctuation(text2).split()
+    max_sequence_length = 0
+    current_sequence_length = 0
+    last_index = 0
+    for word1 in words1:
+        for i, word2 in enumerate(words2[last_index:]):
+            soundex1 = soundex_transform(word1)
+            soundex2 = soundex_transform(word2)
+            if soundex1 == soundex2:
+                current_sequence_length += 1
+                last_index += i + 1
+                break
+            else:
+                max_sequence_length = max(max_sequence_length, current_sequence_length)
+                current_sequence_length = 0
+                
+    max_sequence_length = max(max_sequence_length, current_sequence_length)
+    return max_sequence_length
+
+
 def soundex_transform(text):
     if text in soundex_dictionary:
         return soundex_dictionary[text]
