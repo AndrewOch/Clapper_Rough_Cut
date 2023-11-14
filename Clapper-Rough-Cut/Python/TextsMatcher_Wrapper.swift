@@ -23,4 +23,9 @@ class TextsMatcher_Wrapper {
         let array = response.map { Int($0)! }
         return array
     }
+
+    func matchingSequenceLength(text1: String, text2: String) -> Int {
+        let response = waveFunction.longest_matching_sequence_length(text1: text1, text2: text2)
+        return Int(response)!
+    }
 }

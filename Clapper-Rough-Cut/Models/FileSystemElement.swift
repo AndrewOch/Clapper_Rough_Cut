@@ -108,3 +108,10 @@ enum FileStatus: Codable, Hashable {
     case transcribing
     case transcription
 }
+
+extension FileSystemElement {
+    var scriptMatchingAccuracy: Double {
+        guard let accuracy = subtitles?.compactMap({ $0.matchAccuracy }).max() else { return 0 }
+        return accuracy
+    }
+}

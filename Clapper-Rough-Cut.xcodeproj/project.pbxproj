@@ -79,6 +79,7 @@
 		04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */; };
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
 		04C18C192AEF092E002C6875 /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04C18C182AEF092E002C6875 /* ggml-small.bin */; };
+		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -187,6 +188,7 @@
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
 		04C18C182AEF092E002C6875 /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-small.bin"; sourceTree = "<group>"; };
+		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				0452C9072AC4236C001E3AA7 /* SeveralSelectionDetailView.swift */,
 				0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */,
 				0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */,
+				04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
 				045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */,
 				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
+				04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */,
 				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
 				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,

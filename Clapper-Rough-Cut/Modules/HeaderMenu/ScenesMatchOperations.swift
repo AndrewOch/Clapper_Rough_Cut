@@ -36,8 +36,8 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func matchFor(files: [FileSystemElement]) {
-        phraseMatcher.matchFilesToPhrases(files: files,
-                                          phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
+        phraseMatcher.match(files: files,
+                            phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
             self.manualMatch(element: file, phrase: phrase)
         }
     }
@@ -52,16 +52,19 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     private func match(element: FileSystemElement, phrase: Phrase) {
         guard let scene = project.fileSystem.firstElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id }) else {
-            if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
-                guard let folder = project.fileSystem.getContainer(forElementWithID: element.id) else { return }
-                let scene = FileSystemElement(title: self.createPhraseFolderTitle(characterName: characterName,
-                                                                                  text: phraseText),
-                                              type: .scene)
-                project.fileSystem.addElement(scene, toFolderWithID: folder.id)
-                project.fileSystem.moveElement(withID: element.id, toFolderWithID: scene.id)
-            }
+            guard let characterName = phrase.character?.name,
+                    let phraseText = phrase.phraseText,
+                  let folder = project.fileSystem.getContainer(forElementWithID: element.id) else { return }
+            let scene = FileSystemElement(title: self.createPhraseFolderTitle(characterName: characterName,
+                                                                              text: phraseText),
+                                          type: .scene,
+                                          scriptPhraseId: phrase.id)
+            project.fileSystem.addElement(scene, toFolderWithID: folder.id)
+            project.fileSystem.updateElement(withID: element.id, newValue: element)
+            project.fileSystem.moveElement(withID: element.id, toFolderWithID: scene.id)
             return
         }
+        project.fileSystem.updateElement(withID: element.id, newValue: element)
         project.fileSystem.moveElement(withID: element.id, toFolderWithID: scene.id)
     }
 }

@@ -72,16 +72,16 @@ struct FileSystemSelectionDetailView: View {
                                 ProgressView()
                                     .progressViewStyle(.circular)
                                     .scaleEffect(0.5)
+                                    .foregroundColor(.contentPrimary(colorScheme))
                             }
-                            if subtitlesMode == 0, let subtitles = element.fullSubtitles {
-                                CustomLabel<BodyMediumStyle>(text: subtitles)
+                            if subtitlesMode == 0, let subtitles = element.subtitles {
+                                SubtitlesView(subtitles: .getOnly(subtitles))
                             }
                             if subtitlesMode == 1, let subtitle = element.currentSubtitle(time: currentTime) {
-                                CustomLabel<BodyMediumStyle>(text: subtitle.text)
+                                SubtitlesView(subtitles: .getOnly([subtitle]))
                             }
                             Spacer()
                         }
-                        .foregroundColor(.contentPrimary(colorScheme))
                     }
                 }
                 .padding(.horizontal, 10)
@@ -95,12 +95,12 @@ struct FileSystemSelectionDetailView: View {
             if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id) {
                 VStack {
                     HStack {
-                        SystemImage.folder.imageView
+                        FileIcon(type: .scene)
                             .foregroundColor(.contentSecondary(colorScheme))
-                        CustomLabel<BodyMediumStyle>(text: folder.title)
+                        CustomBindedLabel<BodyMediumStyle>(text: .getOnly(folder.title))
                             .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
-                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.capitalized,
+                        RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.changeScene.capitalized,
                                                                        imageName: SystemImage.film.rawValue,
                                                                        enabled: .constant(true)) {
                             isModalPresented.toggle()
@@ -109,12 +109,12 @@ struct FileSystemSelectionDetailView: View {
                 }
             } else {
                 HStack {
-                    RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.determineScene.capitalized,
+                    RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.determineScene.capitalized,
                                                                    imageName: SystemImage.film.rawValue,
                                                                    enabled: .constant(element.subtitles != nil)) {
                         document.matchSceneForFile(element)
                     }
-                    RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.chooseScene.capitalized,
+                    RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.chooseScene.capitalized,
                                                                    imageName: SystemImage.film.rawValue,
                                                                    enabled: .constant(true)) {
                         isModalPresented.toggle()
@@ -170,7 +170,7 @@ struct FileSystemSelectionDetailView: View {
                         CustomLabel<BodyMediumStyle>(text: element.title)
                             .foregroundColor(.contentSecondary(colorScheme))
                         Spacer()
-                        RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
+                        RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
                                                                        imageName: SystemImage.film.rawValue,
                                                                        enabled: .constant(true)) {
                             isModalPresented.toggle()
