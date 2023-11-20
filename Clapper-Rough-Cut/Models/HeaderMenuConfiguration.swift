@@ -114,19 +114,26 @@ struct HeaderMenuConfiguration {
                                             document.transcribeFiles()
                                         })
             ]),
-
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.determineScenes.firstWordCapitalized,
                                         imageName: SystemImage.film.rawValue,
                                         isEnabled: .getOnly(document.project.canSortScenes),
                                         action: {
                                             document.matchScenes()
-                                        }),
-                CustomContextMenuOption(title: L10n.determineTakes.firstWordCapitalized,
-                                        imageName: SystemImage.filmStack.rawValue,
-                                        isEnabled: .getOnly(document.project.hasUnmatchedSortedFiles),
+                                        })
+            ]),
+            CustomContextMenuSection(options: [
+                CustomContextMenuOption(title: L10n.synchronizeByTimecode.firstWordCapitalized,
+                                        imageName: SystemImage.timer.rawValue,
+                                        isEnabled: .getOnly(document.project.hasUnsynchronizedScenes),
                                         action: {
-                                            document.matchTakes()
+                                            document.syncAllByTimecode()
+                                        }),
+                CustomContextMenuOption(title: L10n.synchronizeByWaveform.firstWordCapitalized,
+                                        imageName: SystemImage.waveform.rawValue,
+                                        isEnabled: .getOnly(document.project.hasUnsynchronizedScenes),
+                                        action: {
+                                            document.syncAllByWaveform()
                                         })
             ])
         ]

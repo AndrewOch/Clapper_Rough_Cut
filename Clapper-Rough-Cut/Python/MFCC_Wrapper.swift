@@ -38,4 +38,11 @@ class MFCC_Wrapper {
        let response = waveFunction.get_dtw(mfccs1: mfccs1, mfccs2: mfccs2)
         return Float(response[0])!
     }
+
+    func distanceAndOffsetDTW(mfccs1: [[Float]], mfccs2: [[Float]]) -> (distance: Float, offset: Float) {
+        let response = waveFunction.get_dtw_offset(mfccs1: mfccs1, mfccs2: mfccs2)
+        let distance = Float(response[0])!
+        let offset = Float(response[1])!
+        return (distance, offset)
+    }
 }

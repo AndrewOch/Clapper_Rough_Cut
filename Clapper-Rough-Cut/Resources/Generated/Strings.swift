@@ -106,6 +106,10 @@ internal enum L10n {
   internal static let sort = L10n.tr("Localizable", "sort", fallback: "сортировка")
   /// статусы
   internal static let statuses = L10n.tr("Localizable", "statuses", fallback: "статусы")
+  /// синхр. по таймкоду
+  internal static let synchronizeByTimecode = L10n.tr("Localizable", "synchronizeByTimecode", fallback: "синхр. по таймкоду")
+  /// синхр. по звуковой волне
+  internal static let synchronizeByWaveform = L10n.tr("Localizable", "synchronizeByWaveform", fallback: "синхр. по звуковой волне")
   /// дубль
   internal static let take = L10n.tr("Localizable", "take", fallback: "дубль")
   /// дубли

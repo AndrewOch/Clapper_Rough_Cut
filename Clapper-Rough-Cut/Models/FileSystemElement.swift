@@ -13,6 +13,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var subtitles: [Subtitle]?
     var mfccs: [[Float]]?
     var collapsed: Bool = false
+    var syncResult: AudioSyncResult? = nil
 
     init(title: String,
          type: FileSystemElementType,
@@ -24,7 +25,8 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          url: URL? = nil,
          transcription: [Subtitle]? = nil,
          mfccs: [[Float]]? = nil,
-         collapsed: Bool = false) {
+         collapsed: Bool = false,
+         syncResult: AudioSyncResult? = nil) {
         self.title = title
         self.type = type
         self.createdAt = createdAt
@@ -36,6 +38,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.subtitles = transcription
         self.mfccs = mfccs
         self.collapsed = collapsed
+        self.syncResult = syncResult
     }
 
     static func == (lhs: FileSystemElement, rhs: FileSystemElement) -> Bool {

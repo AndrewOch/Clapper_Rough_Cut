@@ -50,12 +50,14 @@
 "take" = "дубль";
 "newFolder" = "новая папка";
 
+// Menu
+"synchronizeByTimecode" = "синхр. по таймкоду";
+"synchronizeByWaveform" = "синхр. по звуковой волне";
 
 // Settings - Shortcuts
 "shortcut_openCharactersMenu" = "Открыть меню персонажей:";
 "shortcut_export" = "Экспорт:";
 "shortcut_transcribeAll" = "Расшифровать все:";
-
 
 // Search
 "fileSystemSearchPlaceholder" = "Найдите нужные файлы";

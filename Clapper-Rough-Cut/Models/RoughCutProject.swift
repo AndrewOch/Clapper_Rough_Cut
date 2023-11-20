@@ -18,6 +18,9 @@ extension RoughCutProject {
     var canSortScenes: Bool {
         return hasUntranscribedFiles && scriptFile != nil
     }
+    var hasUnsynchronizedScenes: Bool {
+        fileSystem.firstElement(where: { $0.isScene && $0.syncResult == nil }) != nil
+    }
     var hasUnmatchedSortedFiles: Bool {
         fileSystem.firstElement { scene in
             scene.isScene &&

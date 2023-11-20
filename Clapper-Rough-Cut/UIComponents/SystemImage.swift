@@ -36,6 +36,8 @@ enum SystemImage: String {
     case timelineSelection = "timeline.selection"
     case magnifyingglass = "magnifyingglass"
     case xmarkCircleFill = "xmark.circle.fill"
+    case waveform = "waveform"
+    case timer = "timer"
 
     var imageView: Image {
         Image(systemName: self.rawValue)

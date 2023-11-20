@@ -39,8 +39,6 @@
 		043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC029E92ED400DA5EFF /* StringsMatcher.cpp */; };
 		043EDDC429E9317A00DA5EFF /* StringsMatcher_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC329E9317A00DA5EFF /* StringsMatcher_Wrapper.mm */; };
 		043EDDC729E953FF00DA5EFF /* TakesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */; };
-		043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */; };
-		043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */; };
 		0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4A29E59CF40086BD89 /* FileSystemView.swift */; };
 		0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4D29E5ADC20086BD89 /* RoundedButton.swift */; };
 		044C4C822AD6ABF4006E6BBD /* FileSystemListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C4C812AD6ABF4006E6BBD /* FileSystemListItemView.swift */; };
@@ -67,6 +65,8 @@
 		0464DA1029E423A80007EF24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E029E423A70007EF24 /* ContentView.swift */; };
 		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
+		047EB3602B036C00004A9ACF /* AudioSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047EB35F2B036C00004A9ACF /* AudioSyncResult.swift */; };
+		047EB3622B036C49004A9ACF /* AudioSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047EB3612B036C49004A9ACF /* AudioSynchronizer.swift */; };
 		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04A72EB62AB2785300000482 /* ggml-medium.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04A72EB52AB2785300000482 /* ggml-medium.bin */; };
@@ -81,6 +81,7 @@
 		04C18C192AEF092E002C6875 /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04C18C182AEF092E002C6875 /* ggml-small.bin */; };
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
+		04E37CC92B0BABA60047E7C5 /* SyncOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E37CC82B0BABA60047E7C5 /* SyncOperations.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
 		04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */; };
@@ -126,11 +127,6 @@
 		043EDDC329E9317A00DA5EFF /* StringsMatcher_Wrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StringsMatcher_Wrapper.mm; sourceTree = "<group>"; };
 		043EDDC529E9318A00DA5EFF /* StringsMatcher_Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringsMatcher_Wrapper.h; sourceTree = "<group>"; };
 		043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakesMatchOperations.swift; sourceTree = "<group>"; };
-		043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WaveFunction.cpp; sourceTree = "<group>"; };
-		043EDDCB29E95EB100DA5EFF /* WaveFunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WaveFunction.hpp; sourceTree = "<group>"; };
-		043EDDCD29E95F1100DA5EFF /* WaveStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveStructure.h; sourceTree = "<group>"; };
-		043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WaveFunction_Wrapper.mm; sourceTree = "<group>"; };
-		043EDDD029E961AD00DA5EFF /* WaveFunction_Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveFunction_Wrapper.h; sourceTree = "<group>"; };
 		044307FD29E2A70800705B78 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		0443080029E2A70800705B78 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
 		0443080129E2A70800705B78 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -176,6 +172,8 @@
 		0464D9E029E423A70007EF24 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0464D9E329E423A70007EF24 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperAudioTranscriber.swift; sourceTree = "<group>"; };
+		047EB35F2B036C00004A9ACF /* AudioSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSyncResult.swift; sourceTree = "<group>"; };
+		047EB3612B036C49004A9ACF /* AudioSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSynchronizer.swift; sourceTree = "<group>"; };
 		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		049B0CBE2AB34019007E446D /* ScriptCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCharacter.swift; sourceTree = "<group>"; };
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
@@ -190,6 +188,7 @@
 		04C18C182AEF092E002C6875 /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-small.bin"; sourceTree = "<group>"; };
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
+		04E37CC82B0BABA60047E7C5 /* SyncOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncOperations.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribedIcon.swift; sourceTree = "<group>"; };
@@ -305,6 +304,7 @@
 			children = (
 				043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */,
 				043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */,
+				04E37CC82B0BABA60047E7C5 /* SyncOperations.swift */,
 				043538E02AAD1D3300775E0D /* Views */,
 			);
 			path = HeaderMenu;
@@ -390,18 +390,6 @@
 			path = StringsMatcher;
 			sourceTree = "<group>";
 		};
-		043EDDC829E95D4900DA5EFF /* MFCC */ = {
-			isa = PBXGroup;
-			children = (
-				043EDDCA29E95EB100DA5EFF /* WaveFunction.cpp */,
-				043EDDCB29E95EB100DA5EFF /* WaveFunction.hpp */,
-				043EDDCD29E95F1100DA5EFF /* WaveStructure.h */,
-				043EDDCE29E961A500DA5EFF /* WaveFunction_Wrapper.mm */,
-				043EDDD029E961AD00DA5EFF /* WaveFunction_Wrapper.h */,
-			);
-			path = MFCC;
-			sourceTree = "<group>";
-		};
 		044307F729E2A6F700705B78 /* Whisper */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,7 +449,6 @@
 		0464D9BF29E423A70007EF24 /* Clapper-Rough-Cut */ = {
 			isa = PBXGroup;
 			children = (
-				043EDDC829E95D4900DA5EFF /* MFCC */,
 				043EDDBE29E92EAA00DA5EFF /* StringsMatcher */,
 				0464D9C029E423A70007EF24 /* Python */,
 				044307F729E2A6F700705B78 /* Whisper */,
@@ -514,6 +501,7 @@
 				049B0CBE2AB34019007E446D /* ScriptCharacter.swift */,
 				0453BC692AD895B0000909D6 /* RoughCutFileSystem.swift */,
 				04C0A0482AE52746001F6B10 /* Subtitle.swift */,
+				047EB35F2B036C00004A9ACF /* AudioSyncResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -559,6 +547,7 @@
 				0464D9E329E423A70007EF24 /* Converter.swift */,
 				043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */,
 				04F7A9E229F91DE0007E4C64 /* Formatter.swift */,
+				047EB3612B036C49004A9ACF /* AudioSynchronizer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -826,7 +815,6 @@
 				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
 				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
 				0453BC6E2AD93535000909D6 /* MediaPlayerView.swift in Sources */,
-				043EDDCC29E95EB100DA5EFF /* WaveFunction.cpp in Sources */,
 				0464DA1129E423A80007EF24 /* Converter.swift in Sources */,
 				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
 				04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */,
@@ -847,8 +835,8 @@
 				0464D9FB29E423A80007EF24 /* TextsMatcher_Wrapper.swift in Sources */,
 				04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */,
 				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
-				043EDDCF29E961A500DA5EFF /* WaveFunction_Wrapper.mm in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
+				04E37CC92B0BABA60047E7C5 /* SyncOperations.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
 				04C0A0422AE46001001F6B10 /* Binding.swift in Sources */,
 				043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */,
@@ -868,6 +856,7 @@
 				04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */,
 				04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */,
 				043538EF2AAFB45000775E0D /* HeaderMenuConfiguration.swift in Sources */,
+				047EB3622B036C49004A9ACF /* AudioSynchronizer.swift in Sources */,
 				043538EB2AAEFB9700775E0D /* OverlayMenu.swift in Sources */,
 				043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */,
 				043538CB2AABBB0D00775E0D /* Strings.swift in Sources */,
@@ -881,6 +870,7 @@
 				0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */,
 				0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */,
 				043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */,
+				047EB3602B036C00004A9ACF /* AudioSyncResult.swift in Sources */,
 				049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

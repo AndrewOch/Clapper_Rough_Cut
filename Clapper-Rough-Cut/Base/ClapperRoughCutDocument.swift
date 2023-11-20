@@ -18,6 +18,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     @Published var undoManager: UndoManager?
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
+    var audioSynchronizer: AudioSynchronizerProtocol? = nil
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
     var cancellables = Set<AnyCancellable>()
 
@@ -30,6 +31,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     init() {
         project = RoughCutProject()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        audioSynchronizer = AudioSynchronizer(document: self)
         cleanFileSystemStatuses()
     }
 
@@ -40,6 +42,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
+        audioSynchronizer = AudioSynchronizer(document: self)
         cleanFileSystemStatuses()
     }
 
