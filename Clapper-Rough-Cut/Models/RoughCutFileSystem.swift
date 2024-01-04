@@ -14,6 +14,10 @@ struct RoughCutFileSystem: Identifiable, Codable {
     var elements: [FileSystemElement] {
         Array(_elements.values)
     }
+    
+    var elementsDictionary: [UUID: FileSystemElement] {
+        _elements
+    }
 
     private var _root: FileSystemElement = FileSystemElement(title: .empty, type: .folder)
     private var _elements: [UUID: FileSystemElement] = [:]

@@ -5,6 +5,7 @@ struct RoughCutProject: Identifiable, Codable {
     var scriptFile: ScriptFile?
     var fileSystem: RoughCutFileSystem = RoughCutFileSystem()
     var exportSettings: ExportSettings = ExportSettings()
+    var devices: [ElementDevice] = []
 }
 
 // MARK: - Project states

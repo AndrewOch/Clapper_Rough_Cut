@@ -82,6 +82,7 @@
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04E37CC92B0BABA60047E7C5 /* SyncOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E37CC82B0BABA60047E7C5 /* SyncOperations.swift */; };
+		04E37CCB2B0C8F360047E7C5 /* AddFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E37CCA2B0C8F360047E7C5 /* AddFilesView.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
 		04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */; };
@@ -189,6 +190,7 @@
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04E37CC82B0BABA60047E7C5 /* SyncOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncOperations.swift; sourceTree = "<group>"; };
+		04E37CCA2B0C8F360047E7C5 /* AddFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesView.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		04F7A9E529F91F82007E4C64 /* TranscribedIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribedIcon.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			children = (
 				0448AD4A29E59CF40086BD89 /* FileSystemView.swift */,
 				044C4C812AD6ABF4006E6BBD /* FileSystemListItemView.swift */,
+				04E37CCA2B0C8F360047E7C5 /* AddFilesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				043EDDC229E92ED400DA5EFF /* StringsMatcher.cpp in Sources */,
 				043538CB2AABBB0D00775E0D /* Strings.swift in Sources */,
 				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
+				04E37CCB2B0C8F360047E7C5 /* AddFilesView.swift in Sources */,
 				0464DA0E29E423A80007EF24 /* Clapper_Rough_CutApp.swift in Sources */,
 				043538CD2AABD57100775E0D /* SystemImage.swift in Sources */,
 				043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */,

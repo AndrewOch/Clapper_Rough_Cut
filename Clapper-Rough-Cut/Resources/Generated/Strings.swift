@@ -58,6 +58,8 @@ internal enum L10n {
   internal static let exportPathPlaceholder = L10n.tr("Localizable", "exportPathPlaceholder", fallback: "введите путь сохранения")
   /// файл
   internal static let file = L10n.tr("Localizable", "file", fallback: "файл")
+  /// файлы
+  internal static let files = L10n.tr("Localizable", "files", fallback: "файлы")
   /// Найдите нужные файлы
   internal static let fileSystemSearchPlaceholder = L10n.tr("Localizable", "fileSystemSearchPlaceholder", fallback: "Найдите нужные файлы")
   /// название
@@ -108,8 +110,8 @@ internal enum L10n {
   internal static let statuses = L10n.tr("Localizable", "statuses", fallback: "статусы")
   /// синхр. по таймкоду
   internal static let synchronizeByTimecode = L10n.tr("Localizable", "synchronizeByTimecode", fallback: "синхр. по таймкоду")
-  /// синхр. по звуковой волне
-  internal static let synchronizeByWaveform = L10n.tr("Localizable", "synchronizeByWaveform", fallback: "синхр. по звуковой волне")
+  /// синхр. по звук. волне
+  internal static let synchronizeByWaveform = L10n.tr("Localizable", "synchronizeByWaveform", fallback: "синхр. по звук. волне")
   /// дубль
   internal static let take = L10n.tr("Localizable", "take", fallback: "дубль")
   /// дубли

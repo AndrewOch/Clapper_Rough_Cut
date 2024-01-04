@@ -96,6 +96,18 @@ struct FileSystemView: View {
         .onTapGesture {
             document.states.selectedHeaderOption = .none
         }
+        .sheet(isPresented: $document.states.isAddFilesViewPresented) {
+            AddFilesView { elements, device in
+                for var element in elements {
+                    element.deviceId = device.id
+                    document.project.fileSystem.addElement(element)
+                }
+                document.project.devices.append(device)
+                document.states.isAddFilesViewPresented.toggle()
+            } closeAction: {
+                document.states.isAddFilesViewPresented.toggle()
+            }
+        }
     }
 
     var detailView: some View {

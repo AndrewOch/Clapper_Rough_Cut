@@ -52,13 +52,7 @@ struct HeaderMenuConfiguration {
                                         imageName: SystemImage.squareAndArrowDown.rawValue,
                                         shortcut: .importFiles, isEnabled: .constant(true),
                                         action: {
-                                            document.addRawFiles()
-                                        }),
-                CustomContextMenuOption(title: L10n.addFolder.firstWordCapitalized,
-                                        imageName: SystemImage.squareAndArrowDown.rawValue,
-                                        isEnabled: .constant(true),
-                                        action: {
-
+                                            document.states.isAddFilesViewPresented.toggle()
                                         })
             ]),
             CustomContextMenuSection(options: [

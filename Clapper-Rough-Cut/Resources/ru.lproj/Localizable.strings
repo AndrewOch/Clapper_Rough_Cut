@@ -49,10 +49,11 @@
 "scene" = "сцена";
 "take" = "дубль";
 "newFolder" = "новая папка";
+"files" = "файлы";
 
 // Menu
 "synchronizeByTimecode" = "синхр. по таймкоду";
-"synchronizeByWaveform" = "синхр. по звуковой волне";
+"synchronizeByWaveform" = "синхр. по звук. волне";
 
 // Settings - Shortcuts
 "shortcut_openCharactersMenu" = "Открыть меню персонажей:";

@@ -26,10 +26,9 @@ extension ClapperRoughCutDocument: ExportOperations {
     func export() {
         let exportSettings = project.exportSettings
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
-        let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
-        createFolder(at: exportFolderURL)
-        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == project.fileSystem.id }).forEach {
-            exportFolder(root: exportFolderURL, folder: $0)}
+        var root = project.fileSystem.root
+        root.title = exportSettings.directoryName
+        exportFolder(root: exportDirectory, folder: root)
     }
 
     private func exportFolder(root: URL, folder: FileSystemElement) {
@@ -40,22 +39,26 @@ extension ClapperRoughCutDocument: ExportOperations {
             let fileName = url.lastPathComponent
             copyFile(from: url, to: exportFolderURL.appendingPathComponent(fileName))
         }
-        var takes: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isTake && $0.containerId == folder.id })
-        takes.sort { take1, take2 in
-            let minCreatedAt1 = project.fileSystem.allElements(where: { $0.containerId == take1.id })
-                .min(by: compareByMinCreatedAt)?.createdAt
-            let minCreatedAt2 = project.fileSystem.allElements(where: { $0.containerId == take2.id })
-                .min(by: compareByMinCreatedAt)?.createdAt
-            if let min1 = minCreatedAt1, let min2 = minCreatedAt2 {
-                return min1 < min2
-            }
-            return false
+        createSceneXML(from: folder, at: exportFolderURL)
+        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == folder.id }).forEach {
+            exportFolder(root: exportFolderURL, folder: $0)
         }
-        var takeNum = 1
-        takes.forEach { take in
-            exportTake(root: exportFolderURL, take: take, num: takeNum)
-            takeNum += 1
-        }
+//        var takes: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isTake && $0.containerId == folder.id })
+//        takes.sort { take1, take2 in
+//            let minCreatedAt1 = project.fileSystem.allElements(where: { $0.containerId == take1.id })
+//                .min(by: compareByMinCreatedAt)?.createdAt
+//            let minCreatedAt2 = project.fileSystem.allElements(where: { $0.containerId == take2.id })
+//                .min(by: compareByMinCreatedAt)?.createdAt
+//            if let min1 = minCreatedAt1, let min2 = minCreatedAt2 {
+//                return min1 < min2
+//            }
+//            return false
+//        }
+//        var takeNum = 1
+//        takes.forEach { take in
+//            exportTake(root: exportFolderURL, take: take, num: takeNum)
+//            takeNum += 1
+//        }
     }
 
     private func compareByMinCreatedAt(_ element1: FileSystemElement, _ element2: FileSystemElement) -> Bool {
@@ -93,5 +96,42 @@ extension ClapperRoughCutDocument: ExportOperations {
         } catch {
             print("Error copying file: \(error.localizedDescription)")
         }
+    }
+
+    private func createSceneXML(from folder: FileSystemElement, at destination: URL) {
+        var xmlDocument = XMLDocument()
+        project.fileSystem.allElements(where: { $0.isScene && $0.containerId == folder.id }).forEach { scene in
+            let sequence = createSequenceForScene(scene: scene,
+                                                  allElements: project.fileSystem.elementsDictionary)
+            xmlDocument.addChild(sequence)
+        }
+        let xmlData = xmlDocument.xmlData(options: .nodePrettyPrint)
+    }
+
+    func createSequenceForScene(scene: FileSystemElement, allElements: [UUID: FileSystemElement]) -> XMLElement {
+        let sequence = XMLElement(name: "sequence")
+        let media = XMLElement(name: "media")
+        let video = XMLElement(name: "video")
+        let track = XMLElement(name: "track")
+
+        for (elementID, offset) in scene.syncResult?.timeOffsets ?? [:] {
+            guard let element = allElements[elementID] else { continue }
+
+            let clipItem = XMLElement(name: "clipitem")
+            clipItem.addChild(XMLElement(name: "name", stringValue: element.title))
+            clipItem.addChild(XMLElement(name: "start", stringValue: "\(secondsToFrames(offset))"))
+            clipItem.addChild(XMLElement(name: "duration", stringValue: "\(secondsToFrames(element.duration ?? 0))"))
+
+            track.addChild(clipItem)
+        }
+
+        video.addChild(track)
+        media.addChild(video)
+        sequence.addChild(media)
+        return sequence
+    }
+
+    private func secondsToFrames(_ seconds: Double) -> Int {
+        return Int(seconds * 25)
     }
 }

@@ -14,6 +14,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var mfccs: [[Float]]?
     var collapsed: Bool = false
     var syncResult: AudioSyncResult? = nil
+    var deviceId: UUID? = nil
 
     init(title: String,
          type: FileSystemElementType,
@@ -26,7 +27,8 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          transcription: [Subtitle]? = nil,
          mfccs: [[Float]]? = nil,
          collapsed: Bool = false,
-         syncResult: AudioSyncResult? = nil) {
+         syncResult: AudioSyncResult? = nil,
+         deviceId: UUID? = nil) {
         self.title = title
         self.type = type
         self.createdAt = createdAt
@@ -39,6 +41,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.mfccs = mfccs
         self.collapsed = collapsed
         self.syncResult = syncResult
+        self.deviceId = deviceId
     }
 
     static func == (lhs: FileSystemElement, rhs: FileSystemElement) -> Bool {
@@ -117,4 +120,9 @@ extension FileSystemElement {
         guard let accuracy = subtitles?.compactMap({ $0.matchAccuracy }).max() else { return 0 }
         return accuracy
     }
+}
+
+struct ElementDevice: Identifiable, Codable, Equatable, Hashable {
+    var id: UUID = UUID()
+    var name: String
 }

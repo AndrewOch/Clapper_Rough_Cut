@@ -52,6 +52,47 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             project.fileSystem.addElement(newFile)
         }
     }
+    
+    public func downloadRawFiles(existingElems: [FileSystemElement]) -> [FileSystemElement] {
+        registerUndo()
+        let dialog = NSOpenPanel()
+        dialog.title                   = "Choose multiple raw files"
+        dialog.showsResizeIndicator    = true
+        dialog.showsHiddenFiles        = false
+        dialog.canChooseDirectories    = false
+        dialog.allowsMultipleSelection = true
+        dialog.allowedContentTypes     = [.audio, .movie]
+        guard (dialog.runModal() == NSApplication.ModalResponse.OK) else { return [] }
+        var existingFiles: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isFile })
+        existingFiles.append(contentsOf: existingElems)
+        let results = dialog.urls
+        let filtered = results.filter { res in
+            !existingFiles.contains(where: { $0.url == res })
+        }
+        var result = [FileSystemElement]()
+        for url in filtered {
+            var type: FileSystemElementType? = nil
+            if let fileType = UTType(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil) {
+                if fileType.isSubtype(of: .audio) {
+                    type = .audio
+                } else if fileType.isSubtype(of: .movie) {
+                    type = .video
+                }
+            }
+            guard let type = type else { continue }
+            let audioAsset = AVURLAsset(url: url)
+            let audioDuration = audioAsset.duration.seconds
+            let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
+            let createdAt = attributes?[.creationDate] as? Date ?? Date()
+            let newFile = FileSystemElement(title: url.lastPathComponent,
+                                            type: type,
+                                            createdAt: createdAt,
+                                            duration: audioDuration,
+                                            url: url)
+            result.append(newFile)
+        }
+        return result
+    }
 
     public func transcribeFile(_ file: FileSystemElement) {
         registerUndo()
