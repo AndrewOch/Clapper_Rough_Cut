@@ -1,5 +1,9 @@
-#import "coreml/whisper-encoder.h"
-#import "coreml/whisper-encoder-impl.h"
+#if !__has_feature(objc_arc)
+#error This file must be compiled with automatic reference counting enabled (-fobjc-arc)
+#endif
+
+#import "whisper-encoder.h"
+#import "whisper-encoder-impl.h"
 
 #import <CoreML/CoreML.h>
 
@@ -18,7 +22,13 @@ struct whisper_coreml_context * whisper_coreml_init(const char * path_model) {
 
     NSURL * url_model = [NSURL fileURLWithPath: path_model_str];
 
-    const void * data = CFBridgingRetain([[whisper_encoder_impl alloc] initWithContentsOfURL:url_model error:nil]);
+    // select which device to run the Core ML model on
+    MLModelConfiguration *config = [[MLModelConfiguration alloc] init];
+    config.computeUnits = MLComputeUnitsCPUAndGPU;
+    //config.computeUnits = MLComputeUnitsCPUAndNeuralEngine;
+    //config.computeUnits = MLComputeUnitsAll;
+
+    const void * data = CFBridgingRetain([[whisper_encoder_impl alloc] initWithContentsOfURL:url_model configuration:config error:nil]);
 
     if (data == NULL) {
         return NULL;
@@ -38,28 +48,24 @@ void whisper_coreml_free(struct whisper_coreml_context * ctx) {
 
 void whisper_coreml_encode(
         const whisper_coreml_context * ctx,
+                             int64_t   n_ctx,
+                             int64_t   n_mel,
                                float * mel,
                                float * out) {
     MLMultiArray * inMultiArray = [
         [MLMultiArray alloc] initWithDataPointer: mel
-                                           shape: @[@1, @80, @3000]
+                                           shape: @[@1, @(n_mel), @(n_ctx)]
                                         dataType: MLMultiArrayDataTypeFloat32
-                                         strides: @[@(240000), @(3000), @1]
+                                         strides: @[@(n_ctx*n_mel), @(n_ctx), @1]
                                      deallocator: nil
                                            error: nil
     ];
 
-    whisper_encoder_implOutput * outCoreML = [(__bridge id) ctx->data predictionFromLogmel_data:inMultiArray error:nil];
+    @autoreleasepool {
+        whisper_encoder_implOutput * outCoreML = [(__bridge id) ctx->data predictionFromLogmel_data:inMultiArray error:nil];
 
-    MLMultiArray * outMA = outCoreML.output;
-
-    //NSArray<NSNumber *> * shape = outMA.shape;
-    //NSArray<NSNumber *> * strides = outMA.strides;
-
-    //printf("shape:   %ld %ld %ld %ld\n", [shape[0] longValue], [shape[1] longValue], [shape[2] longValue], [shape[3] longValue]);
-    //printf("strides: %ld %ld %ld %ld\n", [strides[0] longValue], [strides[1] longValue], [strides[2] longValue], [strides[3] longValue]);
-
-    memcpy(out, outMA.dataPointer, outMA.count * sizeof(float));
+        memcpy(out, outCoreML.output.dataPointer, outCoreML.output.count * sizeof(float));
+    }
 }
 
 #if __cplusplus

@@ -1,53 +1,63 @@
-#include <cublas_v2.h>
-#include <cuda_runtime.h>
+#pragma once
+
 #include "ggml.h"
+#include "ggml-backend.h"
+
+#ifdef GGML_USE_HIPBLAS
+#define GGML_CUDA_NAME "ROCm"
+#define GGML_CUBLAS_NAME "hipBLAS"
+#else
+#define GGML_CUDA_NAME "CUDA"
+#define GGML_CUBLAS_NAME "cuBLAS"
+#endif
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
-#define CUDA_CHECK(err)                                                                 \
-    do {                                                                                \
-        cudaError_t err_ = (err);                                                       \
-        if (err_ != cudaSuccess) {                                                      \
-            fprintf(stderr, "CUDA error %d at %s:%d: %s\n", err_, __FILE__, __LINE__,   \
-                cudaGetErrorString(err_));                                              \
-            exit(1);                                                                    \
-        }                                                                               \
-    } while (0)
+#define GGML_CUDA_MAX_DEVICES       16
 
-#define CUBLAS_CHECK(err)                                                               \
-    do {                                                                                \
-        cublasStatus_t err_ = (err);                                                    \
-        if (err_ != CUBLAS_STATUS_SUCCESS) {                                            \
-            fprintf(stderr, "cuBLAS error %d at %s:%d\n", err_, __FILE__, __LINE__);    \
-            exit(1);                                                                    \
-        }                                                                               \
-    } while (0)
+// Always success. To check if CUDA is actually loaded, use `ggml_cublas_loaded`.
+GGML_API void   ggml_init_cublas(void);
 
-extern cublasHandle_t g_cublasH;
-extern cudaStream_t g_cudaStream;
-extern cudaStream_t g_cudaStream2;
-extern cudaEvent_t g_cudaEvent;
+// Returns `true` if there are available CUDA devices and cublas loads successfully; otherwise, it returns `false`.
+GGML_API bool   ggml_cublas_loaded(void);
 
-void   ggml_init_cublas(void);
-void * ggml_cuda_host_malloc(size_t size);
-void   ggml_cuda_host_free(void * ptr);
+GGML_API void * ggml_cuda_host_malloc(size_t size);
+GGML_API void   ggml_cuda_host_free(void * ptr);
 
-void * ggml_cuda_pool_malloc(size_t size, size_t * actual_size);
-void   ggml_cuda_pool_free(void * ptr, size_t size);
+GGML_API bool   ggml_cuda_can_mul_mat(const struct ggml_tensor * src0, const struct ggml_tensor * src1, struct ggml_tensor * dst);
+GGML_API void   ggml_cuda_set_tensor_split(const float * tensor_split);
+GGML_API void   ggml_cuda_transform_tensor(void * data, struct ggml_tensor * tensor);
+GGML_API void   ggml_cuda_free_data(struct ggml_tensor * tensor);
 
-void dequantize_row_q4_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
-void dequantize_row_q4_1_cuda(const void * vx, float * y, int k, cudaStream_t stream);
-void dequantize_row_q4_2_cuda(const void * vx, float * y, int k, cudaStream_t stream);
-void dequantize_row_q5_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
-void dequantize_row_q5_1_cuda(const void * vx, float * y, int k, cudaStream_t stream);
-void dequantize_row_q8_0_cuda(const void * vx, float * y, int k, cudaStream_t stream);
+GGML_API void   ggml_cuda_assign_buffers(struct ggml_tensor * tensor);
+GGML_API void   ggml_cuda_assign_buffers_no_scratch(struct ggml_tensor * tensor);
+GGML_API void   ggml_cuda_assign_buffers_force_inplace(struct ggml_tensor * tensor);
 
-cudaError_t ggml_cuda_h2d_tensor_2d(void * dst, const struct ggml_tensor * src, uint64_t i3, uint64_t i2, cudaStream_t stream);
+GGML_API void   ggml_cuda_assign_buffers_no_alloc(struct ggml_tensor * tensor);
+GGML_API void   ggml_cuda_assign_scratch_offset(struct ggml_tensor * tensor, size_t offset);
+GGML_API void   ggml_cuda_copy_to_device(struct ggml_tensor * tensor);
 
-typedef void (*dequantize_row_q_cuda_t)(const void * x, float * y, int k, cudaStream_t stream);
-dequantize_row_q_cuda_t ggml_get_dequantize_row_q_cuda(enum ggml_type type);
+GGML_API void   ggml_cuda_set_main_device(int main_device);
+GGML_API void   ggml_cuda_set_mul_mat_q(bool mul_mat_q);
+GGML_API void   ggml_cuda_set_scratch_size(size_t scratch_size);
+GGML_API void   ggml_cuda_free_scratch(void);
+GGML_API bool   ggml_cuda_compute_forward(struct ggml_compute_params * params, struct ggml_tensor * tensor);
+
+GGML_API int    ggml_cuda_get_device_count(void);
+GGML_API void   ggml_cuda_get_device_description(int device, char * description, size_t description_size);
+
+// backend API
+GGML_API ggml_backend_t ggml_backend_cuda_init(int device);
+
+GGML_API bool ggml_backend_is_cuda(ggml_backend_t backend);
+GGML_API int  ggml_backend_cuda_get_device(ggml_backend_t backend);
+
+GGML_API ggml_backend_buffer_type_t ggml_backend_cuda_buffer_type(int device);
+
+// pinned host buffer for use with CPU backend for faster copies between CPU and GPU
+GGML_API ggml_backend_buffer_type_t ggml_backend_cuda_host_buffer_type(void);
 
 #ifdef  __cplusplus
 }

@@ -1,5 +1,5 @@
 import SwiftUI
-import KeyboardShortcuts
+//import KeyboardShortcuts
 
 struct CustomContextMenuSection: Identifiable {
     var id = UUID()
@@ -10,7 +10,7 @@ struct CustomContextMenuOption: Identifiable {
     var id = UUID()
     var title: String
     var imageName: String?
-    var shortcut: KeyboardShortcuts.Name?
+//    var shortcut: KeyboardShortcuts.Name?
     var isEnabled: Binding<Bool>
     var action: () -> Void
 }
@@ -36,7 +36,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.export.capitalized,
                                         imageName: SystemImage.rectanglePortraitAndArrowRight.rawValue,
-                                        shortcut: .export,
+//                                        shortcut: .export,
                                         isEnabled: .constant(true),
                                         action: {
                                             document.states.isExportViewPresented.toggle()
@@ -50,7 +50,8 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.addFiles.firstWordCapitalized,
                                         imageName: SystemImage.squareAndArrowDown.rawValue,
-                                        shortcut: .importFiles, isEnabled: .constant(true),
+//                                        shortcut: .importFiles, 
+                                        isEnabled: .constant(true),
                                         action: {
                                             document.addRawFiles()
                                         }),
@@ -94,7 +95,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.characters.firstWordCapitalized,
                                         imageName: SystemImage.person.rawValue,
-                                        shortcut: .characters,
+//                                        shortcut: .characters,
                                         isEnabled: .getOnly(document.project.scriptFile != nil),
                                         action: {
                                             document.states.isCharactersViewPresented.toggle()
@@ -108,7 +109,7 @@ struct HeaderMenuConfiguration {
             CustomContextMenuSection(options: [
                 CustomContextMenuOption(title: L10n.transcribe.capitalized,
                                         imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
-                                        shortcut: .transcribeAll,
+//                                        shortcut: .transcribeAll,
                                         isEnabled: .getOnly(document.project.hasUntranscribedFiles),
                                         action: {
                                             document.transcribeFiles()
@@ -138,22 +139,22 @@ struct HeaderMenuConfiguration {
     }
 
     private func configureShortcuts() {
-        configureShortcuts(for: base)
-        configureShortcuts(for: file)
-        configureShortcuts(for: edit)
-        configureShortcuts(for: script)
-        configureShortcuts(for: sort)
+//        configureShortcuts(for: base)
+//        configureShortcuts(for: file)
+//        configureShortcuts(for: edit)
+//        configureShortcuts(for: script)
+//        configureShortcuts(for: sort)
     }
 
-    private func configureShortcuts(for menu: [CustomContextMenuSection]) {
-        menu.forEach({ section in
-            section.options.forEach({ option in
-                if let shortcut = option.shortcut {
-                    KeyboardShortcuts.onKeyDown(for: shortcut) {
-                        option.action()
-                    }
-                }
-            })
-        })
-    }
+//    private func configureShortcuts(for menu: [CustomContextMenuSection]) {
+//        menu.forEach({ section in
+//            section.options.forEach({ option in
+//                if let shortcut = option.shortcut {
+//                    KeyboardShortcuts.onKeyDown(for: shortcut) {
+//                        option.action()
+//                    }
+//                }
+//            })
+//        })
+//    }
 }

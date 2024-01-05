@@ -1,5 +1,5 @@
 import SwiftUI
-import KeyboardShortcuts
+//import KeyboardShortcuts
 
 struct FileSystemView: View {
     @Environment(\.colorScheme) private var colorScheme
