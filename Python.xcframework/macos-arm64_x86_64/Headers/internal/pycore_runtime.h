@@ -19,9 +19,7 @@ struct _ceval_runtime_state {
        the main thread of the main interpreter can handle signals: see
        _Py_ThreadCanHandleSignals(). */
     _Py_atomic_int signals_pending;
-#ifndef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
     struct _gil_runtime_state gil;
-#endif
 };
 
 /* GIL state */
@@ -48,13 +46,6 @@ typedef struct _Py_AuditHookEntry {
     Py_AuditHookFunction hookCFunction;
     void *userData;
 } _Py_AuditHookEntry;
-
-struct _Py_unicode_runtime_ids {
-    PyThread_type_lock lock;
-    // next_index value must be preserved when Py_Initialize()/Py_Finalize()
-    // is called multiple times: see _PyUnicode_FromId() implementation.
-    Py_ssize_t next_index;
-};
 
 /* Full Python runtime state */
 
@@ -109,13 +100,9 @@ typedef struct pyruntimestate {
 
     PyPreConfig preconfig;
 
-    // Audit values must be preserved when Py_Initialize()/Py_Finalize()
-    // is called multiple times.
     Py_OpenCodeHookFunction open_code_hook;
     void *open_code_userdata;
     _Py_AuditHookEntry *audit_hook_head;
-
-    struct _Py_unicode_runtime_ids unicode_ids;
 
     // XXX Consolidate globals found via the check-c-globals script.
 } _PyRuntimeState;
@@ -131,7 +118,7 @@ PyAPI_FUNC(PyStatus) _PyRuntimeState_Init(_PyRuntimeState *runtime);
 PyAPI_FUNC(void) _PyRuntimeState_Fini(_PyRuntimeState *runtime);
 
 #ifdef HAVE_FORK
-extern PyStatus _PyRuntimeState_ReInitThreads(_PyRuntimeState *runtime);
+PyAPI_FUNC(void) _PyRuntimeState_ReInitThreads(_PyRuntimeState *runtime);
 #endif
 
 /* Initialize _PyRuntimeState.

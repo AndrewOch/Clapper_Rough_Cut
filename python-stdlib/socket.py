@@ -337,7 +337,6 @@ class socket(_socket.socket):
             buffer = io.BufferedWriter(raw, buffering)
         if binary:
             return buffer
-        encoding = io.text_encoding(encoding)
         text = io.TextIOWrapper(buffer, encoding, errors, newline)
         text.mode = mode
         return text
@@ -378,7 +377,7 @@ class socket(_socket.socket):
             try:
                 while True:
                     if timeout and not selector_select(timeout):
-                        raise TimeoutError('timed out')
+                        raise _socket.timeout('timed out')
                     if count:
                         blocksize = count - total_sent
                         if blocksize <= 0:
@@ -707,7 +706,7 @@ class SocketIO(io.RawIOBase):
                 self._timeout_occurred = True
                 raise
             except error as e:
-                if e.errno in _blocking_errnos:
+                if e.args[0] in _blocking_errnos:
                     return None
                 raise
 
@@ -723,7 +722,7 @@ class SocketIO(io.RawIOBase):
             return self._sock.send(b)
         except error as e:
             # XXX what about EINTR?
-            if e.errno in _blocking_errnos:
+            if e.args[0] in _blocking_errnos:
                 return None
             raise
 
@@ -783,11 +782,11 @@ def getfqdn(name=''):
 
     First the hostname returned by gethostbyaddr() is checked, then
     possibly existing aliases. In case no FQDN is available and `name`
-    was given, it is returned unchanged. If `name` was empty, '0.0.0.0' or '::',
+    was given, it is returned unchanged. If `name` was empty or '0.0.0.0',
     hostname from gethostname() is returned.
     """
     name = name.strip()
-    if not name or name in ('0.0.0.0', '::'):
+    if not name or name == '0.0.0.0':
         name = gethostname()
     try:
         hostname, aliases, ipaddrs = gethostbyaddr(name)
@@ -902,7 +901,7 @@ def create_server(address, *, family=AF_INET, backlog=None, reuse_port=False,
         # address, effectively preventing this one from accepting
         # connections. Also, it may set the process in a state where
         # it'll no longer respond to any signals or graceful kills.
-        # See: https://learn.microsoft.com/windows/win32/winsock/using-so-reuseaddr-and-so-exclusiveaddruse
+        # See: msdn2.microsoft.com/en-us/library/ms740621(VS.85).aspx
         if os.name not in ('nt', 'cygwin') and \
                 hasattr(_socket, 'SO_REUSEADDR'):
             try:

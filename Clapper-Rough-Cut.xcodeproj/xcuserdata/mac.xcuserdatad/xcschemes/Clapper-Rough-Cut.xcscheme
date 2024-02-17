@@ -51,8 +51,8 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "PYTHON_LIBRARY"
-            value = "/Users/mac/opt/anaconda3/lib/libpython3.9.dylib"
+            key = "BASE_URL"
+            value = "http://127.0.0.1:5000"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

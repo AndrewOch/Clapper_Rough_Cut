@@ -31,7 +31,6 @@ Notes:
 
 import atexit
 import builtins
-import inspect
 import __main__
 
 __all__ = ["Completer"]
@@ -97,13 +96,7 @@ class Completer:
 
     def _callable_postfix(self, val, word):
         if callable(val):
-            word += "("
-            try:
-                if not inspect.signature(val).parameters:
-                    word += ")"
-            except ValueError:
-                pass
-
+            word = word + "("
         return word
 
     def global_matches(self, text):

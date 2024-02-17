@@ -544,9 +544,10 @@ class BaseEventLoop(events.AbstractEventLoop):
         closing_agens = list(self._asyncgens)
         self._asyncgens.clear()
 
-        results = await tasks.gather(
+        results = await tasks._gather(
             *[ag.aclose() for ag in closing_agens],
-            return_exceptions=True)
+            return_exceptions=True,
+            loop=self)
 
         for result, agen in zip(results, closing_agens):
             if isinstance(result, Exception):
@@ -573,11 +574,9 @@ class BaseEventLoop(events.AbstractEventLoop):
     def _do_shutdown(self, future):
         try:
             self._default_executor.shutdown(wait=True)
-            if not self.is_closed():
-                self.call_soon_threadsafe(future.set_result, None)
+            self.call_soon_threadsafe(future.set_result, None)
         except Exception as ex:
-            if not self.is_closed():
-                self.call_soon_threadsafe(future.set_exception, ex)
+            self.call_soon_threadsafe(future.set_exception, ex)
 
     def _check_running(self):
         if self.is_running():
@@ -591,13 +590,12 @@ class BaseEventLoop(events.AbstractEventLoop):
         self._check_closed()
         self._check_running()
         self._set_coroutine_origin_tracking(self._debug)
+        self._thread_id = threading.get_ident()
 
         old_agen_hooks = sys.get_asyncgen_hooks()
+        sys.set_asyncgen_hooks(firstiter=self._asyncgen_firstiter_hook,
+                               finalizer=self._asyncgen_finalizer_hook)
         try:
-            self._thread_id = threading.get_ident()
-            sys.set_asyncgen_hooks(firstiter=self._asyncgen_firstiter_hook,
-                                   finalizer=self._asyncgen_finalizer_hook)
-
             events._set_running_loop(self)
             while True:
                 self._run_once()
@@ -946,10 +944,7 @@ class BaseEventLoop(events.AbstractEventLoop):
             sock = socket.socket(family=family, type=type_, proto=proto)
             sock.setblocking(False)
             if local_addr_infos is not None:
-                for lfamily, _, _, _, laddr in local_addr_infos:
-                    # skip local addresses of different family
-                    if lfamily != family:
-                        continue
+                for _, _, _, _, laddr in local_addr_infos:
                     try:
                         sock.bind(laddr)
                         break
@@ -962,10 +957,7 @@ class BaseEventLoop(events.AbstractEventLoop):
                         exc = OSError(exc.errno, msg)
                         my_exceptions.append(exc)
                 else:  # all bind attempts failed
-                    if my_exceptions:
-                        raise my_exceptions.pop()
-                    else:
-                        raise OSError(f"no matching local address with {family=} found")
+                    raise my_exceptions.pop()
             await self.sock_connect(sock, address)
             return sock
         except OSError as exc:
@@ -977,8 +969,6 @@ class BaseEventLoop(events.AbstractEventLoop):
             if sock is not None:
                 sock.close()
             raise
-        finally:
-            exceptions = my_exceptions = None
 
     async def create_connection(
             self, protocol_factory, host=None, port=None,
@@ -989,7 +979,7 @@ class BaseEventLoop(events.AbstractEventLoop):
             happy_eyeballs_delay=None, interleave=None):
         """Connect to a TCP server.
 
-        Create a streaming transport connection to a given internet host and
+        Create a streaming transport connection to a given Internet host and
         port: socket family AF_INET or socket.AF_INET6 depending on host (or
         family if specified), socket type SOCK_STREAM. protocol_factory must be
         a callable returning a protocol instance.
@@ -1071,20 +1061,17 @@ class BaseEventLoop(events.AbstractEventLoop):
 
             if sock is None:
                 exceptions = [exc for sub in exceptions for exc in sub]
-                try:
-                    if len(exceptions) == 1:
+                if len(exceptions) == 1:
+                    raise exceptions[0]
+                else:
+                    # If they all have the same str(), raise one.
+                    model = str(exceptions[0])
+                    if all(str(exc) == model for exc in exceptions):
                         raise exceptions[0]
-                    else:
-                        # If they all have the same str(), raise one.
-                        model = str(exceptions[0])
-                        if all(str(exc) == model for exc in exceptions):
-                            raise exceptions[0]
-                        # Raise a combined exception so the user can see all
-                        # the various error messages.
-                        raise OSError('Multiple exceptions: {}'.format(
-                            ', '.join(str(exc) for exc in exceptions)))
-                finally:
-                    exceptions = None
+                    # Raise a combined exception so the user can see all
+                    # the various error messages.
+                    raise OSError('Multiple exceptions: {}'.format(
+                        ', '.join(str(exc) for exc in exceptions)))
 
         else:
             if sock is None:
@@ -1312,8 +1299,8 @@ class BaseEventLoop(events.AbstractEventLoop):
                 addr_infos = {}  # Using order preserving dict
                 for idx, addr in ((0, local_addr), (1, remote_addr)):
                     if addr is not None:
-                        assert isinstance(addr, tuple) and len(addr) == 2, (
-                            '2-tuple is expected')
+                        if not (isinstance(addr, tuple) and len(addr) == 2):
+                            raise TypeError('2-tuple is expected')
 
                         infos = await self._ensure_resolved(
                             addr, family=family, type=socket.SOCK_DGRAM,
@@ -1482,7 +1469,7 @@ class BaseEventLoop(events.AbstractEventLoop):
             fs = [self._create_server_getaddrinfo(host, port, family=family,
                                                   flags=flags)
                   for host in hosts]
-            infos = await tasks.gather(*fs)
+            infos = await tasks._gather(*fs, loop=self)
             infos = set(itertools.chain.from_iterable(infos))
 
             completed = False
@@ -1550,6 +1537,14 @@ class BaseEventLoop(events.AbstractEventLoop):
             self, protocol_factory, sock,
             *, ssl=None,
             ssl_handshake_timeout=None):
+        """Handle an accepted connection.
+
+        This is used by servers that accept connections outside of
+        asyncio but that use asyncio to handle connections.
+
+        This method is a coroutine.  When completed, the coroutine
+        returns a (transport, protocol) pair.
+        """
         if sock.type != socket.SOCK_STREAM:
             raise ValueError(f'A Stream Socket was expected, got {sock!r}')
 
@@ -1815,9 +1810,12 @@ class BaseEventLoop(events.AbstractEventLoop):
                                  exc_info=True)
 
     def _add_callback(self, handle):
-        """Add a Handle to _ready."""
-        if not handle._cancelled:
-            self._ready.append(handle)
+        """Add a Handle to _scheduled (TimerHandle) or _ready."""
+        assert isinstance(handle, events.Handle), 'A Handle is required here'
+        if handle._cancelled:
+            return
+        assert not isinstance(handle, events.TimerHandle)
+        self._ready.append(handle)
 
     def _add_callback_signalsafe(self, handle):
         """Like _add_callback() but called from a signal handler."""
@@ -1870,8 +1868,6 @@ class BaseEventLoop(events.AbstractEventLoop):
 
         event_list = self._selector.select(timeout)
         self._process_events(event_list)
-        # Needed to break cycles when an exception occurs.
-        event_list = None
 
         # Handle 'later' callbacks that are ready.
         end_time = self.time() + self._clock_resolution

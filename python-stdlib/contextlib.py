@@ -9,7 +9,7 @@ from types import MethodType, GenericAlias
 __all__ = ["asynccontextmanager", "contextmanager", "closing", "nullcontext",
            "AbstractContextManager", "AbstractAsyncContextManager",
            "AsyncExitStack", "ContextDecorator", "ExitStack",
-           "redirect_stdout", "redirect_stderr", "suppress", "aclosing"]
+           "redirect_stdout", "redirect_stderr", "suppress"]
 
 
 class AbstractContextManager(abc.ABC):
@@ -77,22 +77,6 @@ class ContextDecorator(object):
         def inner(*args, **kwds):
             with self._recreate_cm():
                 return func(*args, **kwds)
-        return inner
-
-
-class AsyncContextDecorator(object):
-    "A base class or mixin that enables async context managers to work as decorators."
-
-    def _recreate_cm(self):
-        """Return a recreated instance of self.
-        """
-        return self
-
-    def __call__(self, func):
-        @wraps(func)
-        async def inner(*args, **kwds):
-            async with self._recreate_cm():
-                return await func(*args, **kwds)
         return inner
 
 
@@ -184,11 +168,9 @@ class _GeneratorContextManager(
                 return False
             raise RuntimeError("generator didn't stop after throw()")
 
-class _AsyncGeneratorContextManager(
-    _GeneratorContextManagerBase,
-    AbstractAsyncContextManager,
-    AsyncContextDecorator,
-):
+
+class _AsyncGeneratorContextManager(_GeneratorContextManagerBase,
+                                    AbstractAsyncContextManager):
     """Helper for @asynccontextmanager decorator."""
 
     async def __aenter__(self):
@@ -196,14 +178,14 @@ class _AsyncGeneratorContextManager(
         # they are only needed for recreation, which is not possible anymore
         del self.args, self.kwds, self.func
         try:
-            return await anext(self.gen)
+            return await self.gen.__anext__()
         except StopAsyncIteration:
             raise RuntimeError("generator didn't yield") from None
 
     async def __aexit__(self, typ, value, traceback):
         if typ is None:
             try:
-                await anext(self.gen)
+                await self.gen.__anext__()
             except StopAsyncIteration:
                 return False
             else:
@@ -338,32 +320,6 @@ class closing(AbstractContextManager):
         return self.thing
     def __exit__(self, *exc_info):
         self.thing.close()
-
-
-class aclosing(AbstractAsyncContextManager):
-    """Async context manager for safely finalizing an asynchronously cleaned-up
-    resource such as an async generator, calling its ``aclose()`` method.
-
-    Code like this:
-
-        async with aclosing(<module>.fetch(<arguments>)) as agen:
-            <block>
-
-    is equivalent to this:
-
-        agen = <module>.fetch(<arguments>)
-        try:
-            <block>
-        finally:
-            await agen.aclose()
-
-    """
-    def __init__(self, thing):
-        self.thing = thing
-    async def __aenter__(self):
-        return self.thing
-    async def __aexit__(self, *exc_info):
-        await self.thing.aclose()
 
 
 class _RedirectStream(AbstractContextManager):
@@ -718,7 +674,7 @@ class AsyncExitStack(_BaseExitStack, AbstractAsyncContextManager):
         return received_exc and suppressed_exc
 
 
-class nullcontext(AbstractContextManager, AbstractAsyncContextManager):
+class nullcontext(AbstractContextManager):
     """Context manager that does no additional processing.
 
     Used as a stand-in for a normal context manager, when a particular
@@ -736,10 +692,4 @@ class nullcontext(AbstractContextManager, AbstractAsyncContextManager):
         return self.enter_result
 
     def __exit__(self, *excinfo):
-        pass
-
-    async def __aenter__(self):
-        return self.enter_result
-
-    async def __aexit__(self, *excinfo):
         pass

@@ -74,13 +74,17 @@ PyAPI_FUNC(void) _Py_DumpASCII(int fd, PyObject *text);
    This function is signal safe. */
 PyAPI_FUNC(void) _Py_DumpDecimal(
     int fd,
-    size_t value);
+    unsigned long value);
 
-/* Format an integer as hexadecimal with width digits into fd file descriptor.
-   The function is signal safe. */
+/* Format an integer as hexadecimal into the file descriptor fd with at least
+   width digits.
+
+   The maximum width is sizeof(unsigned long)*2 digits.
+
+   This function is signal safe. */
 PyAPI_FUNC(void) _Py_DumpHexadecimal(
     int fd,
-    uintptr_t value,
+    unsigned long value,
     Py_ssize_t width);
 
 PyAPI_FUNC(PyObject*) _PyTraceBack_FromFrame(

@@ -5,10 +5,15 @@
 extern "C" {
 #endif
 
+PyAPI_FUNC(PyObject *) _PyImport_FindBuiltin(
+    PyThreadState *tstate,
+    const char *name             /* UTF-8 encoded string */
+    );
+
 #ifdef HAVE_FORK
-extern PyStatus _PyImport_ReInitLock(void);
+extern void _PyImport_ReInitLock(void);
 #endif
-extern PyObject* _PyImport_BootstrapImp(PyThreadState *tstate);
+extern void _PyImport_Cleanup(PyThreadState *tstate);
 
 #ifdef __cplusplus
 }

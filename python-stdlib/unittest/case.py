@@ -295,6 +295,7 @@ class _AssertWarnsContext(_AssertRaisesBaseContext):
             self._raiseFailure("{} not triggered".format(exc_name))
 
 
+
 class _OrderedChainMap(collections.ChainMap):
     def __iter__(self):
         seen = set()
@@ -348,11 +349,11 @@ class TestCase(object):
     # of difflib.  See #11763.
     _diffThreshold = 2**16
 
-    def __init_subclass__(cls, *args, **kwargs):
-        # Attribute used by TestSuite for classSetUp
-        cls._classSetupFailed = False
-        cls._class_cleanups = []
-        super().__init_subclass__(*args, **kwargs)
+    # Attribute used by TestSuite for classSetUp
+
+    _classSetupFailed = False
+
+    _class_cleanups = []
 
     def __init__(self, methodName='runTest'):
         """Create an instance of the class that will use the named test
@@ -793,16 +794,7 @@ class TestCase(object):
         """
         # Lazy import to avoid importing logging if it is not needed.
         from ._log import _AssertLogsContext
-        return _AssertLogsContext(self, logger, level, no_logs=False)
-
-    def assertNoLogs(self, logger=None, level=None):
-        """ Fail unless no log messages of level *level* or higher are emitted
-        on *logger_name* or its children.
-
-        This method must be used as a context manager.
-        """
-        from ._log import _AssertLogsContext
-        return _AssertLogsContext(self, logger, level, no_logs=True)
+        return _AssertLogsContext(self, logger, level)
 
     def _getAssertEqualityFunc(self, first, second):
         """Get a detailed comparison function for the types of the two args.
@@ -1146,8 +1138,7 @@ class TestCase(object):
     def assertDictContainsSubset(self, subset, dictionary, msg=None):
         """Checks whether dictionary is a superset of subset."""
         warnings.warn('assertDictContainsSubset is deprecated',
-                      DeprecationWarning,
-                      stacklevel=2)
+                      DeprecationWarning)
         missing = []
         mismatched = []
         for key, value in subset.items():

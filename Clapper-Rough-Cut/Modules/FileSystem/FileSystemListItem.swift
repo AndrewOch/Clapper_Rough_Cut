@@ -1,3 +1,5 @@
+import Foundation
+
 struct FileSystemListItem: Identifiable, Hashable {
     let id: UUID
     let value: FileSystemElement

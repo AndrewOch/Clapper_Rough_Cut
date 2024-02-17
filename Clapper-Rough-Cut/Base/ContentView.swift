@@ -5,7 +5,7 @@ struct ContentView: View {
     @Environment(\.undoManager) var undoManager
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var isExportViewPresented = false
-    @State var value: Bool = false
+//    @State var value: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -20,6 +20,6 @@ struct ContentView: View {
         .onChange(of: self.undoManager) { undoManager in
             document.undoManager = undoManager
         }
-//        .focusedValue(\.currentDocument, document)
+//        .focusedValue(\.document, .getOnly(document))
     }
 }

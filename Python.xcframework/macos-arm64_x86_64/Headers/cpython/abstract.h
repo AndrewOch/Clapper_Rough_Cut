@@ -2,6 +2,10 @@
 #  error "this header file must not be included directly"
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* === Object Protocol ================================================== */
 
 #ifdef PY_SSIZE_T_CLEAN
@@ -119,7 +123,7 @@ static inline PyObject *
 PyObject_Vectorcall(PyObject *callable, PyObject *const *args,
                      size_t nargsf, PyObject *kwnames)
 {
-    PyThreadState *tstate = PyThreadState_Get();
+    PyThreadState *tstate = PyThreadState_GET();
     return _PyObject_VectorcallTstate(tstate, callable,
                                       args, nargsf, kwnames);
 }
@@ -155,7 +159,7 @@ _PyObject_FastCallTstate(PyThreadState *tstate, PyObject *func, PyObject *const 
 static inline PyObject *
 _PyObject_FastCall(PyObject *func, PyObject *const *args, Py_ssize_t nargs)
 {
-    PyThreadState *tstate = PyThreadState_Get();
+    PyThreadState *tstate = PyThreadState_GET();
     return _PyObject_FastCallTstate(tstate, func, args, nargs);
 }
 
@@ -164,7 +168,7 @@ _PyObject_FastCall(PyObject *func, PyObject *const *args, Py_ssize_t nargs)
    PyObject_CallNoArgs(). */
 static inline PyObject *
 _PyObject_CallNoArg(PyObject *func) {
-    PyThreadState *tstate = PyThreadState_Get();
+    PyThreadState *tstate = PyThreadState_GET();
     return _PyObject_VectorcallTstate(tstate, func, NULL, 0, NULL);
 }
 
@@ -179,7 +183,7 @@ PyObject_CallOneArg(PyObject *func, PyObject *arg)
     assert(arg != NULL);
     args = _args + 1;  // For PY_VECTORCALL_ARGUMENTS_OFFSET
     args[0] = arg;
-    tstate = PyThreadState_Get();
+    tstate = PyThreadState_GET();
     nargsf = 1 | PY_VECTORCALL_ARGUMENTS_OFFSET;
     return _PyObject_VectorcallTstate(tstate, func, args, nargsf, NULL);
 }
@@ -325,6 +329,12 @@ PyAPI_FUNC(int) PyBuffer_FillInfo(Py_buffer *view, PyObject *o, void *buf,
 /* Releases a Py_buffer obtained from getbuffer ParseTuple's "s*". */
 PyAPI_FUNC(void) PyBuffer_Release(Py_buffer *view);
 
+/* ==== Iterators ================================================ */
+
+#define PyIter_Check(obj) \
+    (Py_TYPE(obj)->tp_iternext != NULL && \
+     Py_TYPE(obj)->tp_iternext != &_PyObject_NextNotImplemented)
+
 /* === Sequence protocol ================================================ */
 
 /* Assume tp_as_sequence and sq_item exist and that 'i' does not
@@ -369,5 +379,6 @@ PyAPI_FUNC(void) _Py_add_one_to_index_C(int nd, Py_ssize_t *index,
 /* Convert Python int to Py_ssize_t. Do nothing if the argument is None. */
 PyAPI_FUNC(int) _Py_convert_optional_to_ssize_t(PyObject *, void *);
 
-/* Same as PyNumber_Index but can return an instance of a subclass of int. */
-PyAPI_FUNC(PyObject *) _PyNumber_Index(PyObject *o);
+#ifdef __cplusplus
+}
+#endif

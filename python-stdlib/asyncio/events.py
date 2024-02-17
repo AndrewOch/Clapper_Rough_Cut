@@ -418,20 +418,6 @@ class AbstractEventLoop:
         """
         raise NotImplementedError
 
-    async def connect_accepted_socket(
-            self, protocol_factory, sock,
-            *, ssl=None,
-            ssl_handshake_timeout=None):
-        """Handle an accepted connection.
-
-        This is used by servers that accept connections outside of
-        asyncio, but use asyncio to handle connections.
-
-        This method is a coroutine.  When completed, the coroutine
-        returns a (transport, protocol) pair.
-        """
-        raise NotImplementedError
-
     async def create_datagram_endpoint(self, protocol_factory,
                                        local_addr=None, remote_addr=None, *,
                                        family=0, proto=0, flags=0,
@@ -759,14 +745,6 @@ def get_event_loop():
     the result of `get_event_loop_policy().get_event_loop()` call.
     """
     # NOTE: this function is implemented in C (see _asynciomodule.c)
-    return _py__get_event_loop()
-
-
-def _get_event_loop(stacklevel=3):
-    # This internal method is going away in Python 3.12, left here only for
-    # backwards compatibility with 3.10.0 - 3.10.8 and 3.11.0.
-    # Similarly, this method's C equivalent in _asyncio is going away as well.
-    # See GH-99949 for more details.
     current_loop = _get_running_loop()
     if current_loop is not None:
         return current_loop
@@ -799,7 +777,6 @@ _py__get_running_loop = _get_running_loop
 _py__set_running_loop = _set_running_loop
 _py_get_running_loop = get_running_loop
 _py_get_event_loop = get_event_loop
-_py__get_event_loop = _get_event_loop
 
 
 try:
@@ -807,7 +784,7 @@ try:
     # functions in asyncio.  Pure Python implementation is
     # about 4 times slower than C-accelerated.
     from _asyncio import (_get_running_loop, _set_running_loop,
-                          get_running_loop, get_event_loop, _get_event_loop)
+                          get_running_loop, get_event_loop)
 except ImportError:
     pass
 else:
@@ -816,4 +793,3 @@ else:
     _c__set_running_loop = _set_running_loop
     _c_get_running_loop = get_running_loop
     _c_get_event_loop = get_event_loop
-    _c__get_event_loop = _get_event_loop

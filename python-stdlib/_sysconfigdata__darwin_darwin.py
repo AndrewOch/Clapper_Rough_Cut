@@ -3,8 +3,6 @@ build_time_vars = {'ABIFLAGS': '',
  'AC_APPLE_UNIVERSAL_BUILD': 0,
  'AIX_BUILDDATE': 0,
  'AIX_GENUINE_CPLUSPLUS': 0,
- 'ALIGNOF_LONG': 8,
- 'ALIGNOF_SIZE_T': 8,
  'ALT_SOABI': 0,
  'ANDROID_API_LEVEL': 0,
  'AR': 'ar',
@@ -12,13 +10,13 @@ build_time_vars = {'ABIFLAGS': '',
  'BASECFLAGS': '-Wno-unused-result -Wsign-compare -Wunreachable-code',
  'BASECPPFLAGS': '',
  'BASEMODLIBS': '',
- 'BINDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/bin',
- 'BINLIBDEST': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10',
- 'BLDLIBRARY': 'libpython3.10.a',
+ 'BINDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/bin',
+ 'BINLIBDEST': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9',
+ 'BLDLIBRARY': 'libpython3.9.a',
  'BLDSHARED': 'apple-darwin-gcc -bundle -undefined dynamic_lookup -arch arm64 '
               '-arch x86_64 -isysroot '
               '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-              '-mmacosx-version-min=10.15 '
+              '-mmacosx-version-min=11.0 '
               '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
               '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
  'BUILDEXE': '.exe',
@@ -30,7 +28,7 @@ build_time_vars = {'ABIFLAGS': '',
  'CFLAGS': '-Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -g '
            '-fwrapv -O3 -Wall -arch arm64 -arch x86_64 -isysroot '
            '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-           '-mmacosx-version-min=10.15 '
+           '-mmacosx-version-min=11.0 '
            '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
            '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include',
  'CFLAGSFORSHARED': '',
@@ -40,7 +38,7 @@ build_time_vars = {'ABIFLAGS': '',
                 'Makefile.pre.in',
  'CONFIGURE_CFLAGS': '-arch arm64 -arch x86_64 -isysroot '
                      '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                     '-mmacosx-version-min=10.15 '
+                     '-mmacosx-version-min=11.0 '
                      '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
                      '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include',
  'CONFIGURE_CFLAGS_NODIST': '-std=c99 -Wextra -Wno-unused-result '
@@ -53,38 +51,39 @@ build_time_vars = {'ABIFLAGS': '',
                        '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk',
  'CONFIGURE_LDFLAGS': '-arch arm64 -arch x86_64 -isysroot '
                       '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                      '-mmacosx-version-min=10.15 '
+                      '-mmacosx-version-min=11.0 '
                       '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
                       '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
  'CONFIGURE_LDFLAGS_NODIST': '',
  'CONFIG_ARGS': "'CC=apple-darwin-gcc' 'CPP=apple-darwin-cpp' "
-                "'CFLAGS=-mmacosx-version-min=10.15 "
+                "'CFLAGS=-mmacosx-version-min=11.0 "
                 '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
                 "-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include' "
-                "'LDFLAGS=-mmacosx-version-min=10.15 "
+                "'LDFLAGS=-mmacosx-version-min=11.0 "
                 '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
                 "-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib' "
-                "'--prefix=/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13' "
+                "'MACOSX_DEPLOYMENT_TARGET=11.0' "
+                "'--prefix=/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18' "
                 "'--enable-ipv6' '--enable-universalsdk' "
                 "'--with-openssl=/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/openssl-3.1.2' "
                 "'--with-universal-archs=universal2' '--without-ensurepip'",
- 'CONFINCLUDEDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include',
- 'CONFINCLUDEPY': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include/python3.10',
+ 'CONFINCLUDEDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include',
+ 'CONFINCLUDEPY': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include/python3.9',
  'COREPYTHONPATH': '',
- 'COVERAGE_INFO': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.10.13/coverage.info',
- 'COVERAGE_REPORT': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.10.13/lcov-report',
+ 'COVERAGE_INFO': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.9.18/coverage.info',
+ 'COVERAGE_REPORT': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.9.18/lcov-report',
  'COVERAGE_REPORT_OPTIONS': '--no-branch-coverage --title "CPython lcov '
                             'report"',
  'CPPFLAGS': '-I. -I./Include -isysroot '
              '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk',
  'CXX': 'c++',
- 'DESTDIRS': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13 '
-             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib '
-             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10 '
-             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10/lib-dynload',
- 'DESTLIB': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10',
+ 'DESTDIRS': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18 '
+             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib '
+             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9 '
+             '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9/lib-dynload',
+ 'DESTLIB': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9',
  'DESTPATH': '',
- 'DESTSHARED': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10/lib-dynload',
+ 'DESTSHARED': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9/lib-dynload',
  'DFLAGS': '',
  'DIRMODE': 755,
  'DIST': 'README.rst ChangeLog configure configure.ac acconfig.h pyconfig.h.in '
@@ -106,12 +105,11 @@ build_time_vars = {'ABIFLAGS': '',
  'ENSUREPIP': 'no',
  'EXE': '',
  'EXEMODE': 755,
- 'EXPERIMENTAL_ISOLATED_SUBINTERPRETERS': 0,
  'EXPORTSFROM': '',
  'EXPORTSYMS': '',
  'EXTRATESTOPTS': '',
  'EXTRA_CFLAGS': '',
- 'EXT_SUFFIX': '.cpython-310-darwin.so',
+ 'EXT_SUFFIX': '.cpython-39-darwin.so',
  'FILEMODE': 644,
  'FLOAT_WORDS_BIGENDIAN': 0,
  'FLOCK_NEEDS_LIBBSD': 0,
@@ -149,7 +147,6 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_CLOCK_GETRES': 1,
  'HAVE_CLOCK_GETTIME': 1,
  'HAVE_CLOCK_SETTIME': 1,
- 'HAVE_CLOSE_RANGE': 0,
  'HAVE_COMPUTED_GOTOS': 1,
  'HAVE_CONFSTR': 1,
  'HAVE_CONIO_H': 0,
@@ -202,7 +199,6 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_ERF': 1,
  'HAVE_ERFC': 1,
  'HAVE_ERRNO_H': 1,
- 'HAVE_EVENTFD': 0,
  'HAVE_EXECV': 1,
  'HAVE_EXPLICIT_BZERO': 0,
  'HAVE_EXPLICIT_MEMSET': 0,
@@ -440,7 +436,6 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_SOCKADDR_STORAGE': 1,
  'HAVE_SOCKETPAIR': 1,
  'HAVE_SPAWN_H': 1,
- 'HAVE_SPLICE': 0,
  'HAVE_SSIZE_T': 1,
  'HAVE_STATVFS': 1,
  'HAVE_STAT_TV_NSEC': 0,
@@ -449,6 +444,7 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_STDINT_H': 1,
  'HAVE_STDLIB_H': 1,
  'HAVE_STD_ATOMIC': 1,
+ 'HAVE_STRDUP': 1,
  'HAVE_STRFTIME': 1,
  'HAVE_STRINGS_H': 1,
  'HAVE_STRING_H': 1,
@@ -476,7 +472,6 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_SYS_DIR_H': 0,
  'HAVE_SYS_ENDIAN_H': 0,
  'HAVE_SYS_EPOLL_H': 0,
- 'HAVE_SYS_EVENTFD_H': 0,
  'HAVE_SYS_EVENT_H': 1,
  'HAVE_SYS_FILE_H': 1,
  'HAVE_SYS_IOCTL_H': 1,
@@ -537,7 +532,6 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_UUID_GENERATE_TIME_SAFE': 0,
  'HAVE_UUID_H': 0,
  'HAVE_UUID_UUID_H': 1,
- 'HAVE_VFORK': 1,
  'HAVE_WAIT3': 1,
  'HAVE_WAIT4': 1,
  'HAVE_WAITID': 1,
@@ -549,57 +543,57 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_WMEMCMP': 1,
  'HAVE_WORKING_TZSET': 1,
  'HAVE_WRITEV': 1,
+ 'HAVE_X509_VERIFY_PARAM_SET1_HOST': 1,
  'HAVE_ZLIB_COPY': 1,
  'HAVE__GETPTY': 0,
  'HOST_GNU_TYPE': 'x86_64-apple-darwin21.6.0',
- 'INCLDIRSTOMAKE': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include '
-                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include '
-                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include/python3.10 '
-                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include/python3.10',
- 'INCLUDEDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include',
- 'INCLUDEPY': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/include/python3.10',
+ 'INCLDIRSTOMAKE': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include '
+                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include '
+                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include/python3.9 '
+                   '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include/python3.9',
+ 'INCLUDEDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include',
+ 'INCLUDEPY': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/include/python3.9',
  'INSTALL': '/usr/bin/install -c',
  'INSTALL_DATA': '/usr/bin/install -c -m 644',
  'INSTALL_PROGRAM': '/usr/bin/install -c',
  'INSTALL_SCRIPT': '/usr/bin/install -c',
  'INSTALL_SHARED': '/usr/bin/install -c -m 755',
- 'INSTSONAME': 'libpython3.10.a',
+ 'INSTSONAME': 'libpython3.9.a',
  'IO_H': 'Modules/_io/_iomodule.h',
  'IO_OBJS': '\\',
  'LDCXXSHARED': 'c++ -bundle -undefined dynamic_lookup',
  'LDFLAGS': '-arch arm64 -arch x86_64 -isysroot '
             '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-            '-mmacosx-version-min=10.15 '
+            '-mmacosx-version-min=11.0 '
             '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
             '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
  'LDFLAGS_NODIST': '',
- 'LDLIBRARY': 'libpython3.10.a',
+ 'LDLIBRARY': 'libpython3.9.a',
  'LDLIBRARYDIR': '',
  'LDSHARED': 'apple-darwin-gcc -bundle -undefined dynamic_lookup -arch arm64 '
              '-arch x86_64 -isysroot '
              '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-             '-mmacosx-version-min=10.15 '
+             '-mmacosx-version-min=11.0 '
              '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
              '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
- 'LDVERSION': '3.10',
+ 'LDVERSION': '3.9',
  'LIBC': '',
- 'LIBDEST': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10',
- 'LIBDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib',
+ 'LIBDEST': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9',
+ 'LIBDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib',
  'LIBFFI_INCLUDEDIR': '',
  'LIBFFI_LIB': '',
  'LIBFFI_LIBDIR': '',
  'LIBM': '',
  'LIBOBJDIR': 'Python/',
  'LIBOBJS': '',
- 'LIBPC': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/pkgconfig',
- 'LIBPL': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10/config-3.10-darwin',
+ 'LIBPC': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/pkgconfig',
+ 'LIBPL': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9/config-3.9-darwin',
  'LIBPYTHON': '',
- 'LIBRARY': 'libpython3.10.a',
- 'LIBRARY_DEPS': 'libpython3.10.a',
+ 'LIBRARY': 'libpython3.9.a',
  'LIBRARY_OBJS': '\\',
  'LIBRARY_OBJS_OMIT_FROZEN': '\\',
  'LIBS': '-ldl   -framework CoreFoundation',
- 'LIBSUBDIRS': 'asyncio \\',
+ 'LIBSUBDIRS': 'tkinter tkinter/test tkinter/test/test_tkinter \\',
  'LINKCC': 'apple-darwin-gcc',
  'LINKFORSHARED': '-Wl,-stack_size,1000000  -framework CoreFoundation',
  'LIPO_32BIT_FLAGS': '',
@@ -612,18 +606,18 @@ build_time_vars = {'ABIFLAGS': '',
  'LOCALMODLIBS': '',
  'MACHDEP': 'darwin',
  'MACHDEP_OBJS': '',
- 'MACHDESTLIB': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib/python3.10',
- 'MACOSX_DEPLOYMENT_TARGET': '12.7',
+ 'MACHDESTLIB': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib/python3.9',
+ 'MACOSX_DEPLOYMENT_TARGET': '11.0',
  'MAINCC': 'apple-darwin-gcc',
  'MAJOR_IN_MKDEV': 0,
  'MAJOR_IN_SYSMACROS': 0,
  'MAKESETUP': './Modules/makesetup',
- 'MANDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/share/man',
+ 'MANDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/share/man',
  'MKDIR_P': './install-sh -c -d',
  'MODBUILT_NAMES': 'posix  errno  pwd  _sre  _codecs  _weakref  _functools  '
                    '_operator  _collections  _abc  itertools  atexit  _signal  '
                    '_stat  time  _thread  _locale  _io  faulthandler  '
-                   '_tracemalloc  _symtable  xxsubtype',
+                   '_tracemalloc  _peg_parser  _symtable  xxsubtype',
  'MODDISABLED_NAMES': '',
  'MODLIBS': '',
  'MODOBJS': 'Modules/posixmodule.o  Modules/errnomodule.o  '
@@ -636,8 +630,8 @@ build_time_vars = {'ABIFLAGS': '',
             'Modules/_localemodule.o  Modules/_iomodule.o Modules/iobase.o '
             'Modules/fileio.o Modules/bytesio.o Modules/bufferedio.o '
             'Modules/textio.o Modules/stringio.o  Modules/faulthandler.o  '
-            'Modules/_tracemalloc.o  Modules/symtablemodule.o  '
-            'Modules/xxsubtype.o',
+            'Modules/_tracemalloc.o  Modules/_peg_parser.o  '
+            'Modules/symtablemodule.o  Modules/xxsubtype.o',
  'MODULE_OBJS': '\\',
  'MULTIARCH': 'darwin',
  'MULTIARCH_CPPFLAGS': '-DMULTIARCH=\\"darwin\\"',
@@ -647,7 +641,6 @@ build_time_vars = {'ABIFLAGS': '',
  'OPENSSL_INCLUDES': '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/openssl-3.1.2/include',
  'OPENSSL_LDFLAGS': '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/openssl-3.1.2/lib',
  'OPENSSL_LIBS': '-lssl -lcrypto',
- 'OPENSSL_RPATH': '',
  'OPT': '-DNDEBUG -g -fwrapv -O3 -Wall',
  'OTHER_LIBTOOL_OPT': '',
  'PACKAGE_BUGREPORT': 0,
@@ -657,7 +650,8 @@ build_time_vars = {'ABIFLAGS': '',
  'PACKAGE_URL': 0,
  'PACKAGE_VERSION': 0,
  'PARSER_HEADERS': '\\',
- 'PARSER_OBJS': '\\ \\ Parser/myreadline.o Parser/tokenizer.o',
+ 'PARSER_OBJS': '\\ \\ Parser/myreadline.o Parser/parsetok.o '
+                'Parser/tokenizer.o',
  'PEGEN_HEADERS': '\\',
  'PEGEN_OBJS': '\\',
  'PGO_PROF_GEN_FLAG': '-fprofile-instr-generate',
@@ -665,7 +659,7 @@ build_time_vars = {'ABIFLAGS': '',
  'PLATLIBDIR': 'lib',
  'POBJS': '\\',
  'POSIX_SEMAPHORES_NOT_ENABLED': 0,
- 'PROFILE_TASK': '-m test --pgo --timeout=1200',
+ 'PROFILE_TASK': '-m test --pgo',
  'PTHREAD_KEY_T_IS_COMPATIBLE_WITH_INT': 0,
  'PTHREAD_SYSTEM_SCHED_SUPPORTED': 1,
  'PURIFY': '',
@@ -678,7 +672,6 @@ build_time_vars = {'ABIFLAGS': '',
  'PYTHONFRAMEWORKPREFIX': '',
  'PYTHONPATH': '',
  'PYTHON_FOR_BUILD': './python.exe -E',
- 'PYTHON_FOR_REGEN': '',
  'PYTHON_HEADERS': '\\',
  'PYTHON_OBJS': '\\',
  'PY_BUILTIN_HASHLIB_HASHES': '"md5,sha1,sha256,sha512,sha3,blake2"',
@@ -686,7 +679,7 @@ build_time_vars = {'ABIFLAGS': '',
                              '-Wunreachable-code -DNDEBUG -g -fwrapv -O3 -Wall '
                              '-arch arm64 -arch x86_64 -isysroot '
                              '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                             '-mmacosx-version-min=10.15 '
+                             '-mmacosx-version-min=11.0 '
                              '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
                              '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include '
                              '-std=c99 -Wextra -Wno-unused-result '
@@ -701,7 +694,7 @@ build_time_vars = {'ABIFLAGS': '',
  'PY_CFLAGS': '-Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG '
               '-g -fwrapv -O3 -Wall -arch arm64 -arch x86_64 -isysroot '
               '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-              '-mmacosx-version-min=10.15 '
+              '-mmacosx-version-min=11.0 '
               '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
               '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include',
  'PY_CFLAGS_NODIST': '-std=c99 -Wextra -Wno-unused-result '
@@ -714,7 +707,7 @@ build_time_vars = {'ABIFLAGS': '',
                    '-DNDEBUG -g -fwrapv -O3 -Wall -arch arm64 -arch x86_64 '
                    '-isysroot '
                    '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                   '-mmacosx-version-min=10.15 '
+                   '-mmacosx-version-min=11.0 '
                    '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
                    '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include '
                    '-std=c99 -Wextra -Wno-unused-result -Wno-unused-parameter '
@@ -725,16 +718,15 @@ build_time_vars = {'ABIFLAGS': '',
                    '-DPy_BUILD_CORE',
  'PY_CORE_LDFLAGS': '-arch arm64 -arch x86_64 -isysroot '
                     '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                    '-mmacosx-version-min=10.15 '
+                    '-mmacosx-version-min=11.0 '
                     '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
                     '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
  'PY_CPPFLAGS': '-I. -I./Include -isysroot '
                 '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk',
- 'PY_ENABLE_SHARED': 0,
  'PY_FORMAT_SIZE_T': '"z"',
  'PY_LDFLAGS': '-arch arm64 -arch x86_64 -isysroot '
                '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-               '-mmacosx-version-min=10.15 '
+               '-mmacosx-version-min=11.0 '
                '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/lib '
                '-L/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/lib',
  'PY_LDFLAGS_NODIST': '',
@@ -744,7 +736,7 @@ build_time_vars = {'ABIFLAGS': '',
                         '-DNDEBUG -g -fwrapv -O3 -Wall -arch arm64 -arch '
                         'x86_64 -isysroot '
                         '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk '
-                        '-mmacosx-version-min=10.15 '
+                        '-mmacosx-version-min=11.0 '
                         '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/bzip2-1.0.8/include '
                         '-I/Users/runner/work/Python-Apple-support/Python-Apple-support/merge/macOS/macosx/xz-5.4.4/include '
                         '-std=c99 -Wextra -Wno-unused-result '
@@ -763,7 +755,7 @@ build_time_vars = {'ABIFLAGS': '',
  'RESSRCDIR': 'Mac/Resources/framework',
  'RETSIGTYPE': 'void',
  'RUNSHARED': '',
- 'SCRIPTDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/lib',
+ 'SCRIPTDIR': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/lib',
  'SETPGRP_HAVE_ARG': 0,
  'SHELL': '/bin/sh',
  'SHLIBS': '-ldl   -framework CoreFoundation',
@@ -789,10 +781,9 @@ build_time_vars = {'ABIFLAGS': '',
  'SIZEOF_VOID_P': 8,
  'SIZEOF_WCHAR_T': 4,
  'SIZEOF__BOOL': 1,
- 'SOABI': 'cpython-310-darwin',
- 'SRCDIRS': 'Parser Objects Python Modules Modules/_io Programs',
+ 'SOABI': 'cpython-39-darwin',
+ 'SRCDIRS': 'Parser Parser/pegen Objects Python Modules Modules/_io Programs',
  'SRC_GDB_HOOKS': './Tools/gdb/libpython.py',
- 'STATIC_LIBPYTHON': 1,
  'STDC_HEADERS': 1,
  'STRICT_SYSV_CURSES': "/* Don't use ncurses extensions */",
  'STRIPFLAG': '-s',
@@ -800,43 +791,37 @@ build_time_vars = {'ABIFLAGS': '',
  'SUBDIRSTOO': 'Include Lib Misc',
  'SYSLIBS': '',
  'SYS_SELECT_WITH_SYS_TIME': 1,
- 'TCLTK_INCLUDES': '-I/usr/local/Cellar/tcl-tk/8.6.13_5/include/tcl-tk',
- 'TCLTK_LIBS': '-L/usr/local/Cellar/tcl-tk/8.6.13_5/lib -ltk8.6 -ltkstub8.6 '
-               '-ltcl8.6 -ltclstub8.6',
+ 'TCLTK_INCLUDES': '',
+ 'TCLTK_LIBS': '',
  'TESTOPTS': '',
  'TESTPATH': '',
  'TESTPYTHON': './python.exe',
  'TESTPYTHONOPTS': '',
  'TESTRUNNER': './python.exe ./Tools/scripts/run_tests.py',
- 'TESTSUBDIRS': 'ctypes/test \\',
  'TESTTIMEOUT': 1200,
- 'TEST_MODULES': 'yes',
- 'THREAD_STACK_SIZE': '0x1000000',
  'TIMEMODULE_LIB': 0,
  'TIME_WITH_SYS_TIME': 1,
  'TM_IN_SYS_TIME': 0,
  'TZPATH': '/usr/share/zoneinfo:/usr/lib/zoneinfo:/usr/share/lib/zoneinfo:/etc/zoneinfo',
  'UNICODE_DEPS': '\\',
  'UNIVERSALSDK': '/Applications/Xcode_14.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk',
- 'UPDATE_FILE': './Tools/scripts/update_file.py',
+ 'UPDATE_FILE': 'python3 ./Tools/scripts/update_file.py',
  'USE_COMPUTED_GOTOS': 0,
- 'VERSION': '3.10',
- 'WHEEL_PKG_DIR': '',
+ 'VERSION': '3.9',
  'WINDOW_HAS_FLAGS': 1,
  'WITH_DECIMAL_CONTEXTVAR': 1,
  'WITH_DOC_STRINGS': 1,
  'WITH_DTRACE': 0,
  'WITH_DYLD': 1,
- 'WITH_EDITLINE': 0,
  'WITH_LIBINTL': 0,
  'WITH_NEXT_FRAMEWORK': 0,
  'WITH_PYMALLOC': 1,
  'WITH_VALGRIND': 0,
  'X87_DOUBLE_ROUNDING': 0,
  'XMLLIBSUBDIRS': 'xml xml/dom xml/etree xml/parsers xml/sax',
- 'abs_builddir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.10.13',
- 'abs_srcdir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.10.13',
- 'datarootdir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13/share',
- 'exec_prefix': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13',
- 'prefix': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.10.13',
+ 'abs_builddir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.9.18',
+ 'abs_srcdir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/build/macOS/macosx/python-3.9.18',
+ 'datarootdir': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18/share',
+ 'exec_prefix': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18',
+ 'prefix': '/Users/runner/work/Python-Apple-support/Python-Apple-support/install/macOS/macosx/python-3.9.18',
  'srcdir': '.'}

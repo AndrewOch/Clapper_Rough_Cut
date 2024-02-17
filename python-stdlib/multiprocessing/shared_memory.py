@@ -23,7 +23,6 @@ else:
     import _posixshmem
     _USE_POSIX = True
 
-from . import resource_tracker
 
 _O_CREX = os.O_CREAT | os.O_EXCL
 
@@ -117,7 +116,8 @@ class SharedMemory:
                 self.unlink()
                 raise
 
-            resource_tracker.register(self._name, "shared_memory")
+            from .resource_tracker import register
+            register(self._name, "shared_memory")
 
         else:
 
@@ -173,10 +173,7 @@ class SharedMemory:
                     )
                 finally:
                     _winapi.CloseHandle(h_map)
-                try:
-                    size = _winapi.VirtualQuerySize(p_buf)
-                finally:
-                    _winapi.UnmapViewOfFile(p_buf)
+                size = _winapi.VirtualQuerySize(p_buf)
                 self._mmap = mmap.mmap(-1, size, tagname=name)
 
         self._size = size
@@ -240,8 +237,9 @@ class SharedMemory:
         called once (and only once) across all processes which have access
         to the shared memory block."""
         if _USE_POSIX and self._name:
+            from .resource_tracker import unregister
             _posixshmem.shm_unlink(self._name)
-            resource_tracker.unregister(self._name, "shared_memory")
+            unregister(self._name, "shared_memory")
 
 
 _encoding = "utf8"

@@ -1,7 +1,7 @@
 import os
 from fonetika.soundex import RussianSoundex
 import string
-    
+
 soundex = RussianSoundex(delete_first_letter=True)
 soundex_dictionary = {}
 
@@ -54,7 +54,7 @@ def longest_matching_sequence_length(text1, text2):
             else:
                 max_sequence_length = max(max_sequence_length, current_sequence_length)
                 current_sequence_length = 0
-                
+
     max_sequence_length = max(max_sequence_length, current_sequence_length)
     return max_sequence_length
 
@@ -72,4 +72,3 @@ def remove_punctuation(txt):
     punct_set = set(string.punctuation)
     no_punct = "".join(char for char in txt if char not in punct_set)
     return no_punct
-

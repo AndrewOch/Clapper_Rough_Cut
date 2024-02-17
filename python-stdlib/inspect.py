@@ -24,8 +24,6 @@ Here are some of the useful functions provided by this module:
     stack(), trace() - get info about frames on the stack or in a traceback
 
     signature() - get a Signature object for the callable
-
-    get_annotations() - safely compute an object's annotations
 """
 
 # This module is in the public domain.  No warranties.
@@ -61,122 +59,6 @@ for k, v in dis.COMPILER_FLAG_NAMES.items():
 
 # See Include/object.h
 TPFLAGS_IS_ABSTRACT = 1 << 20
-
-
-def get_annotations(obj, *, globals=None, locals=None, eval_str=False):
-    """Compute the annotations dict for an object.
-
-    obj may be a callable, class, or module.
-    Passing in an object of any other type raises TypeError.
-
-    Returns a dict.  get_annotations() returns a new dict every time
-    it's called; calling it twice on the same object will return two
-    different but equivalent dicts.
-
-    This function handles several details for you:
-
-      * If eval_str is true, values of type str will
-        be un-stringized using eval().  This is intended
-        for use with stringized annotations
-        ("from __future__ import annotations").
-      * If obj doesn't have an annotations dict, returns an
-        empty dict.  (Functions and methods always have an
-        annotations dict; classes, modules, and other types of
-        callables may not.)
-      * Ignores inherited annotations on classes.  If a class
-        doesn't have its own annotations dict, returns an empty dict.
-      * All accesses to object members and dict values are done
-        using getattr() and dict.get() for safety.
-      * Always, always, always returns a freshly-created dict.
-
-    eval_str controls whether or not values of type str are replaced
-    with the result of calling eval() on those values:
-
-      * If eval_str is true, eval() is called on values of type str.
-      * If eval_str is false (the default), values of type str are unchanged.
-
-    globals and locals are passed in to eval(); see the documentation
-    for eval() for more information.  If either globals or locals is
-    None, this function may replace that value with a context-specific
-    default, contingent on type(obj):
-
-      * If obj is a module, globals defaults to obj.__dict__.
-      * If obj is a class, globals defaults to
-        sys.modules[obj.__module__].__dict__ and locals
-        defaults to the obj class namespace.
-      * If obj is a callable, globals defaults to obj.__globals__,
-        although if obj is a wrapped function (using
-        functools.update_wrapper()) it is first unwrapped.
-    """
-    if isinstance(obj, type):
-        # class
-        obj_dict = getattr(obj, '__dict__', None)
-        if obj_dict and hasattr(obj_dict, 'get'):
-            ann = obj_dict.get('__annotations__', None)
-            if isinstance(ann, types.GetSetDescriptorType):
-                ann = None
-        else:
-            ann = None
-
-        obj_globals = None
-        module_name = getattr(obj, '__module__', None)
-        if module_name:
-            module = sys.modules.get(module_name, None)
-            if module:
-                obj_globals = getattr(module, '__dict__', None)
-        obj_locals = dict(vars(obj))
-        unwrap = obj
-    elif isinstance(obj, types.ModuleType):
-        # module
-        ann = getattr(obj, '__annotations__', None)
-        obj_globals = getattr(obj, '__dict__')
-        obj_locals = None
-        unwrap = None
-    elif callable(obj):
-        # this includes types.Function, types.BuiltinFunctionType,
-        # types.BuiltinMethodType, functools.partial, functools.singledispatch,
-        # "class funclike" from Lib/test/test_inspect... on and on it goes.
-        ann = getattr(obj, '__annotations__', None)
-        obj_globals = getattr(obj, '__globals__', None)
-        obj_locals = None
-        unwrap = obj
-    else:
-        raise TypeError(f"{obj!r} is not a module, class, or callable.")
-
-    if ann is None:
-        return {}
-
-    if not isinstance(ann, dict):
-        raise ValueError(f"{obj!r}.__annotations__ is neither a dict nor None")
-
-    if not ann:
-        return {}
-
-    if not eval_str:
-        return dict(ann)
-
-    if unwrap is not None:
-        while True:
-            if hasattr(unwrap, '__wrapped__'):
-                unwrap = unwrap.__wrapped__
-                continue
-            if isinstance(unwrap, functools.partial):
-                unwrap = unwrap.func
-                continue
-            break
-        if hasattr(unwrap, "__globals__"):
-            obj_globals = unwrap.__globals__
-
-    if globals is None:
-        globals = obj_globals
-    if locals is None:
-        locals = obj_locals
-
-    return_value = {key:
-        value if not isinstance(value, str) else eval(value, globals, locals)
-        for key, value in ann.items() }
-    return return_value
-
 
 # ----------------------------------------------------------- type-checking
 def ismodule(object):
@@ -294,7 +176,7 @@ def _has_code_flag(f, flag):
     while ismethod(f):
         f = f.__func__
     f = functools._unwrap_partial(f)
-    if not (isfunction(f) or _signature_is_functionlike(f)):
+    if not isfunction(f):
         return False
     return bool(f.__code__.co_flags & flag)
 
@@ -525,7 +407,7 @@ def classify_class_attrs(cls):
     # attribute with the same name as a DynamicClassAttribute exists.
     for base in mro:
         for k, v in base.__dict__.items():
-            if isinstance(v, types.DynamicClassAttribute) and v.fget is not None:
+            if isinstance(v, types.DynamicClassAttribute):
                 names.append(k)
     result = []
     processed = set()
@@ -781,8 +663,6 @@ def getfile(object):
             module = sys.modules.get(object.__module__)
             if getattr(module, '__file__', None):
                 return module.__file__
-            if object.__module__ == '__main__':
-                raise OSError('source code not available')
         raise TypeError('{!r} is a built-in class'.format(object))
     if ismethod(object):
         object = object.__func__
@@ -826,13 +706,10 @@ def getsourcefile(object):
     if os.path.exists(filename):
         return filename
     # only return a non-existent filename if the module has a PEP 302 loader
-    module = getmodule(object, filename)
-    if getattr(module, '__loader__', None) is not None:
-        return filename
-    elif getattr(getattr(module, "__spec__", None), "loader", None) is not None:
+    if getattr(getmodule(object, filename), '__loader__', None) is not None:
         return filename
     # or it is in the linecache
-    elif filename in linecache.cache:
+    if filename in linecache.cache:
         return filename
 
 def getabsfile(object, _filename=None):
@@ -1052,6 +929,7 @@ class BlockFinder:
         self.started = False
         self.passline = False
         self.indecorator = False
+        self.decoratorhasargs = False
         self.last = 1
         self.body_col0 = None
 
@@ -1066,6 +944,13 @@ class BlockFinder:
                     self.islambda = True
                 self.started = True
             self.passline = True    # skip to the end of the line
+        elif token == "(":
+            if self.indecorator:
+                self.decoratorhasargs = True
+        elif token == ")":
+            if self.indecorator:
+                self.indecorator = False
+                self.decoratorhasargs = False
         elif type == tokenize.NEWLINE:
             self.passline = False   # stop skipping when a NEWLINE is seen
             self.last = srowcol[0]
@@ -1073,7 +958,7 @@ class BlockFinder:
                 raise EndOfBlock
             # hitting a NEWLINE when in a decorator without args
             # ends the decorator
-            if self.indecorator:
+            if self.indecorator and not self.decoratorhasargs:
                 self.indecorator = False
         elif self.passline:
             pass
@@ -1277,8 +1162,7 @@ def getfullargspec(func):
         sig = _signature_from_callable(func,
                                        follow_wrapper_chains=False,
                                        skip_bound_arg=False,
-                                       sigcls=Signature,
-                                       eval_str=False)
+                                       sigcls=Signature)
     except Exception as ex:
         # Most of the times 'signature' will raise ValueError.
         # But, it can also raise AttributeError, and, maybe something
@@ -1348,10 +1232,7 @@ def getargvalues(frame):
 
 def formatannotation(annotation, base_module=None):
     if getattr(annotation, '__module__', None) == 'typing':
-        def repl(match):
-            text = match.group()
-            return text.removeprefix('typing.')
-        return re.sub(r'[\w\.]+', repl, repr(annotation))
+        return repr(annotation).replace('typing.', '')
     if isinstance(annotation, types.GenericAlias):
         return str(annotation)
     if isinstance(annotation, type):
@@ -2016,7 +1897,7 @@ def _signature_is_functionlike(obj):
             isinstance(name, str) and
             (defaults is None or isinstance(defaults, tuple)) and
             (kwdefaults is None or isinstance(kwdefaults, dict)) and
-            (isinstance(annotations, (dict)) or annotations is None) )
+            isinstance(annotations, dict))
 
 
 def _signature_get_bound_param(spec):
@@ -2061,7 +1942,7 @@ def _signature_strip_non_python_syntax(signature):
     self_parameter = None
     last_positional_only = None
 
-    lines = [l.encode('ascii') for l in signature.split('\n') if l]
+    lines = [l.encode('ascii') for l in signature.split('\n')]
     generator = iter(lines).__next__
     token_stream = tokenize.tokenize(generator)
 
@@ -2141,6 +2022,7 @@ def _signature_fromstr(cls, obj, s, skip_bound_arg=True):
 
     parameters = []
     empty = Parameter.empty
+    invalid = object()
 
     module = None
     module_dict = {}
@@ -2164,11 +2046,11 @@ def _signature_fromstr(cls, obj, s, skip_bound_arg=True):
             try:
                 value = eval(s, sys_module_dict)
             except NameError:
-                raise ValueError
+                raise RuntimeError()
 
         if isinstance(value, (str, int, float, bytes, bool, type(None))):
             return ast.Constant(value)
-        raise ValueError
+        raise RuntimeError()
 
     class RewriteSymbolics(ast.NodeTransformer):
         def visit_Attribute(self, node):
@@ -2178,7 +2060,7 @@ def _signature_fromstr(cls, obj, s, skip_bound_arg=True):
                 a.append(n.attr)
                 n = n.value
             if not isinstance(n, ast.Name):
-                raise ValueError
+                raise RuntimeError()
             a.append(n.id)
             value = ".".join(reversed(a))
             return wrap_value(value)
@@ -2188,29 +2070,19 @@ def _signature_fromstr(cls, obj, s, skip_bound_arg=True):
                 raise ValueError()
             return wrap_value(node.id)
 
-        def visit_BinOp(self, node):
-            # Support constant folding of a couple simple binary operations
-            # commonly used to define default values in text signatures
-            left = self.visit(node.left)
-            right = self.visit(node.right)
-            if not isinstance(left, ast.Constant) or not isinstance(right, ast.Constant):
-                raise ValueError
-            if isinstance(node.op, ast.Add):
-                return ast.Constant(left.value + right.value)
-            elif isinstance(node.op, ast.Sub):
-                return ast.Constant(left.value - right.value)
-            elif isinstance(node.op, ast.BitOr):
-                return ast.Constant(left.value | right.value)
-            raise ValueError
-
     def p(name_node, default_node, default=empty):
         name = parse_name(name_node)
+        if name is invalid:
+            return None
         if default_node and default_node is not _empty:
             try:
                 default_node = RewriteSymbolics().visit(default_node)
-                default = ast.literal_eval(default_node)
+                o = ast.literal_eval(default_node)
             except ValueError:
-                raise ValueError("{!r} builtin has invalid signature".format(obj)) from None
+                o = invalid
+            if o is invalid:
+                return None
+            default = o if o is not invalid else default
         parameters.append(Parameter(name, kind, default=default, annotation=empty))
 
     # non-keyword-only parameters
@@ -2277,8 +2149,7 @@ def _signature_from_builtin(cls, func, skip_bound_arg=True):
     return _signature_fromstr(cls, func, s, skip_bound_arg)
 
 
-def _signature_from_function(cls, func, skip_bound_arg=True,
-                             globals=None, locals=None, eval_str=False):
+def _signature_from_function(cls, func, skip_bound_arg=True):
     """Private helper: constructs Signature for the given python function."""
 
     is_duck_function = False
@@ -2304,7 +2175,7 @@ def _signature_from_function(cls, func, skip_bound_arg=True,
     positional = arg_names[:pos_count]
     keyword_only_count = func_code.co_kwonlyargcount
     keyword_only = arg_names[pos_count:pos_count + keyword_only_count]
-    annotations = get_annotations(func, globals=globals, locals=locals, eval_str=eval_str)
+    annotations = func.__annotations__
     defaults = func.__defaults__
     kwdefaults = func.__kwdefaults__
 
@@ -2375,9 +2246,6 @@ def _signature_from_function(cls, func, skip_bound_arg=True,
 def _signature_from_callable(obj, *,
                              follow_wrapper_chains=True,
                              skip_bound_arg=True,
-                             globals=None,
-                             locals=None,
-                             eval_str=False,
                              sigcls):
 
     """Private helper function to get signature for arbitrary
@@ -2387,10 +2255,7 @@ def _signature_from_callable(obj, *,
     _get_signature_of = functools.partial(_signature_from_callable,
                                 follow_wrapper_chains=follow_wrapper_chains,
                                 skip_bound_arg=skip_bound_arg,
-                                globals=globals,
-                                locals=locals,
-                                sigcls=sigcls,
-                                eval_str=eval_str)
+                                sigcls=sigcls)
 
     if not callable(obj):
         raise TypeError('{!r} is not a callable object'.format(obj))
@@ -2407,10 +2272,7 @@ def _signature_from_callable(obj, *,
 
     # Was this function wrapped by a decorator?
     if follow_wrapper_chains:
-        # Unwrap until we find an explicit signature or a MethodType (which will be
-        # handled explicitly below).
-        obj = unwrap(obj, stop=(lambda f: hasattr(f, "__signature__")
-                                or isinstance(f, types.MethodType)))
+        obj = unwrap(obj, stop=(lambda f: hasattr(f, "__signature__")))
         if isinstance(obj, types.MethodType):
             # If the unwrapped object is a *method*, we might want to
             # skip its first parameter (self).
@@ -2461,8 +2323,7 @@ def _signature_from_callable(obj, *,
         # If it's a pure Python function, or an object that is duck type
         # of a Python function (Cython functions, for instance), then:
         return _signature_from_function(sigcls, obj,
-                                        skip_bound_arg=skip_bound_arg,
-                                        globals=globals, locals=locals, eval_str=eval_str)
+                                        skip_bound_arg=skip_bound_arg)
 
     if _signature_is_builtin(obj):
         return _signature_from_builtin(sigcls, obj,
@@ -2996,12 +2857,10 @@ class Signature:
         return _signature_from_builtin(cls, func)
 
     @classmethod
-    def from_callable(cls, obj, *,
-                      follow_wrapped=True, globals=None, locals=None, eval_str=False):
+    def from_callable(cls, obj, *, follow_wrapped=True):
         """Constructs Signature for the given callable object."""
         return _signature_from_callable(obj, sigcls=cls,
-                                        follow_wrapper_chains=follow_wrapped,
-                                        globals=globals, locals=locals, eval_str=eval_str)
+                                        follow_wrapper_chains=follow_wrapped)
 
     @property
     def parameters(self):
@@ -3249,10 +3108,9 @@ class Signature:
         return rendered
 
 
-def signature(obj, *, follow_wrapped=True, globals=None, locals=None, eval_str=False):
+def signature(obj, *, follow_wrapped=True):
     """Get a signature object for the passed callable."""
-    return Signature.from_callable(obj, follow_wrapped=follow_wrapped,
-                                   globals=globals, locals=locals, eval_str=eval_str)
+    return Signature.from_callable(obj, follow_wrapped=follow_wrapped)
 
 
 def _main():

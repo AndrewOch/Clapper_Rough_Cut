@@ -2,12 +2,20 @@
 #  error "this header file must not be included directly"
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 PyAPI_FUNC(void) _Py_NewReference(PyObject *op);
 
 #ifdef Py_TRACE_REFS
 /* Py_TRACE_REFS is such major surgery that we call external routines. */
 PyAPI_FUNC(void) _Py_ForgetReference(PyObject *);
 #endif
+
+/* Update the Python traceback of an object. This function must be called
+   when a memory block is reused from a free list. */
+PyAPI_FUNC(int) _PyTraceMalloc_NewReference(PyObject *op);
 
 #ifdef Py_REF_DEBUG
 PyAPI_FUNC(Py_ssize_t) _Py_GetRefTotal(void);
@@ -35,13 +43,12 @@ PyAPI_FUNC(Py_ssize_t) _Py_GetRefTotal(void);
    _PyObject_{Get,Set,Has}AttrId are __getattr__ versions using _Py_Identifier*.
 */
 typedef struct _Py_Identifier {
+    struct _Py_Identifier *next;
     const char* string;
-    // Index in PyInterpreterState.unicode.ids.array. It is process-wide
-    // unique and must be initialized to -1.
-    Py_ssize_t index;
+    PyObject *object;
 } _Py_Identifier;
 
-#define _Py_static_string_init(value) { .string = value, .index = -1 }
+#define _Py_static_string_init(value) { .next = NULL, .string = value, .object = NULL }
 #define _Py_static_string(varname, value)  static _Py_Identifier varname = _Py_static_string_init(value)
 #define _Py_IDENTIFIER(varname) _Py_static_string(PyId_##varname, #varname)
 
@@ -168,13 +175,10 @@ typedef struct {
     objobjargproc mp_ass_subscript;
 } PyMappingMethods;
 
-typedef PySendResult (*sendfunc)(PyObject *iter, PyObject *value, PyObject **result);
-
 typedef struct {
     unaryfunc am_await;
     unaryfunc am_aiter;
     unaryfunc am_anext;
-    sendfunc am_send;
 } PyAsyncMethods;
 
 typedef struct {
@@ -186,8 +190,6 @@ typedef struct {
  * backwards-compatibility */
 typedef Py_ssize_t printfunc;
 
-// If this structure is modified, Doc/includes/typestruct.h should be updated
-// as well.
 struct _typeobject {
     PyObject_VAR_HEAD
     const char *tp_name; /* For printing, in format "<module>.<name>" */
@@ -247,7 +249,6 @@ struct _typeobject {
     struct PyMethodDef *tp_methods;
     struct PyMemberDef *tp_members;
     struct PyGetSetDef *tp_getset;
-    // Strong reference on a heap type, borrowed reference on a static type
     struct _typeobject *tp_base;
     PyObject *tp_dict;
     descrgetfunc tp_descr_get;
@@ -303,8 +304,6 @@ PyAPI_FUNC(PyObject *) _PyObject_LookupSpecial(PyObject *, _Py_Identifier *);
 PyAPI_FUNC(PyTypeObject *) _PyType_CalculateMetaclass(PyTypeObject *, PyObject *);
 PyAPI_FUNC(PyObject *) _PyType_GetDocFromInternalDoc(const char *, const char *);
 PyAPI_FUNC(PyObject *) _PyType_GetTextSignatureFromInternalDoc(const char *, const char *);
-struct PyModuleDef;
-PyAPI_FUNC(PyObject *) _PyType_GetModuleByDef(PyTypeObject *, struct PyModuleDef *);
 
 struct _Py_Identifier;
 PyAPI_FUNC(int) PyObject_Print(PyObject *, FILE *, int);
@@ -315,6 +314,7 @@ PyAPI_FUNC(int) _PyObject_IsFreed(PyObject *);
 PyAPI_FUNC(int) _PyObject_IsAbstract(PyObject *);
 PyAPI_FUNC(PyObject *) _PyObject_GetAttrId(PyObject *, struct _Py_Identifier *);
 PyAPI_FUNC(int) _PyObject_SetAttrId(PyObject *, struct _Py_Identifier *, PyObject *);
+PyAPI_FUNC(int) _PyObject_HasAttrId(PyObject *, struct _Py_Identifier *);
 /* Replacements of PyObject_GetAttr() and _PyObject_GetAttrId() which
    don't raise AttributeError.
 
@@ -519,8 +519,6 @@ struct _ts;
 /* Python 3.9 private API, invoked by the macros below. */
 PyAPI_FUNC(int) _PyTrash_begin(struct _ts *tstate, PyObject *op);
 PyAPI_FUNC(void) _PyTrash_end(struct _ts *tstate);
-/* Python 3.10 private API, invoked by the Py_TRASHCAN_BEGIN(). */
-PyAPI_FUNC(int) _PyTrash_cond(PyObject *op, destructor dealloc);
 
 #define PyTrash_UNWIND_LEVEL 50
 
@@ -530,7 +528,7 @@ PyAPI_FUNC(int) _PyTrash_cond(PyObject *op, destructor dealloc);
         /* If "cond" is false, then _tstate remains NULL and the deallocator \
          * is run normally without involving the trashcan */ \
         if (cond) { \
-            _tstate = PyThreadState_Get(); \
+            _tstate = PyThreadState_GET(); \
             if (_PyTrash_begin(_tstate, _PyObject_CAST(op))) { \
                 break; \
             } \
@@ -544,9 +542,13 @@ PyAPI_FUNC(int) _PyTrash_cond(PyObject *op, destructor dealloc);
 
 #define Py_TRASHCAN_BEGIN(op, dealloc) \
     Py_TRASHCAN_BEGIN_CONDITION(op, \
-        _PyTrash_cond(_PyObject_CAST(op), (destructor)dealloc))
+        Py_TYPE(op)->tp_dealloc == (destructor)(dealloc))
 
 /* For backwards compatibility, these macros enable the trashcan
  * unconditionally */
 #define Py_TRASHCAN_SAFE_BEGIN(op) Py_TRASHCAN_BEGIN_CONDITION(op, 1)
 #define Py_TRASHCAN_SAFE_END(op) Py_TRASHCAN_END
+
+#ifdef __cplusplus
+}
+#endif

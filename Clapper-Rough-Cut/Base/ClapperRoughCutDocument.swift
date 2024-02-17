@@ -20,6 +20,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
     var cancellables = Set<AnyCancellable>()
+    let mfccMatcher = MFCCService()
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 

@@ -16,7 +16,6 @@ import functools
 IPV4LENGTH = 32
 IPV6LENGTH = 128
 
-
 class AddressValueError(ValueError):
     """A Value Error related to the address."""
 
@@ -1212,7 +1211,7 @@ class _BaseV4:
         """
         if not octet_str:
             raise ValueError("Empty octet not permitted")
-        # Reject non-ASCII digits.
+        # Whitelist the characters, since int() allows a lot of bizarre stuff.
         if not (octet_str.isascii() and octet_str.isdigit()):
             msg = "Only decimal digits permitted in %r"
             raise ValueError(msg % octet_str)
@@ -1722,7 +1721,7 @@ class _BaseV6:
               [0..FFFF].
 
         """
-        # Reject non-ASCII digits.
+        # Whitelist the characters, since int() allows a lot of bizarre stuff.
         if not cls._HEX_DIGITS.issuperset(hextet_str):
             raise ValueError("Only hex digits permitted in %r" % hextet_str)
         # We do the length check second, since the invalid character error
@@ -2000,13 +1999,9 @@ class IPv6Address(_BaseV6, _BaseAddress):
 
         Returns:
             A boolean, True if the address is reserved per
-            iana-ipv6-special-registry, or is ipv4_mapped and is
-            reserved in the iana-ipv4-special-registry.
+            iana-ipv6-special-registry.
 
         """
-        ipv4_mapped = self.ipv4_mapped
-        if ipv4_mapped is not None:
-            return ipv4_mapped.is_private
         return any(self in net for net in self._constants._private_networks)
 
     @property

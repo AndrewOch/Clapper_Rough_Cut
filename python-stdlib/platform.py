@@ -174,7 +174,7 @@ def libc_ver(executable=None, lib='', version='', chunksize=16384):
         The file is read and scanned in chunks of chunksize bytes.
 
     """
-    if not executable:
+    if executable is None:
         try:
             ver = os.confstr('CS_GNU_LIBC_VERSION')
             # parse 'glibc 2.28' as ('glibc', '2.28')
@@ -468,7 +468,6 @@ def is_simulator():
     """
     return getattr(sys.implementation, "_simulator", False)
 
-
 def _java_getprop(name, default):
 
     from java.lang import System
@@ -545,6 +544,16 @@ def system_alias(system, release, version):
         else:
             # XXX Whatever the new SunOS marketing name is...
             system = 'Solaris'
+
+    elif system == 'IRIX64':
+        # IRIX reports IRIX64 on platforms with 64-bit support; yet it
+        # is really a version and not a different platform, since 32-bit
+        # apps are also supported..
+        system = 'IRIX'
+        if version:
+            version = version + ' (64bit)'
+        else:
+            version = '64bit'
 
     elif system in ('win32', 'win16'):
         # In case one of the other tricks
@@ -710,6 +719,9 @@ def architecture(executable=sys.executable, bits='', linkage=''):
     # Bits
     if '32-bit' in fileout:
         bits = '32bit'
+    elif 'N32' in fileout:
+        # On Irix only
+        bits = 'n32bit'
     elif '64-bit' in fileout:
         bits = '64bit'
 
@@ -814,8 +826,6 @@ class uname_result(
     except when needed.
     """
 
-    _fields = ('system', 'node', 'release', 'version', 'machine', 'processor')
-
     @functools.cached_property
     def processor(self):
         return _unknown_as_blank(_Processor.get())
@@ -829,7 +839,7 @@ class uname_result(
     @classmethod
     def _make(cls, iterable):
         # override factory to affect length check
-        num_fields = len(cls._fields) - 1
+        num_fields = len(cls._fields)
         result = cls.__new__(cls, *iterable)
         if len(result) != num_fields + 1:
             msg = f'Expected {num_fields} arguments, got {len(result)}'
@@ -843,7 +853,7 @@ class uname_result(
         return len(tuple(iter(self)))
 
     def __reduce__(self):
-        return uname_result, tuple(self)[:len(self._fields) - 1]
+        return uname_result, tuple(self)[:len(self._fields)]
 
 
 _uname_cache = None
@@ -1252,6 +1262,7 @@ def platform(aliased=0, terse=0):
         system, release, version = system_alias(system, release, version)
 
     if system == 'Darwin':
+        # macOS/iOS/tvOS/watchOS (darwin kernel)
         if sys.platform in ('ios', 'tvos'):
             system, release, _ = iOS_ver()
         else:
@@ -1295,63 +1306,6 @@ def platform(aliased=0, terse=0):
 
     _platform_cache[(aliased, terse)] = platform
     return platform
-
-### freedesktop.org os-release standard
-# https://www.freedesktop.org/software/systemd/man/os-release.html
-
-# NAME=value with optional quotes (' or "). The regular expression is less
-# strict than shell lexer, but that's ok.
-_os_release_line = re.compile(
-    "^(?P<name>[a-zA-Z0-9_]+)=(?P<quote>[\"\']?)(?P<value>.*)(?P=quote)$"
-)
-# unescape five special characters mentioned in the standard
-_os_release_unescape = re.compile(r"\\([\\\$\"\'`])")
-# /etc takes precedence over /usr/lib
-_os_release_candidates = ("/etc/os-release", "/usr/lib/os-release")
-_os_release_cache = None
-
-
-def _parse_os_release(lines):
-    # These fields are mandatory fields with well-known defaults
-    # in practice all Linux distributions override NAME, ID, and PRETTY_NAME.
-    info = {
-        "NAME": "Linux",
-        "ID": "linux",
-        "PRETTY_NAME": "Linux",
-    }
-
-    for line in lines:
-        mo = _os_release_line.match(line)
-        if mo is not None:
-            info[mo.group('name')] = _os_release_unescape.sub(
-                r"\1", mo.group('value')
-            )
-
-    return info
-
-
-def freedesktop_os_release():
-    """Return operation system identification from freedesktop.org os-release
-    """
-    global _os_release_cache
-
-    if _os_release_cache is None:
-        errno = None
-        for candidate in _os_release_candidates:
-            try:
-                with open(candidate, encoding="utf-8") as f:
-                    _os_release_cache = _parse_os_release(f)
-                break
-            except OSError as e:
-                errno = e.errno
-        else:
-            raise OSError(
-                errno,
-                f"Unable to read files {', '.join(_os_release_candidates)}"
-            )
-
-    return _os_release_cache.copy()
-
 
 ### Command line interface
 

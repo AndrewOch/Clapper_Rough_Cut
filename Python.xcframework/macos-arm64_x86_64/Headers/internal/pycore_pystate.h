@@ -22,11 +22,11 @@ _Py_IsMainThread(void)
 
 
 static inline int
-_Py_IsMainInterpreter(PyInterpreterState *interp)
+_Py_IsMainInterpreter(PyThreadState* tstate)
 {
     /* Use directly _PyRuntime rather than tstate->interp->runtime, since
        this function is used in performance critical code path (ceval) */
-    return (interp == _PyRuntime.interpreters.main);
+    return (tstate->interp == _PyRuntime.interpreters.main);
 }
 
 
@@ -49,18 +49,10 @@ _Py_ThreadCanHandlePendingCalls(void)
 /* Variable and macro for in-line access to current thread
    and interpreter state */
 
-#ifdef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-PyAPI_FUNC(PyThreadState*) _PyThreadState_GetTSS(void);
-#endif
-
 static inline PyThreadState*
 _PyRuntimeState_GetThreadState(_PyRuntimeState *runtime)
 {
-#ifdef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-    return _PyThreadState_GetTSS();
-#else
     return (PyThreadState*)_Py_atomic_load_relaxed(&runtime->gilstate.tstate_current);
-#endif
 }
 
 /* Get the current Python thread state.
@@ -75,11 +67,7 @@ _PyRuntimeState_GetThreadState(_PyRuntimeState *runtime)
 static inline PyThreadState*
 _PyThreadState_GET(void)
 {
-#ifdef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-    return _PyThreadState_GetTSS();
-#else
     return _PyRuntimeState_GetThreadState(&_PyRuntime);
-#endif
 }
 
 /* Redefine PyThreadState_GET() as an alias to _PyThreadState_GET() */
@@ -131,12 +119,9 @@ PyAPI_FUNC(PyThreadState *) _PyThreadState_Swap(
     PyThreadState *newts);
 
 PyAPI_FUNC(PyStatus) _PyInterpreterState_Enable(_PyRuntimeState *runtime);
+PyAPI_FUNC(void) _PyInterpreterState_DeleteExceptMain(_PyRuntimeState *runtime);
 
-#ifdef HAVE_FORK
-extern PyStatus _PyInterpreterState_DeleteExceptMain(_PyRuntimeState *runtime);
-extern PyStatus _PyGILState_Reinit(_PyRuntimeState *runtime);
-extern void _PySignal_AfterFork(void);
-#endif
+PyAPI_FUNC(void) _PyGILState_Reinit(_PyRuntimeState *runtime);
 
 
 PyAPI_FUNC(int) _PyState_AddModule(

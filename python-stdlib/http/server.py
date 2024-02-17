@@ -420,7 +420,7 @@ class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
             method = getattr(self, mname)
             method()
             self.wfile.flush() #actually send the response if not already done.
-        except TimeoutError as e:
+        except socket.timeout as e:
             #a read or a write timed out.  Discard this connection
             self.log_error("Request timed out: %r", e)
             self.close_connection = True
@@ -709,7 +709,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                 return None
             for index in "index.html", "index.htm":
                 index = os.path.join(path, index)
-                if os.path.isfile(index):
+                if os.path.exists(index):
                     path = index
                     break
             else:
@@ -1108,7 +1108,8 @@ class CGIHTTPRequestHandler(SimpleHTTPRequestHandler):
         env['PATH_INFO'] = uqrest
         env['PATH_TRANSLATED'] = self.translate_path(uqrest)
         env['SCRIPT_NAME'] = scriptname
-        env['QUERY_STRING'] = query
+        if query:
+            env['QUERY_STRING'] = query
         env['REMOTE_ADDR'] = self.client_address[0]
         authorization = self.headers.get("authorization")
         if authorization:

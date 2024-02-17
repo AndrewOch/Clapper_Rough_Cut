@@ -1,6 +1,6 @@
 import Foundation
 
-struct ScriptFile: Identifiable, Codable {
+struct ScriptFile: Identifiable, Codable, Equatable {
     var id = UUID()
     let url: URL
     var fullText: String
@@ -101,6 +101,10 @@ struct ScriptFile: Identifiable, Codable {
         }
         determineScriptBlocks(phrases: updatedPhrases)
     }
+    
+    static func == (lhs: ScriptFile, rhs: ScriptFile) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct ScriptBlock: Identifiable, Codable {
@@ -133,7 +137,7 @@ struct ScriptBlock: Identifiable, Codable {
     }
 }
 
-struct Phrase: Identifiable, Codable, Hashable {    
+struct Phrase: Identifiable, Codable, Hashable {
     var id = UUID()
     var fullText: String
     var character: ScriptCharacter?
@@ -147,5 +151,13 @@ struct Phrase: Identifiable, Codable, Hashable {
         self.fullText = text
         self.character = character
         self.phraseText = phraseText
+    }
+
+    var dictionaryRepresentation: [String: Any] {
+        var dict = [String: Any]()
+        dict["phrase_id"] = id.uuidString
+        dict["text"] = fullText
+        dict["phrase_text"] = phraseText ?? ""
+        return dict
     }
 }

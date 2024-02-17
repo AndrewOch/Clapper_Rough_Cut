@@ -136,7 +136,8 @@ class _TZifHeader:
     ]
 
     def __init__(self, *args):
-        for attr, val in zip(self.__slots__, args, strict=True):
+        assert len(self.__slots__) == len(args)
+        for attr, val in zip(self.__slots__, args):
             setattr(self, attr, val)
 
     @classmethod
