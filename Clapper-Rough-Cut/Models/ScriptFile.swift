@@ -105,6 +105,10 @@ struct ScriptFile: Identifiable, Codable, Equatable {
     static func == (lhs: ScriptFile, rhs: ScriptFile) -> Bool {
         lhs.id == rhs.id
     }
+    
+    var allPhrases: [Phrase] {
+        blocks.flatMap({ $0.phrases })
+    }
 }
 
 struct ScriptBlock: Identifiable, Codable {

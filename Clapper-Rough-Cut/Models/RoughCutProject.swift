@@ -1,7 +1,7 @@
 import Foundation
 
-class RoughCutProject: Identifiable, Codable {
-    var id: UUID = UUID()
+struct RoughCutProject: Identifiable, Codable {
+    var id = UUID()
     var scriptFile: ScriptFile? {
         didSet {
             updateScriptFile()
@@ -10,6 +10,10 @@ class RoughCutProject: Identifiable, Codable {
     var fileSystem: RoughCutFileSystem = RoughCutFileSystem()
     var exportSettings: ExportSettings = ExportSettings()
 
+    func syncToServer() {
+        updateScriptFile()
+    }
+    
     private func updateScriptFile() {
         guard let scriptFile = scriptFile else { return }
         guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/script") else { return }
@@ -18,7 +22,7 @@ class RoughCutProject: Identifiable, Codable {
             "project_id": id.uuidString,
             "script_id": scriptFile.id.uuidString,
             "file_path": scriptFile.url.absoluteString,
-            "phrases": scriptFile.blocks.flatMap({ $0.phrases }).map({ $0.dictionaryRepresentation })
+            "phrases": scriptFile.allPhrases.map({ $0.dictionaryRepresentation })
         ] as [String : Any]
 
         guard let requestData = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
@@ -60,7 +64,7 @@ extension RoughCutProject {
         return fileSystem.allElements(where: { $0.isFile && $0.subtitles != nil }).isNotEmpty
     }
     var canSortScenes: Bool {
-        return hasUntranscribedFiles && scriptFile != nil
+        return hasUnsortedTranscribedFiles && scriptFile != nil
     }
     var hasUnmatchedSortedFiles: Bool {
         fileSystem.firstElement { scene in

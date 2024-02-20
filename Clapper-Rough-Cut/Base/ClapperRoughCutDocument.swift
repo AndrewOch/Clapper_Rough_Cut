@@ -40,6 +40,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
             throw CocoaError(.fileReadCorruptFile)
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
+        project.syncToServer()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
         cleanFileSystemStatuses()
     }

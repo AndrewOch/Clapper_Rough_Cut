@@ -36,12 +36,11 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func matchFor(files: [FileSystemElement]) {
-        phraseMatcher.match(files: files, projectId: project.id) { result in
+        guard let scriptFile = project.scriptFile else { return }
+        phraseMatcher.match(files: files, phrases: scriptFile.allPhrases, projectId: project.id) { result in
             switch result {
-            case .success(let matches):
-                for (file, phrase) in matches {
-                    self.manualMatch(element: file, phrase: phrase)
-                }
+            case .success(let match):
+                self.manualMatch(element: match.0, phrase: match.1)
             case .failure(let error):
                 print("Ошибка при сопоставлении: \(error)")
             }
