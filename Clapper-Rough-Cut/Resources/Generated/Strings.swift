@@ -30,6 +30,14 @@ internal enum L10n {
   internal static let choose = L10n.tr("Localizable", "choose", fallback: "выбрать")
   /// выбрать сцену
   internal static let chooseScene = L10n.tr("Localizable", "chooseScene", fallback: "выбрать сцену")
+  /// Распознанный звук
+  internal static let classifiedAudio = L10n.tr("Localizable", "classifiedAudio", fallback: "Распознанный звук")
+  /// Объекты на Видео
+  internal static let classifiedVideo = L10n.tr("Localizable", "classifiedVideo", fallback: "Объекты на Видео")
+  /// Распознать звук
+  internal static let classifyAudio = L10n.tr("Localizable", "classifyAudio", fallback: "Распознать звук")
+  /// Распознать видео
+  internal static let classifyVideos = L10n.tr("Localizable", "classifyVideos", fallback: "Распознать видео")
   /// дата создания
   internal static let createdAt = L10n.tr("Localizable", "createdAt", fallback: "дата создания")
   /// создать папку

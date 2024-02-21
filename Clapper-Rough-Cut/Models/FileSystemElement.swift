@@ -13,6 +13,8 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var subtitles: [Subtitle]?
     var mfccs: [[Float]]?
     var collapsed: Bool = false
+    var audioClasses: [ClassificationElement]?
+    var videoClasses: [ClassificationElement]?
 
     init(title: String,
          type: FileSystemElementType,
@@ -24,7 +26,10 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          url: URL? = nil,
          transcription: [Subtitle]? = nil,
          mfccs: [[Float]]? = nil,
-         collapsed: Bool = false) {
+         collapsed: Bool = false,
+         audioClasses: [ClassificationElement]? = nil,
+         videoClasses: [ClassificationElement]? = nil
+    ) {
         self.title = title
         self.type = type
         self.createdAt = createdAt
@@ -36,6 +41,8 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.subtitles = transcription
         self.mfccs = mfccs
         self.collapsed = collapsed
+        self.audioClasses = audioClasses
+        self.videoClasses = videoClasses
     }
 
     static func == (lhs: FileSystemElement, rhs: FileSystemElement) -> Bool {
@@ -107,6 +114,10 @@ extension FileSystemElementType {
 enum FileStatus: Codable, Hashable {
     case transcribing
     case transcription
+    case videoCaptioning
+    case videoCaption
+    case audioClassifying
+    case audioClassification
 }
 
 extension FileSystemElement {
@@ -114,4 +125,9 @@ extension FileSystemElement {
         guard let accuracy = subtitles?.compactMap({ $0.matchAccuracy }).max() else { return 0 }
         return accuracy
     }
+}
+
+struct ClassificationElement: Codable, Hashable {
+    var className: String
+    var confidence: Float
 }

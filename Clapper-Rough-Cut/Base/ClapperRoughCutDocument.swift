@@ -17,6 +17,8 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     @Published var states: DocumentStates = DocumentStates()
     @Published var undoManager: UndoManager?
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
+    let videoCaptionizer: VideoCaptionizerProtocol = VideoCaptionizer()
+    let audioClassificator: AudioClassificatorProtocol = AudioClassificator()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
     var cancellables = Set<AnyCancellable>()

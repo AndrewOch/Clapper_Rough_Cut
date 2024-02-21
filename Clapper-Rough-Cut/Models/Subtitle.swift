@@ -15,7 +15,7 @@ struct Subtitle: Equatable, Codable, Hashable {
         dict["end_time"] = endTime
         return dict
     }
-    
+
     init(text: String, startTime: Double, endTime: Double, phraseId: UUID? = nil, matchAccuracy: Double? = nil, bestMatches: [MatchingResult]? = nil) {
         self.text = text
         self.startTime = startTime
@@ -24,7 +24,7 @@ struct Subtitle: Equatable, Codable, Hashable {
         self.matchAccuracy = matchAccuracy
         self.bestMatches = bestMatches
     }
-    
+
     init(using response: MatchPhraseSubtitleResponse) {
         text = response.text
         startTime = response.startTime

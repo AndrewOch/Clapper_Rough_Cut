@@ -76,6 +76,14 @@ struct ClapperRoughCutCommands: Commands {
             }
             .keyboardShortcut(KeyboardShortcuts.transcribeAll)
             .disabled(!(document?.project.hasUntranscribedFiles ?? false))
+            Button(L10n.classifyVideos.firstWordCapitalized) {
+                document?.classifyVideos()
+            }
+            .disabled(false)
+            Button(L10n.classifyAudio.firstWordCapitalized) {
+                document?.classifyAudios()
+            }
+            .disabled(false)
             Button(L10n.determineScenes.firstWordCapitalized) {
                 document?.matchScenes()
             }

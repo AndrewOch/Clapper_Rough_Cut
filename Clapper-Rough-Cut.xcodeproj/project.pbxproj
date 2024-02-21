@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0400DA4E29EDC860003AD42B /* PythonKit */; };
 		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529D29EF3869008855C1 /* MFCC.py in Resources */ = {isa = PBXBuildFile; fileRef = 0426529C29EF3869008855C1 /* MFCC.py */; };
@@ -127,6 +126,12 @@
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
+		04B494D02B84BF5400BE0376 /* yolov8x.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */; };
+		04B494D12B84BF5400BE0376 /* yolov8n.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */; };
+		04B494D32B84BF9300BE0376 /* VideoCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */; };
+		04B494D52B84C3AF00BE0376 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D42B84C3AF00BE0376 /* Array.swift */; };
+		04B494DC2B85014400BE0376 /* ClassificationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DB2B85014400BE0376 /* ClassificationResultView.swift */; };
+		04B494DE2B854FFA00BE0376 /* AudioClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DD2B854FFA00BE0376 /* AudioClassification.swift */; };
 		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
 		04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A03F2AE3EF66001F6B10 /* Color.swift */; };
 		04C0A0422AE46001001F6B10 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0412AE46001001F6B10 /* Binding.swift */; };
@@ -289,6 +294,12 @@
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
+		04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = yolov8x.mlpackage; path = "../../../Новая папка/yolov8x.mlpackage"; sourceTree = "<group>"; };
+		04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = yolov8n.mlpackage; path = "../../../Новая папка/yolov8n.mlpackage"; sourceTree = "<group>"; };
+		04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptionizer.swift; sourceTree = "<group>"; };
+		04B494D42B84C3AF00BE0376 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		04B494DB2B85014400BE0376 /* ClassificationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationResultView.swift; sourceTree = "<group>"; };
+		04B494DD2B854FFA00BE0376 /* AudioClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioClassification.swift; sourceTree = "<group>"; };
 		04C0A03F2AE3EF66001F6B10 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		04C0A0412AE46001001F6B10 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
@@ -321,7 +332,6 @@
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
 				0449EC262B4953C800407B28 /* SystemConfiguration.framework in Frameworks */,
-				0400DA4F29EDC860003AD42B /* PythonKit in Frameworks */,
 				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +365,7 @@
 				0453BC6F2AD93F53000909D6 /* DateFormatter.swift */,
 				04C0A03F2AE3EF66001F6B10 /* Color.swift */,
 				04C0A0412AE46001001F6B10 /* Binding.swift */,
+				04B494D42B84C3AF00BE0376 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -453,6 +464,7 @@
 				0452C9092AC42565001E3AA7 /* FileSystemSelectionDetailView.swift */,
 				0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */,
 				04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */,
+				04B494DB2B85014400BE0376 /* ClassificationResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -667,6 +679,8 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */,
+				04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */,
 				043538BF2AAB8B5400775E0D /* ru.lproj */,
 				041FE5D12AAB38910054C861 /* Generated */,
 				04E23A292AA9CAA600F14C3D /* Fonts */,
@@ -705,6 +719,8 @@
 		0464D9CD29E423A70007EF24 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				04B494DF2B85500000BE0376 /* AudioClassification */,
+				04B494D62B84C41300BE0376 /* VideoCaptioning */,
 				04C0A0432AE47499001F6B10 /* AudioTranscription */,
 				049B0CC22AB39C0D007E446D /* Characters */,
 				043538FB2AB21ABB00775E0D /* Settings */,
@@ -789,6 +805,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		04B494D62B84C41300BE0376 /* VideoCaptioning */ = {
+			isa = PBXGroup;
+			children = (
+				04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */,
+			);
+			path = VideoCaptioning;
+			sourceTree = "<group>";
+		};
+		04B494DF2B85500000BE0376 /* AudioClassification */ = {
+			isa = PBXGroup;
+			children = (
+				04B494DD2B854FFA00BE0376 /* AudioClassification.swift */,
+			);
+			path = AudioClassification;
+			sourceTree = "<group>";
+		};
 		04C0A0432AE47499001F6B10 /* AudioTranscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,7 +874,6 @@
 			name = "Clapper-Rough-Cut";
 			packageProductDependencies = (
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
-				0400DA4E29EDC860003AD42B /* PythonKit */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -876,7 +907,6 @@
 			mainGroup = 04845597298D212400772EB0;
 			packageReferences = (
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
-				0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -1026,6 +1056,8 @@
 				044C4C822AD6ABF4006E6BBD /* FileSystemListItemView.swift in Sources */,
 				045D60DF2AE6B1D400833AB6 /* CustomPicker.swift in Sources */,
 				0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */,
+				04B494D02B84BF5400BE0376 /* yolov8x.mlpackage in Sources */,
+				04B494DE2B854FFA00BE0376 /* AudioClassification.swift in Sources */,
 				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
 				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
 				04483EA32B486B6100774D4A /* KeyboardShortcuts.swift in Sources */,
@@ -1039,6 +1071,7 @@
 				043538F52AB2019B00775E0D /* ShortcutView.swift in Sources */,
 				0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */,
 				04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */,
+				04B494D52B84C3AF00BE0376 /* Array.swift in Sources */,
 				040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */,
 				04483D752B47F53400774D4A /* whisper-encoder.mm in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
@@ -1061,11 +1094,13 @@
 				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
+				04B494D12B84BF5400BE0376 /* yolov8n.mlpackage in Sources */,
 				04C0A0422AE46001001F6B10 /* Binding.swift in Sources */,
 				043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */,
 				04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */,
 				0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */,
 				043538D92AACD33500775E0D /* ImageButton.swift in Sources */,
+				04B494D32B84BF9300BE0376 /* VideoCaptionizer.swift in Sources */,
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
 				04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */,
 				043538CF2AAC75CA00775E0D /* CustomLabel.swift in Sources */,
@@ -1089,6 +1124,7 @@
 				0464DA0E29E423A80007EF24 /* ClapperRoughCutApp.swift in Sources */,
 				043538CD2AABD57100775E0D /* SystemImage.swift in Sources */,
 				043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */,
+				04B494DC2B85014400BE0376 /* ClassificationResultView.swift in Sources */,
 				04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */,
 				04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */,
 				0448AD4E29E5ADC20086BD89 /* RoundedButton.swift in Sources */,
@@ -1330,14 +1366,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pvieito/PythonKit";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -1349,11 +1377,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0400DA4E29EDC860003AD42B /* PythonKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0462233F29E2B56C00944093 /* XCRemoteSwiftPackageReference "PythonKit" */;
-			productName = PythonKit;
-		};
 		04BA3A0D29E1F26300047A9B /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */;

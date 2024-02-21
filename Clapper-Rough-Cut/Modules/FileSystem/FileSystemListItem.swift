@@ -26,5 +26,7 @@ enum FileSystemListItemHighlight {
     case type
     case title
     case subtitles
+    case videoClasses
+    case audioClasses
     case date
 }
