@@ -3,7 +3,7 @@ import SwiftUI
 struct CharactersSettingsView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @State var characterPhrases: [UUID: [Phrase]]
+    @State var characterPhrases: [UUID: [ScriptBlockElement]]
     @State var closeAction: () -> Void
     @State private var selectedCharacters: [UUID] = []
     @State private var lastSelectedCharacterIndex: Int? = nil

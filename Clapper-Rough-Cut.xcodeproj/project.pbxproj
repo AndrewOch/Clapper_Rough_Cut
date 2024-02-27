@@ -129,6 +129,7 @@
 		04B494D52B84C3AF00BE0376 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D42B84C3AF00BE0376 /* Array.swift */; };
 		04B494DC2B85014400BE0376 /* ClassificationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DB2B85014400BE0376 /* ClassificationResultView.swift */; };
 		04B494DE2B854FFA00BE0376 /* AudioClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DD2B854FFA00BE0376 /* AudioClassification.swift */; };
+		04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B495242B8DB17000BE0376 /* ScriptBlockView.swift */; };
 		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
 		04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A03F2AE3EF66001F6B10 /* Color.swift */; };
 		04C0A0422AE46001001F6B10 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0412AE46001001F6B10 /* Binding.swift */; };
@@ -294,6 +295,7 @@
 		04B494D42B84C3AF00BE0376 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		04B494DB2B85014400BE0376 /* ClassificationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationResultView.swift; sourceTree = "<group>"; };
 		04B494DD2B854FFA00BE0376 /* AudioClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioClassification.swift; sourceTree = "<group>"; };
+		04B495242B8DB17000BE0376 /* ScriptBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptBlockView.swift; sourceTree = "<group>"; };
 		04C0A03F2AE3EF66001F6B10 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		04C0A0412AE46001001F6B10 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				0464D9D529E423A70007EF24 /* ScriptView.swift */,
+				04B495242B8DB17000BE0376 /* ScriptBlockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -704,7 +707,7 @@
 				04B494DF2B85500000BE0376 /* AudioClassification */,
 				04B494D62B84C41300BE0376 /* VideoCaptioning */,
 				04C0A0432AE47499001F6B10 /* AudioTranscription */,
-				049B0CC22AB39C0D007E446D /* Characters */,
+				049B0CC22AB39C0D007E446D /* ScriptSettings */,
 				043538FB2AB21ABB00775E0D /* Settings */,
 				043538DF2AAD1D0400775E0D /* HeaderMenu */,
 				043538DE2AAD1CFA00775E0D /* SelectPhrase */,
@@ -759,12 +762,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		049B0CC22AB39C0D007E446D /* Characters */ = {
+		049B0CC22AB39C0D007E446D /* ScriptSettings */ = {
 			isa = PBXGroup;
 			children = (
 				049B0CC32AB39C14007E446D /* Views */,
 			);
-			path = Characters;
+			path = ScriptSettings;
 			sourceTree = "<group>";
 		};
 		049B0CC32AB39C14007E446D /* Views */ = {
@@ -1061,6 +1064,7 @@
 				043538ED2AAFAFE700775E0D /* CustomContextMenuView.swift in Sources */,
 				04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */,
 				04483D762B47F53400774D4A /* whisper-decoder-impl.m in Sources */,
+				04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */,
 				04483E962B47F53400774D4A /* ggml-metal.metal in Sources */,
 				043538F32AB073DE00775E0D /* Environment.swift in Sources */,
 				043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */,

@@ -2,12 +2,12 @@ import Foundation
 import NaturalLanguage
 
 protocol PhraseMatcherProtocol {
-    func match(files: [FileSystemElement], phrases: [Phrase], projectId: UUID, completion: @escaping (Result<(FileSystemElement, Phrase), Error>) -> Void)
-    func match(file: FileSystemElement, phrases: [Phrase], projectId: UUID, completion: @escaping (Result<(FileSystemElement, Phrase), Error>) -> Void)
+    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void)
+    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void)
 }
 
 struct MatchingResult: Codable, Equatable, Hashable {
-    let phrase: Phrase
+    let phrase: ScriptBlockElement
     let matchingCount: Int
 
     var matchAccuracy: Double {
@@ -19,14 +19,14 @@ struct MatchingResult: Codable, Equatable, Hashable {
 final class PhraseMatcher: PhraseMatcherProtocol {
     private struct MatchingResponse: Decodable {
         let file: FileSystemElement
-        let phrase: Phrase
+        let phrase: ScriptBlockElement
     }
 
-    func match(file: FileSystemElement, phrases: [Phrase], projectId: UUID, completion: @escaping (Result<(FileSystemElement, Phrase), Error>) -> Void) {
+    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void) {
          match(files: [file], phrases: phrases, projectId: projectId, completion: completion)
     }
 
-    func match(files: [FileSystemElement], phrases: [Phrase], projectId: UUID, completion: @escaping (Result<(FileSystemElement, Phrase), Error>) -> Void) {
+    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void) {
         guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/matchScenes") else {
             completion(.failure(URLError(.badURL)))
             return

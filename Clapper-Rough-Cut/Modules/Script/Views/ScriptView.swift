@@ -27,29 +27,7 @@ struct ScriptView: View {
                 ScrollView {
                     LazyVStack {
                         ForEach(blocks) { block in
-                            let isDialogue = block.isDialogue
-                            if isDialogue {
-                                VStack {
-                                    ForEach(block.phrases) { phrase in
-                                        HStack(spacing: 0) {
-                                            if let character = phrase.character, let phraseText = phrase.phraseText {
-                                                PhraseLabel(characterName: character.name,
-                                                            text: phraseText)
-                                            }
-                                            Spacer()
-                                        }
-                                        .foregroundColor(.contentPrimary(colorScheme))
-                                    }
-                                }
-                                .padding(.all, 5)
-                                .background(Color.surfacePrimary(colorScheme))
-                                    .cornerRadius(5)
-                                    .overlay(RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-                            } else {
-                                CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
-                                    .foregroundColor(.contentPrimary(colorScheme))
-                            }
+                            ScriptBlockView(block: .getOnly(block))
                         }
                     }
                     .padding(.top)
@@ -63,7 +41,7 @@ struct ScriptView: View {
         .background(Color.surfaceSecondary(colorScheme))
         .sheet(isPresented: $document.states.isCharactersViewPresented) {
             if let scriptFile = document.project.scriptFile {
-                let characterPhrasesMap: [UUID: [Phrase]] = scriptFile.characters.reduce(into: [:]) { result, character in
+                let characterPhrasesMap: [UUID: [ScriptBlockElement]] = scriptFile.characters.reduce(into: [:]) { result, character in
                     let phrases = scriptFile.getCharacterPhrases(character: character)
                     if !phrases.isEmpty {
                         result[character.id] = phrases

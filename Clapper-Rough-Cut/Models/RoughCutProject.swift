@@ -13,7 +13,7 @@ struct RoughCutProject: Identifiable, Codable {
     func syncToServer() {
         updateScriptFile()
     }
-    
+
     private func updateScriptFile() {
         guard let scriptFile = scriptFile else { return }
         guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/script") else { return }
