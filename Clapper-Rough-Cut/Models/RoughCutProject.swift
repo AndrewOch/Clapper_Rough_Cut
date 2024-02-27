@@ -60,6 +60,12 @@ extension RoughCutProject {
     var hasUntranscribedFiles: Bool {
         return fileSystem.allElements(where: { $0.isFile && $0.subtitles == nil }).isNotEmpty
     }
+    var hasUnclassifiedAudios: Bool {
+        return fileSystem.allElements(where: { $0.isFile && $0.audioClasses == nil }).isNotEmpty
+    }
+    var hasUnclassifiedVideos: Bool {
+        return fileSystem.allElements(where: { $0.type == .video && $0.videoClasses == nil }).isNotEmpty
+    }
     var hasUnsortedTranscribedFiles: Bool {
         return fileSystem.allElements(where: { $0.isFile && $0.subtitles != nil }).isNotEmpty
     }

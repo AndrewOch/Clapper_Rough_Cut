@@ -8,12 +8,12 @@ class TextMatcher {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let requestBody = [
             "text1": text1,
             "text2": text2
         ]
-        
+
         request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody, options: [])
         
         URLSession.shared.dataTask(with: request) { data, response, error in

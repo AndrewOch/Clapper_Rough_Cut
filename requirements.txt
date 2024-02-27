@@ -1,5 +1,0 @@
-fonetika
-librosa
-scikit-learn
-dtw-python
-numpy

@@ -79,11 +79,11 @@ struct ClapperRoughCutCommands: Commands {
             Button(L10n.classifyVideos.firstWordCapitalized) {
                 document?.classifyVideos()
             }
-            .disabled(false)
+            .disabled(!(document?.project.hasUnclassifiedAudios ?? false))
             Button(L10n.classifyAudio.firstWordCapitalized) {
                 document?.classifyAudios()
             }
-            .disabled(false)
+            .disabled(!(document?.project.hasUnclassifiedVideos ?? false))
             Button(L10n.determineScenes.firstWordCapitalized) {
                 document?.matchScenes()
             }

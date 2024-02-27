@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
-		0426529D29EF3869008855C1 /* MFCC.py in Resources */ = {isa = PBXBuildFile; fileRef = 0426529C29EF3869008855C1 /* MFCC.py */; };
 		0426529F29EFB6FB008855C1 /* MFCCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCCService.swift */; };
 		043538C22AAB8B5400775E0D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043538C02AAB8B5400775E0D /* Localizable.strings */; };
 		043538C52AABA51C00775E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C42AABA51C00775E0D /* String.swift */; };
@@ -103,12 +102,10 @@
 		0453BC6A2AD895B0000909D6 /* RoughCutFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC692AD895B0000909D6 /* RoughCutFileSystem.swift */; };
 		0453BC6E2AD93535000909D6 /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */; };
 		0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BC6F2AD93F53000909D6 /* DateFormatter.swift */; };
-		045634FF2B4C012C000B34CB /* requirements.txt in Resources */ = {isa = PBXBuildFile; fileRef = 045634FE2B4C012C000B34CB /* requirements.txt */; };
 		045D60DF2AE6B1D400833AB6 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D60DE2AE6B1D400833AB6 /* CustomPicker.swift */; };
 		045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D60E02AE6DE8C00833AB6 /* SubtitilesMode.swift */; };
 		0464AEDE2B8262D000269757 /* MatchPhraseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464AEDD2B8262D000269757 /* MatchPhraseResponse.swift */; };
 		0464D9FB29E423A80007EF24 /* TextMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C229E423A70007EF24 /* TextMatcher.swift */; };
-		0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C329E423A70007EF24 /* text_matcher.py */; };
 		0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464D9C529E423A70007EF24 /* Assets.xcassets */; };
 		0464D9FE29E423A80007EF24 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C729E423A70007EF24 /* ScriptRunner.swift */; };
 		0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9C929E423A70007EF24 /* ScriptFile.swift */; };
@@ -153,7 +150,6 @@
 /* Begin PBXFileReference section */
 		040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
-		0426529C29EF3869008855C1 /* MFCC.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = MFCC.py; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCCService.swift; sourceTree = "<group>"; };
 		043538C12AAB8B5400775E0D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		043538C42AABA51C00775E0D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -268,12 +264,10 @@
 		0453BC692AD895B0000909D6 /* RoughCutFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutFileSystem.swift; sourceTree = "<group>"; };
 		0453BC6D2AD93535000909D6 /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
 		0453BC6F2AD93F53000909D6 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		045634FE2B4C012C000B34CB /* requirements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
 		045D60DE2AE6B1D400833AB6 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		045D60E02AE6DE8C00833AB6 /* SubtitilesMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitilesMode.swift; sourceTree = "<group>"; };
 		0464AEDD2B8262D000269757 /* MatchPhraseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPhraseResponse.swift; sourceTree = "<group>"; };
 		0464D9C229E423A70007EF24 /* TextMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMatcher.swift; sourceTree = "<group>"; };
-		0464D9C329E423A70007EF24 /* text_matcher.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = text_matcher.py; sourceTree = "<group>"; };
 		0464D9C529E423A70007EF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0464D9C729E423A70007EF24 /* ScriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
 		0464D9C929E423A70007EF24 /* ScriptFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptFile.swift; sourceTree = "<group>"; };
@@ -650,7 +644,6 @@
 			isa = PBXGroup;
 			children = (
 				04483ABB2B47F51E00774D4A /* Whisper */,
-				0464D9C029E423A70007EF24 /* Python */,
 				0448AD4C29E5ACE80086BD89 /* UIComponents */,
 				0464D9CD29E423A70007EF24 /* Modules */,
 				043538C32AABA50E00775E0D /* Extensions */,
@@ -663,17 +656,6 @@
 				0464D9CB29E423A70007EF24 /* Preview Content */,
 			);
 			path = "Clapper-Rough-Cut";
-			sourceTree = "<group>";
-		};
-		0464D9C029E423A70007EF24 /* Python */ = {
-			isa = PBXGroup;
-			children = (
-				0464D9C229E423A70007EF24 /* TextMatcher.swift */,
-				0464D9C329E423A70007EF24 /* text_matcher.py */,
-				0426529E29EFB6FB008855C1 /* MFCCService.swift */,
-				0426529C29EF3869008855C1 /* MFCC.py */,
-			);
-			path = Python;
 			sourceTree = "<group>";
 		};
 		0464D9C429E423A70007EF24 /* Resources */ = {
@@ -749,6 +731,8 @@
 		0464D9E129E423A70007EF24 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0426529E29EFB6FB008855C1 /* MFCCService.swift */,
+				0464D9C229E423A70007EF24 /* TextMatcher.swift */,
 				0464D9C729E423A70007EF24 /* ScriptRunner.swift */,
 				0464D9E329E423A70007EF24 /* Converter.swift */,
 				043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */,
@@ -760,7 +744,6 @@
 		04845597298D212400772EB0 = {
 			isa = PBXGroup;
 			children = (
-				045634FE2B4C012C000B34CB /* requirements.txt */,
 				0464D9BF29E423A70007EF24 /* Clapper-Rough-Cut */,
 				048455A1298D212400772EB0 /* Products */,
 				04B0E505298F04C9004E8435 /* Frameworks */,
@@ -956,7 +939,6 @@
 				04483D9D2B47F53400774D4A /* convert-whisper-to-openvino.py in Resources */,
 				04483DA02B47F53400774D4A /* convert-whisper-to-coreml.py in Resources */,
 				04483D8B2B47F53400774D4A /* for-tests-ggml-tiny.bin in Resources */,
-				0464D9FC29E423A80007EF24 /* text_matcher.py in Resources */,
 				04483E922B47F53400774D4A /* ggml-cuda.cu in Resources */,
 				04483D862B47F53400774D4A /* quantize-all.sh in Resources */,
 				04483D7D2B47F53400774D4A /* sync-ggml-am.sh in Resources */,
@@ -969,10 +951,8 @@
 				04483D992B47F53400774D4A /* .gitignore in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
 				04483D932B47F53400774D4A /* README.md in Resources */,
-				045634FF2B4C012C000B34CB /* requirements.txt in Resources */,
 				04483D222B47F53400774D4A /* server in Resources */,
 				04483D812B47F53400774D4A /* sha-all.sh in Resources */,
-				0426529D29EF3869008855C1 /* MFCC.py in Resources */,
 				043538D32AAC855200775E0D /* NunitoSans.ttf in Resources */,
 				04483D712B47F53400774D4A /* assistant.gbnf in Resources */,
 				04483D912B47F53400774D4A /* for-tests-ggml-small.bin in Resources */,
@@ -1281,7 +1261,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Clapper-Rough-Cut/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Clapper: Rough-Cut";
+				INFOPLIST_KEY_CFBundleDisplayName = "theClapper: Черновой монтаж";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1322,7 +1302,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Clapper-Rough-Cut/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Clapper: Rough-Cut";
+				INFOPLIST_KEY_CFBundleDisplayName = "theClapper: Черновой монтаж";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
