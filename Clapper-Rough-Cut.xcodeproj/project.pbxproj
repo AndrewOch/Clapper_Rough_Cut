@@ -123,13 +123,13 @@
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
 		04ACBEF329E7DE250093DD76 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */; };
-		04B494D02B84BF5400BE0376 /* yolov8x.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */; };
-		04B494D12B84BF5400BE0376 /* yolov8n.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */; };
-		04B494D32B84BF9300BE0376 /* VideoCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */; };
+		04B494D32B84BF9300BE0376 /* YoloV8Captionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D22B84BF9300BE0376 /* YoloV8Captionizer.swift */; };
 		04B494D52B84C3AF00BE0376 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494D42B84C3AF00BE0376 /* Array.swift */; };
 		04B494DC2B85014400BE0376 /* ClassificationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DB2B85014400BE0376 /* ClassificationResultView.swift */; };
 		04B494DE2B854FFA00BE0376 /* AudioClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B494DD2B854FFA00BE0376 /* AudioClassification.swift */; };
 		04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B495242B8DB17000BE0376 /* ScriptBlockView.swift */; };
+		04B495272B91F07400BE0376 /* daytime.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 04B495262B91F07400BE0376 /* daytime.mlmodel */; };
+		04B495352B93233600BE0376 /* location.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 04B495342B93233600BE0376 /* location.mlmodel */; };
 		04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA3A0D29E1F26300047A9B /* AudioKit */; };
 		04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A03F2AE3EF66001F6B10 /* Color.swift */; };
 		04C0A0422AE46001001F6B10 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0412AE46001001F6B10 /* Binding.swift */; };
@@ -145,6 +145,10 @@
 		04F7A9EA29F926D1007E4C64 /* ExportOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E929F926D1007E4C64 /* ExportOperations.swift */; };
 		04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */; };
 		04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */; };
+		04FEB6FE2B9754660075EBBB /* VideoCaptionizerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB6FD2B9754660075EBBB /* VideoCaptionizerProtocol.swift */; };
+		04FEB7002B97548C0075EBBB /* DaytimeCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB6FF2B97548C0075EBBB /* DaytimeCaptionizer.swift */; };
+		04FEB7022B9754EB0075EBBB /* LocationCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7012B9754EB0075EBBB /* LocationCaptionizer.swift */; };
+		04FEB7042B9765A10075EBBB /* yolov8x.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */; };
 		5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */; };
 /* End PBXBuildFile section */
 
@@ -289,13 +293,13 @@
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
 		04ACBEF229E7DE250093DD76 /* TranscriptionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
-		04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = yolov8x.mlpackage; path = "../../../Новая папка/yolov8x.mlpackage"; sourceTree = "<group>"; };
-		04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = yolov8n.mlpackage; path = "../../../Новая папка/yolov8n.mlpackage"; sourceTree = "<group>"; };
-		04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptionizer.swift; sourceTree = "<group>"; };
+		04B494D22B84BF9300BE0376 /* YoloV8Captionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoloV8Captionizer.swift; sourceTree = "<group>"; };
 		04B494D42B84C3AF00BE0376 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		04B494DB2B85014400BE0376 /* ClassificationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationResultView.swift; sourceTree = "<group>"; };
 		04B494DD2B854FFA00BE0376 /* AudioClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioClassification.swift; sourceTree = "<group>"; };
 		04B495242B8DB17000BE0376 /* ScriptBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptBlockView.swift; sourceTree = "<group>"; };
+		04B495262B91F07400BE0376 /* daytime.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = daytime.mlmodel; sourceTree = "<group>"; };
+		04B495342B93233600BE0376 /* location.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = location.mlmodel; sourceTree = "<group>"; };
 		04C0A03F2AE3EF66001F6B10 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		04C0A0412AE46001001F6B10 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
@@ -310,6 +314,10 @@
 		04F7A9E929F926D1007E4C64 /* ExportOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOperations.swift; sourceTree = "<group>"; };
 		04F7A9EB29F9275D007E4C64 /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
 		04F7A9ED29F96D27007E4C64 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		04FEB6FD2B9754660075EBBB /* VideoCaptionizerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptionizerProtocol.swift; sourceTree = "<group>"; };
+		04FEB6FF2B97548C0075EBBB /* DaytimeCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaytimeCaptionizer.swift; sourceTree = "<group>"; };
+		04FEB7012B9754EB0075EBBB /* LocationCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCaptionizer.swift; sourceTree = "<group>"; };
+		04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = yolov8x.mlpackage; path = "../../../Новая папка/yolov8x.mlpackage"; sourceTree = "<group>"; };
 		08EA0AE07B656F6BD5FF1A21 /* Pods_Clapper_Rough_Cut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_Cut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241ABEDD25F8D6061A7DFFD7 /* Pods_Clapper_Rough_CutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clapper_Rough_CutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		266EB9366FA0884BBF0EC260 /* Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig"; path = "Target Support Files/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests/Pods-Clapper-Rough-Cut-Clapper-Rough-CutUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -664,8 +672,9 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				04B494CF2B84BF5400BE0376 /* yolov8n.mlpackage */,
-				04B494CE2B84BF5400BE0376 /* yolov8x.mlpackage */,
+				04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */,
+				04B495342B93233600BE0376 /* location.mlmodel */,
+				04B495262B91F07400BE0376 /* daytime.mlmodel */,
 				043538BF2AAB8B5400775E0D /* ru.lproj */,
 				041FE5D12AAB38910054C861 /* Generated */,
 				04E23A292AA9CAA600F14C3D /* Fonts */,
@@ -794,7 +803,10 @@
 		04B494D62B84C41300BE0376 /* VideoCaptioning */ = {
 			isa = PBXGroup;
 			children = (
-				04B494D22B84BF9300BE0376 /* VideoCaptionizer.swift */,
+				04B494D22B84BF9300BE0376 /* YoloV8Captionizer.swift */,
+				04FEB6FD2B9754660075EBBB /* VideoCaptionizerProtocol.swift */,
+				04FEB6FF2B97548C0075EBBB /* DaytimeCaptionizer.swift */,
+				04FEB7012B9754EB0075EBBB /* LocationCaptionizer.swift */,
 			);
 			path = VideoCaptioning;
 			sourceTree = "<group>";
@@ -1039,7 +1051,6 @@
 				044C4C822AD6ABF4006E6BBD /* FileSystemListItemView.swift in Sources */,
 				045D60DF2AE6B1D400833AB6 /* CustomPicker.swift in Sources */,
 				0464DA0629E423A80007EF24 /* ScriptFileOperations.swift in Sources */,
-				04B494D02B84BF5400BE0376 /* yolov8x.mlpackage in Sources */,
 				04B494DE2B854FFA00BE0376 /* AudioClassification.swift in Sources */,
 				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
 				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
@@ -1055,6 +1066,7 @@
 				0464DA0029E423A80007EF24 /* FileSystemElement.swift in Sources */,
 				04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */,
 				04B494D52B84C3AF00BE0376 /* Array.swift in Sources */,
+				04FEB7022B9754EB0075EBBB /* LocationCaptionizer.swift in Sources */,
 				040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */,
 				04483D752B47F53400774D4A /* whisper-encoder.mm in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
@@ -1067,6 +1079,7 @@
 				04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */,
 				04483E962B47F53400774D4A /* ggml-metal.metal in Sources */,
 				043538F32AB073DE00775E0D /* Environment.swift in Sources */,
+				04FEB7002B97548C0075EBBB /* DaytimeCaptionizer.swift in Sources */,
 				043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */,
 				043538C92AABBB0D00775E0D /* Fonts.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
@@ -1077,14 +1090,14 @@
 				04483EA12B4868D300774D4A /* MenuCommands.swift in Sources */,
 				04F7A9EE29F96D27007E4C64 /* CustomTextField.swift in Sources */,
 				04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */,
+				04FEB6FE2B9754660075EBBB /* VideoCaptionizerProtocol.swift in Sources */,
 				0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */,
-				04B494D12B84BF5400BE0376 /* yolov8n.mlpackage in Sources */,
 				04C0A0422AE46001001F6B10 /* Binding.swift in Sources */,
 				043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */,
 				04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */,
 				0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */,
 				043538D92AACD33500775E0D /* ImageButton.swift in Sources */,
-				04B494D32B84BF9300BE0376 /* VideoCaptionizer.swift in Sources */,
+				04B494D32B84BF9300BE0376 /* YoloV8Captionizer.swift in Sources */,
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
 				04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */,
 				043538CF2AAC75CA00775E0D /* CustomLabel.swift in Sources */,
@@ -1102,11 +1115,13 @@
 				04F7A9E629F91F82007E4C64 /* TranscribedIcon.swift in Sources */,
 				043538EF2AAFB45000775E0D /* HeaderMenuConfiguration.swift in Sources */,
 				043538EB2AAEFB9700775E0D /* OverlayMenu.swift in Sources */,
+				04B495352B93233600BE0376 /* location.mlmodel in Sources */,
 				04483D882B47F53400774D4A /* ggml-alloc.c in Sources */,
 				043538CB2AABBB0D00775E0D /* Strings.swift in Sources */,
 				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
 				0464DA0E29E423A80007EF24 /* ClapperRoughCutApp.swift in Sources */,
 				043538CD2AABD57100775E0D /* SystemImage.swift in Sources */,
+				04B495272B91F07400BE0376 /* daytime.mlmodel in Sources */,
 				043538FF2AB21AD900775E0D /* SettingsView.swift in Sources */,
 				04B494DC2B85014400BE0376 /* ClassificationResultView.swift in Sources */,
 				04C0A0402AE3EF66001F6B10 /* Color.swift in Sources */,
@@ -1115,6 +1130,7 @@
 				0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */,
 				043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */,
 				049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */,
+				04FEB7042B9765A10075EBBB /* yolov8x.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
