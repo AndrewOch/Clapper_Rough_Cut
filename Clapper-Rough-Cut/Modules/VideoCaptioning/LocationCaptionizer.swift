@@ -3,8 +3,8 @@ import AVFoundation
 import Vision
 
 final class LocationCaptionizer: VideoCaptionizerProtocol {
-    private let exactConfidenceThreshold: Float = 0.3
-    private let parentConfidenceThreshold: Float = 0.6
+    private let exactConfidenceThreshold: Float = 0.6
+    private let parentConfidenceThreshold: Float = 0.75
     private let model: VNCoreMLModel
     private let frameStep: Int = 20
 
@@ -58,8 +58,7 @@ final class LocationCaptionizer: VideoCaptionizerProtocol {
             assetReader.add(readerOutput)
             assetReader.startReading()
             var frameCount = 0
-            var classificationResults = [ClassificationElement]()
-            var cumulativeClassConfidences = [String: Float]()
+            var maxClassConfidences = [String: Float]()
             var cumulativeParentClassConfidences = [String: Float]()
             
             while assetReader.status == .reading {
@@ -69,10 +68,13 @@ final class LocationCaptionizer: VideoCaptionizerProtocol {
                         let request = VNCoreMLRequest(model: model) { (request, error) in
                             guard error == nil, let results = request.results as? [VNClassificationObservation] else { return }
                             results.forEach { label in
+                                let confidence = label.confidence
                                 guard label.confidence > 0 else { return }
                                 let classNames = label.identifier.components(separatedBy: "_")
-                                cumulativeParentClassConfidences[classNames[0], default: 0.0] += label.confidence
-                                cumulativeClassConfidences[classNames[1], default: 0.0] += label.confidence
+                                cumulativeParentClassConfidences[classNames[0], default: 0.0] += confidence
+                                if (confidence > maxClassConfidences[classNames[1]] ?? 0) {
+                                    maxClassConfidences[classNames[1], default: 0.0] = confidence
+                                }
                             }
                         }
                         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
@@ -82,9 +84,8 @@ final class LocationCaptionizer: VideoCaptionizerProtocol {
             }
             var results = [ClassificationElement]()
 
-            let adjustedResults = cumulativeClassConfidences.map { key, value -> ClassificationElement in
-                let adjustedConfidence = value / Float(frameCount) * Float(frameStep)
-                return ClassificationElement(className: key, confidence: adjustedConfidence)
+            let adjustedResults = maxClassConfidences.map { key, value -> ClassificationElement in
+                return ClassificationElement(className: key, confidence: value)
             }.filter { element in
                 element.confidence >= exactConfidenceThreshold
             }

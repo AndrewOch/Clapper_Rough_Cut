@@ -55,7 +55,6 @@ final class DaytimeCaptionizer: VideoCaptionizerProtocol {
             assetReader.add(readerOutput)
             assetReader.startReading()
             var frameCount = 0
-            var classificationResults = [ClassificationElement]()
             var cumulativeClassConfidences = [String: Float]()
             while assetReader.status == .reading {
                 if let sampleBuffer = readerOutput.copyNextSampleBuffer() {
@@ -66,7 +65,6 @@ final class DaytimeCaptionizer: VideoCaptionizerProtocol {
                             results.forEach { label in
                                 guard label.confidence > 0 else { return }
                                 let element = ClassificationElement(className: label.identifier, confidence: label.confidence)
-                                classificationResults.append(element)
                                 cumulativeClassConfidences[label.identifier, default: 0.0] += label.confidence
                             }
                         }
