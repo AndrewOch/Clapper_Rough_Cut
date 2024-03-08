@@ -119,6 +119,7 @@
 		0464DA1029E423A80007EF24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E029E423A70007EF24 /* ContentView.swift */; };
 		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
+		049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */ = {isa = PBXBuildFile; productRef = 049A8A592B9B66E800A20092 /* VisualActionKit */; };
 		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
@@ -136,6 +137,7 @@
 		04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */; };
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
+		04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */; };
 		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
@@ -305,6 +307,7 @@
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
+		04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCaptionizer.swift; sourceTree = "<group>"; };
 		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
+				049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */,
 				0449EC262B4953C800407B28 /* SystemConfiguration.framework in Frameworks */,
 				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
@@ -807,6 +811,7 @@
 				04FEB6FD2B9754660075EBBB /* VideoCaptionizerProtocol.swift */,
 				04FEB6FF2B97548C0075EBBB /* DaytimeCaptionizer.swift */,
 				04FEB7012B9754EB0075EBBB /* LocationCaptionizer.swift */,
+				04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */,
 			);
 			path = VideoCaptioning;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 			name = "Clapper-Rough-Cut";
 			packageProductDependencies = (
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
+				049A8A592B9B66E800A20092 /* VisualActionKit */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -905,6 +911,7 @@
 			mainGroup = 04845597298D212400772EB0;
 			packageReferences = (
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
+				049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -1081,6 +1088,7 @@
 				043538F32AB073DE00775E0D /* Environment.swift in Sources */,
 				04FEB7002B97548C0075EBBB /* DaytimeCaptionizer.swift in Sources */,
 				043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */,
+				04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */,
 				043538C92AABBB0D00775E0D /* Fonts.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
 				045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */,
@@ -1366,6 +1374,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndrewOch/VisualActionKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -1377,6 +1393,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		049A8A592B9B66E800A20092 /* VisualActionKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */;
+			productName = VisualActionKit;
+		};
 		04BA3A0D29E1F26300047A9B /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */;

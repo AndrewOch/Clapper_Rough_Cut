@@ -41,18 +41,18 @@ final class LocationCaptionizer: VideoCaptionizerProtocol {
             }
         }
     }
-    
+
     private func processVideo(url: URL, withModel model: VNCoreMLModel, frameStep: Int, completion: @escaping ([ClassificationElement]?) -> Void) {
         let asset = AVAsset(url: url)
-        
+
         do {
             let assetReader = try AVAssetReader(asset: asset)
-            
+
             guard let videoTrack = asset.tracks(withMediaType: .video).first else {
                 completion(nil)
                 return
             }
-            
+
             let readerOutputSettings: [String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
             let readerOutput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings: readerOutputSettings)
             assetReader.add(readerOutput)
@@ -60,7 +60,7 @@ final class LocationCaptionizer: VideoCaptionizerProtocol {
             var frameCount = 0
             var maxClassConfidences = [String: Float]()
             var cumulativeParentClassConfidences = [String: Float]()
-            
+
             while assetReader.status == .reading {
                 if let sampleBuffer = readerOutput.copyNextSampleBuffer() {
                     frameCount += 1
