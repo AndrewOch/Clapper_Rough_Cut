@@ -2,8 +2,8 @@ import SwiftUI
 
 struct ClassificationResultView: View {
     var elements: [ClassificationElement]
-    let spacing: CGFloat = 5
-    let lineSpacing: CGFloat = 5
+    let spacing: CGFloat = 4
+    let lineSpacing: CGFloat = 4
 
     @State private var totalHeight = CGFloat.zero
 
