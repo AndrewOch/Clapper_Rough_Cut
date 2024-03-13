@@ -1,4 +1,5 @@
 {
+  "originHash" : "8c9f81349684889cb530c8a8885db33febef992642f17dc50d3fa6f8a5c46215",
   "pins" : [
     {
       "identity" : "audiokit",
@@ -10,23 +11,14 @@
       }
     },
     {
-      "identity" : "keyboardshortcuts",
+      "identity" : "visualactionkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
-      "state" : {
-        "revision" : "b878f8132be59576fc87e39405b1914eff9f55d3",
-        "version" : "1.14.1"
-      }
-    },
-    {
-      "identity" : "pythonkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pvieito/PythonKit",
+      "location" : "https://github.com/AndrewOch/VisualActionKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "060e1c8b0d14e4d241b3623fdbe83d0e3c81a993"
+        "revision" : "e4ba91c7e5cec99a83adedbd2e4e4e570f0a2b09"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
