@@ -143,6 +143,14 @@ extension RoughCutFileSystem {
                     chosen = true
                     item.highlights.append(.subtitles)
                 }
+                if let classes = item.value.videoClasses, classes.map({ $0.className }).joined(separator: " ").localizedCaseInsensitiveContains(searchText) {
+                    chosen = true
+                    item.highlights.append(.videoClasses)
+                }
+                if let classes = item.value.audioClasses, classes.map({ $0.className }).joined(separator: " ").localizedCaseInsensitiveContains(searchText) {
+                    chosen = true
+                    item.highlights.append(.audioClasses)
+                }
                 if chosen {
                     filtered.append(item)
                 }

@@ -47,7 +47,7 @@ struct FileSystemSelectionDetailView: View {
 
     var fileDetailInfo: some View {
         VStack {
-            if !element.statuses.contains(where: { $0 == .transcription || $0 == .transcribing }) {
+            if element.statuses.isEmpty {
                 HStack {
                     RoundedButton<RoundedButtonPrimaryMediumStyle>(title: L10n.transcribe.capitalized,
                                                                    imageName: SystemImage.rectangleAndPencilAndEllipsis.rawValue,
@@ -57,40 +57,98 @@ struct FileSystemSelectionDetailView: View {
                     Spacer()
                 }
             } else {
-                VStack {
-                    HStack {
-                        TranscribedIcon()
-                        CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
-                        Spacer()
-                        CustomPicker(selectedOption: $subtitlesMode, options: SubtitlesMode.images)
-                            .frame(width: 100)
-                    }
-                    .foregroundColor(.contentSecondary(colorScheme))
-                    ScrollView {
+                VStack(spacing: 5) {
+                    VStack {
                         HStack {
-                            if element.statuses.contains(.transcribing) {
-                                ProgressView()
-                                    .progressViewStyle(.circular)
-                                    .scaleEffect(0.5)
-                                    .foregroundColor(.contentPrimary(colorScheme))
-                            }
-                            if subtitlesMode == 0, let subtitles = element.subtitles {
-                                SubtitlesView(subtitles: .getOnly(subtitles))
-                            }
-                            if subtitlesMode == 1, let subtitle = element.currentSubtitle(time: currentTime) {
-                                SubtitlesView(subtitles: .getOnly([subtitle]))
-                            }
+                            TranscribedIcon()
+                            CustomLabel<BodyMediumStyle>(text: L10n.transcribedSpeech.capitalized)
                             Spacer()
+                            CustomPicker(selectedOption: $subtitlesMode, options: SubtitlesMode.images)
+                                .frame(width: 100)
+                        }
+                        .foregroundColor(.contentSecondary(colorScheme))
+                        ScrollView {
+                            HStack {
+                                if element.statuses.contains(.transcribing) {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                        .scaleEffect(0.5)
+                                        .foregroundColor(.contentPrimary(colorScheme))
+                                }
+                                if subtitlesMode == 0, let subtitles = element.subtitles {
+                                    SubtitlesView(subtitles: .getOnly(subtitles))
+                                }
+                                if subtitlesMode == 1, let subtitle = element.currentSubtitle(time: currentTime) {
+                                    SubtitlesView(subtitles: .getOnly([subtitle]))
+                                }
+                                Spacer()
+                            }
                         }
                     }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.surfacePrimary(colorScheme))
+                    .cornerRadius(5)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                    .padding(.bottom, 10)
+                    HStack {
+                        VStack {
+                            HStack {
+                                AudioClassificationIcon()
+                                CustomLabel<BodyMediumStyle>(text: L10n.classifiedAudio.capitalized)
+                                Spacer()
+                            }
+                            .foregroundColor(.contentSecondary(colorScheme))
+                            ScrollView {
+                                HStack {
+                                    if element.statuses.contains(.audioClassifying) {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                            .scaleEffect(0.5)
+                                            .foregroundColor(.contentPrimary(colorScheme))
+                                    }
+                                    ClassificationResultView(elements: element.audioClasses ?? [])
+                                }
+                                Spacer()
+                            }
+                        }
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 5)
+                        .background(Color.surfacePrimary(colorScheme))
+                        .cornerRadius(5)
+                        .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                        .padding(.bottom, 10)
+                        VStack {
+                            HStack {
+                                VideoClassificationIcon()
+                                CustomLabel<BodyMediumStyle>(text: L10n.classifiedVideo)
+                                Spacer()
+                            }
+                            .foregroundColor(.contentSecondary(colorScheme))
+                            ScrollView {
+                                HStack {
+                                    if element.statuses.contains(.videoCaptioning) {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                            .scaleEffect(0.5)
+                                            .foregroundColor(.contentPrimary(colorScheme))
+                                    }
+                                    ClassificationResultView(elements: element.videoClasses ?? [])
+                                }
+                                Spacer()
+                            }
+                        }
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 5)
+                        .background(Color.surfacePrimary(colorScheme))
+                        .cornerRadius(5)
+                        .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                        .padding(.bottom, 10)
+                    }
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(Color.surfacePrimary(colorScheme))
-                .cornerRadius(5)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-                .padding(.bottom, 10)
             }
             if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id) {
                 VStack {

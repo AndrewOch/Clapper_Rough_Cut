@@ -3,7 +3,7 @@ import SwiftUI
 struct SelectPhraseMatchView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
-    @State var selectAction: (Phrase) -> Void
+    @State var selectAction: (ScriptBlockElement) -> Void
     @State var searchText: String = .empty
 
     var body: some View {
@@ -39,11 +39,11 @@ struct SelectPhraseMatchView: View {
         .cornerRadius(10)
     }
 
-    func getPhrases() -> [Phrase] {
-        var phrases: [Phrase] = []
-        let blocks = document.project.scriptFile?.blocks.filter({ $0.isDialogue }) ?? []
+    func getPhrases() -> [ScriptBlockElement] {
+        var phrases: [ScriptBlockElement] = []
+        let blocks = document.project.scriptFile?.blocks.filter({ $0.elementsType == .phrase }) ?? []
         for block in blocks {
-            phrases += block.phrases
+            phrases += block.elements
         }
         if searchText.isNotEmpty {
             phrases = phrases.filter { phrase in phrase.fullText.lowercased().contains(searchText.lowercased()) }

@@ -1,5 +1,5 @@
 import SwiftUI
-import KeyboardShortcuts
+//import KeyboardShortcuts
 
 struct SettingsView: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -16,9 +16,9 @@ struct SettingsView: View {
                 HStack {
                     Spacer()
                     Form {
-                        KeyboardShortcuts.Recorder(L10n.shortcutOpenCharactersMenu, name: .characters)
-                        KeyboardShortcuts.Recorder(L10n.shortcutTranscribeAll, name: .transcribeAll)
-                        KeyboardShortcuts.Recorder(L10n.shortcutExport, name: .export)
+//                        KeyboardShortcuts.Recorder(L10n.shortcutOpenCharactersMenu, name: .characters)
+//                        KeyboardShortcuts.Recorder(L10n.shortcutTranscribeAll, name: .transcribeAll)
+//                        KeyboardShortcuts.Recorder(L10n.shortcutExport, name: .export)
                     }
                 }
                 Spacer()

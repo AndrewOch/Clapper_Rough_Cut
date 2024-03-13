@@ -30,19 +30,19 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
     }
 
     private func findMFCCS(in scenes: [FileSystemElement]) {
-        let python = MFCC_Wrapper()
         scenes.forEach { scene in
             project.fileSystem.allElements(where: { $0.containerId == scene.id }).forEach { element in
                 guard element.isFile, element.mfccs == nil, let url = element.url else { return }
                 var newFile = element
-                newFile.mfccs = python.extractMFCCS(file: url)
-                project.fileSystem.updateElement(withID: element.id, newValue: newFile)
+                mfccMatcher.extractMFCCs(fileURL: url) { mfccs in
+                    newFile.mfccs = mfccs
+                    self.project.fileSystem.updateElement(withID: element.id, newValue: newFile)
+                }
             }
         }
     }
 
     private func matchByDistance(in scenes: [FileSystemElement]) {
-        let python = MFCC_Wrapper()
         var videos: [FileSystemElement] = []
         var audios: [FileSystemElement] = []
         scenes.forEach { scene in
@@ -54,11 +54,13 @@ extension ClapperRoughCutDocument: TakesMatchOperations {
                 var bestRatio = Float.greatestFiniteMagnitude
                 for audio in audios {
                     guard let audioMFCCS = audio.mfccs else { continue }
-                    let distance = python.distanceDTW(mfccs1: audioMFCCS, mfccs2: videoMFCCS)
-                    if bestRatio > distance {
-                        bestMatch = audio.id
-                        bestRatio = distance
-                    }
+                    mfccMatcher.distanceDTW(mfccs1: audioMFCCS, mfccs2: videoMFCCS) { distance in
+                        guard let distance = distance else { return }
+                        if bestRatio > distance {
+                            bestMatch = audio.id
+                            bestRatio = distance
+                        }
+                    } // TODO: - Проверить потоки (чтобы код ниже выполнялся после цикла)
                 }
                 if let match = bestMatch, let audio = project.fileSystem.elementById(match) {
                     let take = FileSystemElement(title: .empty, type: .take)

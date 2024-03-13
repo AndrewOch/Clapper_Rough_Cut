@@ -1,3 +1,5 @@
+import Foundation
+
 struct FileSystemListItem: Identifiable, Hashable {
     let id: UUID
     let value: FileSystemElement
@@ -24,5 +26,7 @@ enum FileSystemListItemHighlight {
     case type
     case title
     case subtitles
+    case videoClasses
+    case audioClasses
     case date
 }

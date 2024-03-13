@@ -28,6 +28,26 @@ struct FileSystemListItemView: View {
                     TranscribedIcon()
                         .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Color.contentSecondary(colorScheme))
                 }
+                if element.statuses.contains(.audioClassifying) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.5)
+                        .frame(width: 10, height: 10)
+                }
+                if element.statuses.contains(.audioClassification) {
+                    AudioClassificationIcon()
+                        .foregroundStyle(highlights.contains(.audioClasses) ? Color.yellow : Color.contentSecondary(colorScheme))
+                }
+                if element.statuses.contains(.videoCaptioning) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.5)
+                        .frame(width: 10, height: 10)
+                }
+                if element.statuses.contains(.videoCaption) {
+                    VideoClassificationIcon()
+                        .foregroundStyle(highlights.contains(.videoClasses) ? Color.yellow : Color.contentSecondary(colorScheme))
+                }
             }
             .frame(width: 60)
             HStack {

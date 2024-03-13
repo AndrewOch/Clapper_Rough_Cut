@@ -3,7 +3,7 @@ import Foundation
 protocol ScenesMatchOperations {
     func matchScenes()
     func matchSceneForFile(_ file: FileSystemElement)
-    func manualMatch(element: FileSystemElement, phrase: Phrase)
+    func manualMatch(element: FileSystemElement, phrase: ScriptBlockElement)
 }
 
 // MARK: - Scenes Match Operations
@@ -20,12 +20,12 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         matchFor(files: [file])
     }
 
-    func manualMatch(element: FileSystemElement, phrase: Phrase) {
+    func manualMatch(element: FileSystemElement, phrase: ScriptBlockElement) {
         registerUndo()
         match(element: element, phrase: phrase)
     }
 
-    func changePhrase(for scene: FileSystemElement, phrase: Phrase) {
+    func changePhrase(for scene: FileSystemElement, phrase: ScriptBlockElement) {
         registerUndo()
         var newScene = scene
         newScene.scriptPhraseId = phrase.id
@@ -36,9 +36,14 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     }
 
     private func matchFor(files: [FileSystemElement]) {
-        phraseMatcher.match(files: files,
-                            phrases: project.scriptFile?.blocks.flatMap({ block in block.phrases }) ?? []) { file, phrase in
-            self.manualMatch(element: file, phrase: phrase)
+        guard let scriptFile = project.scriptFile else { return }
+        phraseMatcher.match(files: files, phrases: scriptFile.allPhrases, projectId: project.id) { result in
+            switch result {
+            case .success(let match):
+                self.manualMatch(element: match.0, phrase: match.1)
+            case .failure(let error):
+                print("Ошибка при сопоставлении: \(error)")
+            }
         }
     }
 
@@ -50,7 +55,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
         return "\(characterName)-\(words.prefix(10).joined(separator: " "))"
     }
 
-    private func match(element: FileSystemElement, phrase: Phrase) {
+    private func match(element: FileSystemElement, phrase: ScriptBlockElement) {
         guard let scene = project.fileSystem.firstElement(where: { $0.isScene && $0.scriptPhraseId == phrase.id }) else {
             guard let characterName = phrase.character?.name,
                     let phraseText = phrase.phraseText,

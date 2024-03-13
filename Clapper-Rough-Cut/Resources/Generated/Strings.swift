@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// Действие
+  internal static let action = L10n.tr("Localizable", "action", fallback: "Действие")
+  /// Действия
+  internal static let actions = L10n.tr("Localizable", "actions", fallback: "Действия")
   /// добавить файлы
   internal static let addFiles = L10n.tr("Localizable", "addFiles", fallback: "добавить файлы")
   /// добавить папки
@@ -18,6 +22,8 @@ internal enum L10n {
   internal static let addScript = L10n.tr("Localizable", "addScript", fallback: "добавить сценарий")
   /// аудио
   internal static let audio = L10n.tr("Localizable", "audio", fallback: "аудио")
+  /// Сменить тип
+  internal static let changeType = L10n.tr("Localizable", "change_type", fallback: "Сменить тип")
   /// заменить сцену
   internal static let changeScene = L10n.tr("Localizable", "changeScene", fallback: "заменить сцену")
   /// персонажи
@@ -30,6 +36,14 @@ internal enum L10n {
   internal static let choose = L10n.tr("Localizable", "choose", fallback: "выбрать")
   /// выбрать сцену
   internal static let chooseScene = L10n.tr("Localizable", "chooseScene", fallback: "выбрать сцену")
+  /// Распознанный звук
+  internal static let classifiedAudio = L10n.tr("Localizable", "classifiedAudio", fallback: "Распознанный звук")
+  /// Объекты на Видео
+  internal static let classifiedVideo = L10n.tr("Localizable", "classifiedVideo", fallback: "Объекты на Видео")
+  /// Распознать звук
+  internal static let classifyAudio = L10n.tr("Localizable", "classifyAudio", fallback: "Распознать звук")
+  /// Распознать видео
+  internal static let classifyVideos = L10n.tr("Localizable", "classifyVideos", fallback: "Распознать видео")
   /// дата создания
   internal static let createdAt = L10n.tr("Localizable", "createdAt", fallback: "дата создания")
   /// создать папку
@@ -46,6 +60,8 @@ internal enum L10n {
   internal static let determineScenes = L10n.tr("Localizable", "determineScenes", fallback: "определить сцены")
   /// определить дубли
   internal static let determineTakes = L10n.tr("Localizable", "determineTakes", fallback: "определить дубли")
+  /// Диалог
+  internal static let dialogue = L10n.tr("Localizable", "dialogue", fallback: "Диалог")
   /// длительность
   internal static let duration = L10n.tr("Localizable", "duration", fallback: "длительность")
   /// правка
@@ -68,8 +84,12 @@ internal enum L10n {
   internal static let folders = L10n.tr("Localizable", "folders", fallback: "папки")
   /// новая папка
   internal static let newFolder = L10n.tr("Localizable", "newFolder", fallback: "новая папка")
+  /// Фраза
+  internal static let phrase = L10n.tr("Localizable", "phrase", fallback: "Фраза")
   /// фразы
   internal static let phrasesCount = L10n.tr("Localizable", "phrasesCount", fallback: "фразы")
+  /// Простой текст
+  internal static let plainText = L10n.tr("Localizable", "plain_text", fallback: "Простой текст")
   /// проект
   internal static let project = L10n.tr("Localizable", "project", fallback: "проект")
   /// название проекта

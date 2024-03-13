@@ -1,3 +1,5 @@
+import Foundation
+
 struct ScriptCharacter: Identifiable, Codable, Hashable {
     var id = UUID()
     var name: String

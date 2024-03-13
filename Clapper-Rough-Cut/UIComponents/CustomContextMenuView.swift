@@ -66,9 +66,9 @@ struct CustomContextMenuOptionButton: View {
                         .baselineOffset(CustomContextMenuButtonStyle.baselineOffset)
                         .lineLimit(1)
                     Spacer()
-                    if let shortcut = option.shortcut?.shortcut {
-                        ShortcutView(shortcut: shortcut)
-                    }
+//                    if let shortcut = option.shortcut?.shortcut {
+//                        ShortcutView(shortcut: shortcut)
+//                    }
                 }
                 .foregroundColor((option.isEnabled.wrappedValue && hovered) ? CustomContextMenuButtonStyle.hoveredForegroundColor : CustomContextMenuButtonStyle.foregroundColor)
                 .padding(.horizontal, CustomContextMenuButtonStyle.paddingHorizontal)

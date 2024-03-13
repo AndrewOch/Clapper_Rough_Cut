@@ -1,6 +1,6 @@
 import Foundation
 
-struct ScriptFile: Identifiable, Codable {
+struct ScriptFile: Identifiable, Codable, Equatable {
     var id = UUID()
     let url: URL
     var fullText: String
@@ -13,17 +13,17 @@ struct ScriptFile: Identifiable, Codable {
         self.characters = []
         self.fullText = text
         let phrases = determinePhrases()
-        determineScriptBlocks(phrases: phrases)
+        determineScriptBlocks(elements: phrases)
     }
 
-    private mutating func determinePhrases() -> [Phrase] {
+    private mutating func determinePhrases() -> [ScriptBlockElement] {
         let lines = fullText.components(separatedBy: .newlines)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { $0.isNotEmpty }
-        var result: [Phrase] = []
+        var result: [ScriptBlockElement] = []
         for line in lines {
             if !ScriptFile.isPhrase(line: line) {
-                result.append(Phrase(text: line))
+                result.append(ScriptBlockElement(text: line, type: .action))
                 continue
             }
             var character: ScriptCharacter?
@@ -39,29 +39,24 @@ struct ScriptFile: Identifiable, Codable {
             }
             let phraseText = components[1...].joined()
             if let character = character {
-                result.append(Phrase(character: character, phraseText: phraseText, text: line))
+                result.append(ScriptBlockElement(character: character, phraseText: phraseText, text: line))
             }
         }
         return result
     }
 
-    private mutating func determineScriptBlocks(phrases: [Phrase]) {
+    private mutating func determineScriptBlocks(elements: [ScriptBlockElement]) {
         self.blocks = []
-        var scriptLines: [Phrase] = []
-        var previousIsPhrase = false
-        for phrase in phrases {
-            let isPhrase = phrase.character != nil
-            if isPhrase && !previousIsPhrase {
-                    self.blocks.append(ScriptBlock(isDialogue: false, phrases: scriptLines))
+        var scriptLines: [ScriptBlockElement] = []
+        var previousType: ScriptBlockElementType = .none
+        for element in elements {
+            let type = element.type
+            if type != previousType {
+                self.blocks.append(ScriptBlock(type: previousType, elements: scriptLines))
                     scriptLines = []
-                    previousIsPhrase = true
+                    previousType = type
             }
-            if !isPhrase && previousIsPhrase {
-                    self.blocks.append(ScriptBlock(isDialogue: true, phrases: scriptLines))
-                    scriptLines = []
-                    previousIsPhrase = false
-            }
-            scriptLines.append(phrase)
+            scriptLines.append(element)
         }
     }
 
@@ -70,11 +65,11 @@ struct ScriptFile: Identifiable, Codable {
         return line.range(of: dialogueRegex, options: .regularExpression) != nil
     }
 
-    public func getCharacterPhrases(character: ScriptCharacter) -> [Phrase] {
-        var result: [Phrase] = []
+    public func getCharacterPhrases(character: ScriptCharacter) -> [ScriptBlockElement] {
+        var result: [ScriptBlockElement] = []
         for block in blocks {
-            guard block.isDialogue else { continue }
-            for phrase in block.phrases {
+            guard block.elementsType == .phrase else { continue }
+            for phrase in block.elements {
                 guard let char = phrase.character else { continue }
                 if char == character {
                     result.append(phrase)
@@ -89,43 +84,64 @@ struct ScriptFile: Identifiable, Codable {
     }
 
     public mutating func removeCharacters(by ids: [UUID]) {
-        var updatedPhrases: [Phrase] = []
+        var updatedPhrases: [ScriptBlockElement] = []
         let removingCharacters = characters.filter({ char in ids.contains(char.id) })
         characters.removeAll { char in ids.contains(char.id) }
-        for phrase in blocks.flatMap({ $0.phrases }) {
+        for phrase in blocks.flatMap({ $0.elements }) {
             if removingCharacters.contains(where: { char in phrase.character == char }) {
-                updatedPhrases.append(Phrase(text: phrase.fullText))
+                updatedPhrases.append(ScriptBlockElement(text: phrase.fullText, type: .none))
                 continue
             }
             updatedPhrases.append(phrase)
         }
-        determineScriptBlocks(phrases: updatedPhrases)
+        determineScriptBlocks(elements: updatedPhrases)
+    }
+
+    static func == (lhs: ScriptFile, rhs: ScriptFile) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    var allPhrases: [ScriptBlockElement] {
+        blocks.filter({ $0.elementsType == .phrase }).flatMap({ $0.elements })
+    }
+    
+    public mutating func setBlockType(id: UUID, type: ScriptBlockElementType) {
+        guard var index = blocks.firstIndex(where: { $0.id == id }) else { return }
+        var block = blocks[index]
+        var updatedElements = [ScriptBlockElement]()
+        block.elements.forEach({ element in
+            var elem = element
+            elem.type = type
+            updatedElements.append(elem)
+        })
+        blocks[index].elements = updatedElements
+        blocks[index].elementsType = type
     }
 }
 
 struct ScriptBlock: Identifiable, Codable {
     var id = UUID()
-    var isDialogue: Bool
+    var elementsType: ScriptBlockElementType
     var fullText: String {
         var result: String = .empty
-        for phrase in phrases {
-            result.append("\n\(phrase.fullText)")
+        for element in elements {
+            result.append("\n\(element.fullText)")
         }
         return result
     }
-    var phrases: [Phrase]
+    var elements: [ScriptBlockElement]
 
-    init(text: String, lines: [String]) {
-        self.isDialogue = false
-        self.phrases = []
+    init(text: String, lines: [String], type: ScriptBlockElementType) {
+        self.elementsType = type
+        self.elements = []
         for line in lines {
-            self.phrases.append(Phrase(text: line))
+            self.elements.append(ScriptBlockElement(text: line, type: type))
         }
     }
 
-    init(isDialogue: Bool, phrases: [Phrase]) {
-        self.isDialogue = isDialogue
-        self.phrases = phrases
+    init(type: ScriptBlockElementType, elements: [ScriptBlockElement]) {
+        self.elementsType = type
+        self.elements = elements
     }
 
     static func == (lhs: ScriptBlock, rhs: ScriptBlock) -> Bool {
@@ -133,19 +149,34 @@ struct ScriptBlock: Identifiable, Codable {
     }
 }
 
-struct Phrase: Identifiable, Codable, Hashable {    
+enum ScriptBlockElementType: Codable {
+    case none, phrase, action
+}
+
+struct ScriptBlockElement: Identifiable, Codable, Hashable {
     var id = UUID()
     var fullText: String
     var character: ScriptCharacter?
     var phraseText: String?
+    var type: ScriptBlockElementType
 
-    init(text: String) {
+    init(text: String, type: ScriptBlockElementType) {
         self.fullText = text
+        self.type = type
     }
 
     init(character: ScriptCharacter, phraseText: String, text: String) {
         self.fullText = text
         self.character = character
         self.phraseText = phraseText
+        self.type = .phrase
+    }
+
+    var dictionaryRepresentation: [String: Any] {
+        var dict = [String: Any]()
+        dict["phrase_id"] = id.uuidString
+        dict["text"] = fullText
+        dict["phrase_text"] = phraseText ?? ""
+        return dict
     }
 }

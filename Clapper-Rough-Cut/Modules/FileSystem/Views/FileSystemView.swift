@@ -1,5 +1,5 @@
 import SwiftUI
-import KeyboardShortcuts
+//import KeyboardShortcuts
 
 struct FileSystemView: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -59,30 +59,40 @@ struct FileSystemView: View {
         ZStack {
             Color.surfaceTertiary(colorScheme)
             VStack {
-                HStack {
+                if (document.project.fileSystem.elements.isEmpty) {
                     Spacer()
-                    CustomSearchTextField(placeholder: L10n.search.firstWordCapitalized,
-                                    text: $searchText)
-                    .frame(width: 300)
-                    .focused($searchBarIsFocused)
-                }
-                .padding(.horizontal, 10)
-                List(document.project.fileSystem.filteredItems(searchText: searchText),
-                     children: \.elements,
-                     selection: $selection) { item in
-                    let element = item.value
-                    FileSystemListItemView(item: .getOnly(item))
-                        .onDrag({
-                            onDrag(element)
-                        }, preview: {
-                            dragPreview
-                        })
-                        .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
-                            drop(at: element, providers: providers)
-                        }
-                        .onHover { hover in
-                            isTargeted = hover && element.isContainer
-                        }
+                    RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.addFiles.capitalized,
+                                                                     imageName: SystemImage.plus.rawValue,
+                                                                     enabled: .constant(true)) {
+                        document.addRawFiles()
+                    }
+                    Spacer()
+                } else {
+                    HStack {
+                        Spacer()
+                        CustomSearchTextField(placeholder: L10n.search.firstWordCapitalized,
+                                              text: $searchText)
+                        .frame(width: 300)
+                        .focused($searchBarIsFocused)
+                    }
+                    .padding(.horizontal, 10)
+                    List(document.project.fileSystem.filteredItems(searchText: searchText),
+                         children: \.elements,
+                         selection: $selection) { item in
+                        let element = item.value
+                        FileSystemListItemView(item: .getOnly(item))
+                            .onDrag({
+                                onDrag(element)
+                            }, preview: {
+                                dragPreview
+                            })
+                            .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
+                                drop(at: element, providers: providers)
+                            }
+                            .onHover { hover in
+                                isTargeted = hover && element.isContainer
+                            }
+                    }
                 }
             }
             .padding(.vertical, 10)

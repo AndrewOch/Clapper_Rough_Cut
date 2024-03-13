@@ -17,9 +17,12 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
     @Published var states: DocumentStates = DocumentStates()
     @Published var undoManager: UndoManager?
     let transcriber: AudioTranscriber = WhisperAudioTranscriber()
+    let videoCaptionizers: [VideoCaptionizerProtocol] = [YoloV8Captionizer(), DaytimeCaptionizer(), LocationCaptionizer(), ActivityCaptionizer()]
+    let audioClassificator: AudioClassificatorProtocol = AudioClassificator()
     let phraseMatcher: PhraseMatcherProtocol = PhraseMatcher()
     var headerMenuConfiguration: HeaderMenuConfiguration? = nil
     var cancellables = Set<AnyCancellable>()
+    let mfccMatcher = MFCCService()
 
     static var readableContentTypes: [UTType] { [.clapperPost] }
 
@@ -39,6 +42,7 @@ final class ClapperRoughCutDocument: ReferenceFileDocument {
             throw CocoaError(.fileReadCorruptFile)
         }
         self.project = try JSONDecoder().decode(RoughCutProject.self, from: data)
+        project.syncToServer()
         headerMenuConfiguration = HeaderMenuConfiguration(document: self)
         cleanFileSystemStatuses()
     }
@@ -71,8 +75,8 @@ extension ClapperRoughCutDocument {
     private func cleanFileSystemStatuses() {
         project.fileSystem.elements.forEach { element in
             var element = element
-            if element.statuses.contains(.transcribing) {
-                element.statuses.removeAll(where: { $0 == .transcribing })
+            if element.statuses.contains(.transcribing) || element.statuses.contains(.videoCaptioning) || element.statuses.contains(.audioClassifying) {
+                element.statuses.removeAll(where: { $0 == .transcribing || $0 == .videoCaptioning || $0 == .audioClassifying })
                 project.fileSystem.updateElement(withID: element.id, newValue: element)
             }
         }

@@ -49,13 +49,21 @@
 "scene" = "сцена";
 "take" = "дубль";
 "newFolder" = "новая папка";
-
+"classifyVideos" = "Распознать видео";
+"classifyAudio" = "Распознать звук";
+"classifiedAudio" = "Распознанный звук";
+"classifiedVideo" = "Объекты на Видео";
+"actions" = "Действия";
 
 // Settings - Shortcuts
 "shortcut_openCharactersMenu" = "Открыть меню персонажей:";
 "shortcut_export" = "Экспорт:";
 "shortcut_transcribeAll" = "Расшифровать все:";
-
+"change_type" = "Сменить тип";
+"plain_text" = "Простой текст";
+"action" = "Действие";
+"dialogue" = "Диалог";
+"phrase" = "Фраза";
 
 // Search
 "fileSystemSearchPlaceholder" = "Найдите нужные файлы";
