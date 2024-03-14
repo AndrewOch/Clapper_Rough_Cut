@@ -44,6 +44,8 @@ internal enum L10n {
   internal static let classifyAudio = L10n.tr("Localizable", "classifyAudio", fallback: "Распознать звук")
   /// Распознать видео
   internal static let classifyVideos = L10n.tr("Localizable", "classifyVideos", fallback: "Распознать видео")
+  /// цвет
+  internal static let color = L10n.tr("Localizable", "color", fallback: "цвет")
   /// дата создания
   internal static let createdAt = L10n.tr("Localizable", "createdAt", fallback: "дата создания")
   /// создать папку

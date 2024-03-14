@@ -1,7 +1,7 @@
 import SwiftUI
 
 private struct CustomContextMenuButtonStyle {
-    public static let fontName: String = FontFamily.Overpass.regular.name
+    public static let fontName: String = FontFamily.NunitoSans.regular.name
     public static let fontSize: CGFloat = 14
     public static let cornerRadius: CGFloat = 5
     public static let foregroundColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor

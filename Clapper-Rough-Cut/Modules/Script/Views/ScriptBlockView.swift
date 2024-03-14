@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ScriptBlockView: View {
-    @Environment(\.colorScheme) private var colorScheme
+    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var block: ScriptBlock
 
@@ -9,50 +9,11 @@ struct ScriptBlockView: View {
         let type = block.elementsType
         VStack {
             if type == .phrase {
-                VStack {
-                    HStack {
-                        SystemImage.dialogue.imageView
-                            .foregroundColor(Asset.accentLight.swiftUIColor)
-                        Spacer()
-                    }
-                    ForEach(block.elements) { phrase in
-                        HStack(spacing: 0) {
-                            if let character = phrase.character, let phraseText = phrase.phraseText {
-                                PhraseLabel(characterName: character.name,
-                                            text: phraseText)
-                            }
-                            Spacer()
-                        }
-                        .foregroundColor(.contentPrimary(colorScheme))
-                    }
-                }
-                .padding(.all, 5)
-                .background(Color.surfacePrimary(colorScheme))
-                .cornerRadius(5)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                dialogueBlock
             } else if type == .action {
-                VStack {
-                    HStack {
-                        SystemImage.photo.imageView
-                            .foregroundColor(Asset.accentLight.swiftUIColor)
-                        Spacer()
-                    }
-                    HStack(spacing: 0) {
-                        CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
-                            .foregroundColor(.contentPrimary(colorScheme))
-                        Spacer()
-                    }
-                    .foregroundColor(.contentPrimary(colorScheme))
-                }
-                .padding(.all, 5)
-                .background(Color.surfacePrimary(colorScheme))
-                .cornerRadius(5)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                actionBlock
             } else {
-                CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
-                    .foregroundColor(.contentPrimary(colorScheme))
+                plainTextBlock
             }
         }
         .contextMenu(menuItems: {
@@ -77,5 +38,57 @@ struct ScriptBlockView: View {
                 }
             }
         })
+    }
+
+    var dialogueBlock: some View {
+        VStack {
+            HStack {
+                SystemImage.dialogue.imageView
+                    .foregroundColor(Asset.accentLight.swiftUIColor)
+                Spacer()
+            }
+            ForEach(block.elements) { phrase in
+                HStack(spacing: 0) {
+                    if let character = phrase.character, let phraseText = phrase.phraseText {
+                        PhraseLabel(characterName: character.name,
+                                    text: phraseText,
+                                    characterColor: character.color)
+                    }
+                    Spacer()
+                }
+                .foregroundColor(Asset.contentPrimary.swiftUIColor)
+            }
+        }
+        .padding(.all, 5)
+        .background(Asset.surfacePrimary.swiftUIColor)
+        .cornerRadius(5)
+        .overlay(RoundedRectangle(cornerRadius: 5)
+            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+    }
+
+    var actionBlock: some View {
+        VStack {
+            HStack {
+                SystemImage.photo.imageView
+                    .foregroundColor(Asset.accentLight.swiftUIColor)
+                Spacer()
+            }
+            HStack(spacing: 0) {
+                CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
+                    .foregroundColor(Asset.contentPrimary.swiftUIColor)
+                Spacer()
+            }
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
+        }
+        .padding(.all, 5)
+        .background(Asset.surfacePrimary.swiftUIColor)
+        .cornerRadius(5)
+        .overlay(RoundedRectangle(cornerRadius: 5)
+            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+    }
+
+    var plainTextBlock: some View {
+        CustomLabel<BodyMediumStyle>(text: block.fullText.trimmingCharacters(in: .whitespacesAndNewlines))
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
     }
 }

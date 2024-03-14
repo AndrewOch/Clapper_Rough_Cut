@@ -2,7 +2,7 @@ import SwiftUI
 //import KeyboardShortcuts
 
 struct FileSystemView: View {
-    @Environment(\.colorScheme) private var colorScheme
+    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 400
@@ -34,7 +34,7 @@ struct FileSystemView: View {
                 detailView
                     .padding()
                     .frame(minWidth: 350, idealWidth: 350, maxWidth: .infinity)
-                    .background(Color.surfaceSecondary(colorScheme))
+                    .background(Asset.surfaceSecondary.swiftUIColor)
             }
             .frame(minWidth: 850, idealWidth: width, maxWidth: .infinity)
             .frame(minHeight: 200, idealHeight: 400, maxHeight: .infinity)
@@ -57,7 +57,7 @@ struct FileSystemView: View {
 
     var fileSystem: some View {
         ZStack {
-            Color.surfaceTertiary(colorScheme)
+            Asset.surfaceTertiary.swiftUIColor
             VStack {
                 if (document.project.fileSystem.elements.isEmpty) {
                     Spacer()
@@ -84,7 +84,7 @@ struct FileSystemView: View {
                             .onDrag({
                                 onDrag(element)
                             }, preview: {
-                                dragPreview
+                                dragPreview(element)
                             })
                             .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
                                 drop(at: element, providers: providers)
@@ -97,9 +97,9 @@ struct FileSystemView: View {
             }
             .padding(.vertical, 10)
         }
-        .font(.custom(FontFamily.Overpass.regular.name, size: 12))
+        .font(.custom(FontFamily.NunitoSans.regular.name, size: 12))
         .scrollContentBackground(.hidden)
-        .background(Color.surfaceTertiary(colorScheme))
+        .background(Asset.surfaceTertiary.swiftUIColor)
         .onDrop(of: [.typeText, .typeUUID], isTargeted: $isTargeted) { providers, _ in
             drop(at: document.project.fileSystem.root, providers: providers)
         }
@@ -123,15 +123,40 @@ struct FileSystemView: View {
         }
     }
 
-    var dragPreview: some View {
-        HStack(spacing: 2) {
-            FileIcon(type: .folder)
-            CustomLabel<BodyMediumStyle>(text: String(draggable.count))
+    func dragPreview(_ element: FileSystemElement) -> some View {
+        var draggable: [UUID] = []
+        if selection.contains(element.id) {
+            draggable.append(contentsOf: selection)
+        } else {
+            draggable.append(element.id)
         }
-        .foregroundColor(.contentPrimary(colorScheme))
+        let foldersCount = draggable.filter({ document.project.fileSystem.elementById($0)?.isFolder ?? false }).count
+        let audiosCount = draggable.filter({ document.project.fileSystem.elementById($0)?.type == FileSystemElementType.audio }).count
+        let videosCount = draggable.filter({ document.project.fileSystem.elementById($0)?.type == FileSystemElementType.video }).count
+        let scenesCount = draggable.filter({ document.project.fileSystem.elementById($0)?.isScene ?? false }).count
+
+        return HStack(spacing: 2) {
+            if (foldersCount > 0) {
+                FileIcon(type: .folder)
+                CustomLabel<BodyMediumStyle>(text: String(foldersCount))
+            }
+            if (audiosCount > 0) {
+                FileIcon(type: .audio)
+                CustomLabel<BodyMediumStyle>(text: String(audiosCount))
+            }
+            if (videosCount > 0) {
+                FileIcon(type: .video)
+                CustomLabel<BodyMediumStyle>(text: String(videosCount))
+            }
+            if (scenesCount > 0) {
+                FileIcon(type: .scene)
+                CustomLabel<BodyMediumStyle>(text: String(scenesCount))
+            }
+        }
+        .foregroundColor(Asset.contentPrimary.swiftUIColor)
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
-        .background(Color.surfacePrimary(colorScheme))
+        .background(Asset.surfacePrimary.swiftUIColor)
         .cornerRadius(5)
         .overlay(RoundedRectangle(cornerRadius: 5)
             .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))

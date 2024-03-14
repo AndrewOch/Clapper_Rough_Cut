@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct ScriptView: View {
-    @Environment(\.colorScheme) private var colorScheme
+    
     @EnvironmentObject var document: ClapperRoughCutDocument
 
     var body: some View {
@@ -11,7 +11,7 @@ struct ScriptView: View {
                 Spacer()
                 if let file = document.project.scriptFile {
                     CustomLabel<Header3Style>(text: file.url.deletingPathExtension().lastPathComponent)
-                        .foregroundColor(.contentPrimary(colorScheme))
+                        .foregroundColor(Asset.contentPrimary.swiftUIColor)
                 } else {
                     RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.addScript.capitalized,
                                                                    imageName: SystemImage.plus.rawValue,
@@ -38,7 +38,7 @@ struct ScriptView: View {
         }
         .frame(minWidth: 300, idealWidth: 400, maxWidth: 580,
                minHeight: 500, maxHeight: .infinity)
-        .background(Color.surfaceSecondary(colorScheme))
+        .background(Asset.surfaceSecondary.swiftUIColor)
         .sheet(isPresented: $document.states.isCharactersViewPresented) {
             if let scriptFile = document.project.scriptFile {
                 let characterPhrasesMap: [UUID: [ScriptBlockElement]] = scriptFile.characters.reduce(into: [:]) { result, character in

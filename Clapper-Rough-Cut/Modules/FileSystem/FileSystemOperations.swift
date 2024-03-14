@@ -163,7 +163,6 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         var transcribingFile = file
         transcribingFile.statuses.append(.videoCaptioning)
         project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
-        
         videoCaptionizers.forEach { captionizer in
             captionizer.captionVideo(file: file) { classes in
                 guard let classes = classes,
@@ -192,32 +191,19 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             transcribingFile.statuses.append(.videoCaptioning)
             project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
         })
-//        YoloV8Captionizer().captionVideos(files: filtered) { results in
-//            results.forEach { id, classes in
-//                guard let classes = classes,
-//                    var element = self.project.fileSystem.elementById(id) else { return }
-//                var videoClasses: [ClassificationElement] = element.videoClasses ?? []
-//                videoClasses.append(contentsOf: classes)
-//                element.videoClasses = videoClasses
-//                element.statuses.removeAll(where: { $0 == .videoCaptioning })
-//                element.statuses.append(.videoCaption)
-//                self.project.fileSystem.updateElement(withID: element.id, newValue: element)
-//            }
-//        }
-        
         videoCaptionizers.forEach { captionizer in
-                captionizer.captionVideos(files: filtered) { results in
-                    results.forEach { id, classes in
-                        guard let classes = classes,
-                              var element = self.project.fileSystem.elementById(id) else { return }
-                        var videoClasses: [ClassificationElement] = element.videoClasses ?? []
-                        videoClasses.append(contentsOf: classes)
-                        element.videoClasses = videoClasses
-                        element.statuses.removeAll(where: { $0 == .videoCaptioning })
-                        element.statuses.append(.videoCaption)
-                        self.project.fileSystem.updateElement(withID: element.id, newValue: element)
-                    }
+            captionizer.captionVideos(files: filtered) { results in
+                results.forEach { id, classes in
+                    guard let classes = classes,
+                          var element = self.project.fileSystem.elementById(id) else { return }
+                    var videoClasses: [ClassificationElement] = element.videoClasses ?? []
+                    videoClasses.append(contentsOf: classes)
+                    element.videoClasses = videoClasses
+                    element.statuses.removeAll(where: { $0 == .videoCaptioning })
+                    element.statuses.append(.videoCaption)
+                    self.project.fileSystem.updateElement(withID: element.id, newValue: element)
                 }
+            }
         }
     }
 

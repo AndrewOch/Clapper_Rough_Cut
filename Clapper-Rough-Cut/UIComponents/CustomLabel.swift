@@ -31,19 +31,19 @@ public enum Header3Style: LabelStyle {
 }
 
 public enum BodyLargeStyle: LabelStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.regular.name
     public static var fontSize: CGFloat = 16
     public static var baselineOffset: CGFloat = -4
 }
 
 public enum BodyMediumStyle: LabelStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.regular.name
     public static var fontSize: CGFloat = 14
     public static var baselineOffset: CGFloat = -4
 }
 
 public enum BodySmallStyle: LabelStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.regular.name
     public static var fontSize: CGFloat = 12
     public static var baselineOffset: CGFloat = -4
 }

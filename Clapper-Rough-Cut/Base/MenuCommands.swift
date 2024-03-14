@@ -60,7 +60,6 @@ struct ClapperRoughCutCommands: Commands {
             Button(L10n.addScript.firstWordCapitalized) {
                 document?.addScriptFile()
             }
-            .keyboardShortcut(KeyboardShortcuts.importFiles)
             Button(L10n.characters.firstWordCapitalized) {
                 document?.states.isCharactersViewPresented.toggle()
             }

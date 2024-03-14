@@ -10,7 +10,6 @@
 		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529F29EFB6FB008855C1 /* MFCCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCCService.swift */; };
-		043538C22AAB8B5400775E0D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043538C02AAB8B5400775E0D /* Localizable.strings */; };
 		043538C52AABA51C00775E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C42AABA51C00775E0D /* String.swift */; };
 		043538C92AABBB0D00775E0D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C62AABBB0D00775E0D /* Fonts.swift */; };
 		043538CA2AABBB0D00775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C72AABBB0D00775E0D /* Assets.swift */; };
@@ -120,6 +119,10 @@
 		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
 		049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */ = {isa = PBXBuildFile; productRef = 049A8A592B9B66E800A20092 /* VisualActionKit */; };
+		049A8A5D2BA1929400A20092 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */; };
+		049A8A5E2BA1929400A20092 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */; };
+		049A8A602BA1938300A20092 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */; };
+		049A8A672BA19CA800A20092 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A652BA19CA800A20092 /* Localizable.strings */; };
 		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
@@ -138,7 +141,6 @@
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */; };
-		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -158,7 +160,6 @@
 		040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCCService.swift; sourceTree = "<group>"; };
-		043538C12AAB8B5400775E0D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		043538C42AABA51C00775E0D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		043538C62AABBB0D00775E0D /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		043538C72AABBB0D00775E0D /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -291,6 +292,10 @@
 		0464D9E329E423A70007EF24 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperAudioTranscriber.swift; sourceTree = "<group>"; };
 		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		049A8A662BA19CA800A20092 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049B0CBE2AB34019007E446D /* ScriptCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCharacter.swift; sourceTree = "<group>"; };
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
@@ -308,7 +313,6 @@
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCaptionizer.swift; sourceTree = "<group>"; };
-		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -355,14 +359,6 @@
 				043538C82AABBB0D00775E0D /* Strings.swift */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		043538BF2AAB8B5400775E0D /* ru.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				043538C02AAB8B5400775E0D /* Localizable.strings */,
-			);
-			path = ru.lproj;
 			sourceTree = "<group>";
 		};
 		043538C32AABA50E00775E0D /* Extensions */ = {
@@ -676,10 +672,10 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				049A8A652BA19CA800A20092 /* Localizable.strings */,
 				04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */,
 				04B495342B93233600BE0376 /* location.mlmodel */,
 				04B495262B91F07400BE0376 /* daytime.mlmodel */,
-				043538BF2AAB8B5400775E0D /* ru.lproj */,
 				041FE5D12AAB38910054C861 /* Generated */,
 				04E23A292AA9CAA600F14C3D /* Fonts */,
 				0464D9C529E423A70007EF24 /* Assets.xcassets */,
@@ -836,9 +832,11 @@
 		04E23A292AA9CAA600F14C3D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */,
+				049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */,
+				049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */,
 				043538D02AAC855200775E0D /* Limelight-Regular.ttf */,
 				043538D12AAC855200775E0D /* NunitoSans.ttf */,
-				04E23A372AA9F16800F14C3D /* Overpass.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -947,21 +945,22 @@
 				04483D892B47F53400774D4A /* for-tests-ggml-tiny.en.bin in Resources */,
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
+				049A8A5D2BA1929400A20092 /* NotoSans-SemiBold.ttf in Resources */,
 				04483D722B47F53400774D4A /* colors.gbnf in Resources */,
 				04483D8F2B47F53400774D4A /* for-tests-ggml-large.bin in Resources */,
 				04483D8D2B47F53400774D4A /* for-tests-ggml-base.en.bin in Resources */,
-				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,
+				049A8A602BA1938300A20092 /* NotoSans-Bold.ttf in Resources */,
 				04483D972B47F53400774D4A /* ggml-small.bin in Resources */,
 				04483D9A2B47F53400774D4A /* for-tests-ggml-small.en.bin in Resources */,
 				04483D982B47F53400774D4A /* download-ggml-model.sh in Resources */,
 				04483D832B47F53400774D4A /* bench-all.sh in Resources */,
 				04483D732B47F53400774D4A /* quantize in Resources */,
-				043538C22AAB8B5400775E0D /* Localizable.strings in Resources */,
 				04483D8E2B47F53400774D4A /* download-ggml-model.cmd in Resources */,
 				04483D9D2B47F53400774D4A /* convert-whisper-to-openvino.py in Resources */,
 				04483DA02B47F53400774D4A /* convert-whisper-to-coreml.py in Resources */,
 				04483D8B2B47F53400774D4A /* for-tests-ggml-tiny.bin in Resources */,
 				04483E922B47F53400774D4A /* ggml-cuda.cu in Resources */,
+				049A8A672BA19CA800A20092 /* Localizable.strings in Resources */,
 				04483D862B47F53400774D4A /* quantize-all.sh in Resources */,
 				04483D7D2B47F53400774D4A /* sync-ggml-am.sh in Resources */,
 				04483D952B47F53400774D4A /* convert-h5-to-coreml.py in Resources */,
@@ -973,6 +972,7 @@
 				04483D992B47F53400774D4A /* .gitignore in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
 				04483D932B47F53400774D4A /* README.md in Resources */,
+				049A8A5E2BA1929400A20092 /* NotoSans-Regular.ttf in Resources */,
 				04483D222B47F53400774D4A /* server in Resources */,
 				04483D812B47F53400774D4A /* sha-all.sh in Resources */,
 				043538D32AAC855200775E0D /* NunitoSans.ttf in Resources */,
@@ -1145,10 +1145,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		043538C02AAB8B5400775E0D /* Localizable.strings */ = {
+		049A8A652BA19CA800A20092 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				043538C12AAB8B5400775E0D /* ru */,
+				049A8A662BA19CA800A20092 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1206,6 +1206,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1260,6 +1261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

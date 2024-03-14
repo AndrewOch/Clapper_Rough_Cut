@@ -1,5 +1,6 @@
 import Foundation
 
+// MARK: - Script File
 struct ScriptFile: Identifiable, Codable, Equatable {
     var id = UUID()
     let url: URL
@@ -65,6 +66,30 @@ struct ScriptFile: Identifiable, Codable, Equatable {
         return line.range(of: dialogueRegex, options: .regularExpression) != nil
     }
 
+    static func == (lhs: ScriptFile, rhs: ScriptFile) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    var allPhrases: [ScriptBlockElement] {
+        blocks.filter({ $0.elementsType == .phrase }).flatMap({ $0.elements })
+    }
+
+    public mutating func setBlockType(id: UUID, type: ScriptBlockElementType) {
+        guard let index = blocks.firstIndex(where: { $0.id == id }) else { return }
+        let block = blocks[index]
+        var updatedElements = [ScriptBlockElement]()
+        block.elements.forEach({ element in
+            var elem = element
+            elem.type = type
+            updatedElements.append(elem)
+        })
+        blocks[index].elements = updatedElements
+        blocks[index].elementsType = type
+    }
+}
+
+// MARK: - Characters
+extension ScriptFile {
     public func getCharacterPhrases(character: ScriptCharacter) -> [ScriptBlockElement] {
         var result: [ScriptBlockElement] = []
         for block in blocks {
@@ -77,6 +102,24 @@ struct ScriptFile: Identifiable, Codable, Equatable {
             }
         }
         return result
+    }
+
+    public mutating func updateCharacter(by id: UUID, with newValue: ScriptCharacter) {
+        guard let index = characters.firstIndex(where: { $0.id == id }) else { return }
+        characters[index] = newValue
+
+        for i in 0..<blocks.count {
+            var updatedElements: [ScriptBlockElement] = []
+            for element in blocks[i].elements {
+                if let character = element.character, character.id == id {
+                    let updatedElement = ScriptBlockElement(character: newValue, phraseText: element.phraseText ?? "", text: element.fullText)
+                    updatedElements.append(updatedElement)
+                } else {
+                    updatedElements.append(element)
+                }
+            }
+            blocks[i].elements = updatedElements
+        }
     }
 
     public mutating func removeCharacter(by id: UUID) {
@@ -96,29 +139,9 @@ struct ScriptFile: Identifiable, Codable, Equatable {
         }
         determineScriptBlocks(elements: updatedPhrases)
     }
-
-    static func == (lhs: ScriptFile, rhs: ScriptFile) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    var allPhrases: [ScriptBlockElement] {
-        blocks.filter({ $0.elementsType == .phrase }).flatMap({ $0.elements })
-    }
-    
-    public mutating func setBlockType(id: UUID, type: ScriptBlockElementType) {
-        guard var index = blocks.firstIndex(where: { $0.id == id }) else { return }
-        var block = blocks[index]
-        var updatedElements = [ScriptBlockElement]()
-        block.elements.forEach({ element in
-            var elem = element
-            elem.type = type
-            updatedElements.append(elem)
-        })
-        blocks[index].elements = updatedElements
-        blocks[index].elementsType = type
-    }
 }
 
+// MARK: - Script Block
 struct ScriptBlock: Identifiable, Codable {
     var id = UUID()
     var elementsType: ScriptBlockElementType
@@ -153,6 +176,7 @@ enum ScriptBlockElementType: Codable {
     case none, phrase, action
 }
 
+// MARK: - Script Block Element
 struct ScriptBlockElement: Identifiable, Codable, Hashable {
     var id = UUID()
     var fullText: String
