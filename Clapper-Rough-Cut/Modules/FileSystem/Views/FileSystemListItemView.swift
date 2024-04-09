@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct FileSystemListItemView: View {
-    
     @Binding var item: FileSystemListItem
 
     var body: some View {
@@ -50,6 +49,7 @@ struct FileSystemListItemView: View {
                 }
             }
             .frame(width: 60)
+            .padding(.horizontal)
             HStack {
                 if let duration = element.duration {
                     CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))

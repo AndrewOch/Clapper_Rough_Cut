@@ -24,7 +24,11 @@ struct ScriptFile: Identifiable, Codable, Equatable {
         var result: [ScriptBlockElement] = []
         for line in lines {
             if !ScriptFile.isPhrase(line: line) {
-                result.append(ScriptBlockElement(text: line, type: .action))
+                if line.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                    result.append(ScriptBlockElement(text: line, type: .action))
+                } else {
+                    result.append(ScriptBlockElement(text: line, type: .none))
+                }
                 continue
             }
             var character: ScriptCharacter?
@@ -72,6 +76,10 @@ struct ScriptFile: Identifiable, Codable, Equatable {
 
     var allPhrases: [ScriptBlockElement] {
         blocks.filter({ $0.elementsType == .phrase }).flatMap({ $0.elements })
+    }
+
+    var allActions: [ScriptBlockElement] {
+        blocks.filter({ $0.elementsType == .action }).flatMap({ $0.elements })
     }
 
     public mutating func setBlockType(id: UUID, type: ScriptBlockElementType) {
@@ -153,7 +161,7 @@ struct ScriptBlock: Identifiable, Codable {
         return result
     }
     var elements: [ScriptBlockElement]
-
+    
     init(text: String, lines: [String], type: ScriptBlockElementType) {
         self.elementsType = type
         self.elements = []
@@ -183,10 +191,12 @@ struct ScriptBlockElement: Identifiable, Codable, Hashable {
     var character: ScriptCharacter?
     var phraseText: String?
     var type: ScriptBlockElementType
+    var lastUpdate: Date
 
     init(text: String, type: ScriptBlockElementType) {
         self.fullText = text
         self.type = type
+        self.lastUpdate = Date()
     }
 
     init(character: ScriptCharacter, phraseText: String, text: String) {
@@ -194,13 +204,23 @@ struct ScriptBlockElement: Identifiable, Codable, Hashable {
         self.character = character
         self.phraseText = phraseText
         self.type = .phrase
+        self.lastUpdate = Date()
     }
 
     var dictionaryRepresentation: [String: Any] {
         var dict = [String: Any]()
-        dict["phrase_id"] = id.uuidString
-        dict["text"] = fullText
-        dict["phrase_text"] = phraseText ?? ""
+        switch type {
+        case .none:
+            break
+        case .phrase:
+            dict["phrase_id"] = id.uuidString
+            dict["text"] = fullText
+            dict["phrase_text"] = phraseText ?? ""
+        case .action:
+            dict["action_id"] = id.uuidString
+            dict["text"] = fullText
+            dict["last_update"] = lastUpdate.timeIntervalSince1970
+        }
         return dict
     }
 }

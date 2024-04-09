@@ -10,6 +10,7 @@
 		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529F29EFB6FB008855C1 /* MFCCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCCService.swift */; };
+		043526EF2BC530C7009BCB2C /* SwiftWhisper in Frameworks */ = {isa = PBXBuildFile; productRef = 043526EE2BC530C7009BCB2C /* SwiftWhisper */; };
 		043538C52AABA51C00775E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C42AABA51C00775E0D /* String.swift */; };
 		043538C92AABBB0D00775E0D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C62AABBB0D00775E0D /* Fonts.swift */; };
 		043538CA2AABBB0D00775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C72AABBB0D00775E0D /* Assets.swift */; };
@@ -343,6 +344,7 @@
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
 				049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */,
+				043526EF2BC530C7009BCB2C /* SwiftWhisper in Frameworks */,
 				0449EC262B4953C800407B28 /* SystemConfiguration.framework in Frameworks */,
 				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
@@ -876,6 +878,7 @@
 			packageProductDependencies = (
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
 				049A8A592B9B66E800A20092 /* VisualActionKit */,
+				043526EE2BC530C7009BCB2C /* SwiftWhisper */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -910,6 +913,7 @@
 			packageReferences = (
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
 				049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */,
+				043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -1376,6 +1380,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exPHAT/SwiftWhisper.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndrewOch/VisualActionKit.git";
@@ -1395,6 +1407,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		043526EE2BC530C7009BCB2C /* SwiftWhisper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */;
+			productName = SwiftWhisper;
+		};
 		049A8A592B9B66E800A20092 /* VisualActionKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */;

@@ -69,3 +69,7 @@
 "fileSystemSearchPlaceholder" = "Найдите нужные файлы";
 
 "color" = "цвет";
+
+"analyze" = "проанализировать файлы";
+"analysis" = "анализ";
+"create" = "создать";

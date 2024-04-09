@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ScriptBlockView: View {
-    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var block: ScriptBlock
 
@@ -62,8 +61,8 @@ struct ScriptBlockView: View {
         .padding(.all, 5)
         .background(Asset.surfacePrimary.swiftUIColor)
         .cornerRadius(5)
-        .overlay(RoundedRectangle(cornerRadius: 5)
-            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//        .overlay(RoundedRectangle(cornerRadius: 5)
+//            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
     }
 
     var actionBlock: some View {
@@ -83,8 +82,8 @@ struct ScriptBlockView: View {
         .padding(.all, 5)
         .background(Asset.surfacePrimary.swiftUIColor)
         .cornerRadius(5)
-        .overlay(RoundedRectangle(cornerRadius: 5)
-            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//        .overlay(RoundedRectangle(cornerRadius: 5)
+//            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
     }
 
     var plainTextBlock: some View {

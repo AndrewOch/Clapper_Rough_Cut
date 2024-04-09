@@ -89,9 +89,9 @@ struct FileSystemSelectionDetailView: View {
                     .padding(.vertical, 5)
                     .background(Asset.surfacePrimary.swiftUIColor)
                     .cornerRadius(5)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-                    .padding(.bottom, 10)
+//                    .overlay(RoundedRectangle(cornerRadius: 5)
+//                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                    .padding(.bottom, 5)
                     HStack {
                         VStack {
                             HStack {
@@ -117,8 +117,8 @@ struct FileSystemSelectionDetailView: View {
                         .padding(.vertical, 5)
                         .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//                        .overlay(RoundedRectangle(cornerRadius: 5)
+//                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                         .padding(.bottom, 10)
                         VStack {
                             HStack {
@@ -144,8 +144,8 @@ struct FileSystemSelectionDetailView: View {
                         .padding(.vertical, 5)
                         .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//                        .overlay(RoundedRectangle(cornerRadius: 5)
+//                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                         .padding(.bottom, 10)
                     }
                 }
@@ -212,7 +212,7 @@ struct FileSystemSelectionDetailView: View {
                 CustomLabel<BodyMediumStyle>(text: "\(audioCount) \(L10n.audio)")
                 Spacer()
             }
-            .foregroundColor(.black)
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
             HStack {
                 SystemImage.filmStack.imageView

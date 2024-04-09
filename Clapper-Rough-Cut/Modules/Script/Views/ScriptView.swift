@@ -2,7 +2,6 @@ import Foundation
 import SwiftUI
 
 struct ScriptView: View {
-    
     @EnvironmentObject var document: ClapperRoughCutDocument
 
     var body: some View {

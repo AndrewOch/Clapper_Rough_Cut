@@ -16,6 +16,8 @@ protocol FileSystemOperations {
     func classifyVideo(_ file: FileSystemElement)
     func classifyVideos(_ files: [FileSystemElement]?)
     func deleteSelectedFiles(_ selection: Set<FileSystemElement.ID>)
+    func analizeFile(_ file: FileSystemElement)
+    func analizeFiles(_ files: [FileSystemElement]?)
 }
 
 // MARK: - File System Operations
@@ -56,6 +58,18 @@ extension ClapperRoughCutDocument: FileSystemOperations {
                                             url: url)
             project.fileSystem.addElement(newFile)
         }
+    }
+    
+    public func analizeFile(_ file: FileSystemElement) {
+        transcribeFile(file)
+        classifyAudio(file)
+        classifyVideo(file)
+    }
+    
+    public func analizeFiles(_ files: [FileSystemElement]? = nil) {
+        transcribeFiles(files)
+        classifyAudios(files)
+        classifyVideos(files)
     }
 
     public func transcribeFile(_ file: FileSystemElement) {

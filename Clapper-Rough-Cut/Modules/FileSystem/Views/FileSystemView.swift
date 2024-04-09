@@ -2,13 +2,13 @@ import SwiftUI
 //import KeyboardShortcuts
 
 struct FileSystemView: View {
-    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State private var width: CGFloat = 850
     @State private var fileSystemHeight: CGFloat = 400
     @State private var selection: Set<FileSystemElement.ID> = []
     @State private var draggable: [UUID] = []
     @State private var isTargeted = false
+    @State private var targetedId: UUID?
     @State private var currentPlayerTime: Double = 0
     @State private var searchText: String = .empty
     @FocusState private var searchBarIsFocused: Bool
@@ -81,6 +81,7 @@ struct FileSystemView: View {
                          selection: $selection) { item in
                         let element = item.value
                         FileSystemListItemView(item: .getOnly(item))
+                            .listRowSeparator(.hidden)
                             .onDrag({
                                 onDrag(element)
                             }, preview: {
@@ -93,6 +94,31 @@ struct FileSystemView: View {
                                 isTargeted = hover && element.isContainer
                             }
                     }
+                    .padding(.horizontal)
+                         .contextMenu(menuItems: {
+                        Button(action: {
+                            document.addRawFiles()
+                        }) {
+                            Text(L10n.addFiles.firstWordCapitalized)
+                        }
+                        Menu(L10n.create.capitalized) {
+                            Button(action: {
+                                let title = document.project.fileSystem.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized)
+                                let folder = FileSystemElement(title: title, type: .folder)
+                                document.project.fileSystem.addElement(folder)
+                            }) {
+                                Text(L10n.folder.firstWordCapitalized)
+                                SystemImage.folderFill.imageView
+                            }
+                            Button(action: {
+                                let folder = FileSystemElement(title: L10n.scene.firstWordCapitalized, type: .scene)
+                                document.project.fileSystem.addElement(folder)
+                            }) {
+                                Text(L10n.scene.firstWordCapitalized)
+                                SystemImage.film.imageView
+                            }
+                        }
+                    })
                 }
             }
             .padding(.vertical, 10)
@@ -157,9 +183,7 @@ struct FileSystemView: View {
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
         .background(Asset.surfacePrimary.swiftUIColor)
-        .cornerRadius(5)
-        .overlay(RoundedRectangle(cornerRadius: 5)
-            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+        .cornerRadius(10)
     }
 
     func onDrag(_ element: FileSystemElement) -> NSItemProvider {
@@ -174,6 +198,8 @@ struct FileSystemView: View {
     }
 
     func drop(at element: FileSystemElement, providers: [NSItemProvider]) -> Bool {
+        targetedId = nil
+        draggable.removeAll()
         var target: FileSystemElement? = nil
         if element.isContainer {
             target = element

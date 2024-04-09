@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SelectPhraseMatchView: View {
-    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var selectAction: (ScriptBlockElement) -> Void
     @State var searchText: String = .empty
@@ -26,8 +25,6 @@ struct SelectPhraseMatchView: View {
                         .padding(.all, 5)
                         .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                     }
                     .focusable(false)
                     .buttonStyle(PlainButtonStyle())

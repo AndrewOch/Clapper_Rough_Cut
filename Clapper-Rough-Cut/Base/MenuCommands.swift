@@ -41,15 +41,22 @@ struct ClapperRoughCutCommands: Commands {
             Button(L10n.addFolder.firstWordCapitalized) {
 
             }
-            Divider()
-            Button(L10n.createFolder.firstWordCapitalized) {
-                guard let title = document?.project.fileSystem.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized) else { return }
-                let folder = FileSystemElement(title: title, type: .folder)
-                document?.project.fileSystem.addElement(folder)
-            }
-            Button(L10n.createScene.firstWordCapitalized) {
-                let folder = FileSystemElement(title: L10n.scene.firstWordCapitalized, type: .scene)
-                document?.project.fileSystem.addElement(folder)
+            Menu(L10n.create.capitalized) {
+                Button(action: {
+                    guard let title = document?.project.fileSystem.generateUniqueName(baseName: L10n.newFolder.firstWordCapitalized) else { return }
+                    let folder = FileSystemElement(title: title, type: .folder)
+                    document?.project.fileSystem.addElement(folder)
+                }) {
+                    Text(L10n.folder.firstWordCapitalized)
+                    SystemImage.folderFill.imageView
+                }
+                Button(action: {
+                    let folder = FileSystemElement(title: L10n.scene.firstWordCapitalized, type: .scene)
+                    document?.project.fileSystem.addElement(folder)
+                }) {
+                    Text(L10n.scene.firstWordCapitalized)
+                    SystemImage.film.imageView
+                }
             }
             Divider()
         }
@@ -70,22 +77,32 @@ struct ClapperRoughCutCommands: Commands {
 
     var sortMenu: some Commands {
         CommandMenu(L10n.sort.firstWordCapitalized) {
-            Button(L10n.transcribe.firstWordCapitalized) {
-                document?.transcribeFiles()
+            Button(L10n.analyze.firstWordCapitalized) {
+                document?.analizeFiles()
             }
             .keyboardShortcut(KeyboardShortcuts.transcribeAll)
-            .disabled(!(document?.project.hasUntranscribedFiles ?? false))
-            Button(L10n.classifyVideos.firstWordCapitalized) {
-                document?.classifyVideos()
+            .disabled(!(document?.project.hasUnanalizedFiles ?? false))
+
+            Menu(L10n.analysis.firstWordCapitalized) {
+                Button(L10n.transcribe.firstWordCapitalized) {
+                    document?.transcribeFiles()
+                }
+                .disabled(!(document?.project.hasUntranscribedFiles ?? false))
+                Button(L10n.classifyVideos.firstWordCapitalized) {
+                    document?.classifyVideos()
+                }
+                .disabled(!(document?.project.hasUnclassifiedAudios ?? false))
+                Button(L10n.classifyAudio.firstWordCapitalized) {
+                    document?.classifyAudios()
+                }
+                .disabled(!(document?.project.hasUnclassifiedVideos ?? false))
             }
-            .disabled(!(document?.project.hasUnclassifiedAudios ?? false))
-            Button(L10n.classifyAudio.firstWordCapitalized) {
-                document?.classifyAudios()
-            }
-            .disabled(!(document?.project.hasUnclassifiedVideos ?? false))
+
+            Divider()
             Button(L10n.determineScenes.firstWordCapitalized) {
                 document?.matchScenes()
             }
+            Divider()
             .disabled(!(document?.project.canSortScenes ?? false))
             Button(L10n.determineTakes.firstWordCapitalized) {
                 document?.matchTakes()
