@@ -22,8 +22,8 @@ internal enum L10n {
   internal static let addScript = L10n.tr("Localizable", "addScript", fallback: "добавить сценарий")
   /// анализ
   internal static let analysis = L10n.tr("Localizable", "analysis", fallback: "анализ")
-  /// проанализировать файл
-  internal static let analyze = L10n.tr("Localizable", "analyze", fallback: "проанализировать файл")
+  /// проанализировать файлы
+  internal static let analyze = L10n.tr("Localizable", "analyze", fallback: "проанализировать файлы")
   /// аудио
   internal static let audio = L10n.tr("Localizable", "audio", fallback: "аудио")
   /// Сменить тип
