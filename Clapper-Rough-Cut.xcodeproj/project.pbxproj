@@ -10,7 +10,9 @@
 		040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529F29EFB6FB008855C1 /* MFCCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCCService.swift */; };
-		043538C22AAB8B5400775E0D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043538C02AAB8B5400775E0D /* Localizable.strings */; };
+		043526EF2BC530C7009BCB2C /* SwiftWhisper in Frameworks */ = {isa = PBXBuildFile; productRef = 043526EE2BC530C7009BCB2C /* SwiftWhisper */; };
+		043526F22BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip in Resources */ = {isa = PBXBuildFile; fileRef = 043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */; };
+		043526F32BC536F2009BCB2C /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 043526F12BC536F2009BCB2C /* ggml-small.bin */; };
 		043538C52AABA51C00775E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C42AABA51C00775E0D /* String.swift */; };
 		043538C92AABBB0D00775E0D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C62AABBB0D00775E0D /* Fonts.swift */; };
 		043538CA2AABBB0D00775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C72AABBB0D00775E0D /* Assets.swift */; };
@@ -33,63 +35,6 @@
 		043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */; };
 		043EDDBD29E8B33D00DA5EFF /* ScenesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */; };
 		043EDDC729E953FF00DA5EFF /* TakesMatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */; };
-		04483D222B47F53400774D4A /* server in Resources */ = {isa = PBXBuildFile; fileRef = 04483AC42B47F53300774D4A /* server */; };
-		04483D252B47F53400774D4A /* ggml-quants.c in Sources */ = {isa = PBXBuildFile; fileRef = 04483AC92B47F53300774D4A /* ggml-quants.c */; };
-		04483D272B47F53400774D4A /* ggml-backend.c in Sources */ = {isa = PBXBuildFile; fileRef = 04483ACC2B47F53300774D4A /* ggml-backend.c */; };
-		04483D702B47F53400774D4A /* chess.gbnf in Resources */ = {isa = PBXBuildFile; fileRef = 04483B3E2B47F53300774D4A /* chess.gbnf */; };
-		04483D712B47F53400774D4A /* assistant.gbnf in Resources */ = {isa = PBXBuildFile; fileRef = 04483B3F2B47F53300774D4A /* assistant.gbnf */; };
-		04483D722B47F53400774D4A /* colors.gbnf in Resources */ = {isa = PBXBuildFile; fileRef = 04483B402B47F53300774D4A /* colors.gbnf */; };
-		04483D732B47F53400774D4A /* quantize in Resources */ = {isa = PBXBuildFile; fileRef = 04483B412B47F53300774D4A /* quantize */; };
-		04483D742B47F53400774D4A /* whisper-encoder-impl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04483B462B47F53300774D4A /* whisper-encoder-impl.m */; };
-		04483D752B47F53400774D4A /* whisper-encoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04483B482B47F53300774D4A /* whisper-encoder.mm */; };
-		04483D762B47F53400774D4A /* whisper-decoder-impl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04483B4B2B47F53300774D4A /* whisper-decoder-impl.m */; };
-		04483D772B47F53400774D4A /* BuildTypes.cmake in Resources */ = {isa = PBXBuildFile; fileRef = 04483B4D2B47F53300774D4A /* BuildTypes.cmake */; };
-		04483D782B47F53400774D4A /* DefaultTargetOptions.cmake in Resources */ = {isa = PBXBuildFile; fileRef = 04483B4E2B47F53300774D4A /* DefaultTargetOptions.cmake */; };
-		04483D792B47F53400774D4A /* GitVars.cmake in Resources */ = {isa = PBXBuildFile; fileRef = 04483B4F2B47F53300774D4A /* GitVars.cmake */; };
-		04483D7A2B47F53400774D4A /* bench in Resources */ = {isa = PBXBuildFile; fileRef = 04483B502B47F53300774D4A /* bench */; };
-		04483D7D2B47F53400774D4A /* sync-ggml-am.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B552B47F53300774D4A /* sync-ggml-am.sh */; };
-		04483D7E2B47F53400774D4A /* convert-all.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B562B47F53300774D4A /* convert-all.sh */; };
-		04483D7F2B47F53400774D4A /* bench-wts.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B572B47F53300774D4A /* bench-wts.sh */; };
-		04483D802B47F53400774D4A /* sync-ggml.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B582B47F53300774D4A /* sync-ggml.sh */; };
-		04483D812B47F53400774D4A /* sha-all.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B592B47F53300774D4A /* sha-all.sh */; };
-		04483D822B47F53400774D4A /* bench.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5A2B47F53300774D4A /* bench.py */; };
-		04483D832B47F53400774D4A /* bench-all.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5B2B47F53300774D4A /* bench-all.sh */; };
-		04483D842B47F53400774D4A /* sync-ggml.last in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5C2B47F53300774D4A /* sync-ggml.last */; };
-		04483D852B47F53400774D4A /* sync-llama.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5D2B47F53300774D4A /* sync-llama.sh */; };
-		04483D862B47F53400774D4A /* quantize-all.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5E2B47F53300774D4A /* quantize-all.sh */; };
-		04483D872B47F53400774D4A /* deploy-wasm.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B5F2B47F53300774D4A /* deploy-wasm.sh */; };
-		04483D882B47F53400774D4A /* ggml-alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 04483B602B47F53300774D4A /* ggml-alloc.c */; };
-		04483D892B47F53400774D4A /* for-tests-ggml-tiny.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B632B47F53300774D4A /* for-tests-ggml-tiny.en.bin */; };
-		04483D8A2B47F53400774D4A /* for-tests-ggml-medium.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B642B47F53300774D4A /* for-tests-ggml-medium.bin */; };
-		04483D8B2B47F53400774D4A /* for-tests-ggml-tiny.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B652B47F53300774D4A /* for-tests-ggml-tiny.bin */; };
-		04483D8C2B47F53400774D4A /* convert-h5-to-ggml.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B662B47F53300774D4A /* convert-h5-to-ggml.py */; };
-		04483D8D2B47F53400774D4A /* for-tests-ggml-base.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B672B47F53300774D4A /* for-tests-ggml-base.en.bin */; };
-		04483D8E2B47F53400774D4A /* download-ggml-model.cmd in Resources */ = {isa = PBXBuildFile; fileRef = 04483B682B47F53300774D4A /* download-ggml-model.cmd */; };
-		04483D8F2B47F53400774D4A /* for-tests-ggml-large.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B692B47F53300774D4A /* for-tests-ggml-large.bin */; };
-		04483D902B47F53400774D4A /* generate-coreml-model.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6A2B47F53300774D4A /* generate-coreml-model.sh */; };
-		04483D912B47F53400774D4A /* for-tests-ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6B2B47F53300774D4A /* for-tests-ggml-small.bin */; };
-		04483D922B47F53400774D4A /* convert-pt-to-ggml.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6C2B47F53300774D4A /* convert-pt-to-ggml.py */; };
-		04483D932B47F53400774D4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6D2B47F53300774D4A /* README.md */; };
-		04483D942B47F53400774D4A /* for-tests-ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6E2B47F53300774D4A /* for-tests-ggml-base.bin */; };
-		04483D952B47F53400774D4A /* convert-h5-to-coreml.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B6F2B47F53300774D4A /* convert-h5-to-coreml.py */; };
-		04483D962B47F53400774D4A /* generate-coreml-interface.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B702B47F53300774D4A /* generate-coreml-interface.sh */; };
-		04483D972B47F53400774D4A /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B712B47F53300774D4A /* ggml-small.bin */; };
-		04483D982B47F53400774D4A /* download-ggml-model.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B722B47F53300774D4A /* download-ggml-model.sh */; };
-		04483D992B47F53400774D4A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 04483B732B47F53300774D4A /* .gitignore */; };
-		04483D9A2B47F53400774D4A /* for-tests-ggml-small.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B742B47F53300774D4A /* for-tests-ggml-small.en.bin */; };
-		04483D9B2B47F53400774D4A /* download-coreml-model.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04483B752B47F53300774D4A /* download-coreml-model.sh */; };
-		04483D9C2B47F53400774D4A /* ggml_to_pt.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B762B47F53300774D4A /* ggml_to_pt.py */; };
-		04483D9D2B47F53400774D4A /* convert-whisper-to-openvino.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B772B47F53300774D4A /* convert-whisper-to-openvino.py */; };
-		04483D9E2B47F53400774D4A /* for-tests-ggml-medium.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 04483B782B47F53300774D4A /* for-tests-ggml-medium.en.bin */; };
-		04483D9F2B47F53400774D4A /* openvino-conversion-requirements.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04483B792B47F53300774D4A /* openvino-conversion-requirements.txt */; };
-		04483DA02B47F53400774D4A /* convert-whisper-to-coreml.py in Resources */ = {isa = PBXBuildFile; fileRef = 04483B7A2B47F53300774D4A /* convert-whisper-to-coreml.py */; };
-		04483E8E2B47F53400774D4A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04483D0C2B47F53300774D4A /* LICENSE */; };
-		04483E912B47F53400774D4A /* main in Resources */ = {isa = PBXBuildFile; fileRef = 04483D102B47F53300774D4A /* main */; };
-		04483E922B47F53400774D4A /* ggml-cuda.cu in Resources */ = {isa = PBXBuildFile; fileRef = 04483D122B47F53300774D4A /* ggml-cuda.cu */; };
-		04483E942B47F53400774D4A /* ggml.c in Sources */ = {isa = PBXBuildFile; fileRef = 04483D142B47F53300774D4A /* ggml.c */; };
-		04483E952B47F53400774D4A /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 04483D152B47F53300774D4A /* Makefile */; };
-		04483E962B47F53400774D4A /* ggml-metal.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04483D162B47F53300774D4A /* ggml-metal.metal */; };
-		04483E992B47F53400774D4A /* whisper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04483D192B47F53400774D4A /* whisper.cpp */; };
 		04483EA12B4868D300774D4A /* MenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04483EA02B4868D300774D4A /* MenuCommands.swift */; };
 		04483EA32B486B6100774D4A /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04483EA22B486B6100774D4A /* KeyboardShortcuts.swift */; };
 		0448AD4B29E59CF40086BD89 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448AD4A29E59CF40086BD89 /* FileSystemView.swift */; };
@@ -120,6 +65,10 @@
 		0464DA1129E423A80007EF24 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9E329E423A70007EF24 /* Converter.swift */; };
 		0464DA2129E423A80007EF24 /* WhisperAudioTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */; };
 		049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */ = {isa = PBXBuildFile; productRef = 049A8A592B9B66E800A20092 /* VisualActionKit */; };
+		049A8A5D2BA1929400A20092 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */; };
+		049A8A5E2BA1929400A20092 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */; };
+		049A8A602BA1938300A20092 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */; };
+		049A8A672BA19CA800A20092 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049A8A652BA19CA800A20092 /* Localizable.strings */; };
 		049B0CBF2AB34019007E446D /* ScriptCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CBE2AB34019007E446D /* ScriptCharacter.swift */; };
 		049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */; };
 		04ACBED329E73C5A0093DD76 /* RoughCutProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */; };
@@ -138,7 +87,6 @@
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */; };
-		04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04E23A372AA9F16800F14C3D /* Overpass.ttf */; };
 		04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -158,7 +106,8 @@
 		040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCCService.swift; sourceTree = "<group>"; };
-		043538C12AAB8B5400775E0D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
+		043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "ggml-small-encoder.mlmodelc.zip"; path = "../../../Новая папка/ggml-small-encoder.mlmodelc.zip"; sourceTree = "<group>"; };
+		043526F12BC536F2009BCB2C /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = "ggml-small.bin"; path = "../../../Новая папка/ggml-small.bin"; sourceTree = "<group>"; };
 		043538C42AABA51C00775E0D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		043538C62AABBB0D00775E0D /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		043538C72AABBB0D00775E0D /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -181,82 +130,6 @@
 		043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseMatcher.swift; sourceTree = "<group>"; };
 		043EDDBC29E8B33D00DA5EFF /* ScenesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesMatchOperations.swift; sourceTree = "<group>"; };
 		043EDDC629E953FF00DA5EFF /* TakesMatchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakesMatchOperations.swift; sourceTree = "<group>"; };
-		04483AC02B47F53300774D4A /* ggml-alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-alloc.h"; sourceTree = "<group>"; };
-		04483AC12B47F53300774D4A /* ggml-quants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-quants.h"; sourceTree = "<group>"; };
-		04483AC22B47F53300774D4A /* ggml-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-impl.h"; sourceTree = "<group>"; };
-		04483AC32B47F53300774D4A /* ggml.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ggml.o; sourceTree = "<group>"; };
-		04483AC42B47F53300774D4A /* server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = server; sourceTree = "<group>"; };
-		04483AC52B47F53300774D4A /* whisper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whisper.h; sourceTree = "<group>"; };
-		04483AC62B47F53300774D4A /* ggml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ggml.h; sourceTree = "<group>"; };
-		04483AC92B47F53300774D4A /* ggml-quants.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ggml-quants.c"; sourceTree = "<group>"; };
-		04483ACA2B47F53300774D4A /* ggml-cuda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-cuda.h"; sourceTree = "<group>"; };
-		04483ACB2B47F53300774D4A /* whisper.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = whisper.o; sourceTree = "<group>"; };
-		04483ACC2B47F53300774D4A /* ggml-backend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ggml-backend.c"; sourceTree = "<group>"; };
-		04483B3E2B47F53300774D4A /* chess.gbnf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chess.gbnf; sourceTree = "<group>"; };
-		04483B3F2B47F53300774D4A /* assistant.gbnf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = assistant.gbnf; sourceTree = "<group>"; };
-		04483B402B47F53300774D4A /* colors.gbnf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = colors.gbnf; sourceTree = "<group>"; };
-		04483B412B47F53300774D4A /* quantize */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = quantize; sourceTree = "<group>"; };
-		04483B462B47F53300774D4A /* whisper-encoder-impl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "whisper-encoder-impl.m"; sourceTree = "<group>"; };
-		04483B472B47F53300774D4A /* whisper-encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "whisper-encoder.h"; sourceTree = "<group>"; };
-		04483B482B47F53300774D4A /* whisper-encoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "whisper-encoder.mm"; sourceTree = "<group>"; };
-		04483B492B47F53300774D4A /* whisper-decoder-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "whisper-decoder-impl.h"; sourceTree = "<group>"; };
-		04483B4A2B47F53300774D4A /* whisper-encoder-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "whisper-encoder-impl.h"; sourceTree = "<group>"; };
-		04483B4B2B47F53300774D4A /* whisper-decoder-impl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "whisper-decoder-impl.m"; sourceTree = "<group>"; };
-		04483B4D2B47F53300774D4A /* BuildTypes.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BuildTypes.cmake; sourceTree = "<group>"; };
-		04483B4E2B47F53300774D4A /* DefaultTargetOptions.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultTargetOptions.cmake; sourceTree = "<group>"; };
-		04483B4F2B47F53300774D4A /* GitVars.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GitVars.cmake; sourceTree = "<group>"; };
-		04483B502B47F53300774D4A /* bench */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bench; sourceTree = "<group>"; };
-		04483B512B47F53300774D4A /* ggml-backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-backend.h"; sourceTree = "<group>"; };
-		04483B522B47F53300774D4A /* ggml-quants.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = "ggml-quants.o"; sourceTree = "<group>"; };
-		04483B552B47F53300774D4A /* sync-ggml-am.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sync-ggml-am.sh"; sourceTree = "<group>"; };
-		04483B562B47F53300774D4A /* convert-all.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "convert-all.sh"; sourceTree = "<group>"; };
-		04483B572B47F53300774D4A /* bench-wts.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "bench-wts.sh"; sourceTree = "<group>"; };
-		04483B582B47F53300774D4A /* sync-ggml.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sync-ggml.sh"; sourceTree = "<group>"; };
-		04483B592B47F53300774D4A /* sha-all.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sha-all.sh"; sourceTree = "<group>"; };
-		04483B5A2B47F53300774D4A /* bench.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = bench.py; sourceTree = "<group>"; };
-		04483B5B2B47F53300774D4A /* bench-all.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "bench-all.sh"; sourceTree = "<group>"; };
-		04483B5C2B47F53300774D4A /* sync-ggml.last */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sync-ggml.last"; sourceTree = "<group>"; };
-		04483B5D2B47F53300774D4A /* sync-llama.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sync-llama.sh"; sourceTree = "<group>"; };
-		04483B5E2B47F53300774D4A /* quantize-all.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "quantize-all.sh"; sourceTree = "<group>"; };
-		04483B5F2B47F53300774D4A /* deploy-wasm.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "deploy-wasm.sh"; sourceTree = "<group>"; };
-		04483B602B47F53300774D4A /* ggml-alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ggml-alloc.c"; sourceTree = "<group>"; };
-		04483B612B47F53300774D4A /* ggml-backend-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-backend-impl.h"; sourceTree = "<group>"; };
-		04483B632B47F53300774D4A /* for-tests-ggml-tiny.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-tiny.en.bin"; sourceTree = "<group>"; };
-		04483B642B47F53300774D4A /* for-tests-ggml-medium.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-medium.bin"; sourceTree = "<group>"; };
-		04483B652B47F53300774D4A /* for-tests-ggml-tiny.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-tiny.bin"; sourceTree = "<group>"; };
-		04483B662B47F53300774D4A /* convert-h5-to-ggml.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "convert-h5-to-ggml.py"; sourceTree = "<group>"; };
-		04483B672B47F53300774D4A /* for-tests-ggml-base.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-base.en.bin"; sourceTree = "<group>"; };
-		04483B682B47F53300774D4A /* download-ggml-model.cmd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "download-ggml-model.cmd"; sourceTree = "<group>"; };
-		04483B692B47F53300774D4A /* for-tests-ggml-large.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-large.bin"; sourceTree = "<group>"; };
-		04483B6A2B47F53300774D4A /* generate-coreml-model.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "generate-coreml-model.sh"; sourceTree = "<group>"; };
-		04483B6B2B47F53300774D4A /* for-tests-ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-small.bin"; sourceTree = "<group>"; };
-		04483B6C2B47F53300774D4A /* convert-pt-to-ggml.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "convert-pt-to-ggml.py"; sourceTree = "<group>"; };
-		04483B6D2B47F53300774D4A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		04483B6E2B47F53300774D4A /* for-tests-ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-base.bin"; sourceTree = "<group>"; };
-		04483B6F2B47F53300774D4A /* convert-h5-to-coreml.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "convert-h5-to-coreml.py"; sourceTree = "<group>"; };
-		04483B702B47F53300774D4A /* generate-coreml-interface.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "generate-coreml-interface.sh"; sourceTree = "<group>"; };
-		04483B712B47F53300774D4A /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-small.bin"; sourceTree = "<group>"; };
-		04483B722B47F53300774D4A /* download-ggml-model.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "download-ggml-model.sh"; sourceTree = "<group>"; };
-		04483B732B47F53300774D4A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		04483B742B47F53300774D4A /* for-tests-ggml-small.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-small.en.bin"; sourceTree = "<group>"; };
-		04483B752B47F53300774D4A /* download-coreml-model.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "download-coreml-model.sh"; sourceTree = "<group>"; };
-		04483B762B47F53300774D4A /* ggml_to_pt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ggml_to_pt.py; sourceTree = "<group>"; };
-		04483B772B47F53300774D4A /* convert-whisper-to-openvino.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "convert-whisper-to-openvino.py"; sourceTree = "<group>"; };
-		04483B782B47F53300774D4A /* for-tests-ggml-medium.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "for-tests-ggml-medium.en.bin"; sourceTree = "<group>"; };
-		04483B792B47F53300774D4A /* openvino-conversion-requirements.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "openvino-conversion-requirements.txt"; sourceTree = "<group>"; };
-		04483B7A2B47F53300774D4A /* convert-whisper-to-coreml.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "convert-whisper-to-coreml.py"; sourceTree = "<group>"; };
-		04483D0C2B47F53300774D4A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		04483D0E2B47F53300774D4A /* ggml-metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-metal.h"; sourceTree = "<group>"; };
-		04483D102B47F53300774D4A /* main */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = main; sourceTree = "<group>"; };
-		04483D112B47F53300774D4A /* ggml-opencl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ggml-opencl.h"; sourceTree = "<group>"; };
-		04483D122B47F53300774D4A /* ggml-cuda.cu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ggml-cuda.cu"; sourceTree = "<group>"; };
-		04483D132B47F53300774D4A /* ggml-metal.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = "ggml-metal.o"; sourceTree = "<group>"; };
-		04483D142B47F53300774D4A /* ggml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ggml.c; sourceTree = "<group>"; };
-		04483D152B47F53300774D4A /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		04483D162B47F53300774D4A /* ggml-metal.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "ggml-metal.metal"; sourceTree = "<group>"; };
-		04483D172B47F53400774D4A /* ggml-alloc.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = "ggml-alloc.o"; sourceTree = "<group>"; };
-		04483D182B47F53400774D4A /* ggml-backend.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = "ggml-backend.o"; sourceTree = "<group>"; };
-		04483D192B47F53400774D4A /* whisper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = whisper.cpp; sourceTree = "<group>"; };
 		04483EA02B4868D300774D4A /* MenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommands.swift; sourceTree = "<group>"; };
 		04483EA22B486B6100774D4A /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
 		0448AD4A29E59CF40086BD89 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
@@ -291,6 +164,10 @@
 		0464D9E329E423A70007EF24 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		0464D9F929E423A70007EF24 /* WhisperAudioTranscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperAudioTranscriber.swift; sourceTree = "<group>"; };
 		048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clapper-Rough-Cut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		049A8A662BA19CA800A20092 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049B0CBE2AB34019007E446D /* ScriptCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCharacter.swift; sourceTree = "<group>"; };
 		049B0CC42AB39C27007E446D /* CharactersSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSettingsView.swift; sourceTree = "<group>"; };
 		04ACBED229E73C5A0093DD76 /* RoughCutProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughCutProject.swift; sourceTree = "<group>"; };
@@ -308,7 +185,6 @@
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCaptionizer.swift; sourceTree = "<group>"; };
-		04E23A372AA9F16800F14C3D /* Overpass.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Overpass.ttf; path = "Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf"; sourceTree = SOURCE_ROOT; };
 		04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -339,6 +215,7 @@
 			files = (
 				04BA3A0E29E1F26300047A9B /* AudioKit in Frameworks */,
 				049A8A5A2B9B66E800A20092 /* VisualActionKit in Frameworks */,
+				043526EF2BC530C7009BCB2C /* SwiftWhisper in Frameworks */,
 				0449EC262B4953C800407B28 /* SystemConfiguration.framework in Frameworks */,
 				5D261780BFA60E95AC843D56 /* Pods_Clapper_Rough_Cut.framework in Frameworks */,
 			);
@@ -355,14 +232,6 @@
 				043538C82AABBB0D00775E0D /* Strings.swift */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		043538BF2AAB8B5400775E0D /* ru.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				043538C02AAB8B5400775E0D /* Localizable.strings */,
-			);
-			path = ru.lproj;
 			sourceTree = "<group>";
 		};
 		043538C32AABA50E00775E0D /* Extensions */ = {
@@ -503,129 +372,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		04483ABB2B47F51E00774D4A /* Whisper */ = {
-			isa = PBXGroup;
-			children = (
-				04483B502B47F53300774D4A /* bench */,
-				04483B4C2B47F53300774D4A /* cmake */,
-				04483B452B47F53300774D4A /* coreml */,
-				04483B542B47F53300774D4A /* extra */,
-				04483B602B47F53300774D4A /* ggml-alloc.c */,
-				04483AC02B47F53300774D4A /* ggml-alloc.h */,
-				04483D172B47F53400774D4A /* ggml-alloc.o */,
-				04483B612B47F53300774D4A /* ggml-backend-impl.h */,
-				04483ACC2B47F53300774D4A /* ggml-backend.c */,
-				04483B512B47F53300774D4A /* ggml-backend.h */,
-				04483D182B47F53400774D4A /* ggml-backend.o */,
-				04483D122B47F53300774D4A /* ggml-cuda.cu */,
-				04483ACA2B47F53300774D4A /* ggml-cuda.h */,
-				04483AC22B47F53300774D4A /* ggml-impl.h */,
-				04483D0E2B47F53300774D4A /* ggml-metal.h */,
-				04483D162B47F53300774D4A /* ggml-metal.metal */,
-				04483D132B47F53300774D4A /* ggml-metal.o */,
-				04483D112B47F53300774D4A /* ggml-opencl.h */,
-				04483AC92B47F53300774D4A /* ggml-quants.c */,
-				04483AC12B47F53300774D4A /* ggml-quants.h */,
-				04483B522B47F53300774D4A /* ggml-quants.o */,
-				04483D142B47F53300774D4A /* ggml.c */,
-				04483AC62B47F53300774D4A /* ggml.h */,
-				04483AC32B47F53300774D4A /* ggml.o */,
-				04483B3D2B47F53300774D4A /* grammars */,
-				04483D0C2B47F53300774D4A /* LICENSE */,
-				04483D102B47F53300774D4A /* main */,
-				04483D152B47F53300774D4A /* Makefile */,
-				04483B622B47F53300774D4A /* models */,
-				04483B412B47F53300774D4A /* quantize */,
-				04483AC42B47F53300774D4A /* server */,
-				04483D192B47F53400774D4A /* whisper.cpp */,
-				04483AC52B47F53300774D4A /* whisper.h */,
-				04483ACB2B47F53300774D4A /* whisper.o */,
-			);
-			path = Whisper;
-			sourceTree = "<group>";
-		};
-		04483B3D2B47F53300774D4A /* grammars */ = {
-			isa = PBXGroup;
-			children = (
-				04483B3E2B47F53300774D4A /* chess.gbnf */,
-				04483B3F2B47F53300774D4A /* assistant.gbnf */,
-				04483B402B47F53300774D4A /* colors.gbnf */,
-			);
-			path = grammars;
-			sourceTree = "<group>";
-		};
-		04483B452B47F53300774D4A /* coreml */ = {
-			isa = PBXGroup;
-			children = (
-				04483B462B47F53300774D4A /* whisper-encoder-impl.m */,
-				04483B472B47F53300774D4A /* whisper-encoder.h */,
-				04483B482B47F53300774D4A /* whisper-encoder.mm */,
-				04483B492B47F53300774D4A /* whisper-decoder-impl.h */,
-				04483B4A2B47F53300774D4A /* whisper-encoder-impl.h */,
-				04483B4B2B47F53300774D4A /* whisper-decoder-impl.m */,
-			);
-			path = coreml;
-			sourceTree = "<group>";
-		};
-		04483B4C2B47F53300774D4A /* cmake */ = {
-			isa = PBXGroup;
-			children = (
-				04483B4D2B47F53300774D4A /* BuildTypes.cmake */,
-				04483B4E2B47F53300774D4A /* DefaultTargetOptions.cmake */,
-				04483B4F2B47F53300774D4A /* GitVars.cmake */,
-			);
-			path = cmake;
-			sourceTree = "<group>";
-		};
-		04483B542B47F53300774D4A /* extra */ = {
-			isa = PBXGroup;
-			children = (
-				04483B552B47F53300774D4A /* sync-ggml-am.sh */,
-				04483B562B47F53300774D4A /* convert-all.sh */,
-				04483B572B47F53300774D4A /* bench-wts.sh */,
-				04483B582B47F53300774D4A /* sync-ggml.sh */,
-				04483B592B47F53300774D4A /* sha-all.sh */,
-				04483B5A2B47F53300774D4A /* bench.py */,
-				04483B5B2B47F53300774D4A /* bench-all.sh */,
-				04483B5C2B47F53300774D4A /* sync-ggml.last */,
-				04483B5D2B47F53300774D4A /* sync-llama.sh */,
-				04483B5E2B47F53300774D4A /* quantize-all.sh */,
-				04483B5F2B47F53300774D4A /* deploy-wasm.sh */,
-			);
-			path = extra;
-			sourceTree = "<group>";
-		};
-		04483B622B47F53300774D4A /* models */ = {
-			isa = PBXGroup;
-			children = (
-				04483B632B47F53300774D4A /* for-tests-ggml-tiny.en.bin */,
-				04483B642B47F53300774D4A /* for-tests-ggml-medium.bin */,
-				04483B652B47F53300774D4A /* for-tests-ggml-tiny.bin */,
-				04483B662B47F53300774D4A /* convert-h5-to-ggml.py */,
-				04483B672B47F53300774D4A /* for-tests-ggml-base.en.bin */,
-				04483B682B47F53300774D4A /* download-ggml-model.cmd */,
-				04483B692B47F53300774D4A /* for-tests-ggml-large.bin */,
-				04483B6A2B47F53300774D4A /* generate-coreml-model.sh */,
-				04483B6B2B47F53300774D4A /* for-tests-ggml-small.bin */,
-				04483B6C2B47F53300774D4A /* convert-pt-to-ggml.py */,
-				04483B6D2B47F53300774D4A /* README.md */,
-				04483B6E2B47F53300774D4A /* for-tests-ggml-base.bin */,
-				04483B6F2B47F53300774D4A /* convert-h5-to-coreml.py */,
-				04483B702B47F53300774D4A /* generate-coreml-interface.sh */,
-				04483B712B47F53300774D4A /* ggml-small.bin */,
-				04483B722B47F53300774D4A /* download-ggml-model.sh */,
-				04483B732B47F53300774D4A /* .gitignore */,
-				04483B742B47F53300774D4A /* for-tests-ggml-small.en.bin */,
-				04483B752B47F53300774D4A /* download-coreml-model.sh */,
-				04483B762B47F53300774D4A /* ggml_to_pt.py */,
-				04483B772B47F53300774D4A /* convert-whisper-to-openvino.py */,
-				04483B782B47F53300774D4A /* for-tests-ggml-medium.en.bin */,
-				04483B792B47F53300774D4A /* openvino-conversion-requirements.txt */,
-				04483B7A2B47F53300774D4A /* convert-whisper-to-coreml.py */,
-			);
-			path = models;
-			sourceTree = "<group>";
-		};
 		0448AD4C29E5ACE80086BD89 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,7 +404,6 @@
 		0464D9BF29E423A70007EF24 /* Clapper-Rough-Cut */ = {
 			isa = PBXGroup;
 			children = (
-				04483ABB2B47F51E00774D4A /* Whisper */,
 				0448AD4C29E5ACE80086BD89 /* UIComponents */,
 				0464D9CD29E423A70007EF24 /* Modules */,
 				043538C32AABA50E00775E0D /* Extensions */,
@@ -676,10 +421,12 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */,
+				043526F12BC536F2009BCB2C /* ggml-small.bin */,
+				049A8A652BA19CA800A20092 /* Localizable.strings */,
 				04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */,
 				04B495342B93233600BE0376 /* location.mlmodel */,
 				04B495262B91F07400BE0376 /* daytime.mlmodel */,
-				043538BF2AAB8B5400775E0D /* ru.lproj */,
 				041FE5D12AAB38910054C861 /* Generated */,
 				04E23A292AA9CAA600F14C3D /* Fonts */,
 				0464D9C529E423A70007EF24 /* Assets.xcassets */,
@@ -836,9 +583,11 @@
 		04E23A292AA9CAA600F14C3D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				049A8A5F2BA1938300A20092 /* NotoSans-Bold.ttf */,
+				049A8A5C2BA1929400A20092 /* NotoSans-Regular.ttf */,
+				049A8A5B2BA1929400A20092 /* NotoSans-SemiBold.ttf */,
 				043538D02AAC855200775E0D /* Limelight-Regular.ttf */,
 				043538D12AAC855200775E0D /* NunitoSans.ttf */,
-				04E23A372AA9F16800F14C3D /* Overpass.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -878,6 +627,7 @@
 			packageProductDependencies = (
 				04BA3A0D29E1F26300047A9B /* AudioKit */,
 				049A8A592B9B66E800A20092 /* VisualActionKit */,
+				043526EE2BC530C7009BCB2C /* SwiftWhisper */,
 			);
 			productName = "Clapper Rough-Cut";
 			productReference = 048455A0298D212400772EB0 /* Clapper-Rough-Cut.app */;
@@ -912,6 +662,7 @@
 			packageReferences = (
 				04BA3A0C29E1F26300047A9B /* XCRemoteSwiftPackageReference "AudioKit" */,
 				049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */,
+				043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
 			);
 			productRefGroup = 048455A1298D212400772EB0 /* Products */;
 			projectDirPath = "";
@@ -927,59 +678,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04483D772B47F53400774D4A /* BuildTypes.cmake in Resources */,
-				04483D9E2B47F53400774D4A /* for-tests-ggml-medium.en.bin in Resources */,
-				04483D7A2B47F53400774D4A /* bench in Resources */,
-				04483D8A2B47F53400774D4A /* for-tests-ggml-medium.bin in Resources */,
-				04483D922B47F53400774D4A /* convert-pt-to-ggml.py in Resources */,
-				04483D872B47F53400774D4A /* deploy-wasm.sh in Resources */,
-				04483D822B47F53400774D4A /* bench.py in Resources */,
-				04483D902B47F53400774D4A /* generate-coreml-model.sh in Resources */,
-				04483D852B47F53400774D4A /* sync-llama.sh in Resources */,
-				04483D9C2B47F53400774D4A /* ggml_to_pt.py in Resources */,
-				04483D702B47F53400774D4A /* chess.gbnf in Resources */,
-				04483E8E2B47F53400774D4A /* LICENSE in Resources */,
-				04483E912B47F53400774D4A /* main in Resources */,
-				04483D792B47F53400774D4A /* GitVars.cmake in Resources */,
-				04483D842B47F53400774D4A /* sync-ggml.last in Resources */,
-				04483D782B47F53400774D4A /* DefaultTargetOptions.cmake in Resources */,
-				04483D942B47F53400774D4A /* for-tests-ggml-base.bin in Resources */,
-				04483D892B47F53400774D4A /* for-tests-ggml-tiny.en.bin in Resources */,
 				0464DA0129E423A80007EF24 /* Preview Assets.xcassets in Resources */,
 				043538D22AAC855200775E0D /* Limelight-Regular.ttf in Resources */,
-				04483D722B47F53400774D4A /* colors.gbnf in Resources */,
-				04483D8F2B47F53400774D4A /* for-tests-ggml-large.bin in Resources */,
-				04483D8D2B47F53400774D4A /* for-tests-ggml-base.en.bin in Resources */,
-				04E23A382AA9F16800F14C3D /* Overpass.ttf in Resources */,
-				04483D972B47F53400774D4A /* ggml-small.bin in Resources */,
-				04483D9A2B47F53400774D4A /* for-tests-ggml-small.en.bin in Resources */,
-				04483D982B47F53400774D4A /* download-ggml-model.sh in Resources */,
-				04483D832B47F53400774D4A /* bench-all.sh in Resources */,
-				04483D732B47F53400774D4A /* quantize in Resources */,
-				043538C22AAB8B5400775E0D /* Localizable.strings in Resources */,
-				04483D8E2B47F53400774D4A /* download-ggml-model.cmd in Resources */,
-				04483D9D2B47F53400774D4A /* convert-whisper-to-openvino.py in Resources */,
-				04483DA02B47F53400774D4A /* convert-whisper-to-coreml.py in Resources */,
-				04483D8B2B47F53400774D4A /* for-tests-ggml-tiny.bin in Resources */,
-				04483E922B47F53400774D4A /* ggml-cuda.cu in Resources */,
-				04483D862B47F53400774D4A /* quantize-all.sh in Resources */,
-				04483D7D2B47F53400774D4A /* sync-ggml-am.sh in Resources */,
-				04483D952B47F53400774D4A /* convert-h5-to-coreml.py in Resources */,
-				04483D9F2B47F53400774D4A /* openvino-conversion-requirements.txt in Resources */,
-				04483D7F2B47F53400774D4A /* bench-wts.sh in Resources */,
-				04483D9B2B47F53400774D4A /* download-coreml-model.sh in Resources */,
-				04483D802B47F53400774D4A /* sync-ggml.sh in Resources */,
-				04483D962B47F53400774D4A /* generate-coreml-interface.sh in Resources */,
-				04483D992B47F53400774D4A /* .gitignore in Resources */,
+				049A8A5D2BA1929400A20092 /* NotoSans-SemiBold.ttf in Resources */,
+				049A8A602BA1938300A20092 /* NotoSans-Bold.ttf in Resources */,
+				049A8A672BA19CA800A20092 /* Localizable.strings in Resources */,
+				043526F32BC536F2009BCB2C /* ggml-small.bin in Resources */,
+				043526F22BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
-				04483D932B47F53400774D4A /* README.md in Resources */,
-				04483D222B47F53400774D4A /* server in Resources */,
-				04483D812B47F53400774D4A /* sha-all.sh in Resources */,
+				049A8A5E2BA1929400A20092 /* NotoSans-Regular.ttf in Resources */,
 				043538D32AAC855200775E0D /* NunitoSans.ttf in Resources */,
-				04483D712B47F53400774D4A /* assistant.gbnf in Resources */,
-				04483D912B47F53400774D4A /* for-tests-ggml-small.bin in Resources */,
-				04483D8C2B47F53400774D4A /* convert-h5-to-ggml.py in Resources */,
-				04483D7E2B47F53400774D4A /* convert-all.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,9 +770,7 @@
 				0453BC702AD93F53000909D6 /* DateFormatter.swift in Sources */,
 				0464DA1029E423A80007EF24 /* ContentView.swift in Sources */,
 				04483EA32B486B6100774D4A /* KeyboardShortcuts.swift in Sources */,
-				04483E952B47F53400774D4A /* Makefile in Sources */,
 				0453BC6E2AD93535000909D6 /* MediaPlayerView.swift in Sources */,
-				04483E992B47F53400774D4A /* whisper.cpp in Sources */,
 				0464DA1129E423A80007EF24 /* Converter.swift in Sources */,
 				0464DA0F29E423A80007EF24 /* ClapperRoughCutDocument.swift in Sources */,
 				04F7A9EC29F9275D007E4C64 /* ExportSettings.swift in Sources */,
@@ -1075,16 +781,12 @@
 				04B494D52B84C3AF00BE0376 /* Array.swift in Sources */,
 				04FEB7022B9754EB0075EBBB /* LocationCaptionizer.swift in Sources */,
 				040E07322AF15DAC00554BEA /* CustomSearchTextField.swift in Sources */,
-				04483D752B47F53400774D4A /* whisper-encoder.mm in Sources */,
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
 				04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */,
 				0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */,
-				04483D272B47F53400774D4A /* ggml-backend.c in Sources */,
 				043538ED2AAFAFE700775E0D /* CustomContextMenuView.swift in Sources */,
 				04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */,
-				04483D762B47F53400774D4A /* whisper-decoder-impl.m in Sources */,
 				04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */,
-				04483E962B47F53400774D4A /* ggml-metal.metal in Sources */,
 				043538F32AB073DE00775E0D /* Environment.swift in Sources */,
 				04FEB7002B97548C0075EBBB /* DaytimeCaptionizer.swift in Sources */,
 				043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */,
@@ -1109,10 +811,7 @@
 				0464D9FF29E423A80007EF24 /* ScriptFile.swift in Sources */,
 				04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */,
 				043538CF2AAC75CA00775E0D /* CustomLabel.swift in Sources */,
-				04483D742B47F53400774D4A /* whisper-encoder-impl.m in Sources */,
-				04483E942B47F53400774D4A /* ggml.c in Sources */,
 				043EDDB829E7FE0F00DA5EFF /* PhraseMatcher.swift in Sources */,
-				04483D252B47F53400774D4A /* ggml-quants.c in Sources */,
 				049B0CC52AB39C27007E446D /* CharactersSettingsView.swift in Sources */,
 				044C4C842AD6CA75006E6BBD /* FileSystemListItem.swift in Sources */,
 				043538CA2AABBB0D00775E0D /* Assets.swift in Sources */,
@@ -1124,7 +823,6 @@
 				043538EF2AAFB45000775E0D /* HeaderMenuConfiguration.swift in Sources */,
 				043538EB2AAEFB9700775E0D /* OverlayMenu.swift in Sources */,
 				04B495352B93233600BE0376 /* location.mlmodel in Sources */,
-				04483D882B47F53400774D4A /* ggml-alloc.c in Sources */,
 				043538CB2AABBB0D00775E0D /* Strings.swift in Sources */,
 				0464DA0729E423A80007EF24 /* ScriptView.swift in Sources */,
 				0464DA0E29E423A80007EF24 /* ClapperRoughCutApp.swift in Sources */,
@@ -1145,10 +843,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		043538C02AAB8B5400775E0D /* Localizable.strings */ = {
+		049A8A652BA19CA800A20092 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				043538C12AAB8B5400775E0D /* ru */,
+				049A8A662BA19CA800A20092 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1206,6 +904,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1260,6 +959,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1374,6 +1074,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exPHAT/SwiftWhisper.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndrewOch/VisualActionKit.git";
@@ -1393,6 +1101,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		043526EE2BC530C7009BCB2C /* SwiftWhisper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 043526ED2BC530C7009BCB2C /* XCRemoteSwiftPackageReference "SwiftWhisper" */;
+			productName = SwiftWhisper;
+		};
 		049A8A592B9B66E800A20092 /* VisualActionKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 049A8A582B9B66E800A20092 /* XCRemoteSwiftPackageReference "VisualActionKit" */;

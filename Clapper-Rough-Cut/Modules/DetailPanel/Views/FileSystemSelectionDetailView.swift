@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FileSystemSelectionDetailView: View {
-    @Environment(\.colorScheme) private var colorScheme
+    
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var element: FileSystemElement
     @Binding var currentTime: Double
@@ -26,23 +26,23 @@ struct FileSystemSelectionDetailView: View {
     var baseDetailInfo: some View {
         HStack {
             FileIcon(type: element.type)
-                .foregroundColor(.contentPrimary(colorScheme))
+                .foregroundColor(Asset.contentPrimary.swiftUIColor)
             CustomLabel<BodyMediumStyle>(text: element.title)
                 .lineLimit(1)
-                .foregroundColor(.contentPrimary(colorScheme))
+                .foregroundColor(Asset.contentPrimary.swiftUIColor)
             Spacer()
             if let duration = element.duration {
                 CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
-                    .foregroundColor(.contentPrimary(colorScheme))
+                    .foregroundColor(Asset.contentPrimary.swiftUIColor)
             }
             if let createdAt = element.createdAt {
                 CustomLabel<BodyMediumStyle>(text: Formatter.formatDateShort(date: createdAt))
-                    .foregroundColor(.contentSecondary(colorScheme))
+                    .foregroundColor(Asset.contentSecondary.swiftUIColor)
                     .lineLimit(1)
             }
         }
         .padding(.bottom)
-        .foregroundStyle(Color.contentPrimary(colorScheme))
+        .foregroundStyle(Asset.contentPrimary.swiftUIColor)
     }
 
     var fileDetailInfo: some View {
@@ -66,14 +66,14 @@ struct FileSystemSelectionDetailView: View {
                             CustomPicker(selectedOption: $subtitlesMode, options: SubtitlesMode.images)
                                 .frame(width: 100)
                         }
-                        .foregroundColor(.contentSecondary(colorScheme))
+                        .foregroundColor(Asset.contentSecondary.swiftUIColor)
                         ScrollView {
                             HStack {
                                 if element.statuses.contains(.transcribing) {
                                     ProgressView()
                                         .progressViewStyle(.circular)
                                         .scaleEffect(0.5)
-                                        .foregroundColor(.contentPrimary(colorScheme))
+                                        .foregroundColor(Asset.contentPrimary.swiftUIColor)
                                 }
                                 if subtitlesMode == 0, let subtitles = element.subtitles {
                                     SubtitlesView(subtitles: .getOnly(subtitles))
@@ -87,11 +87,11 @@ struct FileSystemSelectionDetailView: View {
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(Color.surfacePrimary(colorScheme))
+                    .background(Asset.surfacePrimary.swiftUIColor)
                     .cornerRadius(5)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
-                    .padding(.bottom, 10)
+//                    .overlay(RoundedRectangle(cornerRadius: 5)
+//                        .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+                    .padding(.bottom, 5)
                     HStack {
                         VStack {
                             HStack {
@@ -99,14 +99,14 @@ struct FileSystemSelectionDetailView: View {
                                 CustomLabel<BodyMediumStyle>(text: L10n.classifiedAudio.capitalized)
                                 Spacer()
                             }
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                             ScrollView {
                                 HStack {
                                     if element.statuses.contains(.audioClassifying) {
                                         ProgressView()
                                             .progressViewStyle(.circular)
                                             .scaleEffect(0.5)
-                                            .foregroundColor(.contentPrimary(colorScheme))
+                                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                                     }
                                     ClassificationResultView(elements: element.audioClasses ?? [])
                                 }
@@ -115,10 +115,10 @@ struct FileSystemSelectionDetailView: View {
                         }
                         .padding(.horizontal, 5)
                         .padding(.vertical, 5)
-                        .background(Color.surfacePrimary(colorScheme))
+                        .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//                        .overlay(RoundedRectangle(cornerRadius: 5)
+//                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                         .padding(.bottom, 10)
                         VStack {
                             HStack {
@@ -126,14 +126,14 @@ struct FileSystemSelectionDetailView: View {
                                 CustomLabel<BodyMediumStyle>(text: L10n.classifiedVideo)
                                 Spacer()
                             }
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                             ScrollView {
                                 HStack {
                                     if element.statuses.contains(.videoCaptioning) {
                                         ProgressView()
                                             .progressViewStyle(.circular)
                                             .scaleEffect(0.5)
-                                            .foregroundColor(.contentPrimary(colorScheme))
+                                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                                     }
                                     ClassificationResultView(elements: element.videoClasses ?? [])
                                 }
@@ -142,21 +142,22 @@ struct FileSystemSelectionDetailView: View {
                         }
                         .padding(.horizontal, 5)
                         .padding(.vertical, 5)
-                        .background(Color.surfacePrimary(colorScheme))
+                        .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
+//                        .overlay(RoundedRectangle(cornerRadius: 5)
+//                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                         .padding(.bottom, 10)
                     }
                 }
             }
-            if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id) {
+            if let folder = document.project.fileSystem.getContainer(forElementWithID: element.id),
+               document.project.fileSystem.root != folder {
                 VStack {
                     HStack {
                         FileIcon(type: .scene)
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                         CustomBindedLabel<BodyMediumStyle>(text: .getOnly(folder.title))
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                         Spacer()
                         RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.changeScene.capitalized,
                                                                        imageName: SystemImage.film.rawValue,
@@ -204,29 +205,29 @@ struct FileSystemSelectionDetailView: View {
                 CustomLabel<BodyMediumStyle>(text: "\(videoCount) \(L10n.video)")
                 Spacer()
             }
-            .foregroundColor(.contentPrimary(colorScheme))
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
             HStack {
                 FileIcon(type: .audio)
                 CustomLabel<BodyMediumStyle>(text: "\(audioCount) \(L10n.audio)")
                 Spacer()
             }
-            .foregroundColor(.black)
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
             HStack {
                 SystemImage.filmStack.imageView
                 CustomLabel<BodyMediumStyle>(text: "\(takesCount) \(L10n.takes)")
                 Spacer()
             }
-            .foregroundColor(.contentPrimary(colorScheme))
+            .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
             if (element.scriptPhraseId != nil) {
                 VStack {
                     HStack {
                         SystemImage.film.imageView
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                         CustomLabel<BodyMediumStyle>(text: element.title)
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                         Spacer()
                         RoundedButton<RoundedButtonSecondaryMediumStyle>(title: L10n.changeScene.firstWordCapitalized,
                                                                        imageName: SystemImage.film.rawValue,
@@ -255,15 +256,15 @@ struct FileSystemSelectionDetailView: View {
                 HStack {
                     if let url = element.url, let duration = element.duration, let createdAt = element.createdAt {
                         FileIcon(type: element.type)
-                            .foregroundColor(.contentPrimary(colorScheme))
+                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                         CustomLabel<BodyMediumStyle>(text: url.lastPathComponent)
                             .lineLimit(1)
-                            .foregroundColor(.contentPrimary(colorScheme))
+                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                         Spacer()
                         CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
-                            .foregroundColor(.contentPrimary(colorScheme))
+                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                         CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: createdAt))
-                            .foregroundColor(.contentSecondary(colorScheme))
+                            .foregroundColor(Asset.contentSecondary.swiftUIColor)
                     }
                 }.padding(.bottom)
                     .sheet(isPresented: $isModalPresented) {

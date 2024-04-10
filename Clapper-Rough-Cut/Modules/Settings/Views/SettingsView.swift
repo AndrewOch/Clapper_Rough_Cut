@@ -2,7 +2,7 @@ import SwiftUI
 //import KeyboardShortcuts
 
 struct SettingsView: View {
-    @Environment(\.colorScheme) private var colorScheme
+    
     var body: some View {
         HSplitView {
             LazyVStack {
@@ -11,7 +11,7 @@ struct SettingsView: View {
             .frame(minWidth: 200, idealWidth: 200, maxWidth: 250)
             .frame(minHeight: 500, idealHeight: 600, maxHeight: 800)
             .padding()
-            .background(Color.surfaceTertiary(colorScheme))
+            .background(Asset.surfaceTertiary.swiftUIColor)
             LazyVStack {
                 HStack {
                     Spacer()
@@ -26,7 +26,7 @@ struct SettingsView: View {
             .frame(minWidth: 300, idealWidth: 600, maxWidth: 800)
             .frame(minHeight: 500, idealHeight: 600, maxHeight: 800)
             .padding()
-            .background(Color.surfaceSecondary(colorScheme))
+            .background(Asset.surfaceSecondary.swiftUIColor)
         }
     }
 }

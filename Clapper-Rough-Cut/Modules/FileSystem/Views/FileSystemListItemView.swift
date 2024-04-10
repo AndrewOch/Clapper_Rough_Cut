@@ -1,20 +1,19 @@
 import SwiftUI
 
 struct FileSystemListItemView: View {
-    @Environment(\.colorScheme) private var colorScheme
     @Binding var item: FileSystemListItem
 
     var body: some View {
         let element = item.value
         let highlights = item.highlights
         HStack(alignment: .center) {
-            HStack(spacing: 5) {
+            HStack(spacing: 10) {
                 FileIcon(type: element.type)
                     .frame(width: 10, height: 10)
                     .scaledToFit()
-                    .foregroundStyle(highlights.contains(.type) ? Color.yellow : Color.contentSecondary(colorScheme))
+                    .foregroundStyle(highlights.contains(.type) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
                 CustomLabel<BodyMediumStyle>(text: element.title)
-                    .foregroundStyle(highlights.contains(.title) ? Color.yellow : Color.contentSecondary(colorScheme))
+                    .foregroundStyle(highlights.contains(.title) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
             }
             Spacer()
             HStack {
@@ -26,7 +25,7 @@ struct FileSystemListItemView: View {
                 }
                 if element.statuses.contains(.transcription) {
                     TranscribedIcon()
-                        .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Color.contentSecondary(colorScheme))
+                        .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
                 }
                 if element.statuses.contains(.audioClassifying) {
                     ProgressView()
@@ -36,7 +35,7 @@ struct FileSystemListItemView: View {
                 }
                 if element.statuses.contains(.audioClassification) {
                     AudioClassificationIcon()
-                        .foregroundStyle(highlights.contains(.audioClasses) ? Color.yellow : Color.contentSecondary(colorScheme))
+                        .foregroundStyle(highlights.contains(.audioClasses) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
                 }
                 if element.statuses.contains(.videoCaptioning) {
                     ProgressView()
@@ -46,10 +45,11 @@ struct FileSystemListItemView: View {
                 }
                 if element.statuses.contains(.videoCaption) {
                     VideoClassificationIcon()
-                        .foregroundStyle(highlights.contains(.videoClasses) ? Color.yellow : Color.contentSecondary(colorScheme))
+                        .foregroundStyle(highlights.contains(.videoClasses) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
                 }
             }
             .frame(width: 60)
+            .padding(.horizontal)
             HStack {
                 if let duration = element.duration {
                     CustomLabel<BodyMediumStyle>(text: Formatter.formatDuration(duration: duration))
@@ -63,7 +63,7 @@ struct FileSystemListItemView: View {
             .frame(width: 60)
             HStack {
                 if let date = element.createdAt {
-                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDate(date: date))
+                    CustomLabel<BodyMediumStyle>(text: Formatter.formatDateShort(date: date))
                         .lineLimit(1)
                 } else {
                     CustomLabel<BodyMediumStyle>(text: .nilParameter)
@@ -71,7 +71,7 @@ struct FileSystemListItemView: View {
                 }
                 Spacer()
             }
-            .frame(width: 200)
+            .frame(width: 130)
         }
         .padding(.horizontal)
     }

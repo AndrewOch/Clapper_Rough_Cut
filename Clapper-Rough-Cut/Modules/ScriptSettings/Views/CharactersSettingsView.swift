@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct CharactersSettingsView: View {
-    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var characterPhrases: [UUID: [ScriptBlockElement]]
     @State var closeAction: () -> Void
@@ -41,7 +40,7 @@ struct CharactersSettingsView: View {
             if let scriptFile = document.project.scriptFile {
                 HStack {
                     CustomLabel<BodyMediumStyle>(text: "\(L10n.charactersInScript.firstWordCapitalized): \(scriptFile.characters.count)")
-                        .foregroundColor(.contentPrimary(colorScheme))
+                        .foregroundColor(Asset.contentPrimary.swiftUIColor)
                     Spacer()
                 }.padding(.horizontal, 10)
                 VStack {
@@ -57,15 +56,15 @@ struct CharactersSettingsView: View {
                                     let selected = selectedCharacters.contains(character.id)
                                     HStack {
                                         CustomLabel<BodyLargeStyle>(text: character.name)
-                                            .foregroundColor(selected ? Asset.white.swiftUIColor : .contentPrimary(colorScheme))
+                                            .foregroundColor(character.color)
                                             .lineLimit(1)
                                         Spacer()
                                         CustomLabel<BodyMediumStyle>(text: "\(L10n.phrasesCount.capitalized): \(characterPhrases[character.id]?.count ?? 0)")
-                                            .foregroundColor(selected ? Asset.semiWhite.swiftUIColor : .contentTertiary(colorScheme))
+                                            .foregroundColor(selected ? Asset.semiWhite.swiftUIColor : Asset.contentTertiary.swiftUIColor)
                                     }
                                     .padding(.vertical, 5)
                                     .padding(.horizontal, 10)
-                                    .background(selected ? Asset.accentPrimary.swiftUIColor : .surfacePrimary(colorScheme))
+                                    .background(selected ? Asset.accentPrimary.swiftUIColor : Asset.surfacePrimary.swiftUIColor)
                                     .cornerRadius(5)
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -74,7 +73,7 @@ struct CharactersSettingsView: View {
                         }
                         .padding(.all, 10)
                     }
-                    .background(Color.surfaceTertiary(colorScheme))
+                    .background(Asset.surfaceTertiary.swiftUIColor)
                     .cornerRadius(10)
                 }
             }
@@ -87,10 +86,17 @@ struct CharactersSettingsView: View {
                 if characters.count == 1 {
                     if let character = characters.first {
                         CustomLabel<Header3Style>(text: character.name)
-                            .foregroundColor(.contentPrimary(colorScheme))
+                            .foregroundColor(character.color)
                             .lineLimit(1)
-                        CustomLabel<BodyLargeStyle>(text: character.description)
-                            .foregroundColor(.contentPrimary(colorScheme))
+                        ColorPicker(L10n.color.firstWordCapitalized, selection: Binding<Color>(
+                            get: { character.color },
+                            set: { newColor in
+                                var character = character
+                                character.color = newColor
+                                document.project.scriptFile?.updateCharacter(by: character.id, with: character)
+                            }
+                        ))
+                        .padding()
                         Spacer()
                         RoundedButton<RoundedButtonAlertMediumStyle>(title: L10n.delete.firstWordCapitalized, enabled: .constant(true)) {
                             document.project.scriptFile?.removeCharacter(by: character.id)
@@ -99,7 +105,7 @@ struct CharactersSettingsView: View {
                     }
                 } else if characters.count > 1 {
                     CustomLabel<Header3Style>(text: "\(L10n.charactersSelected.firstWordCapitalized): \(characters.count)")
-                        .foregroundColor(.contentPrimary(colorScheme))
+                        .foregroundColor(Asset.contentPrimary.swiftUIColor)
                         .lineLimit(1)
                     Spacer()
                     RoundedButton<RoundedButtonAlertMediumStyle>(title: L10n.delete.firstWordCapitalized, enabled: .constant(true)) {

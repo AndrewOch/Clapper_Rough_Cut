@@ -2,8 +2,7 @@ import SwiftUI
 
 public protocol ImageButtonStyle {
     static var cornerRadius: CGFloat { get }
-    static var foregroundColorDark: SwiftUI.Color { get }
-    static var foregroundColorLight: SwiftUI.Color { get }
+    static var foregroundColor: SwiftUI.Color { get }
     static var backgroundColor: SwiftUI.Color { get }
     static var borderWidth: CGFloat { get }
     static var paddingHorizontal: CGFloat { get }
@@ -15,8 +14,7 @@ public protocol ImageButtonStyle {
 
 public enum ImageButtonLogoStyle: ImageButtonStyle {
     public static var cornerRadius: CGFloat = 0
-    public static var foregroundColorDark: SwiftUI.Color = Asset.white.swiftUIColor
-    public static var foregroundColorLight: SwiftUI.Color = Asset.white.swiftUIColor
+    public static var foregroundColor: SwiftUI.Color = Asset.contentPrimary.swiftUIColor
     public static var backgroundColor: SwiftUI.Color = .clear
     public static var borderWidth: CGFloat = 0
     public static var paddingHorizontal: CGFloat = 0
@@ -28,8 +26,7 @@ public enum ImageButtonLogoStyle: ImageButtonStyle {
 
 public enum ImageButtonSystemStyle: ImageButtonStyle {
     public static var cornerRadius: CGFloat = 0
-    public static var foregroundColorDark: SwiftUI.Color = Asset.white.swiftUIColor
-    public static var foregroundColorLight: SwiftUI.Color = Asset.dark.swiftUIColor
+    public static var foregroundColor: SwiftUI.Color = Asset.contentPrimary.swiftUIColor
     public static var backgroundColor: SwiftUI.Color = .clear
     public static var borderWidth: CGFloat = 0
     public static var paddingHorizontal: CGFloat = 0
@@ -40,7 +37,6 @@ public enum ImageButtonSystemStyle: ImageButtonStyle {
 }
 
 struct ImageButton<Style: ImageButtonStyle>: View {
-    @Environment(\.colorScheme) private var colorScheme
     var image: Image
     @Binding var enabled: Bool
     var action: () -> Void
@@ -51,7 +47,7 @@ struct ImageButton<Style: ImageButtonStyle>: View {
                 image.resizable()
                     .scaledToFit()
                     .frame(width: Style.imageSize, height: Style.imageSize)
-                    .foregroundColor((colorScheme == .dark) ? Style.foregroundColorDark : Style.foregroundColorLight)
+                    .foregroundColor(Style.foregroundColor)
             }
             .padding(.horizontal, Style.paddingHorizontal)
             .padding(.top, Style.paddingTop)

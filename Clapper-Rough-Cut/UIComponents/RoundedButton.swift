@@ -19,7 +19,7 @@ public protocol RoundedButtonStyle {
 }
 
 public enum RoundedButtonPrimaryMediumStyle: RoundedButtonStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.semiBold.name
     public static var fontSize: CGFloat = 12
     public static var cornerRadius: CGFloat = 10
     public static var foregroundColor: SwiftUI.Color = Asset.white.swiftUIColor
@@ -37,18 +37,18 @@ public enum RoundedButtonPrimaryMediumStyle: RoundedButtonStyle {
 }
 
 public enum RoundedButtonSecondaryMediumStyle: RoundedButtonStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.semiBold.name
     public static var fontSize: CGFloat = 12
     public static var cornerRadius: CGFloat = 10
     public static var foregroundColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor
     public static var selectedColor: SwiftUI.Color = Asset.accentDark.swiftUIColor
-    public static var backgroundColor: SwiftUI.Color = .clear
+    public static var backgroundColor: SwiftUI.Color = Asset.surfacePrimary.swiftUIColor
     public static var elementsSpacing: CGFloat = 8
     public static var borderWidth: CGFloat = 1
     public static var paddingHorizontal: CGFloat = 16
     public static var paddingVertical: CGFloat = 10
     public static var imageSize: CGFloat = 12
-    public static var borderColor: SwiftUI.Color = Asset.accentPrimary.swiftUIColor
+    public static var borderColor: SwiftUI.Color = .clear
     public static var hoveredForegroundColor: Color = Asset.white.swiftUIColor
     public static var hoveredBackgroundColor: Color = Asset.accentPrimary.swiftUIColor
     public static var baselineOffset: CGFloat = -2
@@ -73,18 +73,18 @@ public enum RoundedButtonHeaderMenuStyle: RoundedButtonStyle {
 }
 
 public enum RoundedButtonAlertMediumStyle: RoundedButtonStyle {
-    public static var fontName: String = FontFamily.Overpass.regular.name
+    public static var fontName: String = FontFamily.NunitoSans.semiBold.name
     public static var fontSize: CGFloat = 12
     public static var cornerRadius: CGFloat = 10
     public static var foregroundColor: SwiftUI.Color = Asset.systemRed.swiftUIColor
     public static var selectedColor: SwiftUI.Color = Asset.systemRed.swiftUIColor
-    public static var backgroundColor: SwiftUI.Color = .clear
+    public static var backgroundColor: SwiftUI.Color = Asset.surfacePrimary.swiftUIColor
     public static var elementsSpacing: CGFloat = 8
     public static var borderWidth: CGFloat = 1
     public static var paddingHorizontal: CGFloat = 16
     public static var paddingVertical: CGFloat = 10
     public static var imageSize: CGFloat = 12
-    public static var borderColor: SwiftUI.Color = Asset.systemRed.swiftUIColor
+    public static var borderColor: SwiftUI.Color = .clear
     public static var hoveredForegroundColor: Color = Asset.white.swiftUIColor
     public static var hoveredBackgroundColor: Color = Asset.systemRed.swiftUIColor
     public static var baselineOffset: CGFloat = -2
@@ -120,6 +120,7 @@ struct RoundedButton<Style: RoundedButtonStyle>: View {
             .cornerRadius(Style.cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: Style.cornerRadius)
                 .stroke(Style.borderColor, lineWidth: Style.borderWidth))
+            .animation(.easeInOut(duration: 0.2), value: hovered)
         }
         .onHover(perform: { hover in
             hovered = hover

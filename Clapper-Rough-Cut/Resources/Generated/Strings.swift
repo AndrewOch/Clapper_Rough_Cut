@@ -20,6 +20,10 @@ internal enum L10n {
   internal static let addFolder = L10n.tr("Localizable", "addFolder", fallback: "добавить папки")
   /// добавить сценарий
   internal static let addScript = L10n.tr("Localizable", "addScript", fallback: "добавить сценарий")
+  /// анализ
+  internal static let analysis = L10n.tr("Localizable", "analysis", fallback: "анализ")
+  /// проанализировать файлы
+  internal static let analyze = L10n.tr("Localizable", "analyze", fallback: "проанализировать файлы")
   /// аудио
   internal static let audio = L10n.tr("Localizable", "audio", fallback: "аудио")
   /// Сменить тип
@@ -44,6 +48,10 @@ internal enum L10n {
   internal static let classifyAudio = L10n.tr("Localizable", "classifyAudio", fallback: "Распознать звук")
   /// Распознать видео
   internal static let classifyVideos = L10n.tr("Localizable", "classifyVideos", fallback: "Распознать видео")
+  /// цвет
+  internal static let color = L10n.tr("Localizable", "color", fallback: "цвет")
+  /// создать
+  internal static let create = L10n.tr("Localizable", "create", fallback: "создать")
   /// дата создания
   internal static let createdAt = L10n.tr("Localizable", "createdAt", fallback: "дата создания")
   /// создать папку

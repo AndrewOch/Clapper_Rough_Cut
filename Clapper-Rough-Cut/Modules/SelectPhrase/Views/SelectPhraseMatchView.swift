@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SelectPhraseMatchView: View {
-    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var document: ClapperRoughCutDocument
     @State var selectAction: (ScriptBlockElement) -> Void
     @State var searchText: String = .empty
@@ -19,15 +18,13 @@ struct SelectPhraseMatchView: View {
                         HStack {
                             if let character = phrase.character, let phraseText = phrase.phraseText {
                                 PhraseLabel(characterName: character.name,
-                                            text: phraseText)
+                                            text: phraseText, characterColor: character.color)
                             }
                             Spacer()
                         }
                         .padding(.all, 5)
-                        .background(Color.surfacePrimary(colorScheme))
+                        .background(Asset.surfacePrimary.swiftUIColor)
                         .cornerRadius(5)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Asset.accentLight.swiftUIColor, lineWidth: 1))
                     }
                     .focusable(false)
                     .buttonStyle(PlainButtonStyle())
@@ -35,7 +32,7 @@ struct SelectPhraseMatchView: View {
             }
             .padding(.all, 10)
         }
-        .background(Color.surfaceTertiary(colorScheme))
+        .background(Asset.surfaceTertiary.swiftUIColor)
         .cornerRadius(10)
     }
 

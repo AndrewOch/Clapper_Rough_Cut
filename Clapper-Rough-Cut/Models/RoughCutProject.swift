@@ -22,7 +22,8 @@ struct RoughCutProject: Identifiable, Codable {
             "project_id": id.uuidString,
             "script_id": scriptFile.id.uuidString,
             "file_path": scriptFile.url.absoluteString,
-            "phrases": scriptFile.allPhrases.map({ $0.dictionaryRepresentation })
+            "phrases": scriptFile.allPhrases.map({ $0.dictionaryRepresentation }),
+            "actions": scriptFile.allActions.map({ $0.dictionaryRepresentation })
         ] as [String : Any]
 
         guard let requestData = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
@@ -57,6 +58,9 @@ struct RoughCutProject: Identifiable, Codable {
 
 // MARK: - Project states
 extension RoughCutProject {
+    var hasUnanalizedFiles: Bool {
+        return hasUntranscribedFiles || hasUnclassifiedAudios || hasUnclassifiedVideos
+    }
     var hasUntranscribedFiles: Bool {
         return fileSystem.allElements(where: { $0.isFile && $0.subtitles == nil }).isNotEmpty
     }

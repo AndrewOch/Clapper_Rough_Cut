@@ -20,6 +20,12 @@ internal enum FontFamily {
     internal static let regular = FontConvertible(name: "Limelight-Regular", family: "Limelight", path: "Limelight-Regular.ttf")
     internal static let all: [FontConvertible] = [regular]
   }
+  internal enum NotoSans {
+    internal static let bold = FontConvertible(name: "NotoSans-Bold", family: "Noto Sans", path: "NotoSans-Bold.ttf")
+    internal static let regular = FontConvertible(name: "NotoSans-Regular", family: "Noto Sans", path: "NotoSans-Regular.ttf")
+    internal static let semiBold = FontConvertible(name: "NotoSans-SemiBold", family: "Noto Sans", path: "NotoSans-SemiBold.ttf")
+    internal static let all: [FontConvertible] = [bold, regular, semiBold]
+  }
   internal enum NunitoSans {
     internal static let _12ptExtraLight = FontConvertible(name: "NunitoSans-12ptExtraLight", family: "Nunito Sans", path: "NunitoSans.ttf")
     internal static let black = FontConvertible(name: "NunitoSans-12ptExtraLight_Black", family: "Nunito Sans", path: "NunitoSans.ttf")
@@ -31,19 +37,7 @@ internal enum FontFamily {
     internal static let semiBold = FontConvertible(name: "NunitoSans-12ptExtraLight_SemiBold", family: "Nunito Sans", path: "NunitoSans.ttf")
     internal static let all: [FontConvertible] = [_12ptExtraLight, black, bold, extraBold, light, medium, regular, semiBold]
   }
-  internal enum Overpass {
-    internal static let regular = FontConvertible(name: "Overpass-Regular", family: "Overpass", path: "Overpass.ttf")
-    internal static let black = FontConvertible(name: "OverpassRoman-Black", family: "Overpass", path: "Overpass.ttf")
-    internal static let bold = FontConvertible(name: "OverpassRoman-Bold", family: "Overpass", path: "Overpass.ttf")
-    internal static let extraBold = FontConvertible(name: "OverpassRoman-ExtraBold", family: "Overpass", path: "Overpass.ttf")
-    internal static let extraLight = FontConvertible(name: "OverpassRoman-ExtraLight", family: "Overpass", path: "Overpass.ttf")
-    internal static let light = FontConvertible(name: "OverpassRoman-Light", family: "Overpass", path: "Overpass.ttf")
-    internal static let medium = FontConvertible(name: "OverpassRoman-Medium", family: "Overpass", path: "Overpass.ttf")
-    internal static let semiBold = FontConvertible(name: "OverpassRoman-SemiBold", family: "Overpass", path: "Overpass.ttf")
-    internal static let thin = FontConvertible(name: "OverpassRoman-Thin", family: "Overpass", path: "Overpass.ttf")
-    internal static let all: [FontConvertible] = [regular, black, bold, extraBold, extraLight, light, medium, semiBold, thin]
-  }
-  internal static let allCustomFonts: [FontConvertible] = [Limelight.all, NunitoSans.all, Overpass.all].flatMap { $0 }
+  internal static let allCustomFonts: [FontConvertible] = [Limelight.all, NotoSans.all, NunitoSans.all].flatMap { $0 }
   internal static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
