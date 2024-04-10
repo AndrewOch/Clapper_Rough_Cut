@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>localhost</key>
+        <dict>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -27,8 +41,9 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Jost.ttf</string>
-		<string>Clapper-Rough-Cut/Resources/Fonts/Overpass.ttf</string>
+		<string>Overpass.ttf</string>
+		<string>Limelight-Regular.ttf</string>
+		<string>NunitoSans.ttf</string>
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>

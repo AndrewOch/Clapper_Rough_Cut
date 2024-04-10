@@ -6,7 +6,7 @@ xcassets:
     output: Assets.swift
 strings:
     inputs:
-        - ../Clapper-Rough-Cut/Resources/Localizable.strings
+        - ../Clapper-Rough-Cut/Resources/ru.lproj/Localizable.strings
     outputs:
       templateName: structured-swift5
       output: Strings.swift

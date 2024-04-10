@@ -1,4 +1,5 @@
 {
+  "originHash" : "dfdacf7845a7d26cb9eed3d0d7bd7ccd0bb74411a4983478e5c5aa81c507e660",
   "pins" : [
     {
       "identity" : "audiokit",
@@ -10,14 +11,23 @@
       }
     },
     {
-      "identity" : "pythonkit",
+      "identity" : "swiftwhisper",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pvieito/PythonKit",
+      "location" : "https://github.com/exPHAT/SwiftWhisper.git",
       "state" : {
         "branch" : "master",
-        "revision" : "060e1c8b0d14e4d241b3623fdbe83d0e3c81a993"
+        "revision" : "c340197966ebd264f3135d3955874b40f8ed58bc"
+      }
+    },
+    {
+      "identity" : "visualactionkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AndrewOch/VisualActionKit.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e4ba91c7e5cec99a83adedbd2e4e4e570f0a2b09"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

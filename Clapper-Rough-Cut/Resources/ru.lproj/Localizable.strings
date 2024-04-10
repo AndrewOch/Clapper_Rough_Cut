@@ -1,0 +1,75 @@
+"addFiles" = "добавить файлы";
+"transcribe" = "расшифровать";
+"determineScenes" = "определить сцены";
+"determineScene" = "определить сцену";
+"determineTakes" = "определить дубли";
+"export" = "экспорт";
+"addScript" = "добавить сценарий";
+"unsorted" = "несортированное";
+"projectName" = "название проекта";
+"projectNamePlaceholder" = "введите название проекта";
+"exportPath" = "путь сохранения";
+"exportPathPlaceholder" = "введите путь сохранения";
+"select" = "выбрать";
+"video" = "видео";
+"audio" = "аудио";
+"takes" = "дубли";
+"transcribedSpeech" = "распознанная речь";
+"changeScene" = "заменить сцену";
+"chooseScene" = "выбрать сцену";
+"sceneSelection" = "выбор сцены";
+"unwrapFiles" = "отделить файлы";
+"choose" = "выбрать";
+"project" = "проект";
+"search" = "поиск";
+"searchPhrase" = "поиск фразы";
+"searchPhrasePlaceholder" = "введите текст фразы";
+"sort" = "сортировка";
+"script" = "сценарий";
+"settings" = "настройки";
+"addFolder" = "добавить папки";
+"characters" = "персонажи";
+"phrasesCount" = "фразы";
+"charactersInScript" = "персонажей в сценарии";
+"delete" = "удалить";
+"charactersSelected" = "выбрано персонажей";
+"fileTitle" = "название";
+"duration" = "длительность";
+"createdAt" = "дата создания";
+"statuses" = "статусы";
+"selected" = "выбрано";
+"folders" = "папки";
+"scenes" = "сцены";
+"editSection" = "правка";
+"file" = "файл";
+"createFolder" = "создать папку";
+"createScene" = "создать сцену";
+"createTake" = "создать дубль";
+"folder" = "папка";
+"scene" = "сцена";
+"take" = "дубль";
+"newFolder" = "новая папка";
+"classifyVideos" = "Распознать видео";
+"classifyAudio" = "Распознать звук";
+"classifiedAudio" = "Распознанный звук";
+"classifiedVideo" = "Объекты на Видео";
+"actions" = "Действия";
+
+// Settings - Shortcuts
+"shortcut_openCharactersMenu" = "Открыть меню персонажей:";
+"shortcut_export" = "Экспорт:";
+"shortcut_transcribeAll" = "Расшифровать все:";
+"change_type" = "Сменить тип";
+"plain_text" = "Простой текст";
+"action" = "Действие";
+"dialogue" = "Диалог";
+"phrase" = "Фраза";
+
+// Search
+"fileSystemSearchPlaceholder" = "Найдите нужные файлы";
+
+"color" = "цвет";
+
+"analyze" = "проанализировать файлы";
+"analysis" = "анализ";
+"create" = "создать";

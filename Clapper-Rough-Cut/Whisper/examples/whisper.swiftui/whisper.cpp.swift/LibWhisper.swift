@@ -1,4 +1,5 @@
 import Foundation
+import whisper
 
 enum WhisperError: Error {
     case couldNotInitializeContext
@@ -23,16 +24,16 @@ actor WhisperContext {
         var params = whisper_full_default_params(WHISPER_SAMPLING_GREEDY)
         "en".withCString { en in
             // Adapted from whisper.objc
-            params.print_realtime = true
-            params.print_progress = false
+            params.print_realtime   = true
+            params.print_progress   = false
             params.print_timestamps = true
-            params.print_special = false
-            params.translate = false
-            params.language = en
-            params.n_threads = Int32(maxThreads)
-            params.offset_ms = 0
-            params.no_context = true
-            params.single_segment = false
+            params.print_special    = false
+            params.translate        = false
+            params.language         = en
+            params.n_threads        = Int32(maxThreads)
+            params.offset_ms        = 0
+            params.no_context       = true
+            params.single_segment   = false
 
             whisper_reset_timings(context)
             print("About to run whisper_full")
@@ -55,7 +56,12 @@ actor WhisperContext {
     }
 
     static func createContext(path: String) throws -> WhisperContext {
-        let context = whisper_init_from_file(path)
+        var params = whisper_context_default_params()
+#if targetEnvironment(simulator)
+        params.use_gpu = false
+        print("Running on the simulator, using CPU")
+#endif
+        let context = whisper_init_from_file_with_params(path, params)
         if let context {
             return WhisperContext(context: context)
         } else {
