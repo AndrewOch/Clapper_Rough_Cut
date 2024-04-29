@@ -77,7 +77,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         var transcribingFile = file
         transcribingFile.statuses.append(.transcribing)
         project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
-        transcriber.transcribeFile(file, quality: .high)
+        transcriber.transcribeFile(file)
             .sink { [weak self] completedFile in
                 guard let self = self else { return }
                 guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
@@ -103,7 +103,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             transcribingFile.statuses.append(.transcribing)
             project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
         })
-        transcriber.transcribeFiles(filtered, quality: .high)
+        transcriber.transcribeFiles(filtered)
             .sink { [weak self] completedFile in
                 guard let self = self else { return }
                 guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }

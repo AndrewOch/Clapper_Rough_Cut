@@ -15,14 +15,13 @@ class TextMatcher {
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody, options: [])
-        
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error during the HTTP request")
                 completion(nil)
                 return
             }
-            
+
             do {
                 let sequenceLengths = try JSONDecoder().decode([Int].self, from: data)
                 completion(sequenceLengths)

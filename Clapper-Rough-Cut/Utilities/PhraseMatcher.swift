@@ -27,7 +27,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
     }
 
     func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void) {
-        guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/matchScenes") else {
+        guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/matchPhrases") else {
             completion(.failure(URLError(.badURL)))
             return
         }
