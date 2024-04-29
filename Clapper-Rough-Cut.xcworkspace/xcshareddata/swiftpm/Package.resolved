@@ -1,5 +1,5 @@
 {
-  "originHash" : "79b57a2c919fe3bd6d3b7dbd6ae688eac80bc7fee7095db8ddd4ec029986772f",
+  "originHash" : "4608357e0a4814cbeb4dddb430d53336ee1ae1683dfd7f89a18e0e5ca6ffaeb3",
   "pins" : [
     {
       "identity" : "audiokit",
@@ -11,12 +11,21 @@
       }
     },
     {
-      "identity" : "swiftwhisper",
+      "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exPHAT/SwiftWhisper.git",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "c340197966ebd264f3135d3955874b40f8ed58bc"
+        "revision" : "c8ed701b513cf5177118a175d85fbbbcd707ab41",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swift-transformers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/huggingface/swift-transformers.git",
+      "state" : {
+        "revision" : "74b94211bdc741694ed7e700a1104c72e5ba68fe",
+        "version" : "0.1.7"
       }
     },
     {
@@ -26,6 +35,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "e4ba91c7e5cec99a83adedbd2e4e4e570f0a2b09"
+      }
+    },
+    {
+      "identity" : "whisperkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/argmaxinc/whisperkit",
+      "state" : {
+        "revision" : "076b6709f3a3af98e0a611c5bfed7401eac90be1",
+        "version" : "0.6.0"
       }
     }
   ],
