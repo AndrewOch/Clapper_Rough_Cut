@@ -13,13 +13,31 @@ struct FileSystemListItem: Identifiable, Hashable {
     }
 
     static func < (lhs: FileSystemListItem, rhs: FileSystemListItem) -> Bool {
-        if lhs.value.type.rawValue < rhs.value.type.rawValue {
+        if lhs.value.isMatched && !rhs.value.isMatched {
             return true
-        } else if lhs.value.type.rawValue > rhs.value.type.rawValue {
+        } else if !lhs.value.isMatched && rhs.value.isMatched {
             return false
         }
+
+        if lhs.value.isMatched && rhs.value.isMatched {
+            if lhs.value.matchingAccuracy != rhs.value.matchingAccuracy {
+                return lhs.value.matchingAccuracy > rhs.value.matchingAccuracy
+            }
+        }
+
+        if let lhsDate = lhs.value.createdAt, let rhsDate = rhs.value.createdAt {
+            if lhsDate != rhsDate {
+                return lhsDate > rhsDate
+            }
+        }
+
+        if lhs.value.type.rawValue != rhs.value.type.rawValue {
+            return lhs.value.type.rawValue < rhs.value.type.rawValue
+        }
+
         return lhs.value.title < rhs.value.title
     }
+
 }
 
 enum FileSystemListItemHighlight {

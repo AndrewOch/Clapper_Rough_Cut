@@ -25,7 +25,7 @@ class WhisperAudioTranscriber: AudioTranscriber {
                     let seeker = SegmentSeeker()
                     let whisper = try await WhisperKit(model: "small")
                     let options = DecodingOptions(language: "ru", wordTimestamps: true)
-                    
+
                     let converter = Converter()
                     converter.convertAudioFileToPCMArray(fileURL: url) { result in
                         switch result {
@@ -41,9 +41,6 @@ class WhisperAudioTranscriber: AudioTranscriber {
                                                                   endTime: Double(wordTiming.end)))
                                     }
                                     modifiedFile.subtitles = subtitles
-                                    
-                                    
-                                    print(transcriptionResult.map({ res in res.allWords }))
                                     promise(.success(modifiedFile))
                                 } catch {
                                     print("Transcription error: \(error)")

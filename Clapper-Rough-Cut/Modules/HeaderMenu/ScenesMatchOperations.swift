@@ -37,7 +37,10 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
 
     private func matchFor(files: [FileSystemElement]) {
         guard let scriptFile = project.scriptFile else { return }
-        phraseMatcher.match(files: files, phrases: scriptFile.allPhrases, projectId: project.id) { result in
+        let filtered = files.filter({ $0.subtitles != nil && 
+            ($0.subtitles ?? []).isNotEmpty
+            && !project.fileSystem.getContainer(forElementWithID: $0.id)!.isScene})
+        phraseMatcher.match(files: filtered, phrases: scriptFile.allPhrases, projectId: project.id) { result in
             switch result {
             case .success(let match):
                 self.manualMatch(element: match.0, phrase: match.1)

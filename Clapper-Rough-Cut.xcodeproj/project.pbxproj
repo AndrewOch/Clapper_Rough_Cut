@@ -11,8 +11,6 @@
 		04127A802BDF9E79007C1541 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04127A7F2BDF9E79007C1541 /* WhisperKit */; };
 		0426529B29EF26AE008855C1 /* SelectPhraseMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */; };
 		0426529F29EFB6FB008855C1 /* MFCCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426529E29EFB6FB008855C1 /* MFCCService.swift */; };
-		043526F22BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip in Resources */ = {isa = PBXBuildFile; fileRef = 043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */; };
-		043526F32BC536F2009BCB2C /* ggml-small.bin in Resources */ = {isa = PBXBuildFile; fileRef = 043526F12BC536F2009BCB2C /* ggml-small.bin */; };
 		043538C52AABA51C00775E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C42AABA51C00775E0D /* String.swift */; };
 		043538C92AABBB0D00775E0D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C62AABBB0D00775E0D /* Fonts.swift */; };
 		043538CA2AABBB0D00775E0D /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043538C72AABBB0D00775E0D /* Assets.swift */; };
@@ -106,8 +104,6 @@
 		040E07312AF15DAC00554BEA /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		0426529A29EF26AE008855C1 /* SelectPhraseMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhraseMatchView.swift; sourceTree = "<group>"; };
 		0426529E29EFB6FB008855C1 /* MFCCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFCCService.swift; sourceTree = "<group>"; };
-		043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "ggml-small-encoder.mlmodelc.zip"; path = "../../../Новая папка/ggml-small-encoder.mlmodelc.zip"; sourceTree = "<group>"; };
-		043526F12BC536F2009BCB2C /* ggml-small.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = "ggml-small.bin"; path = "../../../Новая папка/ggml-small.bin"; sourceTree = "<group>"; };
 		043538C42AABA51C00775E0D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		043538C62AABBB0D00775E0D /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		043538C72AABBB0D00775E0D /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -421,8 +417,6 @@
 		0464D9C429E423A70007EF24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				043526F02BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip */,
-				043526F12BC536F2009BCB2C /* ggml-small.bin */,
 				049A8A652BA19CA800A20092 /* Localizable.strings */,
 				04FEB7032B9765A10075EBBB /* yolov8x.mlpackage */,
 				04B495342B93233600BE0376 /* location.mlmodel */,
@@ -683,8 +677,6 @@
 				049A8A5D2BA1929400A20092 /* NotoSans-SemiBold.ttf in Resources */,
 				049A8A602BA1938300A20092 /* NotoSans-Bold.ttf in Resources */,
 				049A8A672BA19CA800A20092 /* Localizable.strings in Resources */,
-				043526F32BC536F2009BCB2C /* ggml-small.bin in Resources */,
-				043526F22BC536F2009BCB2C /* ggml-small-encoder.mlmodelc.zip in Resources */,
 				0464D9FD29E423A80007EF24 /* Assets.xcassets in Resources */,
 				049A8A5E2BA1929400A20092 /* NotoSans-Regular.ttf in Resources */,
 				043538D32AAC855200775E0D /* NunitoSans.ttf in Resources */,

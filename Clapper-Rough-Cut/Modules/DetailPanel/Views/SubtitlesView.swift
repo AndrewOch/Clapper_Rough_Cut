@@ -8,7 +8,8 @@ struct SubtitlesView: View {
             let subtitleColor = Asset.contentTertiary.swiftUIColor
                 .interpolated(to: Asset.accentPrimary.swiftUIColor, fraction: subtitle.matchAccuracy ?? 0)
             let subtitleText = Text("\(subtitle.text) ")
-                .foregroundColor(subtitleColor)
+                .fontWeight(subtitle.matchAccuracy ?? 0 > 0 ? .black : .regular)
+                .foregroundColor(subtitle.matchAccuracy ?? 0 > 0 ? subtitleColor : Asset.surfaceTertiary.swiftUIColor )
             return combined + subtitleText
         }
         return combinedText

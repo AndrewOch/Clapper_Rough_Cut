@@ -10,6 +10,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var containerId: UUID?
     var scriptPhraseId: UUID?
     let url: URL?
+    var matchingAccuracy: Double = 0
     var subtitles: [Subtitle]?
     var mfccs: [[Float]]?
     var collapsed: Bool = false
@@ -121,9 +122,8 @@ enum FileStatus: Codable, Hashable {
 }
 
 extension FileSystemElement {
-    var scriptMatchingAccuracy: Double {
-        guard let accuracy = subtitles?.compactMap({ $0.matchAccuracy }).max() else { return 0 }
-        return accuracy
+    var isMatched: Bool {
+        return self.scriptPhraseId != nil && self.subtitles != nil && (self.subtitles ?? []).isNotEmpty
     }
 }
 

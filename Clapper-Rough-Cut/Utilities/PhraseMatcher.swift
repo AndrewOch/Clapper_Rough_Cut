@@ -55,6 +55,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
                           let phrase = phrases.first(where: { $0.id == UUID(uuidString: match.phraseId) }),
                           var updatedFile = files.first(where: { $0.id == UUID(uuidString: f.id) }) else { return }
                     updatedFile.scriptPhraseId = phrase.id
+                    updatedFile.matchingAccuracy = match.accuracy
                     var subsArray = [Subtitle]()
                     f.subtitles?.forEach({ sub in
                         var subtitle = Subtitle(using: sub)

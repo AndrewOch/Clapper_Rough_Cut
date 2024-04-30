@@ -2,16 +2,18 @@ import Foundation
 
 struct BestPhraseMatchResponse: Codable {
     let phraseId: String
-    
+    let accuracy: Double
+
     enum CodingKeys: String, CodingKey {
         case phraseId = "phrase_id"
+        case accuracy = "accuracy"
     }
 }
 
 struct BestPhraseMatchDetailResponse: Codable {
     let phraseId: String
     let matchingCount: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case phraseId = "phrase_id"
         case matchingCount = "matching_count"
@@ -25,7 +27,7 @@ struct MatchPhraseSubtitleResponse: Codable {
     let phraseId: String
     let matchAccuracy: Double
     let bestMatches: [BestPhraseMatchDetailResponse]
-    
+
     enum CodingKeys: String, CodingKey {
         case text
         case startTime = "start_time"
@@ -39,7 +41,7 @@ struct MatchPhraseSubtitleResponse: Codable {
 struct MatchPhraseFileResponse: Codable {
     let subtitles: [MatchPhraseSubtitleResponse]?
     let id: String
-    
+
     enum CodingKeys: String, CodingKey {
         case subtitles
         case id
