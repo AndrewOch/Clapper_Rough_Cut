@@ -1,5 +1,4 @@
 import SwiftUI
-//import KeyboardShortcuts
 
 struct FileSystemView: View {
     @EnvironmentObject var document: ClapperRoughCutDocument
@@ -41,13 +40,28 @@ struct FileSystemView: View {
         }
         .onAppear {
             NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-                if event.keyCode == 51 && !searchBarIsFocused {
-                    document.deleteSelectedFiles(selection)
-                    selection = []
-                    return event
-                }
+//                if event.keyCode == 51 && !searchBarIsFocused {
+//                    document.deleteSelectedFiles(selection)
+//                    selection = []
+//                    return event
+//                }
                 if event.modifierFlags.contains(.command) && event.charactersIgnoringModifiers == "t" {
                     document.transcribeSelectedFiles(selection)
+                    return nil
+                }
+                if event.modifierFlags.contains(.shift) {
+                    switch event.charactersIgnoringModifiers {
+                    case "!":
+                        addMarker(to: selection, marker: .green)
+                    case "@", "\"":
+                        addMarker(to: selection, marker: .yellow)
+                    case "#", "№":
+                        addMarker(to: selection, marker: .red)
+                    case "$", "%":
+                        addMarker(to: selection, marker: nil)
+                    default:
+                        break
+                    }
                     return nil
                 }
                 return event
@@ -121,7 +135,7 @@ struct FileSystemView: View {
                     })
                 }
             }
-            .padding(.vertical, 10)
+            .padding(.top, 10)
         }
         .font(.custom(FontFamily.NunitoSans.regular.name, size: 12))
         .scrollContentBackground(.hidden)
@@ -142,7 +156,8 @@ struct FileSystemView: View {
                 if let id = selection.first, let element = document.project.fileSystem.elementById(id) {
                     FileSystemSelectionDetailView(element: Binding(get: { element },
                                                                    set: { document.project.fileSystem.updateElement(withID: element.id,
-                                                                                                                    newValue: $0) }), currentTime: $currentPlayerTime)
+                                                                                                                    newValue: $0) }),
+                                                  currentTime: $currentPlayerTime, selection: $selection)
                 }
             }
             Spacer()
@@ -230,5 +245,14 @@ struct FileSystemView: View {
             }
         }
         return true
+    }
+
+    private func addMarker(to elements: Set<FileSystemElement.ID>, marker: Marker?) {
+        for elementId in elements {
+            if var element = document.project.fileSystem.elementById(elementId) {
+                element.marker = marker
+                document.project.fileSystem.updateElement(withID: element.id, newValue: element)
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var statuses: [FileStatus]
     var duration: Double?
     var containerId: UUID?
-    var scriptPhraseId: UUID?
+    var sceneId: UUID?
     let url: URL?
     var matchingAccuracy: Double = 0
     var subtitles: [Subtitle]?
@@ -16,6 +16,9 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var collapsed: Bool = false
     var audioClasses: [ClassificationElement]?
     var videoClasses: [ClassificationElement]?
+    var transcriptionTime: Double?
+    var tScriptPhraseId: UUID?
+    var marker: Marker?
 
     init(title: String,
          type: FileSystemElementType,
@@ -29,7 +32,9 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
          mfccs: [[Float]]? = nil,
          collapsed: Bool = false,
          audioClasses: [ClassificationElement]? = nil,
-         videoClasses: [ClassificationElement]? = nil
+         videoClasses: [ClassificationElement]? = nil,
+         marker: Marker? = nil,
+         tScriptPhraseId: UUID? = nil
     ) {
         self.title = title
         self.type = type
@@ -37,13 +42,15 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.statuses = statuses
         self.duration = duration
         self.containerId = containerId
-        self.scriptPhraseId = scriptPhraseId
+        self.sceneId = scriptPhraseId
         self.url = url
         self.subtitles = transcription
         self.mfccs = mfccs
         self.collapsed = collapsed
         self.audioClasses = audioClasses
         self.videoClasses = videoClasses
+        self.marker = marker
+        self.tScriptPhraseId = tScriptPhraseId
     }
 
     static func == (lhs: FileSystemElement, rhs: FileSystemElement) -> Bool {
@@ -123,11 +130,19 @@ enum FileStatus: Codable, Hashable {
 
 extension FileSystemElement {
     var isMatched: Bool {
-        return self.scriptPhraseId != nil && self.subtitles != nil && (self.subtitles ?? []).isNotEmpty
+        return self.sceneId != nil && self.subtitles != nil && (self.subtitles ?? []).isNotEmpty
     }
 }
 
 struct ClassificationElement: Codable, Hashable {
     var className: String
     var confidence: Float
+}
+
+enum Marker: String, Codable, Hashable {
+    case red // С классом - неправильно
+    case green // С классом - правильно
+    case yellow // С классом - не определено
+    case blue // Без класса - не определено
+    case purple // Без класса - определено
 }

@@ -40,7 +40,8 @@ enum SystemImage: String {
     case waveformCircle = "waveform.circle"
     case photo = "photo"
     case dialogue = "bubble.left.and.bubble.right"
-    
+    case circleFill = "circle.fill"
+
     var imageView: Image {
         Image(systemName: self.rawValue)
     }

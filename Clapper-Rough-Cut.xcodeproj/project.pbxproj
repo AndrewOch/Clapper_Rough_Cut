@@ -84,7 +84,10 @@
 		04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */; };
 		04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0A0482AE52746001F6B10 /* Subtitle.swift */; };
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
+		04D4ED222C13582A00C94412 /* ActionMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED212C13582A00C94412 /* ActionMatcher.swift */; };
+		04D4ED252C14B14900C94412 /* PremiereProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED242C14B14900C94412 /* PremiereProject.swift */; };
 		04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */; };
+		04DEBAE72BF6037000B7D9B0 /* SceneMatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DEBAE62BF6037000B7D9B0 /* SceneMatchError.swift */; };
 		04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */; };
 		04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E029F91AF2007E4C64 /* FileIcon.swift */; };
 		04F7A9E329F91DE0007E4C64 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A9E229F91DE0007E4C64 /* Formatter.swift */; };
@@ -180,7 +183,10 @@
 		04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionQuality.swift; sourceTree = "<group>"; };
 		04C0A0482AE52746001F6B10 /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
+		04D4ED212C13582A00C94412 /* ActionMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMatcher.swift; sourceTree = "<group>"; };
+		04D4ED242C14B14900C94412 /* PremiereProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiereProject.swift; sourceTree = "<group>"; };
 		04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCaptionizer.swift; sourceTree = "<group>"; };
+		04DEBAE62BF6037000B7D9B0 /* SceneMatchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMatchError.swift; sourceTree = "<group>"; };
 		04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
 		04F7A9E029F91AF2007E4C64 /* FileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIcon.swift; sourceTree = "<group>"; };
 		04F7A9E229F91DE0007E4C64 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -275,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				04F7A9E929F926D1007E4C64 /* ExportOperations.swift */,
+				04D4ED242C14B14900C94412 /* PremiereProject.swift */,
 				043538E22AAD1D4900775E0D /* Views */,
 			);
 			path = Export;
@@ -431,6 +438,7 @@
 		0464D9C829E423A70007EF24 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04DEBAE52BF6035C00B7D9B0 /* Errors */,
 				0464AEDC2B82621D00269757 /* Responses */,
 				0464D9C929E423A70007EF24 /* ScriptFile.swift */,
 				0464D9CA29E423A70007EF24 /* FileSystemElement.swift */,
@@ -458,6 +466,7 @@
 		0464D9CD29E423A70007EF24 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				04D4ED232C14B13200C94412 /* New Group */,
 				04B494DF2B85500000BE0376 /* AudioClassification */,
 				04B494D62B84C41300BE0376 /* VideoCaptioning */,
 				04C0A0432AE47499001F6B10 /* AudioTranscription */,
@@ -494,6 +503,7 @@
 				0464D9E329E423A70007EF24 /* Converter.swift */,
 				043EDDB729E7FE0F00DA5EFF /* PhraseMatcher.swift */,
 				04F7A9E229F91DE0007E4C64 /* Formatter.swift */,
+				04D4ED212C13582A00C94412 /* ActionMatcher.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -572,6 +582,21 @@
 				04C0A0442AE5066A001F6B10 /* TranscriptionQuality.swift */,
 			);
 			path = AudioTranscription;
+			sourceTree = "<group>";
+		};
+		04D4ED232C14B13200C94412 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		04DEBAE52BF6035C00B7D9B0 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				04DEBAE62BF6037000B7D9B0 /* SceneMatchError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		04E23A292AA9CAA600F14C3D /* Fonts */ = {
@@ -776,17 +801,20 @@
 				0464DA0329E423A80007EF24 /* FileSystemOperations.swift in Sources */,
 				04C0A0452AE5066A001F6B10 /* TranscriptionQuality.swift in Sources */,
 				0452C90A2AC42565001E3AA7 /* FileSystemSelectionDetailView.swift in Sources */,
+				04DEBAE72BF6037000B7D9B0 /* SceneMatchError.swift in Sources */,
 				043538ED2AAFAFE700775E0D /* CustomContextMenuView.swift in Sources */,
 				04F7A9E829F9262D007E4C64 /* ExportView.swift in Sources */,
 				04B495252B8DB17000BE0376 /* ScriptBlockView.swift in Sources */,
 				043538F32AB073DE00775E0D /* Environment.swift in Sources */,
 				04FEB7002B97548C0075EBBB /* DaytimeCaptionizer.swift in Sources */,
 				043538D52AAC86DD00775E0D /* PhraseLabel.swift in Sources */,
+				04D4ED222C13582A00C94412 /* ActionMatcher.swift in Sources */,
 				04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */,
 				043538C92AABBB0D00775E0D /* Fonts.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
 				045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */,
 				0464AEDE2B8262D000269757 /* MatchPhraseResponse.swift in Sources */,
+				04D4ED252C14B14900C94412 /* PremiereProject.swift in Sources */,
 				0464D9FB29E423A80007EF24 /* TextMatcher.swift in Sources */,
 				04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */,
 				04483EA12B4868D300774D4A /* MenuCommands.swift in Sources */,

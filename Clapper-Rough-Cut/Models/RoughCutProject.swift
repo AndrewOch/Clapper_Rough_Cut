@@ -23,7 +23,8 @@ struct RoughCutProject: Identifiable, Codable {
             "script_id": scriptFile.id.uuidString,
             "file_path": scriptFile.url.absoluteString,
             "phrases": scriptFile.allPhrases.map({ $0.dictionaryRepresentation }),
-            "actions": scriptFile.allActions.map({ $0.dictionaryRepresentation })
+            "actions": scriptFile.allActions.map({ $0.dictionaryRepresentation }),
+            "character_names": scriptFile.characters.map({ $0.name })
         ] as [String : Any]
 
         guard let requestData = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }

@@ -27,34 +27,24 @@ extension ClapperRoughCutDocument: ExportOperations {
         let exportSettings = project.exportSettings
         let exportDirectory = URL(fileURLWithPath: exportSettings.path)
         let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
-        createFolder(at: exportFolderURL)
-        project.fileSystem.allElements(where: { $0.isFolder && $0.containerId == project.fileSystem.id }).forEach {
-            exportFolder(root: exportFolderURL, folder: $0)}
+        exportFolder(root: exportFolderURL, folder: project.fileSystem.root)
     }
-
+    
     private func exportFolder(root: URL, folder: FileSystemElement) {
         let exportFolderURL = root.appendingPathComponent(folder.title)
         createFolder(at: exportFolderURL)
-        project.fileSystem.allElements(where: { $0.isFile && $0.containerId == folder.id }).forEach { file in
+        let containedElements = project.fileSystem.allElements(where: { $0.containerId == folder.id })
+        
+        containedElements.filter({ $0.isFile }).forEach { file in
             guard let url = file.url else { return }
             let fileName = url.lastPathComponent
             copyFile(from: url, to: exportFolderURL.appendingPathComponent(fileName))
         }
-        var takes: [FileSystemElement] = project.fileSystem.allElements(where: { $0.isTake && $0.containerId == folder.id })
-        takes.sort { take1, take2 in
-            let minCreatedAt1 = project.fileSystem.allElements(where: { $0.containerId == take1.id })
-                .min(by: compareByMinCreatedAt)?.createdAt
-            let minCreatedAt2 = project.fileSystem.allElements(where: { $0.containerId == take2.id })
-                .min(by: compareByMinCreatedAt)?.createdAt
-            if let min1 = minCreatedAt1, let min2 = minCreatedAt2 {
-                return min1 < min2
-            }
-            return false
-        }
-        var takeNum = 1
-        takes.forEach { take in
-            exportTake(root: exportFolderURL, take: take, num: takeNum)
-            takeNum += 1
+//        containedElements.filter({ $0.isScene }).forEach { file in
+//            exportScene()
+//        }
+        containedElements.filter({ $0.isFolder }).forEach { file in
+            exportFolder(root: exportFolderURL, folder: file)
         }
     }
 
@@ -95,3 +85,4 @@ extension ClapperRoughCutDocument: ExportOperations {
         }
     }
 }
+

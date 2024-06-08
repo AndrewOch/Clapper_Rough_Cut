@@ -2,8 +2,8 @@ import Foundation
 import NaturalLanguage
 
 protocol PhraseMatcherProtocol {
-    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void)
-    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void)
+    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), SceneMatchError>) -> Void)
+    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), SceneMatchError>) -> Void)
 }
 
 struct MatchingResult: Codable, Equatable, Hashable {
@@ -22,20 +22,21 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         let phrase: ScriptBlockElement
     }
 
-    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void) {
-         match(files: [file], phrases: phrases, projectId: projectId, completion: completion)
+    func match(file: FileSystemElement, phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), SceneMatchError>) -> Void) {
+        match(files: [file], phrases: phrases, projectId: projectId, completion: completion)
     }
 
-    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), Error>) -> Void) {
+    func match(files: [FileSystemElement], phrases: [ScriptBlockElement], projectId: UUID, completion: @escaping (Result<(FileSystemElement, ScriptBlockElement), SceneMatchError>) -> Void) {
         guard let url = URL(string: "\(EnvironmentVariables.baseUrl)/matchPhrases") else {
-            completion(.failure(URLError(.badURL)))
+            print(URLError.badURL)
             return
         }
         let body: [String: Any] = [
             "project_id": projectId.uuidString,
             "files": files.map { file in [
                 "id": file.id.uuidString,
-                "subtitles": ((file.subtitles ?? []) as [Subtitle]).map { $0.dictionaryRepresentation }
+                "subtitles": ((file.subtitles ?? []) as [Subtitle]).map { $0.dictionaryRepresentation },
+                "truePhraseId": file.tScriptPhraseId?.uuidString ?? "-"
             ] }
         ]
         var request = URLRequest(url: url)
@@ -44,24 +45,29 @@ final class PhraseMatcher: PhraseMatcherProtocol {
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                completion(.failure(error ?? URLError(.badServerResponse)))
+                files.forEach { file in
+                    completion(.failure(SceneMatchError(fileId: file.id, underlyingError: error ?? URLError(.badServerResponse))))
+                }
                 return
             }
             do {
                 let responses = try JSONDecoder().decode([MatchPhraseResponse].self, from: data)
                 responses.forEach { response in
                     guard let f = response.file,
-                          let match = response.bestMatch,
-                          let phrase = phrases.first(where: { $0.id == UUID(uuidString: match.phraseId) }),
-                          var updatedFile = files.first(where: { $0.id == UUID(uuidString: f.id) }) else { return }
-                    updatedFile.scriptPhraseId = phrase.id
+                    var updatedFile = files.first(where: { $0.id == UUID(uuidString: f.id) }) else { return }
+                    guard let match = response.bestMatch,
+                          let phrase = phrases.first(where: { $0.id == UUID(uuidString: match.phraseId) }) else {
+                        completion(.failure(SceneMatchError(fileId: updatedFile.id, underlyingError: URLError(.unknown))))
+                        return
+                    }
+                    updatedFile.sceneId = phrase.id
                     updatedFile.matchingAccuracy = match.accuracy
                     var subsArray = [Subtitle]()
                     f.subtitles?.forEach({ sub in
                         var subtitle = Subtitle(using: sub)
                         var matches = [MatchingResult]()
                         sub.bestMatches.forEach { match in
-                            if let ph = phrases.first(where: { $0.id == UUID(uuidString: match.phraseId )}) {
+                            if let ph = phrases.first(where: { $0.id == UUID(uuidString: match.phraseId) }) {
                                 matches.append(MatchingResult(phrase: ph, matchingCount: match.matchingCount))
                             }
                         }
@@ -72,7 +78,9 @@ final class PhraseMatcher: PhraseMatcherProtocol {
                     completion(.success((updatedFile, phrase)))
                 }
             } catch {
-                completion(.failure(error))
+                files.forEach { file in
+                    completion(.failure(SceneMatchError(fileId: file.id, underlyingError: error)))
+                }
             }
         }.resume()
     }

@@ -33,6 +33,14 @@ struct SeveralSelectionDetailView: View {
                     CustomLabel<BodyMediumStyle>(text: "\(L10n.video.firstWordCapitalized): \(selection.filter({ id in document.project.fileSystem.elementById(id)?.type == .video }).count)")
                         .lineLimit(1)
                         .foregroundColor(Asset.contentPrimary.swiftUIColor)
+                    let totalDuration = selection
+                        .compactMap { id in document.project.fileSystem.elementById(id) }
+                        .filter { $0.isFile }
+                        .compactMap { $0.duration }
+                        .reduce(0, +)
+                    CustomLabel<BodyMediumStyle>(text: "Длительность: \(Formatter.formatDuration(duration: totalDuration))")
+                        .lineLimit(1)
+                        .foregroundColor(Asset.contentPrimary.swiftUIColor)
                 }
                 Spacer()
             }

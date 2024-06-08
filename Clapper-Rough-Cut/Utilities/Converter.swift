@@ -17,11 +17,11 @@ class Converter {
             }
         })
     }
-    
+
     func convertAudioFileToPCMArray(fileURL: URL, completionHandler: @escaping (Result<[Float], Error>) -> Void) {
         var options = FormatConverter.Options()
         options.format = .wav
-        options.sampleRate = 16000
+        options.sampleRate = 16_000
         options.bitDepth = 16
         options.channels = 1
         options.isInterleaved = false

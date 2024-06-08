@@ -10,7 +10,7 @@ struct FileSystemListItemView: View {
             HStack(spacing: 10) {
                 if (element.isMatched) {
                     HStack {
-                        Text(String(format: "%.2f", element.matchingAccuracy))
+                        Text(String("\(Int(element.matchingAccuracy * 100))%"))
                             .lineLimit(1)
                             .foregroundColor(Asset.contentPrimary.swiftUIColor)
                     }
@@ -56,7 +56,30 @@ struct FileSystemListItemView: View {
     private var statuses: some View {
         let element = item.value
         let highlights = item.highlights
+        var color: Color = .red
+        if let marker = element.marker {
+            switch marker {
+            case .red:
+                color = .red
+            case .green:
+                color = .green
+            case .yellow:
+                color = .yellow
+            case .blue:
+                color = .blue
+            case .purple:
+                color = .purple
+            }
+        }
         return HStack {
+            Spacer()
+            if (element.marker != nil) {
+                SystemImage.circleFill.imageView
+                    .resizable()
+                    .frame(width: 10, height: 10)
+                    .scaledToFit()
+                    .foregroundColor(color)
+            }
             if element.statuses.contains(.transcribing) {
                 ProgressView()
                     .progressViewStyle(.circular)

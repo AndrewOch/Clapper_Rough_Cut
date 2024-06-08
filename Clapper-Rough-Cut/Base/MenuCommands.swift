@@ -91,16 +91,19 @@ struct ClapperRoughCutCommands: Commands {
                 Button(L10n.classifyVideos.firstWordCapitalized) {
                     document?.classifyVideos()
                 }
-                .disabled(!(document?.project.hasUnclassifiedAudios ?? false))
+                .disabled(!(document?.project.hasUnclassifiedVideos ?? false))
                 Button(L10n.classifyAudio.firstWordCapitalized) {
                     document?.classifyAudios()
                 }
-                .disabled(!(document?.project.hasUnclassifiedVideos ?? false))
+                .disabled(!(document?.project.hasUnclassifiedAudios ?? false))
             }
 
             Divider()
             Button(L10n.determineScenes.firstWordCapitalized) {
                 document?.matchScenes()
+            }
+            Button("Сбросить сортировку") {
+                document?.cleanScenes()
             }
             Divider()
             .disabled(!(document?.project.canSortScenes ?? false))

@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct FileSystemSelectionDetailView: View {
-    
+
     @EnvironmentObject var document: ClapperRoughCutDocument
     @Binding var element: FileSystemElement
     @Binding var currentTime: Double
     @State private var isModalPresented = false
     @State private var subtitlesMode: Int = SubtitlesMode.full.rawValue
+    @Binding var selection: Set<FileSystemElement.ID>
 
     var body: some View {
         VStack {
@@ -186,6 +187,7 @@ struct FileSystemSelectionDetailView: View {
             ModalSheet(title: L10n.sceneSelection.firstWordCapitalized, resizableVertical: true) {
                 SelectPhraseMatchView { phrase in
                     document.manualMatch(element: element, phrase: phrase)
+                    selection.removeAll()
                     isModalPresented.toggle()
                 }
             } closeAction: {
@@ -221,7 +223,7 @@ struct FileSystemSelectionDetailView: View {
             }
             .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
-            if (element.scriptPhraseId != nil) {
+            if (element.sceneId != nil) {
                 VStack {
                     HStack {
                         SystemImage.film.imageView

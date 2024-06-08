@@ -59,13 +59,13 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             project.fileSystem.addElement(newFile)
         }
     }
-    
+
     public func analizeFile(_ file: FileSystemElement) {
         transcribeFile(file)
         classifyAudio(file)
         classifyVideo(file)
     }
-    
+
     public func analizeFiles(_ files: [FileSystemElement]? = nil) {
         transcribeFiles(files)
         classifyAudios(files)
@@ -80,11 +80,7 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         transcriber.transcribeFile(file)
             .sink { [weak self] completedFile in
                 guard let self = self else { return }
-                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
-                file.statuses.removeAll(where: { $0 == .transcribing })
-                file.statuses.append(.transcription)
-                file.subtitles = completedFile.subtitles
-                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+                self.handleTranscribedFile(completedFile)
             }
             .store(in: &cancellables)
     }
@@ -106,13 +102,18 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         transcriber.transcribeFiles(filtered)
             .sink { [weak self] completedFile in
                 guard let self = self else { return }
-                guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
-                file.statuses.removeAll(where: { $0 == .transcribing })
-                file.statuses.append(.transcription)
-                file.subtitles = completedFile.subtitles
-                self.project.fileSystem.updateElement(withID: file.id, newValue: file)
+                self.handleTranscribedFile(completedFile)
             }
             .store(in: &cancellables)
+    }
+
+    private func handleTranscribedFile(_ completedFile: FileSystemElement) {
+        guard var file = self.project.fileSystem.elementById(completedFile.id) else { return }
+        file.statuses.removeAll(where: { $0 == .transcribing })
+        file.statuses.append(.transcription)
+        file.subtitles = completedFile.subtitles
+        file.transcriptionTime = completedFile.transcriptionTime
+        self.project.fileSystem.updateElement(withID: file.id, newValue: file)
     }
 
     func transcribeSelectedFiles(_ selection: Set<FileSystemElement.ID>) {
@@ -124,21 +125,19 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         transcribeFiles(files)
     }
 
-    func classifyAudio(_ file: FileSystemElement) {
+    public func classifyAudio(_ file: FileSystemElement) {
         registerUndo()
         var transcribingFile = file
         transcribingFile.statuses.append(.audioClassifying)
         project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
-        audioClassificator.classifyAudio(file: file) { elem in
-            guard var element = self.project.fileSystem.elementById(elem.id) else { return }
-            element.audioClasses = elem.audioClasses
-            element.statuses.removeAll(where: { $0 == .audioClassifying })
-            element.statuses.append(.audioClassification)
-            self.project.fileSystem.updateElement(withID: file.id, newValue: element)
-        }
+        audioClassificator.classifyAudio(file: file)
+            .sink { [weak self] elem in
+                self?.handleAudioClassificationResult(elem)
+            }
+            .store(in: &cancellables)
     }
 
-    func classifyAudios(_ files: [FileSystemElement]? = nil) {
+    public func classifyAudios(_ files: [FileSystemElement]? = nil) {
         var filtered: [FileSystemElement] = []
         if let files = files {
             filtered = files.filter({ $0.isFile && $0.audioClasses == nil })
@@ -152,15 +151,20 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             transcribingFile.statuses.append(.audioClassifying)
             project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
         })
-        audioClassificator.classifyAudios(files: filtered) { elements in
-            elements.forEach { elem in
-                guard var element = self.project.fileSystem.elementById(elem.id) else { return }
-                element.audioClasses = elem.audioClasses
-                element.statuses.removeAll(where: { $0 == .audioClassifying })
-                element.statuses.append(.audioClassification)
-                self.project.fileSystem.updateElement(withID: element.id, newValue: element)
+
+        audioClassificator.classifyAudios(files: filtered)
+            .sink { [weak self] elem in
+                self?.handleAudioClassificationResult(elem)
             }
-        }
+            .store(in: &cancellables)
+    }
+
+    private func handleAudioClassificationResult(_ elem: FileSystemElement) {
+        guard var element = project.fileSystem.elementById(elem.id) else { return }
+        element.audioClasses = elem.audioClasses
+        element.statuses.removeAll(where: { $0 == .audioClassifying })
+        element.statuses.append(.audioClassification)
+        project.fileSystem.updateElement(withID: element.id, newValue: element)
     }
 
     func classifySelectedAudios(_ selection: Set<FileSystemElement.ID>) {
@@ -172,26 +176,19 @@ extension ClapperRoughCutDocument: FileSystemOperations {
         classifyAudios(files)
     }
 
-    func classifyVideo(_ file: FileSystemElement) {
+    public func classifyVideo(_ file: FileSystemElement) {
         registerUndo()
         var transcribingFile = file
         transcribingFile.statuses.append(.videoCaptioning)
         project.fileSystem.updateElement(withID: file.id, newValue: transcribingFile)
         videoCaptionizers.forEach { captionizer in
-            captionizer.captionVideo(file: file) { classes in
-                guard let classes = classes,
-                      var element = self.project.fileSystem.elementById(file.id) else { return }
-                var videoClasses: [ClassificationElement] = element.videoClasses ?? []
-                videoClasses.append(contentsOf: classes)
-                element.videoClasses = videoClasses
-                element.statuses.removeAll(where: { $0 == .videoCaptioning })
-                element.statuses.append(.videoCaption)
-                self.project.fileSystem.updateElement(withID: file.id, newValue: element)
+            captionizer.captionVideo(file: file) { [weak self] classes in
+                self?.handleVideoCaptionResult(file.id, classes: classes)
             }
         }
     }
 
-    func classifyVideos(_ files: [FileSystemElement]? = nil) {
+    public func classifyVideos(_ files: [FileSystemElement]? = nil) {
         var filtered: [FileSystemElement] = []
         if let files = files {
             filtered = files.filter({ $0.type == .video && $0.videoClasses == nil })
@@ -206,19 +203,21 @@ extension ClapperRoughCutDocument: FileSystemOperations {
             project.fileSystem.updateElement(withID: $0.id, newValue: transcribingFile)
         })
         videoCaptionizers.forEach { captionizer in
-            captionizer.captionVideos(files: filtered) { results in
-                results.forEach { id, classes in
-                    guard let classes = classes,
-                          var element = self.project.fileSystem.elementById(id) else { return }
-                    var videoClasses: [ClassificationElement] = element.videoClasses ?? []
-                    videoClasses.append(contentsOf: classes)
-                    element.videoClasses = videoClasses
-                    element.statuses.removeAll(where: { $0 == .videoCaptioning })
-                    element.statuses.append(.videoCaption)
-                    self.project.fileSystem.updateElement(withID: element.id, newValue: element)
-                }
+            captionizer.captionVideos(files: filtered) { [weak self] results in
+                results.forEach { self?.handleVideoCaptionResult($0, classes: $1) }
             }
         }
+    }
+
+    private func handleVideoCaptionResult(_ id: UUID, classes: [ClassificationElement]?) {
+        guard let classes = classes,
+              var element = project.fileSystem.elementById(id) else { return }
+        var videoClasses: [ClassificationElement] = element.videoClasses ?? []
+        videoClasses.append(contentsOf: classes)
+        element.videoClasses = videoClasses
+        element.statuses.removeAll(where: { $0 == .videoCaptioning })
+        element.statuses.append(.videoCaption)
+        project.fileSystem.updateElement(withID: element.id, newValue: element)
     }
 
     func classifySelectedVideos(_ selection: Set<FileSystemElement.ID>) {
