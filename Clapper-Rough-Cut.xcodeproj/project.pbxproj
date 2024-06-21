@@ -86,6 +86,8 @@
 		04C8B4FE2AFC003100B41843 /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */; };
 		04D4ED222C13582A00C94412 /* ActionMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED212C13582A00C94412 /* ActionMatcher.swift */; };
 		04D4ED252C14B14900C94412 /* PremiereProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED242C14B14900C94412 /* PremiereProject.swift */; };
+		04D4ED282C19BC9700C94412 /* PremiereExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED272C19BC9700C94412 /* PremiereExporter.swift */; };
+		04D4ED2A2C19BE3200C94412 /* ProjectExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4ED292C19BE3200C94412 /* ProjectExporter.swift */; };
 		04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */; };
 		04DEBAE72BF6037000B7D9B0 /* SceneMatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DEBAE62BF6037000B7D9B0 /* SceneMatchError.swift */; };
 		04E2CABA2B80C43C00B27C2F /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */; };
@@ -185,6 +187,8 @@
 		04C8B4FD2AFC003100B41843 /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		04D4ED212C13582A00C94412 /* ActionMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMatcher.swift; sourceTree = "<group>"; };
 		04D4ED242C14B14900C94412 /* PremiereProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiereProject.swift; sourceTree = "<group>"; };
+		04D4ED272C19BC9700C94412 /* PremiereExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiereExporter.swift; sourceTree = "<group>"; };
+		04D4ED292C19BE3200C94412 /* ProjectExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectExporter.swift; sourceTree = "<group>"; };
 		04D9DE9F2B9B5FC8008555EB /* ActivityCaptionizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCaptionizer.swift; sourceTree = "<group>"; };
 		04DEBAE62BF6037000B7D9B0 /* SceneMatchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMatchError.swift; sourceTree = "<group>"; };
 		04E2CAB92B80C43C00B27C2F /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
@@ -280,9 +284,10 @@
 		043538DD2AAD1CF100775E0D /* Export */ = {
 			isa = PBXGroup;
 			children = (
+				04D4ED262C19BC5500C94412 /* AdobePremiere */,
 				04F7A9E929F926D1007E4C64 /* ExportOperations.swift */,
-				04D4ED242C14B14900C94412 /* PremiereProject.swift */,
 				043538E22AAD1D4900775E0D /* Views */,
+				04D4ED292C19BE3200C94412 /* ProjectExporter.swift */,
 			);
 			path = Export;
 			sourceTree = "<group>";
@@ -466,7 +471,6 @@
 		0464D9CD29E423A70007EF24 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				04D4ED232C14B13200C94412 /* New Group */,
 				04B494DF2B85500000BE0376 /* AudioClassification */,
 				04B494D62B84C41300BE0376 /* VideoCaptioning */,
 				04C0A0432AE47499001F6B10 /* AudioTranscription */,
@@ -584,11 +588,13 @@
 			path = AudioTranscription;
 			sourceTree = "<group>";
 		};
-		04D4ED232C14B13200C94412 /* New Group */ = {
+		04D4ED262C19BC5500C94412 /* AdobePremiere */ = {
 			isa = PBXGroup;
 			children = (
+				04D4ED242C14B14900C94412 /* PremiereProject.swift */,
+				04D4ED272C19BC9700C94412 /* PremiereExporter.swift */,
 			);
-			path = "New Group";
+			path = AdobePremiere;
 			sourceTree = "<group>";
 		};
 		04DEBAE52BF6035C00B7D9B0 /* Errors */ = {
@@ -812,6 +818,7 @@
 				04D9DEA02B9B5FC8008555EB /* ActivityCaptionizer.swift in Sources */,
 				043538C92AABBB0D00775E0D /* Fonts.swift in Sources */,
 				04F7A9E129F91AF2007E4C64 /* FileIcon.swift in Sources */,
+				04D4ED2A2C19BE3200C94412 /* ProjectExporter.swift in Sources */,
 				045D60E12AE6DE8C00833AB6 /* SubtitilesMode.swift in Sources */,
 				0464AEDE2B8262D000269757 /* MatchPhraseResponse.swift in Sources */,
 				04D4ED252C14B14900C94412 /* PremiereProject.swift in Sources */,
@@ -825,6 +832,7 @@
 				04C0A0422AE46001001F6B10 /* Binding.swift in Sources */,
 				043538F12AAFB99100775E0D /* DocumentStates.swift in Sources */,
 				04C0A0492AE52746001F6B10 /* Subtitle.swift in Sources */,
+				04D4ED282C19BC9700C94412 /* PremiereExporter.swift in Sources */,
 				0452C9082AC4236C001E3AA7 /* SeveralSelectionDetailView.swift in Sources */,
 				043538D92AACD33500775E0D /* ImageButton.swift in Sources */,
 				04B494D32B84BF9300BE0376 /* YoloV8Captionizer.swift in Sources */,

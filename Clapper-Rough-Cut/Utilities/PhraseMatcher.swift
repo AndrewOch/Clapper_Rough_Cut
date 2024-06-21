@@ -60,7 +60,7 @@ final class PhraseMatcher: PhraseMatcherProtocol {
                         completion(.failure(SceneMatchError(fileId: updatedFile.id, underlyingError: URLError(.unknown))))
                         return
                     }
-                    updatedFile.sceneId = phrase.id
+                    updatedFile.scriptPhraseId = phrase.id
                     updatedFile.matchingAccuracy = match.accuracy
                     var subsArray = [Subtitle]()
                     f.subtitles?.forEach({ sub in

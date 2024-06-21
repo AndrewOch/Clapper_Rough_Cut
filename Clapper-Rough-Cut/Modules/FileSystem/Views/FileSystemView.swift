@@ -40,11 +40,11 @@ struct FileSystemView: View {
         }
         .onAppear {
             NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-//                if event.keyCode == 51 && !searchBarIsFocused {
-//                    document.deleteSelectedFiles(selection)
-//                    selection = []
-//                    return event
-//                }
+                if event.keyCode == 51 && !searchBarIsFocused {
+                    document.deleteSelectedFiles(selection)
+                    selection = []
+                    return event
+                }
                 if event.modifierFlags.contains(.command) && event.charactersIgnoringModifiers == "t" {
                     document.transcribeSelectedFiles(selection)
                     return nil

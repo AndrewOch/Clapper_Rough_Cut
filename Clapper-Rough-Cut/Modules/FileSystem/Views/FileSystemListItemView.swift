@@ -12,18 +12,17 @@ struct FileSystemListItemView: View {
                     HStack {
                         Text(String("\(Int(element.matchingAccuracy * 100))%"))
                             .lineLimit(1)
-                            .foregroundColor(Asset.contentPrimary.swiftUIColor)
                     }
                     .padding(5)
-                    .background(Asset.surfacePrimary.swiftUIColor)
+                    .background(Color.primary.opacity(0.1))
                     .cornerRadius(5)
                 }
                 FileIcon(type: element.type)
                     .frame(width: 10, height: 10)
                     .scaledToFit()
-                    .foregroundStyle(highlights.contains(.type) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
+                    .foregroundStyle(highlights.contains(.type) ? Color.yellow : Color.primary)
                 CustomLabel<BodyMediumStyle>(text: element.title)
-                    .foregroundStyle(highlights.contains(.title) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
+                    .foregroundStyle(highlights.contains(.title) ? Color.yellow : Color.primary)
             }
             Spacer()
             statuses
@@ -88,7 +87,7 @@ struct FileSystemListItemView: View {
             }
             if element.statuses.contains(.transcription) {
                 TranscribedIcon()
-                    .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
+                    .foregroundStyle(highlights.contains(.subtitles) ? Color.yellow : Color.primary)
             }
             if element.statuses.contains(.audioClassifying) {
                 ProgressView()
@@ -98,7 +97,7 @@ struct FileSystemListItemView: View {
             }
             if element.statuses.contains(.audioClassification) {
                 AudioClassificationIcon()
-                    .foregroundStyle(highlights.contains(.audioClasses) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
+                    .foregroundStyle(highlights.contains(.audioClasses) ? Color.yellow : Color.primary)
             }
             if element.statuses.contains(.videoCaptioning) {
                 ProgressView()
@@ -108,7 +107,7 @@ struct FileSystemListItemView: View {
             }
             if element.statuses.contains(.videoCaption) {
                 VideoClassificationIcon()
-                    .foregroundStyle(highlights.contains(.videoClasses) ? Color.yellow : Asset.contentSecondary.swiftUIColor)
+                    .foregroundStyle(highlights.contains(.videoClasses) ? Color.yellow : Color.primary)
             }
         }
         .frame(width: 60)

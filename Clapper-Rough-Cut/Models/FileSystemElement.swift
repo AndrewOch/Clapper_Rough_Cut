@@ -8,8 +8,8 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
     var statuses: [FileStatus]
     var duration: Double?
     var containerId: UUID?
-    var sceneId: UUID?
-    let url: URL?
+    var scriptPhraseId: UUID?
+    var url: URL?
     var matchingAccuracy: Double = 0
     var subtitles: [Subtitle]?
     var mfccs: [[Float]]?
@@ -42,7 +42,7 @@ struct FileSystemElement: Identifiable, Equatable, Codable, Hashable {
         self.statuses = statuses
         self.duration = duration
         self.containerId = containerId
-        self.sceneId = scriptPhraseId
+        self.scriptPhraseId = scriptPhraseId
         self.url = url
         self.subtitles = transcription
         self.mfccs = mfccs
@@ -130,7 +130,7 @@ enum FileStatus: Codable, Hashable {
 
 extension FileSystemElement {
     var isMatched: Bool {
-        return self.sceneId != nil && self.subtitles != nil && (self.subtitles ?? []).isNotEmpty
+        return self.scriptPhraseId != nil && self.subtitles != nil && (self.subtitles ?? []).isNotEmpty
     }
 }
 

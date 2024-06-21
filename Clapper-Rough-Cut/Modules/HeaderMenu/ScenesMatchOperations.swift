@@ -31,7 +31,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
     func changePhrase(for scene: FileSystemElement, phrase: ScriptBlockElement) {
         registerUndo()
         var newScene = scene
-        newScene.sceneId = phrase.id
+        newScene.scriptPhraseId = phrase.id
         if let characterName = phrase.character?.name, let phraseText = phrase.phraseText {
             newScene.title = createPhraseFolderTitle(characterName: characterName, text: phraseText)
         }
@@ -80,17 +80,17 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
             }
         }
 
-        actionMatcher.match(files: filteredPhraseFiles, actions: scriptFile.allPhrases, projectId: project.id) { result in
-            switch result {
-            case .success(let match):
-                self.match(element: match.0, scene: match.1)
-            case .failure(let error):
-                print("Ошибка при сопоставлении: \(error.localizedDescription)")
-                guard var updatedFile = self.project.fileSystem.elementById(error.fileId) else { return }
-                updatedFile.marker = updatedFile.tScriptPhraseId == nil ? .blue : .yellow
-                self.project.fileSystem.updateElement(withID: error.fileId, newValue: updatedFile)
-            }
-        }
+//        actionMatcher.match(files: filteredPhraseFiles, actions: scriptFile.allPhrases, projectId: project.id) { result in
+//            switch result {
+//            case .success(let match):
+//                self.match(element: match.0, scene: match.1)
+//            case .failure(let error):
+//                print("Ошибка при сопоставлении: \(error.localizedDescription)")
+//                guard var updatedFile = self.project.fileSystem.elementById(error.fileId) else { return }
+//                updatedFile.marker = updatedFile.tScriptPhraseId == nil ? .blue : .yellow
+//                self.project.fileSystem.updateElement(withID: error.fileId, newValue: updatedFile)
+//            }
+//        }
     }
 
     private func createPhraseFolderTitle(characterName: String, text: String) -> String {
@@ -119,7 +119,7 @@ extension ClapperRoughCutDocument: ScenesMatchOperations {
             updated.marker = .purple
         }
 
-        guard let scene = project.fileSystem.firstElement(where: { $0.isScene && $0.sceneId == scene.id }) else {
+        guard let scene = project.fileSystem.firstElement(where: { $0.isScene && $0.scriptPhraseId == scene.id }) else {
             guard let characterName = scene.character?.name,
                     let phraseText = scene.phraseText,
                   let folder = project.fileSystem.getContainer(forElementWithID: element.id) else { return }

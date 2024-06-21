@@ -223,7 +223,7 @@ struct FileSystemSelectionDetailView: View {
             }
             .foregroundColor(Asset.contentPrimary.swiftUIColor)
             .padding(.vertical, 5)
-            if (element.sceneId != nil) {
+            if (element.scriptPhraseId != nil) {
                 VStack {
                     HStack {
                         SystemImage.film.imageView

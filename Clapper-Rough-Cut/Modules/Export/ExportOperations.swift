@@ -29,40 +29,18 @@ extension ClapperRoughCutDocument: ExportOperations {
         let exportFolderURL = exportDirectory.appendingPathComponent(exportSettings.directoryName)
         exportFolder(root: exportFolderURL, folder: project.fileSystem.root)
     }
-    
+
     private func exportFolder(root: URL, folder: FileSystemElement) {
         let exportFolderURL = root.appendingPathComponent(folder.title)
         createFolder(at: exportFolderURL)
         let containedElements = project.fileSystem.allElements(where: { $0.containerId == folder.id })
-        
         containedElements.filter({ $0.isFile }).forEach { file in
             guard let url = file.url else { return }
             let fileName = url.lastPathComponent
             copyFile(from: url, to: exportFolderURL.appendingPathComponent(fileName))
         }
-//        containedElements.filter({ $0.isScene }).forEach { file in
-//            exportScene()
-//        }
-        containedElements.filter({ $0.isFolder }).forEach { file in
-            exportFolder(root: exportFolderURL, folder: file)
-        }
-    }
-
-    private func compareByMinCreatedAt(_ element1: FileSystemElement, _ element2: FileSystemElement) -> Bool {
-        if let createdAt1 = element1.createdAt, let createdAt2 = element2.createdAt {
-            return createdAt1 < createdAt2
-        }
-        return false
-    }
-
-    private func exportTake(root: URL, take: FileSystemElement, num: Int) {
-        let exportFolderURL = root.appendingPathComponent("Take \(num)")
-        createFolder(at: exportFolderURL)
-        project.fileSystem.allElements(where: { $0.isFile && $0.containerId == take.id }).forEach { file in
-            guard let url = file.url else { return }
-            let name = url.lastPathComponent
-            copyFile(from: url, to: exportFolderURL.appendingPathComponent(name))
-        }
+        containedElements.filter({ $0.isScene }).forEach({ exportScene(root: exportFolderURL, $0) })
+        containedElements.filter({ $0.isFolder }).forEach({ exportFolder(root: exportFolderURL, folder: $0) })
     }
 
     private func createFolder(at url: URL) {
@@ -84,5 +62,24 @@ extension ClapperRoughCutDocument: ExportOperations {
             print("Error copying file: \(error.localizedDescription)")
         }
     }
-}
 
+    private func exportScene(root: URL, _ scene: FileSystemElement) {
+        let exportFolderURL = root.appendingPathComponent(scene.title)
+        createFolder(at: exportFolderURL)
+        let containedElements = project.fileSystem.allElements(where: { $0.containerId == scene.id })
+        containedElements.filter({ $0.isScene }).forEach({ exportScene(root: exportFolderURL, $0) })
+        containedElements.filter({ $0.isFolder }).forEach({ exportFolder(root: exportFolderURL, folder: $0) })
+
+        var exportedFiles = [FileSystemElement]()
+        containedElements.filter({ $0.isFile }).forEach { file in
+            guard let url = file.url else { return }
+            let newUrl = exportFolderURL.appendingPathComponent(url.lastPathComponent)
+            copyFile(from: url, to: newUrl)
+            var copy = file
+            copy.url = newUrl
+            exportedFiles.append(copy)
+        }
+        let exporter = PremiereExporter()
+        exporter.exportScene(scene: scene, elements: exportedFiles, to: exportFolderURL)
+    }
+}
